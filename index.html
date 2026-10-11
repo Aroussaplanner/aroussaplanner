@@ -99,7 +99,7 @@ img{max-width:100%;display:block;}
 .hero-actions{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;opacity:0;animation:fadeUp 0.9s 0.9s forwards;}
 .hero-trust{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;margin-top:64px;opacity:0;animation:fadeUp 0.8s 1.2s forwards;}
 .trust-item{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;color:rgba(196,168,130,0.7);}
-.trust-item::before{content:'◆';font-size:8px;color:var(--gold);}
+.trust-item::before{content:'';}
 .hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 0.6s 1.5s forwards;}
 .hero-scroll span{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--warm);}
 .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s infinite;}
@@ -119,7 +119,7 @@ img{max-width:100%;display:block;}
 .pdf-card__desc{font-size:13px;line-height:1.7;color:var(--warm);margin-bottom:16px;flex:1;}
 .pdf-card__includes{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:20px;}
 .pdf-card__includes li{font-size:11px;color:var(--dark);display:flex;gap:8px;align-items:flex-start;}
-.pdf-card__includes li::before{content:'◆';font-size:7px;color:var(--gold);margin-top:3px;flex-shrink:0;}
+.pdf-card__includes li::before{content:'';}
 .pdf-card__footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:16px;border-top:1px solid rgba(196,168,130,0.2);}
 .pdf-card__price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--dark);}
 .pdf-card__price sup{font-size:14px;vertical-align:top;margin-top:6px;}
@@ -141,7 +141,7 @@ img{max-width:100%;display:block;}
 .bundle-items li{font-size:13px;display:flex;gap:10px;align-items:center;}
 .bundle-card--a .bundle-items li{color:rgba(247,242,234,0.85);}
 .bundle-card--b .bundle-items li{color:var(--dark);}
-.bundle-items li::before{content:'◆';font-size:8px;flex-shrink:0;}
+.bundle-items li::before{content:'';}
 .bundle-card--a .bundle-items li::before{color:var(--gold);}
 .bundle-card--b .bundle-items li::before{color:var(--dark);opacity:0.5;}
 .bundle-price{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:300;line-height:1;}
@@ -159,7 +159,7 @@ img{max-width:100%;display:block;}
 .addon-card:hover .addon-title{color:var(--ivory);}
 .addon-card:hover .addon-desc,.addon-card:hover .addon-time{color:var(--warm);}
 .addon-card:hover .addon-price{color:var(--gold);}
-.addon-icon{font-size:18px;margin-bottom:12px;color:var(--gold);}
+.addon-icon{display:none;}
 .addon-title{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:400;color:var(--dark);margin-bottom:6px;transition:color 0.3s;}
 .addon-desc{font-size:11px;color:var(--warm);line-height:1.5;margin-bottom:12px;transition:color 0.3s;}
 .addon-price{font-size:20px;font-weight:600;color:var(--bronze);margin-bottom:4px;transition:color 0.3s;}
@@ -173,7 +173,7 @@ img{max-width:100%;display:block;}
 .service-card__desc{font-size:13px;line-height:1.75;color:var(--warm);flex:1;}
 .service-card__features{margin-top:20px;list-style:none;display:flex;flex-direction:column;gap:8px;}
 .service-card__features li{font-size:12px;color:var(--dark);display:flex;gap:10px;align-items:flex-start;}
-.service-card__features li::before{content:'◆';font-size:8px;color:var(--gold);margin-top:3px;flex-shrink:0;}
+.service-card__features li::before{content:'';}
 .service-cta{margin-top:24px;}
 .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:56px;}
 .how-step{padding:36px 28px;background:var(--sand);position:relative;overflow:hidden;}
@@ -187,7 +187,7 @@ img{max-width:100%;display:block;}
 .match-card-stack{display:flex;flex-direction:column;gap:12px;}
 .match-card{background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.15);padding:20px 24px;display:flex;align-items:center;gap:16px;transition:all 0.3s;}
 .match-card:hover{background:rgba(196,168,130,0.1);}
-.match-card__icon{width:40px;height:40px;background:rgba(196,168,130,0.15);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.match-card__icon{display:none;}
 .match-card__title{font-size:13px;font-weight:500;color:var(--ivory);margin-bottom:2px;}
 .match-card__sub{font-size:11px;color:var(--warm);}
 .match-card__badge{margin-left:auto;background:rgba(196,168,130,0.15);border:1px solid rgba(196,168,130,0.3);padding:4px 10px;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);white-space:nowrap;}
@@ -202,7 +202,7 @@ img{max-width:100%;display:block;}
 .club-feature{padding:20px 0;border-bottom:1px solid rgba(196,168,130,0.2);display:flex;gap:16px;align-items:flex-start;}
 .club-feature:first-child{padding-top:0;}
 .club-feature:last-child{border-bottom:none;}
-.club-feature__icon{width:36px;height:36px;background:var(--beige);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;font-weight:700;flex-shrink:0;margin-top:2px;}
+.club-feature__icon{display:none;}
 .club-feature__title{font-size:14px;font-weight:500;color:var(--dark);margin-bottom:4px;}
 .club-feature__desc{font-size:13px;color:var(--warm);line-height:1.6;}
 .club-pricing{background:var(--dark);padding:40px 36px;position:sticky;top:100px;}
@@ -220,7 +220,7 @@ img{max-width:100%;display:block;}
 .vendor-type:hover{background:var(--dark);}
 .vendor-type:hover .vendor-type__name{color:var(--ivory);}
 .vendor-type:hover .vendor-type__link{color:var(--gold);}
-.vendor-type__emoji{font-size:20px;margin-bottom:12px;display:block;color:var(--gold);}
+.vendor-type__emoji{display:none;}
 .vendor-type__name{font-size:13px;font-weight:500;color:var(--dark);transition:color 0.3s;}
 .vendor-type__link{font-size:10px;color:var(--warm);margin-top:6px;transition:color 0.3s;display:block;}
 .faq-section{padding:96px 0;background:var(--ivory);}
@@ -229,7 +229,7 @@ img{max-width:100%;display:block;}
 .faq-item:first-child{border-top:1px solid rgba(196,168,130,0.2);}
 .faq-q{padding:22px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;gap:24px;}
 .faq-q h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--dark);}
-.faq-icon{width:28px;height:28px;border:1px solid rgba(196,168,130,0.4);display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--gold);flex-shrink:0;transition:transform 0.3s;}
+.faq-icon{width:28px;height:28px;border:1px solid rgba(196,168,130,0.4);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--gold);flex-shrink:0;transition:transform 0.3s;}
 .faq-item.open .faq-icon{transform:rotate(45deg);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
 .faq-a p{padding:0 0 22px;font-size:14px;line-height:1.8;color:var(--warm);}
@@ -355,7 +355,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .modal-submit span{position:relative;z-index:1;}
 .modal-submit:hover{color:var(--dark);}
 .modal-success{text-align:center;padding:20px 0;}
-.modal-success__icon{font-size:28px;color:var(--gold);margin-bottom:16px;}
+.modal-success__icon{display:none;}
 .modal-success__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:10px;}
 .modal-success__text{font-size:13px;color:var(--warm);line-height:1.7;}
 /* WHY BUY */
@@ -369,8 +369,8 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .star-label{font-size:12px;color:var(--dark);min-width:180px;}
 .star-group{display:flex;flex-direction:row-reverse;gap:3px;}
 .star-group input{display:none;}
-.star-group label{font-size:22px;color:rgba(196,168,130,0.25);cursor:pointer;transition:color 0.15s;line-height:1;}
-.star-group input:checked ~ label,.star-group label:hover,.star-group label:hover ~ label{color:var(--gold);}
+.star-group label{font-size:13px;font-weight:600;color:rgba(196,168,130,0.35);cursor:pointer;transition:color 0.15s;line-height:1;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border:1px solid rgba(196,168,130,0.2);}
+.star-group input:checked ~ label,.star-group label:hover,.star-group label:hover ~ label{color:var(--gold);border-color:var(--gold);background:rgba(196,168,130,0.08);}
 /* NIEUWSBRIEF */
 .nl-form{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;max-width:580px;margin:28px auto 0;align-items:start;}
 .nl-input{padding:13px 16px;border:1px solid rgba(196,168,130,0.35);background:transparent;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--dark);outline:none;transition:border-color 0.2s;width:100%;}
@@ -871,9 +871,9 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
       <div class="reveal reveal-delay-2">
         <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);margin-bottom:14px;">Voorbeeld zo ziet Match er straks uit</p>
         <div class="match-card-stack">
-          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Ziana / Bridalstylist voorbeeld</div><div class="match-card__sub">Rotterdam &#183; &#9733;&#9733;&#9733;&#9733;&#9733; &#183; &#8364;1.400 tot &#8364;2.800</div></div><div class="match-card__badge">Verified</div></div>
-          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Feestzaal voorbeeld</div><div class="match-card__sub">Amsterdam &#183; &#9733;&#9733;&#9733;&#9733;&#9734; &#183; &#8364;4.500 tot &#8364;9.000</div></div><div class="match-card__badge">Verified</div></div>
-          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Fotograaf voorbeeld</div><div class="match-card__sub">Den Haag &#183; &#9733;&#9733;&#9733;&#9733;&#9733; &#183; &#8364;1.800 tot &#8364;2.400</div></div><div class="match-card__badge">Verified</div></div>
+          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Ziana / Bridalstylist voorbeeld</div><div class="match-card__sub">Rotterdam &#183; 5/5 &#183; &#8364;1.400 tot &#8364;2.800</div></div><div class="match-card__badge">Verified</div></div>
+          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Feestzaal voorbeeld</div><div class="match-card__sub">Amsterdam &#183; 4.8/5 &#183; &#8364;4.500 tot &#8364;9.000</div></div><div class="match-card__badge">Verified</div></div>
+          <div class="match-card"><div class="match-card__icon">&#9672;</div><div><div class="match-card__title">Fotograaf voorbeeld</div><div class="match-card__sub">Den Haag &#183; 5/5 &#183; &#8364;1.800 tot &#8364;2.400</div></div><div class="match-card__badge">Verified</div></div>
           <div class="match-card" style="justify-content:center;border-style:dashed;opacity:0.5;"><div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--warm);">Meer leveranciers binnenkort</div></div>
         </div>
       </div>
@@ -908,7 +908,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
           <input type="tel" placeholder="WhatsApp-nummer (optioneel)" style="padding:13px 16px;border:1px solid rgba(196,168,130,0.25);background:rgba(196,168,130,0.06);color:var(--ivory);font-family:Montserrat,sans-serif;font-size:12px;outline:none;">
           <button type="submit" class="btn btn--gold" style="width:100%;text-align:center;margin-top:4px;"><span>Aanmelden voor de Club &#8594;</span></button>
         </form>
-        <div id="clubSuccess" style="display:none;margin-top:16px;color:var(--gold);font-size:13px;text-align:center;line-height:1.6;">&#9670; Aangemeld! We nemen contact met je op zodra de Club beschikbaar is.</div>
+        <div id="clubSuccess" style="display:none;margin-top:16px;color:var(--gold);font-size:13px;text-align:center;line-height:1.6;">Aangemeld! We nemen contact met je op zodra de Club beschikbaar is.</div>
         <p style="font-size:11px;color:var(--warm);text-align:center;margin-top:14px;line-height:1.5;">Geen verplichtingen. Geen kosten. Alleen vroege toegang.</p>
       </div>
     </div>
@@ -950,9 +950,9 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
       <h2 class="title title--light">Meld je aan voor de <em>nieuwsbrief</em></h2>
       <p class="subtitle subtitle--light" style="max-width:520px;margin:0 auto;">Toekomstige bruiden melden zich aan en zijn als eerste op de hoogte van nieuwe tools, de live dienstenindicator en exclusieve aanbiedingen. Binnenkort in je mailbox.</p>
       <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:20px 0 8px;">
-        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">&#9670; Live dienstenindicator</span>
-        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">&#9670; Live prijsdatabase</span>
-        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">&#9670; Exclusieve aanbiedingen</span>
+        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">Live dienstenindicator</span>
+        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">Live prijsdatabase</span>
+        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.55);display:flex;align-items:center;gap:6px;">Exclusieve aanbiedingen</span>
       </div>
     </div>
     <form id="nlForm" name="nieuwsbrief" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitNl(event)" class="nl-form reveal">
@@ -963,7 +963,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
       <input class="nl-input" type="email" name="email" placeholder="E-mailadres" required>
       <button type="submit" class="btn btn--gold" style="white-space:nowrap;"><span>Aanmelden &#8594;</span></button>
     </form>
-    <div id="nlSuccess" style="display:none;margin-top:20px;text-align:center;color:var(--gold);font-size:13px;letter-spacing:1px;">&#9670; Aangemeld! Je hoort van ons zodra er nieuws is.</div>
+    <div id="nlSuccess" style="display:none;margin-top:20px;text-align:center;color:var(--gold);font-size:13px;letter-spacing:1px;">Aangemeld! Je hoort van ons zodra er nieuws is.</div>
     <p style="text-align:center;font-size:11px;color:rgba(155,142,126,0.5);margin-top:16px;">Geen spam. Altijd uitschrijven mogelijk.</p>
   </div>
 </section>
@@ -1033,7 +1033,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
       <span class="label">Diensten beoordelen</span>
       <h2 class="title">Deel een review over een <em>dienst</em></h2>
       <p class="subtitle" style="max-width:540px;margin:0 auto;">Heb jij een leverancier geboekt voor je bruiloft of feest? Deel jouw ervaring en help andere bruiden. Jouw review bouwt de live prijsdatabase en dienstenindicator mee op.</p>
-      <p style="margin-top:14px;font-size:11px;color:var(--warm);letter-spacing:1px;">&#9670; Alle reviews worden eerst door Aroussa gecontroleerd voordat ze zichtbaar worden</p>
+      <p style="margin-top:14px;font-size:11px;color:var(--warm);letter-spacing:1px;">Alle reviews worden eerst door Aroussa gecontroleerd voordat ze zichtbaar worden</p>
     </div>
     <div class="review-form-card reveal" style="margin-top:48px;">
       <form id="reviewForm" name="review" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitReview(event)">
@@ -1091,44 +1091,44 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
           <div class="star-row">
             <span class="star-label">Algehele ervaring</span>
             <div class="star-group">
-              <input type="radio" id="a5" name="algemeen" value="5"><label for="a5">&#9733;</label>
-              <input type="radio" id="a4" name="algemeen" value="4"><label for="a4">&#9733;</label>
-              <input type="radio" id="a3" name="algemeen" value="3"><label for="a3">&#9733;</label>
-              <input type="radio" id="a2" name="algemeen" value="2"><label for="a2">&#9733;</label>
-              <input type="radio" id="a1" name="algemeen" value="1"><label for="a1">&#9733;</label>
+              <input type="radio" id="a5" name="algemeen" value="5"><label for="a5">5</label>
+              <input type="radio" id="a4" name="algemeen" value="4"><label for="a4">4</label>
+              <input type="radio" id="a3" name="algemeen" value="3"><label for="a3">3</label>
+              <input type="radio" id="a2" name="algemeen" value="2"><label for="a2">2</label>
+              <input type="radio" id="a1" name="algemeen" value="1"><label for="a1">1</label>
             </div>
           </div>
 
           <div class="star-row">
             <span class="star-label">Prijstransparantie</span>
             <div class="star-group">
-              <input type="radio" id="p5" name="prijstransparantie" value="5"><label for="p5">&#9733;</label>
-              <input type="radio" id="p4" name="prijstransparantie" value="4"><label for="p4">&#9733;</label>
-              <input type="radio" id="p3" name="prijstransparantie" value="3"><label for="p3">&#9733;</label>
-              <input type="radio" id="p2" name="prijstransparantie" value="2"><label for="p2">&#9733;</label>
-              <input type="radio" id="p1" name="prijstransparantie" value="1"><label for="p1">&#9733;</label>
+              <input type="radio" id="p5" name="prijstransparantie" value="5"><label for="p5">5</label>
+              <input type="radio" id="p4" name="prijstransparantie" value="4"><label for="p4">4</label>
+              <input type="radio" id="p3" name="prijstransparantie" value="3"><label for="p3">3</label>
+              <input type="radio" id="p2" name="prijstransparantie" value="2"><label for="p2">2</label>
+              <input type="radio" id="p1" name="prijstransparantie" value="1"><label for="p1">1</label>
             </div>
           </div>
 
           <div class="star-row">
             <span class="star-label">Kwaliteit geleverde dienst</span>
             <div class="star-group">
-              <input type="radio" id="k5" name="kwaliteit" value="5"><label for="k5">&#9733;</label>
-              <input type="radio" id="k4" name="kwaliteit" value="4"><label for="k4">&#9733;</label>
-              <input type="radio" id="k3" name="kwaliteit" value="3"><label for="k3">&#9733;</label>
-              <input type="radio" id="k2" name="kwaliteit" value="2"><label for="k2">&#9733;</label>
-              <input type="radio" id="k1" name="kwaliteit" value="1"><label for="k1">&#9733;</label>
+              <input type="radio" id="k5" name="kwaliteit" value="5"><label for="k5">5</label>
+              <input type="radio" id="k4" name="kwaliteit" value="4"><label for="k4">4</label>
+              <input type="radio" id="k3" name="kwaliteit" value="3"><label for="k3">3</label>
+              <input type="radio" id="k2" name="kwaliteit" value="2"><label for="k2">2</label>
+              <input type="radio" id="k1" name="kwaliteit" value="1"><label for="k1">1</label>
             </div>
           </div>
 
           <div class="star-row">
             <span class="star-label">Reactietijd communicatie</span>
             <div class="star-group">
-              <input type="radio" id="r5" name="reactietijd" value="5"><label for="r5">&#9733;</label>
-              <input type="radio" id="r4" name="reactietijd" value="4"><label for="r4">&#9733;</label>
-              <input type="radio" id="r3" name="reactietijd" value="3"><label for="r3">&#9733;</label>
-              <input type="radio" id="r2" name="reactietijd" value="2"><label for="r2">&#9733;</label>
-              <input type="radio" id="r1" name="reactietijd" value="1"><label for="r1">&#9733;</label>
+              <input type="radio" id="r5" name="reactietijd" value="5"><label for="r5">5</label>
+              <input type="radio" id="r4" name="reactietijd" value="4"><label for="r4">4</label>
+              <input type="radio" id="r3" name="reactietijd" value="3"><label for="r3">3</label>
+              <input type="radio" id="r2" name="reactietijd" value="2"><label for="r2">2</label>
+              <input type="radio" id="r1" name="reactietijd" value="1"><label for="r1">1</label>
             </div>
           </div>
         </div>
@@ -1141,7 +1141,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
         <p style="font-size:10px;color:var(--warm);text-align:center;margin-top:10px;line-height:1.6;">Jouw review wordt eerst door Aroussa gecontroleerd. Na goedkeuring verschijnt hij op de live prijsdatabase en dienstenindicator.</p>
       </form>
       <div id="reviewSuccess" style="display:none;padding:24px 0;text-align:center;">
-        <div style="font-size:24px;color:var(--gold);margin-bottom:12px;">&#9670;</div>
+        <div style="margin-bottom:12px;"></div>
         <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--dark);margin-bottom:8px;">Bedankt voor je review!</div>
         <p style="font-size:13px;color:var(--warm);line-height:1.7;">We controleren je beoordeling en nemen hem op in de live prijsdatabase en dienstenindicator. Jij helpt andere bruiden. Na goedkeuring sturen we je een persoonlijke kortingscode per e-mail die je kunt gebruiken voor je toekomstige aanschaf van een PDF voor het plannen van een ander feestje, of doorgeven aan iemand in jouw omgeving die ook gaat trouwen.</p>
       </div>
@@ -1209,7 +1209,7 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
         </div>
         <button type="submit" class="btn btn--dark" style="width:100%;margin-top:4px;"><span>Inschrijven voor vroege toegang &#8594;</span></button>
       </form>
-      <div id="waitlistSuccess" style="display:none;margin-top:20px;color:var(--bronze);font-size:13px;letter-spacing:1px;">&#9670; Ingeschreven! We nemen contact met je op zodra Aroussa Match beschikbaar is.</div>
+      <div id="waitlistSuccess" style="display:none;margin-top:20px;color:var(--bronze);font-size:13px;letter-spacing:1px;">Ingeschreven! We nemen contact met je op zodra Aroussa Match beschikbaar is.</div>
     </div>
   </div>
 </section>

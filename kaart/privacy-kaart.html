@@ -632,7 +632,7 @@ body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-weig
     <div class="tracker-legend">
       <div class="tracker-legend-item"><span class="tracker-legend-dot dot-unsent"></span> Nog niet verzonden</div>
       <div class="tracker-legend-item"><span class="tracker-legend-dot dot-sent"></span> Document verzonden</div>
-      <div class="tracker-legend-item"><span class="tracker-legend-dot dot-akkoord"></span> Akkoord ontvangen ✓</div>
+      <div class="tracker-legend-item"><span class="tracker-legend-dot dot-akkoord"></span> Akkoord ontvangen</div>
     </div>
   </div>
 
@@ -822,8 +822,8 @@ function trackerRender() {
         <span class="tracker-item-type">${escapeHtml(item.type)}</span>
       </div>
       <div class="tracker-item-actions">
-        <button class="tracker-pill pill-sent${item.sent?' active':''}" onclick="trackerToggle(${item.id},'sent')">${item.sent ? '✓ Verzonden' : 'Verzonden'}</button>
-        <button class="tracker-pill pill-akkoord${item.akkoord?' active':''}" onclick="trackerToggle(${item.id},'akkoord')">${item.akkoord ? '✓ Akkoord' : 'Akkoord'}</button>
+        <button class="tracker-pill pill-sent${item.sent?' active':''}" onclick="trackerToggle(${item.id},'sent')">${item.sent ? 'Verzonden' : 'Verzonden'}</button>
+        <button class="tracker-pill pill-akkoord${item.akkoord?' active':''}" onclick="trackerToggle(${item.id},'akkoord')">${item.akkoord ? 'Akkoord' : 'Akkoord'}</button>
         <button class="tracker-pill-delete" onclick="trackerDelete(${item.id})" title="Verwijderen">✕</button>
       </div>`;
     list.appendChild(div);
