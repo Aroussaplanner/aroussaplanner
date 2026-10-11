@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mijn account — Aroussa Wedding Planner</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
+<link rel="apple-touch-icon" href="/logo-512.png">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--darker:#1A1210;--dark:#221916;--beige:#EDE6D6;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--sand:#F8F4EC;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{font-size:16px;}
+  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;visibility:hidden;}
+
+  /* NAV */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;background:rgba(26,18,16,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,168,130,0.12);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:0 24px;}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;letter-spacing:0.08em;color:var(--ivory);text-decoration:none;}
+  .nav-logo small{display:block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);margin-top:-2px;}
+  .nav-right{display:flex;align-items:center;gap:20px;}
+  .nav-back{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm);text-decoration:none;transition:color .2s;}
+  .nav-back:hover{color:var(--gold);}
+  .btn-logout{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm);background:none;border:1px solid rgba(196,168,130,0.2);padding:8px 16px;cursor:pointer;border-radius:2px;transition:all .2s;font-family:'Montserrat',sans-serif;}
+  .btn-logout:hover{color:var(--ivory);border-color:rgba(196,168,130,0.5);}
+
+  /* LAYOUT */
+  main{flex:1;padding:120px 24px 80px;max-width:1180px;margin:0 auto;width:100%;}
+
+  /* HEADER */
+  .account-header{margin-bottom:56px;}
+  .ornament{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .ornament-line{flex:1;max-width:60px;height:1px;}
+  .ornament-line.l{background:linear-gradient(to right,transparent,rgba(196,168,130,0.4));}
+  .ornament-line.r{background:linear-gradient(to left,transparent,rgba(196,168,130,0.4));}
+  .ornament-diamond{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
+  .label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,168,130,0.3);padding:5px 14px;border-radius:2px;margin-bottom:20px;}
+  .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:12px;}
+  .page-title em{font-style:italic;color:var(--gold);}
+  .user-greeting{font-size:14px;color:var(--warm);}
+  .user-greeting strong{color:var(--ivory);font-weight:500;}
+
+  /* DIVIDER */
+  .section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,130,0.2),transparent);margin:40px 0;}
+
+  /* SECTION LABEL */
+  .section-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:24px;}
+
+  /* PRODUCT GRID */
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:48px;}
+
+  /* PRODUCT CARD */
+  .product-card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:36px;position:relative;overflow:hidden;transition:border-color .3s;}
+  .product-card:hover{border-color:rgba(196,168,130,0.35);}
+  .product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
+  .product-card:hover::before{opacity:1;}
+  .product-card__icon{font-size:28px;margin-bottom:16px;}
+  .product-card__label{font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+  .product-card__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:10px;}
+  .product-card__desc{font-size:13px;color:var(--warm);line-height:1.65;margin-bottom:24px;}
+  .product-card__action{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .25s,transform .25s;}
+  .product-card__action:hover{background:#D4B892;transform:translateY(-1px);}
+  .product-card__badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--gold);font-weight:500;}
+  .product-card__badge::before{content:'✓';font-weight:700;}
+
+  /* PENDING STATE */
+  .pending-card{background:rgba(196,168,130,0.04);border:1px solid rgba(196,168,130,0.1);border-radius:8px;padding:36px;text-align:center;}
+  .pending-card__icon{font-size:36px;margin-bottom:16px;}
+  .pending-card__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:10px;}
+  .pending-card__text{font-size:13px;color:var(--warm);line-height:1.7;max-width:400px;margin:0 auto 24px;}
+  .pending-card__wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(196,168,130,0.1);border:1px solid rgba(196,168,130,0.2);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .25s;}
+  .pending-card__wa:hover{background:rgba(196,168,130,0.18);}
+
+  /* INFO CARDS */
+  .info-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:40px;}
+  .info-card{background:rgba(255,255,255,0.02);border:1px solid rgba(196,168,130,0.1);border-radius:6px;padding:24px;}
+  .info-card__label{font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--warm);margin-bottom:8px;}
+  .info-card__value{font-size:14px;color:var(--ivory);font-weight:400;}
+  .info-card__value a{color:var(--gold);text-decoration:none;}
+  .info-card__value a:hover{text-decoration:underline;}
+
+  /* FOOTER */
+  footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(196,168,130,0.1);margin-top:auto;}
+  footer p{font-size:12px;color:var(--warm);}
+  footer a{color:var(--gold);text-decoration:none;}
+
+  /* STATES */
+  #loading-state,#account-state,#no-products-state{display:none;}
+  #loading-state.active,#account-state.active,#no-products-state.active{display:block;}
+
+  /* LOADING SPINNER */
+  .loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:16px;}
+  .spinner{width:32px;height:32px;border:2px solid rgba(196,168,130,0.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .loading-text{font-size:12px;color:var(--warm);letter-spacing:0.08em;}
+
+  @media(max-width:600px){
+    main{padding:100px 16px 60px;}
+    .products-grid{grid-template-columns:1fr;}
+    .info-row{grid-template-columns:1fr;}
+    .nav-right{gap:12px;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Aroussa<small>Wedding Planner</small></a>
+    <div class="nav-right">
+      <a href="/" class="nav-back">← Website</a>
+      <button class="btn-logout" onclick="doLogout()">Uitloggen</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <!-- LOADING -->
+  <div id="loading-state" class="active">
+    <div class="loading-wrap">
+      <div class="spinner"></div>
+      <span class="loading-text">Even geduld…</span>
+    </div>
+  </div>
+
+  <!-- ACCOUNT DASHBOARD -->
+  <div id="account-state">
+    <div class="account-header">
+      <div class="ornament">
+        <span class="ornament-line l"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-line r"></span>
+      </div>
+      <span class="label">Mijn account</span>
+      <h1 class="page-title">Welkom<br><em>terug</em></h1>
+      <p class="user-greeting">Ingelogd als <strong id="user-email"></strong></p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <p class="section-label">Jouw producten</p>
+
+    <!-- PRODUCTS CONTAINER -->
+    <div class="products-grid" id="products-grid"></div>
+
+    <!-- NO PRODUCTS YET -->
+    <div id="no-products-state">
+      <div class="pending-card">
+        <div class="pending-card__icon">⏳</div>
+        <h2 class="pending-card__title">Betaling in behandeling</h2>
+        <p class="pending-card__text">
+          Je account is aangemaakt — goed bezig! Zodra je betaling van €30 is verwerkt, wordt jouw toegang geactiveerd. Je ontvangt een Tikkie via WhatsApp.
+        </p>
+        <a href="https://wa.me/31613115286" class="pending-card__wa">📲 WhatsApp sturen</a>
+      </div>
+    </div>
+
+    <!-- ACCOUNT INFO -->
+    <div class="info-row">
+      <div class="info-card">
+        <div class="info-card__label">E-mailadres</div>
+        <div class="info-card__value" id="info-email">—</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__label">Hulp nodig?</div>
+        <div class="info-card__value"><a href="https://wa.me/31613115286">WhatsApp: 06 13 11 52 86</a></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card__label">Wachtwoord wijzigen</div>
+        <div class="info-card__value"><a href="#" onclick="sendPasswordReset(); return false;">Stuur reset-link</a></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <p>&copy; 2026 Aroussa Wedding Planner &mdash; <a href="/">Terug naar de website</a></p>
+</footer>
+
+<script>
+// ── PRODUCT CATALOGUE ──────────────────────────────────────────────────────
+// Add more products here in the future:
+var PRODUCTS = [
+  {
+    role: 'privacy-kaart',
+    icon: '🛡️',
+    label: 'Privacy & bescherming',
+    title: 'Privacy Kaart',
+    desc: 'Jouw persoonlijke document waarmee fotograaf, DJ, videograaf en Bridal Stylist exact weten wat wel en niet mag op jouw grote dag.',
+    link: '/kaart/privacy-kaart'
+  }
+  // Future products go here, e.g. { role: 'stappenplan', icon: '📋', ... }
+];
+
+// ── AUTH GUARD & INIT ──────────────────────────────────────────────────────
+(function() {
+  // Keep body hidden until auth is confirmed
+  document.body.style.visibility = 'hidden';
+
+  function showPage() {
+    document.body.style.visibility = '';
+  }
+
+  function checkUser(user) {
+    if (!user) {
+      window.location.href = '/login?redirect=/mijn-account';
+      return;
+    }
+    showPage();
+    renderDashboard(user);
+  }
+
+  if (window.netlifyIdentity) {
+    netlifyIdentity.on('init', function(user) {
+      checkUser(user);
+    });
+    netlifyIdentity.on('logout', function() {
+      window.location.href = '/';
+    });
+    netlifyIdentity.init();
+  } else {
+    // Fallback if widget loads late
+    setTimeout(function() {
+      var user = window.netlifyIdentity && netlifyIdentity.currentUser();
+      if (!user) {
+        window.location.href = '/login?redirect=/mijn-account';
+      } else {
+        showPage();
+        renderDashboard(user);
+      }
+    }, 2000);
+  }
+})();
+
+// ── RENDER DASHBOARD ───────────────────────────────────────────────────────
+function renderDashboard(user) {
+  document.getElementById('loading-state').classList.remove('active');
+  document.getElementById('account-state').classList.add('active');
+
+  var email = user.email || '';
+  document.getElementById('user-email').textContent = email;
+  document.getElementById('info-email').textContent = email;
+
+  var roles = (user.app_metadata && user.app_metadata.roles) || [];
+  var isAdmin = roles.indexOf('admin') !== -1;
+
+  // Render product cards
+  var grid = document.getElementById('products-grid');
+  var hasProducts = false;
+
+  PRODUCTS.forEach(function(p) {
+    if (isAdmin || roles.indexOf(p.role) !== -1) {
+      hasProducts = true;
+      var card = document.createElement('div');
+      card.className = 'product-card';
+      card.innerHTML =
+        '<div class="product-card__icon">' + p.icon + '</div>' +
+        '<div class="product-card__label">' + p.label + '</div>' +
+        '<h2 class="product-card__title">' + p.title + '</h2>' +
+        '<p class="product-card__desc">' + p.desc + '</p>' +
+        '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
+          '<a href="' + p.link + '" class="product-card__action">Openen →</a>' +
+          '<span class="product-card__badge">Actief</span>' +
+        '</div>';
+      grid.appendChild(card);
+    }
+  });
+
+  // If admin, also show an admin note
+  if (isAdmin) {
+    var adminCard = document.createElement('div');
+    adminCard.className = 'product-card';
+    adminCard.innerHTML =
+      '<div class="product-card__icon">⚙️</div>' +
+      '<div class="product-card__label">Beheer</div>' +
+      '<h2 class="product-card__title">Admin toegang</h2>' +
+      '<p class="product-card__desc">Je hebt beheerderstoegang tot alle producten.</p>' +
+      '<a href="https://app.netlify.com" target="_blank" class="product-card__action" style="background:rgba(196,168,130,0.15);color:var(--gold);border:1px solid rgba(196,168,130,0.3);">Netlify dashboard →</a>';
+    grid.appendChild(adminCard);
+  }
+
+  if (!hasProducts) {
+    document.getElementById('no-products-state').style.display = 'block';
+  }
+}
+
+// ── ACTIONS ────────────────────────────────────────────────────────────────
+function doLogout() {
+  if (window.netlifyIdentity) {
+    netlifyIdentity.logout();
+  }
+}
+
+function sendPasswordReset() {
+  if (!window.netlifyIdentity) return;
+  var user = netlifyIdentity.currentUser();
+  if (!user || !user.email) return;
+  // Netlify Identity widget handles this via the modal
+  netlifyIdentity.open('login');
+}
+</script>
+
+</body>
+</html>
