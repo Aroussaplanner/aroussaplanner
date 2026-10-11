@@ -17,7 +17,6 @@
   /* LOCK SCREEN */
   #lock{text-align:center;padding:60px 0;}
   #lock h2{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ivory);margin-bottom:20px;}
-  .lock-icon{font-size:48px;margin-bottom:20px;}
 
   /* FORM */
   .card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:32px;margin-bottom:24px;}
@@ -67,7 +66,6 @@
 
   <!-- LOCK SCREEN -->
   <div id="lock">
-    <div class="lock-icon">🔐</div>
     <h2>Geheime code invoeren</h2>
     <div class="form-group" style="max-width:320px;margin:0 auto 16px;">
       <input type="password" id="adminPass" placeholder="Admin wachtwoord" onkeydown="if(event.key==='Enter')unlock()">
@@ -81,7 +79,7 @@
 
     <!-- CODE GENERATOR -->
     <div class="card">
-      <h2>🎫 Genereer downloadcode</h2>
+      <h2>Genereer downloadcode</h2>
       <div class="form-group">
         <label>E-mailadres klant</label>
         <input type="email" id="klantEmail" placeholder="klant@email.nl">
@@ -105,7 +103,7 @@
 
         <!-- WhatsApp bericht template -->
         <div class="wa-block">
-          <div class="wa-block__label">📲 WhatsApp bericht (klaar om te kopiëren)</div>
+          <div class="wa-block__label">WhatsApp bericht (klaar om te kopiëren)</div>
           <div class="wa-block__text" id="waTemplate"></div>
           <span class="wa-copy" onclick="copyWA()">Kopieer WhatsApp bericht</span>
         </div>
@@ -116,7 +114,7 @@
 
     <!-- INFO -->
     <div class="card" style="background:rgba(196,168,130,0.04);">
-      <h2 style="font-size:16px;margin-bottom:12px;">📋 Hoe werkt het?</h2>
+      <h2 style="font-size:16px;margin-bottom:12px;">Hoe werkt het?</h2>
       <ol style="font-size:13px;color:var(--warm);line-height:2;padding-left:18px;">
         <li>Klant logt in → klikt op "Bestel Privacy Kaart"</li>
         <li>Jij ontvangt een e-mail melding via Netlify</li>
@@ -252,17 +250,17 @@ async function generateCode() {
 
     // WhatsApp template
     var waMsg =
-      'Hoi ' + data.naam.split(' ')[0] + ' 💛\n\n' +
+      'Hoi ' + data.naam.split(' ')[0] + '\n\n' +
       'Jouw Privacy Kaart staat klaar! Hier is jouw persoonlijke downloadcode:\n\n' +
-      '🔑 ' + data.code + '\n\n' +
+      data.code + '\n\n' +
       'Zo download je jouw Privacy Kaart:\n' +
-      '1️⃣ Ga naar https://aroussaplanner.com/mijn-account\n' +
-      '2️⃣ Maak een gratis account aan (of log in) met dit e-mailadres\n' +
-      '3️⃣ Klik op "Bestel Privacy Kaart" — geen extra betaling nodig!\n' +
-      '4️⃣ Voer de code in die je hierboven ziet\n' +
-      '5️⃣ Download jouw persoonlijke PDF 🎉\n\n' +
+      '1. Ga naar https://aroussaplanner.com/mijn-account\n' +
+      '2. Maak een gratis account aan (of log in) met dit e-mailadres\n' +
+      '3. Klik op "Bestel Privacy Kaart" — geen extra betaling nodig!\n' +
+      '4. Voer de code in die je hierboven ziet\n' +
+      '5. Download jouw persoonlijke PDF\n\n' +
       'De code is persoonlijk en kan maar één keer worden gebruikt.\n\n' +
-      'Veel liefde, Aroussa 🌸';
+      'Veel liefde, Aroussa';
 
     document.getElementById('waTemplate').textContent = waMsg;
     document.getElementById('copyCodeBtn').textContent = 'Kopieer code';
