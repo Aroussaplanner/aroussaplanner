@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Kaart aanvragen — Aroussa</title>
+<meta name="description" content="Vraag jouw persoonlijke Aroussa Privacy Kaart aan voor €30. Bescherm je bruiloft — geen foto's op Instagram zonder jouw toestemming.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://aroussaplanner.com/aanmelden">
+<link rel="icon" type="image/png" sizes="512x512" href="logo-512.png">
+<link rel="apple-touch-icon" href="logo-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--darker:#1A1210;--dark:#221916;--beige:#EDE6D6;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--sand:#F8F4EC;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{font-size:16px;scroll-behavior:smooth;}
+  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;min-height:100vh;}
+
+  /* NAV */
+  .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;background:rgba(26,18,16,0.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,168,130,0.12);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;letter-spacing:0.08em;color:var(--ivory);text-decoration:none;}
+  .nav-logo small{display:block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);margin-top:-2px;}
+  .nav-back{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm);text-decoration:none;transition:color .2s;}
+  .nav-back:hover{color:var(--gold);}
+
+  /* HERO */
+  .hero-wrap{padding:140px 0 80px;text-align:center;}
+  .label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,168,130,0.3);padding:6px 16px;border-radius:2px;margin-bottom:24px;}
+  .title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,64px);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:20px;}
+  .title em{font-style:italic;color:var(--gold);}
+  .subtitle{font-size:15px;font-weight:300;color:var(--warm);max-width:520px;margin:0 auto 48px;}
+
+  /* PRIJSBADGE */
+  .price-badge{display:inline-flex;align-items:center;gap:12px;background:rgba(196,168,130,0.08);border:1px solid rgba(196,168,130,0.2);padding:16px 28px;border-radius:4px;margin-bottom:48px;}
+  .price-badge__amount{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:300;color:var(--gold);line-height:1;}
+  .price-badge__amount sup{font-size:22px;vertical-align:super;}
+  .price-badge__info{text-align:left;}
+  .price-badge__label{font-size:13px;font-weight:600;color:var(--ivory);letter-spacing:0.05em;}
+  .price-badge__sub{font-size:11px;color:var(--warm);margin-top:2px;}
+
+  /* FEATURES */
+  .features{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:56px;}
+  .feature{font-size:12px;font-weight:400;color:var(--warm);display:flex;align-items:center;gap:6px;}
+  .feature::before{content:'✓';color:var(--gold);font-weight:600;}
+
+  /* FORM */
+  .form-card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:48px;max-width:540px;margin:0 auto;}
+  .form-card h2{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);margin-bottom:8px;}
+  .form-card p{font-size:13px;color:var(--warm);margin-bottom:32px;line-height:1.6;}
+  .form-group{margin-bottom:20px;}
+  .form-group label{display:block;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .form-group input{width:100%;padding:14px 16px;background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.2);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;outline:none;border-radius:2px;transition:border-color .2s;}
+  .form-group input::placeholder{color:rgba(155,142,126,0.6);}
+  .form-group input:focus{border-color:rgba(196,168,130,0.5);}
+  .form-group .hint{font-size:11px;color:var(--warm);margin-top:6px;opacity:0.7;}
+
+  /* BUTTONS */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:15px 32px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;cursor:pointer;border:none;border-radius:2px;transition:all .25s;}
+  .btn--gold{background:var(--gold);color:var(--darker);}
+  .btn--gold:hover{background:#D4B892;transform:translateY(-1px);}
+  .btn--full{width:100%;}
+  .submit-wrap{margin-top:32px;}
+
+  /* TIKKIE INFO */
+  .tikkie-info{background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.15);border-radius:4px;padding:20px 24px;margin-top:24px;display:flex;gap:14px;align-items:flex-start;}
+  .tikkie-icon{font-size:24px;flex-shrink:0;margin-top:2px;}
+  .tikkie-text h4{font-size:13px;font-weight:600;color:var(--ivory);margin-bottom:4px;}
+  .tikkie-text p{font-size:12px;color:var(--warm);line-height:1.6;}
+
+  /* FOOTER */
+  footer{text-align:center;padding:48px 24px;border-top:1px solid rgba(196,168,130,0.1);margin-top:80px;}
+  footer p{font-size:12px;color:var(--warm);}
+  footer a{color:var(--gold);text-decoration:none;}
+
+  /* SUCCESS */
+  .success-msg{display:none;text-align:center;padding:40px 0;}
+  .success-msg.show{display:block;}
+  .success-icon{font-size:48px;margin-bottom:20px;}
+  .success-msg h2{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:400;color:var(--ivory);margin-bottom:12px;}
+  .success-msg p{font-size:14px;color:var(--warm);max-width:400px;margin:0 auto 8px;}
+
+  @media(max-width:600px){
+    .form-card{padding:32px 24px;}
+    .price-badge{flex-direction:column;text-align:center;gap:8px;}
+    .price-badge__info{text-align:center;}
+    .features{flex-direction:column;align-items:center;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">Aroussa<small>Wedding Planner</small></a>
+      <a href="/#privacy-kaart" class="nav-back">← Terug</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <div class="hero-wrap">
+      <span class="label">Privacy &amp; bescherming</span>
+      <h1 class="title">Jouw persoonlijke<br><em>Privacy Kaart</em></h1>
+      <p class="subtitle">Regel in één document dat jouw fotograaf, DJ, videograaf en Bridal Stylist exact weten wat wel en niet mag op jouw grote dag.</p>
+
+      <div class="price-badge">
+        <div class="price-badge__amount"><sup>€</sup>30</div>
+        <div class="price-badge__info">
+          <div class="price-badge__label">Eenmalig — voor jouw bruiloft</div>
+          <div class="price-badge__sub">Persoonlijk document op naam</div>
+        </div>
+      </div>
+
+      <div class="features">
+        <span class="feature">Persoonlijke licentiecode</span>
+        <span class="feature">Dienstverlener tracker</span>
+        <span class="feature">Noodplan voor de trouwdag</span>
+        <span class="feature">Printklaar met disclaimer</span>
+        <span class="feature">Anti-kopieer beveiliging</span>
+        <span class="feature">Juridisch geldig</span>
+      </div>
+
+      <!-- FORM CARD -->
+      <div class="form-card" id="formCard">
+        <h2>Vul je gegevens in</h2>
+        <p>Na aanmelding ontvang je binnen 24 uur een Tikkie van €30 via WhatsApp. Na betaling stuur ik je persoonlijke Privacy Kaart direct toe.</p>
+
+        <form name="privacy-kaart-aanmelding" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="form-name" value="privacy-kaart-aanmelding">
+          <p style="display:none"><input name="bot-field"></p>
+
+          <div class="form-group">
+            <label for="naam">Jouw naam (bruid)</label>
+            <input type="text" id="naam" name="naam" placeholder="Bijv. Fatima" required>
+          </div>
+
+          <div class="form-group">
+            <label for="whatsapp">WhatsApp nummer</label>
+            <input type="tel" id="whatsapp" name="whatsapp" placeholder="06 12 34 56 78" required>
+            <span class="hint">Hierop ontvang je de Tikkie betaallink</span>
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mailadres</label>
+            <input type="email" id="email" name="email" placeholder="jouw@email.nl" required>
+            <span class="hint">Hierop ontvang je je Privacy Kaart na betaling</span>
+          </div>
+
+          <div class="form-group">
+            <label for="trouwdatum">Trouwdatum</label>
+            <input type="date" id="trouwdatum" name="trouwdatum" required>
+          </div>
+
+          <div class="form-group">
+            <label for="bruidegom">Naam bruidegom</label>
+            <input type="text" id="bruidegom" name="bruidegom" placeholder="Bijv. Youssef">
+          </div>
+
+          <div class="tikkie-info">
+            <div class="tikkie-icon">📲</div>
+            <div class="tikkie-text">
+              <h4>Betaling via Tikkie</h4>
+              <p>Na aanmelding ontvang je een Tikkie van €30 via WhatsApp. Zodra je betaald hebt, ontvang je je persoonlijke Privacy Kaart per e-mail.</p>
+            </div>
+          </div>
+
+          <div class="submit-wrap">
+            <button type="submit" class="btn btn--gold btn--full"><span>Aanmelden en Tikkie ontvangen →</span></button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUCCESS MESSAGE -->
+      <div class="success-msg" id="successMsg">
+        <div class="success-icon">✉️</div>
+        <h2>Aanmelding ontvangen!</h2>
+        <p>Je ontvangt binnen 24 uur een Tikkie van <strong style="color:var(--gold);">€30</strong> via WhatsApp.</p>
+        <p>Na betaling stuur ik je persoonlijke Privacy Kaart direct toe.</p>
+        <p style="margin-top:8px;font-size:12px;opacity:0.6;">Geen bericht ontvangen? Check ook je spam of stuur een WhatsApp naar <a href="https://wa.me/31613115286" style="color:var(--gold);">06 13 11 52 86</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 Aroussa Wedding Planner &mdash; <a href="/">Terug naar de website</a></p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = new FormData(form);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(() => {
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  })
+  .catch(() => {
+    // Fallback: toon toch de succes melding
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+  });
+}
+</script>
+
+</body>
+</html>
