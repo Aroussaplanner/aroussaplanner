@@ -270,7 +270,20 @@
           <button class="btn-order" id="orderBtn" onclick="submitOrder()">
             <span>Bestel Privacy Kaart — €30 →</span>
           </button>
-          <p style="font-size:11px;color:var(--warm);margin-top:12px;text-align:center;">Na bestelling ontvang jij van mij een persoonlijke downloadcode.</p>
+          <p style="font-size:11px;color:var(--warm);margin-top:12px;text-align:center;">Na bestelling ontvang jij van mij een persoonlijke downloadcode via WhatsApp.</p>
+
+          <!-- Code invoer voor klanten die al een code hebben ontvangen -->
+          <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(196,168,130,0.1);">
+            <p style="font-size:12px;color:var(--warm);margin-bottom:12px;font-weight:600;letter-spacing:0.06em;">Al een code ontvangen via WhatsApp? Voer hem direct in:</p>
+            <div class="code-form">
+              <div class="code-input-row">
+                <input class="code-input" type="text" id="codeInput0" placeholder="ARO-XXXX-XXXX" maxlength="13" oninput="formatCode(this)">
+                <button class="btn-validate" id="validateBtn0" onclick="validateCode0()">Activeren</button>
+              </div>
+              <p class="code-hint">De code staat in het WhatsApp-bericht van Aroussa.</p>
+              <div class="error-msg" id="codeError0"></div>
+            </div>
+          </div>
         </div>
 
         <!-- PANEL 1B: WACHT OP CODE -->
@@ -497,7 +510,10 @@ function formatCode(input) {
   input.value = parts.join('-');
 }
 
-// ── CODE VALIDATION (wacht panel) ────────────────────────────────────────
+// ── CODE VALIDATION ───────────────────────────────────────────────────────
+function validateCode0() {
+  doValidate('codeInput0', 'validateBtn0', 'codeError0');
+}
 function validateCode() {
   doValidate('codeInput', 'validateBtn', 'codeError');
 }

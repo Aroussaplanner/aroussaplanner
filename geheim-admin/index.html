@@ -72,8 +72,8 @@
     <div class="form-group" style="max-width:320px;margin:0 auto 16px;">
       <input type="password" id="adminPass" placeholder="Admin wachtwoord" onkeydown="if(event.key==='Enter')unlock()">
     </div>
-    <button class="btn" style="max-width:320px;margin:0 auto;" onclick="unlock()">Inloggen</button>
-    <div class="error-msg" id="lockError">Verkeerd wachtwoord</div>
+    <button class="btn" id="lockBtn" style="max-width:320px;margin:0 auto;" onclick="unlock()">Inloggen</button>
+    <div class="error-msg" id="lockError">Verkeerd wachtwoord — probeer opnieuw.</div>
   </div>
 
   <!-- ADMIN PANEL (hidden until unlocked) -->
@@ -138,20 +138,48 @@ var currentCode = '';
 var currentNaam = '';
 var currentEmail = '';
 
-function unlock() {
-  var pass = document.getElementById('adminPass').value;
+async function unlock() {
+  var pass = document.getElementById('adminPass').value.trim();
   if (!pass) return;
 
-  // Store in session for UX (the real check is server-side)
-  sessionStorage.setItem(ADMIN_SECRET_KEY, pass);
-  showPanel(pass);
+  var btn = document.getElementById('lockBtn');
+  btn.disabled = true;
+  btn.textContent = 'Controleren…';
+  document.getElementById('lockError').classList.remove('show');
+
+  try {
+    var resp = await fetch('/.netlify/functions/check-admin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret: pass })
+    });
+
+    if (resp.status === 401) {
+      document.getElementById('lockError').classList.add('show');
+      return;
+    }
+
+    if (!resp.ok) {
+      document.getElementById('lockError').textContent = 'Verbindingsfout — probeer opnieuw.';
+      document.getElementById('lockError').classList.add('show');
+      return;
+    }
+
+    // Password correct — store and show panel
+    sessionStorage.setItem(ADMIN_SECRET_KEY, pass);
+    showPanel(pass);
+  } catch(e) {
+    document.getElementById('lockError').textContent = 'Verbindingsfout — controleer je internet.';
+    document.getElementById('lockError').classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Inloggen';
+  }
 }
 
 function showPanel(pass) {
-  // Quick client-side check by trying to generate (server validates)
   document.getElementById('lock').style.display = 'none';
   document.getElementById('panel').style.display = 'block';
-  // Store pass for API calls
   window._adminPass = pass;
 }
 
@@ -161,9 +189,11 @@ function logout() {
   document.getElementById('lock').style.display = 'block';
   document.getElementById('panel').style.display = 'none';
   document.getElementById('adminPass').value = '';
+  document.getElementById('lockError').classList.remove('show');
+  document.getElementById('lockError').textContent = 'Verkeerd wachtwoord — probeer opnieuw.';
 }
 
-// Restore session
+// Restore session (no server re-check needed — generate-code validates again anyway)
 (function() {
   var stored = sessionStorage.getItem(ADMIN_SECRET_KEY);
   if (stored) showPanel(stored);
@@ -225,8 +255,12 @@ async function generateCode() {
       'Hoi ' + data.naam.split(' ')[0] + ' 💛\n\n' +
       'Jouw Privacy Kaart staat klaar! Hier is jouw persoonlijke downloadcode:\n\n' +
       '🔑 ' + data.code + '\n\n' +
-      'Ga naar aroussaplanner.com/mijn-account, log in en voer deze code in.\n' +
-      'Je kunt de Privacy Kaart daarna eenmalig downloaden als PDF.\n\n' +
+      'Zo download je jouw Privacy Kaart:\n' +
+      '1️⃣ Ga naar https://aroussaplanner.com/mijn-account\n' +
+      '2️⃣ Maak een gratis account aan (of log in) met dit e-mailadres\n' +
+      '3️⃣ Klik op "Bestel Privacy Kaart" — geen extra betaling nodig!\n' +
+      '4️⃣ Voer de code in die je hierboven ziet\n' +
+      '5️⃣ Download jouw persoonlijke PDF 🎉\n\n' +
       'De code is persoonlijk en kan maar één keer worden gebruikt.\n\n' +
       'Veel liefde, Aroussa 🌸';
 

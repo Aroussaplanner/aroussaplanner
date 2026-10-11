@@ -45,32 +45,44 @@ exports.handler = async (event) => {
   const code = `ARO-${part1}-${part2}`;
 
   // Store code in Netlify Blobs
-  const store = getStore('download-codes');
-  const codeData = {
-    email: email.toLowerCase().trim(),
-    naam: naam.trim(),
-    product,
-    code,
-    createdAt: new Date().toISOString(),
-    used: false,
-    usedAt: null,
-  };
-
-  await store.setJSON(code, codeData);
-
-  // Also index by email (to look up pending codes)
-  const emailKey = `email:${email.toLowerCase().trim()}:${product}`;
-  await store.setJSON(emailKey, { code, createdAt: codeData.createdAt });
-
-  return {
-    statusCode: 200,
-    headers,
-    body: JSON.stringify({
-      success: true,
-      code,
-      email,
-      naam,
+  try {
+    const store = getStore('download-codes');
+    const codeData = {
+      email: email.toLowerCase().trim(),
+      naam: naam.trim(),
       product,
-    }),
-  };
+      code,
+      createdAt: new Date().toISOString(),
+      used: false,
+      usedAt: null,
+    };
+
+    await store.setJSON(code, codeData);
+
+    // Also index by email (to look up pending codes)
+    const emailKey = `email:${email.toLowerCase().trim()}:${product}`;
+    await store.setJSON(emailKey, { code, createdAt: codeData.createdAt });
+
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({
+        success: true,
+        code,
+        email,
+        naam,
+        product,
+      }),
+    };
+  } catch (err) {
+    console.error('Blobs error in generate-code:', err);
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        error: 'Opslaan mislukt. Probeer opnieuw.',
+        detail: err && err.message ? err.message : String(err),
+      }),
+    };
+  }
 };
