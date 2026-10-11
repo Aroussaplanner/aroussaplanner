@@ -163,14 +163,14 @@
     <a href="/" class="nav-logo">Aroussa<small>Wedding Planner</small></a>
     <div class="nav-right">
       <a href="/" class="nav-back">← Website</a>
-      <button class="btn-logout" onclick="doLogout()">Uitloggen</button>
+      <button class="btn-logout" id="logoutBtn" onclick="doLogout()" style="display:none;">Uitloggen</button>
     </div>
   </div>
 </nav>
 
 <main>
-  <!-- EMAIL ENTRY (getoond als geen e-mail bekend is) -->
-  <div id="email-entry" style="display:none;">
+  <!-- EMAIL ENTRY (standaard zichtbaar; JS verbergt dit als e-mail al bekend is) -->
+  <div id="email-entry">
     <div class="page-header">
       <div class="ornament">
         <span class="ornament-line l"></span>
@@ -201,8 +201,8 @@
     </div>
   </div>
 
-  <!-- LOADING STATE -->
-  <div id="loading-state">
+  <!-- LOADING STATE (verborgen; alleen zichtbaar tijdens init) -->
+  <div id="loading-state" style="display:none;">
     <div class="spinner-wrap">
       <div class="spinner"></div>
       <span class="spinner-txt">Laden…</span>
@@ -363,8 +363,8 @@
   <p>&copy; 2026 Aroussa Wedding Planner — <a href="/">Terug naar website</a></p>
 </footer>
 
-<!-- jsPDF via CDN for PDF generation -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<!-- jsPDF via CDN — defer zodat het auth-init niet blokkeert -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script>
 // ── STATE KEYS ─────────────────────────────────────────────────────────────
@@ -378,14 +378,14 @@ var downloadToken = null;
 var klantNaam = '';
 
 // ── AUTH INIT ─────────────────────────────────────────────────────────────
+// email-entry is visible by default in HTML; hide it only when we have a stored email.
 (function() {
   var storedEmail = tryGet('aroussa_email');
   if (storedEmail) {
+    document.getElementById('email-entry').style.display = 'none';
     init({ email: storedEmail });
-  } else {
-    document.getElementById('loading-state').style.display = 'none';
-    document.getElementById('email-entry').style.display = 'block';
   }
+  // else: email-entry remains visible — no JS needed
 })();
 
 function setEmail() {
@@ -398,15 +398,17 @@ function setEmail() {
   }
   trySet('aroussa_email', val);
   document.getElementById('email-entry').style.display = 'none';
-  document.getElementById('loading-state').style.display = 'block';
+  // init() shows account-content directly — no need for loading spinner here
   init({ email: val });
 }
 
 // ── INIT DASHBOARD ────────────────────────────────────────────────────────
 function init(user) {
   currentUser = user;
-  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('email-entry').style.display    = 'none';
+  document.getElementById('loading-state').style.display  = 'none';
   document.getElementById('account-content').style.display = 'block';
+  document.getElementById('logoutBtn').style.display      = 'inline-block';
 
   var email = (user && user.email) ? user.email : '';
   document.getElementById('user-email-display').textContent = email;
@@ -562,6 +564,20 @@ async function downloadPDF() {
   var btn = document.getElementById('downloadBtn');
   btn.disabled = true;
   btn.textContent = 'Aanmaken…';
+
+  // jsPDF loads with defer — wait if it hasn't arrived yet
+  if (!window.jspdf) {
+    for (var i = 0; i < 30; i++) {
+      await new Promise(function(r) { setTimeout(r, 200); });
+      if (window.jspdf) break;
+    }
+    if (!window.jspdf) {
+      btn.disabled = false;
+      btn.textContent = '⬇ Download mijn Privacy Kaart PDF';
+      alert('De PDF-bibliotheek kon niet worden geladen. Controleer je internet en probeer opnieuw.');
+      return;
+    }
+  }
 
   document.getElementById('pdf-overlay').classList.add('show');
 
