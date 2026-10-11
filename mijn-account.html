@@ -7,13 +7,12 @@
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
 <link rel="apple-touch-icon" href="/logo-512.png">
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{--darker:#1A1210;--dark:#221916;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--green:#4CAF6E;--red:#C4625B;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{font-size:16px;}
-  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;visibility:hidden;}
+  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;}
 
   /* NAV */
   .nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 0;background:rgba(26,18,16,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,168,130,0.12);}
@@ -170,6 +169,38 @@
 </nav>
 
 <main>
+  <!-- EMAIL ENTRY (getoond als geen e-mail bekend is) -->
+  <div id="email-entry" style="display:none;">
+    <div class="page-header">
+      <div class="ornament">
+        <span class="ornament-line l"></span>
+        <span class="ornament-diamond"></span>
+        <span class="ornament-line r"></span>
+      </div>
+      <span class="label">Privacy Kaart</span>
+      <h1 class="page-title">Jouw<br><em>account</em></h1>
+      <p class="user-email-txt">Voer jouw e-mailadres in om verder te gaan.</p>
+    </div>
+    <div class="product-card">
+      <div class="product-card__head" style="padding-bottom:36px;">
+        <div class="product-card__icon">🛡️</div>
+        <h2 class="product-card__title">Privacy Kaart</h2>
+        <p class="product-card__desc" style="margin-bottom:24px;">Voer hieronder het e-mailadres in dat je hebt opgegeven bij je bestelling.</p>
+        <div class="code-input-row">
+          <input type="email" id="emailEntryInput" class="code-input" placeholder="jouw@email.nl"
+            style="text-transform:none;letter-spacing:0.02em;font-size:14px;"
+            oninput="document.getElementById('emailEntryError').classList.remove('show')"
+            onkeydown="if(event.key==='Enter')setEmail()">
+          <button class="btn-validate" onclick="setEmail()">Verder →</button>
+        </div>
+        <div class="error-msg" id="emailEntryError"></div>
+        <p style="font-size:11px;color:var(--warm);margin-top:16px;">
+          Heb je nog geen bestelling gedaan? <a href="/" style="color:var(--gold);">Ga naar de website →</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
   <!-- LOADING STATE -->
   <div id="loading-state">
     <div class="spinner-wrap">
@@ -348,46 +379,36 @@ var klantNaam = '';
 
 // ── AUTH INIT ─────────────────────────────────────────────────────────────
 (function() {
-  document.body.style.visibility = 'hidden';
+  var storedEmail = tryGet('aroussa_email');
+  if (storedEmail) {
+    init({ email: storedEmail });
+  } else {
+    document.getElementById('loading-state').style.display = 'none';
+    document.getElementById('email-entry').style.display = 'block';
+  }
 })();
 
-// Fallback: als Identity na 6 seconden nog geen init heeft gestuurd, doorsturen
-var _authTimeout = setTimeout(function() {
-  window.location.href = '/login?redirect=/mijn-account';
-}, 6000);
-
-if (window.netlifyIdentity) {
-  netlifyIdentity.on('init', function(user) {
-    clearTimeout(_authTimeout);
-    if (!user) {
-      window.location.href = '/login?redirect=/mijn-account';
-    } else {
-      currentUser = user;
-      document.body.style.visibility = '';
-      init(user);
-    }
-  });
-  netlifyIdentity.on('logout', function() {
-    window.location.href = '/';
-  });
-  netlifyIdentity.init();
-} else {
-  clearTimeout(_authTimeout);
-  setTimeout(function() {
-    var u = window.netlifyIdentity && netlifyIdentity.currentUser();
-    if (!u) { window.location.href = '/login?redirect=/mijn-account'; return; }
-    currentUser = u;
-    document.body.style.visibility = '';
-    init(u);
-  }, 2000);
+function setEmail() {
+  var val = (document.getElementById('emailEntryInput').value || '').trim().toLowerCase();
+  var errEl = document.getElementById('emailEntryError');
+  if (!val || !val.includes('@') || !val.includes('.')) {
+    errEl.textContent = 'Voer een geldig e-mailadres in.';
+    errEl.classList.add('show');
+    return;
+  }
+  trySet('aroussa_email', val);
+  document.getElementById('email-entry').style.display = 'none';
+  document.getElementById('loading-state').style.display = 'block';
+  init({ email: val });
 }
 
 // ── INIT DASHBOARD ────────────────────────────────────────────────────────
 function init(user) {
+  currentUser = user;
   document.getElementById('loading-state').style.display = 'none';
   document.getElementById('account-content').style.display = 'block';
 
-  var email = user.email || '';
+  var email = (user && user.email) ? user.email : '';
   document.getElementById('user-email-display').textContent = email;
   document.getElementById('info-email-display').textContent = email;
   document.getElementById('orderEmail').value = email;
@@ -876,7 +897,8 @@ function tryRemove(key) {
   try { localStorage.removeItem(key); } catch(e) {}
 }
 function doLogout() {
-  if (window.netlifyIdentity) netlifyIdentity.logout();
+  tryRemove('aroussa_email');
+  window.location.href = '/';
 }
 </script>
 

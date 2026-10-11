@@ -1341,19 +1341,6 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
   </div>
 </div>
 
-<!-- Netlify Identity widget — verwerkt e-mailbevestigingslinks (#confirmation_token) -->
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-<script>
-if (window.netlifyIdentity) {
-  window.netlifyIdentity.on('init', function(user) {
-    if (!user) {
-      window.netlifyIdentity.on('login', function() {
-        document.location.href = '/mijn-account';
-      });
-    }
-  });
-}
-</script>
 
 </body>
 </html>
