@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aroussa Admin — Codes</title>
+<meta name="robots" content="noindex, nofollow">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--darker:#1A1210;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--green:#4CAF6E;--red:#C4625B;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;min-height:100vh;padding:40px 20px;}
+  .wrap{max-width:520px;margin:0 auto;}
+  h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);margin-bottom:4px;}
+  .sub{font-size:11px;color:var(--warm);letter-spacing:0.1em;margin-bottom:40px;}
+
+  /* LOCK SCREEN */
+  #lock{text-align:center;padding:60px 0;}
+  #lock h2{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ivory);margin-bottom:20px;}
+  .lock-icon{font-size:48px;margin-bottom:20px;}
+
+  /* FORM */
+  .card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:32px;margin-bottom:24px;}
+  .card h2{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ivory);margin-bottom:20px;}
+  .form-group{margin-bottom:16px;}
+  .form-group label{display:block;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+  .form-group input{width:100%;padding:12px 14px;background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.2);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;border-radius:2px;outline:none;transition:border-color .2s;}
+  .form-group input:focus{border-color:rgba(196,168,130,0.5);}
+  .form-group input::placeholder{color:rgba(155,142,126,0.5);}
+  .btn{width:100%;padding:14px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background .2s;margin-top:8px;}
+  .btn:hover{background:#D4B892;}
+  .btn:disabled{opacity:0.5;cursor:not-allowed;}
+  .btn--ghost{background:transparent;color:var(--warm);border:1px solid rgba(196,168,130,0.2);margin-top:12px;}
+  .btn--ghost:hover{color:var(--ivory);border-color:rgba(196,168,130,0.4);}
+
+  /* CODE RESULT */
+  .result{display:none;margin-top:20px;padding:24px;background:rgba(76,175,110,0.08);border:1px solid rgba(76,175,110,0.25);border-radius:6px;text-align:center;}
+  .result.show{display:block;}
+  .result-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
+  .result-code{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:var(--ivory);letter-spacing:0.08em;margin-bottom:12px;}
+  .result-info{font-size:12px;color:var(--warm);line-height:1.6;}
+  .copy-btn{display:inline-block;margin-top:14px;padding:8px 20px;background:rgba(196,168,130,0.12);border:1px solid rgba(196,168,130,0.25);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
+  .copy-btn:hover{background:rgba(196,168,130,0.22);}
+  .copy-btn.copied{color:var(--green);border-color:rgba(76,175,110,0.4);}
+
+  /* WA TEMPLATE */
+  .wa-block{margin-top:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(196,168,130,0.1);border-radius:4px;padding:14px 16px;text-align:left;}
+  .wa-block__label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm);margin-bottom:8px;}
+  .wa-block__text{font-size:13px;color:var(--ivory);line-height:1.65;white-space:pre-line;}
+  .wa-copy{display:inline-block;margin-top:10px;font-size:10px;color:var(--gold);cursor:pointer;text-decoration:underline;}
+
+  /* ERROR */
+  .error-msg{margin-top:14px;font-size:12px;color:var(--red);display:none;}
+  .error-msg.show{display:block;}
+
+  /* STATUS */
+  .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;}
+  .status-dot.ok{background:var(--green);}
+  .status-dot.err{background:var(--red);}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <h1>Aroussa Admin</h1>
+  <p class="sub">Codebeheer — alleen voor intern gebruik</p>
+
+  <!-- LOCK SCREEN -->
+  <div id="lock">
+    <div class="lock-icon">🔐</div>
+    <h2>Geheime code invoeren</h2>
+    <div class="form-group" style="max-width:320px;margin:0 auto 16px;">
+      <input type="password" id="adminPass" placeholder="Admin wachtwoord" onkeydown="if(event.key==='Enter')unlock()">
+    </div>
+    <button class="btn" style="max-width:320px;margin:0 auto;" onclick="unlock()">Inloggen</button>
+    <div class="error-msg" id="lockError">Verkeerd wachtwoord</div>
+  </div>
+
+  <!-- ADMIN PANEL (hidden until unlocked) -->
+  <div id="panel" style="display:none;">
+
+    <!-- CODE GENERATOR -->
+    <div class="card">
+      <h2>🎫 Genereer downloadcode</h2>
+      <div class="form-group">
+        <label>E-mailadres klant</label>
+        <input type="email" id="klantEmail" placeholder="klant@email.nl">
+      </div>
+      <div class="form-group">
+        <label>Naam bruid</label>
+        <input type="text" id="klantNaam" placeholder="Bijv. Fatima">
+      </div>
+      <div class="form-group" style="display:none;">
+        <label>Product</label>
+        <input type="text" id="klantProduct" value="privacy-kaart" readonly>
+      </div>
+      <button class="btn" id="genBtn" onclick="generateCode()">Code genereren →</button>
+
+      <!-- RESULT -->
+      <div class="result" id="codeResult">
+        <div class="result-label"><span class="status-dot ok"></span>Code aangemaakt</div>
+        <div class="result-code" id="codeDisplay"></div>
+        <div class="result-info" id="codeInfo"></div>
+        <button class="copy-btn" id="copyCodeBtn" onclick="copyCode()">Kopieer code</button>
+
+        <!-- WhatsApp bericht template -->
+        <div class="wa-block">
+          <div class="wa-block__label">📲 WhatsApp bericht (klaar om te kopiëren)</div>
+          <div class="wa-block__text" id="waTemplate"></div>
+          <span class="wa-copy" onclick="copyWA()">Kopieer WhatsApp bericht</span>
+        </div>
+      </div>
+
+      <div class="error-msg" id="genError"></div>
+    </div>
+
+    <!-- INFO -->
+    <div class="card" style="background:rgba(196,168,130,0.04);">
+      <h2 style="font-size:16px;margin-bottom:12px;">📋 Hoe werkt het?</h2>
+      <ol style="font-size:13px;color:var(--warm);line-height:2;padding-left:18px;">
+        <li>Klant logt in → klikt op "Bestel Privacy Kaart"</li>
+        <li>Jij ontvangt een e-mail melding via Netlify</li>
+        <li>Jij ontvangt betaling (bank/contant naar jouw keuze)</li>
+        <li>Jij genereert hier een code voor het e-mailadres van de klant</li>
+        <li>Stuur de code via WhatsApp naar de klant</li>
+        <li>Klant voert code in → downloadt eenmalig haar Privacy Kaart PDF</li>
+        <li>De code wordt automatisch geblokkeerd na gebruik</li>
+      </ol>
+    </div>
+
+    <button class="btn btn--ghost" onclick="logout()">Uitloggen</button>
+  </div>
+</div>
+
+<script>
+var ADMIN_SECRET_KEY = 'aroussa_admin_session';
+var currentCode = '';
+var currentNaam = '';
+var currentEmail = '';
+
+function unlock() {
+  var pass = document.getElementById('adminPass').value;
+  if (!pass) return;
+
+  // Store in session for UX (the real check is server-side)
+  sessionStorage.setItem(ADMIN_SECRET_KEY, pass);
+  showPanel(pass);
+}
+
+function showPanel(pass) {
+  // Quick client-side check by trying to generate (server validates)
+  document.getElementById('lock').style.display = 'none';
+  document.getElementById('panel').style.display = 'block';
+  // Store pass for API calls
+  window._adminPass = pass;
+}
+
+function logout() {
+  sessionStorage.removeItem(ADMIN_SECRET_KEY);
+  window._adminPass = '';
+  document.getElementById('lock').style.display = 'block';
+  document.getElementById('panel').style.display = 'none';
+  document.getElementById('adminPass').value = '';
+}
+
+// Restore session
+(function() {
+  var stored = sessionStorage.getItem(ADMIN_SECRET_KEY);
+  if (stored) showPanel(stored);
+})();
+
+async function generateCode() {
+  var email = document.getElementById('klantEmail').value.trim();
+  var naam = document.getElementById('klantNaam').value.trim();
+  var product = document.getElementById('klantProduct').value;
+
+  if (!email || !naam) {
+    showError('genError', 'Vul e-mail en naam in.');
+    return;
+  }
+
+  var btn = document.getElementById('genBtn');
+  btn.disabled = true;
+  btn.textContent = 'Aanmaken…';
+  document.getElementById('codeResult').classList.remove('show');
+  document.getElementById('genError').classList.remove('show');
+
+  try {
+    var resp = await fetch('/.netlify/functions/generate-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        adminSecret: window._adminPass,
+        email: email,
+        naam: naam,
+        product: product
+      })
+    });
+
+    var data = await resp.json();
+
+    if (!resp.ok || !data.success) {
+      // If 401, the password is wrong → go back to lock screen
+      if (resp.status === 401) {
+        showError('lockError', 'Verkeerd wachtwoord — probeer opnieuw.');
+        logout();
+        return;
+      }
+      showError('genError', data.error || 'Er is iets misgegaan.');
+      return;
+    }
+
+    currentCode = data.code;
+    currentNaam = data.naam;
+    currentEmail = data.email;
+
+    document.getElementById('codeDisplay').textContent = data.code;
+    document.getElementById('codeInfo').innerHTML =
+      'Voor: <strong style="color:var(--ivory);">' + data.naam + '</strong><br>' +
+      'E-mail: ' + data.email + '<br>' +
+      'Product: Privacy Kaart';
+
+    // WhatsApp template
+    var waMsg =
+      'Hoi ' + data.naam.split(' ')[0] + ' 💛\n\n' +
+      'Jouw Privacy Kaart staat klaar! Hier is jouw persoonlijke downloadcode:\n\n' +
+      '🔑 ' + data.code + '\n\n' +
+      'Ga naar aroussaplanner.com/mijn-account, log in en voer deze code in.\n' +
+      'Je kunt de Privacy Kaart daarna eenmalig downloaden als PDF.\n\n' +
+      'De code is persoonlijk en kan maar één keer worden gebruikt.\n\n' +
+      'Veel liefde, Aroussa 🌸';
+
+    document.getElementById('waTemplate').textContent = waMsg;
+    document.getElementById('copyCodeBtn').textContent = 'Kopieer code';
+    document.getElementById('copyCodeBtn').classList.remove('copied');
+    document.getElementById('codeResult').classList.add('show');
+
+    // Clear form
+    document.getElementById('klantEmail').value = '';
+    document.getElementById('klantNaam').value = '';
+
+  } catch(err) {
+    showError('genError', 'Verbindingsfout. Controleer je internet en probeer opnieuw.');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Code genereren →';
+  }
+}
+
+function copyCode() {
+  navigator.clipboard.writeText(currentCode).then(function() {
+    var btn = document.getElementById('copyCodeBtn');
+    btn.textContent = '✓ Gekopieerd!';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = 'Kopieer code';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+function copyWA() {
+  var text = document.getElementById('waTemplate').textContent;
+  navigator.clipboard.writeText(text).then(function() {
+    var el = event.target;
+    el.textContent = '✓ Gekopieerd!';
+    setTimeout(function() { el.textContent = 'Kopieer WhatsApp bericht'; }, 2000);
+  });
+}
+
+function showError(id, msg) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.classList.add('show');
+}
+</script>
+
+</body>
+</html>

@@ -10,7 +10,7 @@
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--darker:#1A1210;--dark:#221916;--beige:#EDE6D6;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--sand:#F8F4EC;}
+  :root{--darker:#1A1210;--dark:#221916;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--green:#4CAF6E;--red:#C4625B;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   html{font-size:16px;}
   body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;min-height:100vh;display:flex;flex-direction:column;visibility:hidden;}
@@ -20,91 +20,144 @@
   .nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:1180px;margin:0 auto;padding:0 24px;}
   .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;letter-spacing:0.08em;color:var(--ivory);text-decoration:none;}
   .nav-logo small{display:block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--warm);margin-top:-2px;}
-  .nav-right{display:flex;align-items:center;gap:20px;}
+  .nav-right{display:flex;align-items:center;gap:16px;}
   .nav-back{font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:var(--warm);text-decoration:none;transition:color .2s;}
   .nav-back:hover{color:var(--gold);}
   .btn-logout{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm);background:none;border:1px solid rgba(196,168,130,0.2);padding:8px 16px;cursor:pointer;border-radius:2px;transition:all .2s;font-family:'Montserrat',sans-serif;}
   .btn-logout:hover{color:var(--ivory);border-color:rgba(196,168,130,0.5);}
 
   /* LAYOUT */
-  main{flex:1;padding:120px 24px 80px;max-width:1180px;margin:0 auto;width:100%;}
+  main{flex:1;padding:120px 24px 80px;max-width:760px;margin:0 auto;width:100%;}
 
   /* HEADER */
-  .account-header{margin-bottom:56px;}
-  .ornament{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .page-header{margin-bottom:48px;}
+  .ornament{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
   .ornament-line{flex:1;max-width:60px;height:1px;}
   .ornament-line.l{background:linear-gradient(to right,transparent,rgba(196,168,130,0.4));}
   .ornament-line.r{background:linear-gradient(to left,transparent,rgba(196,168,130,0.4));}
   .ornament-diamond{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);flex-shrink:0;}
   .label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,168,130,0.3);padding:5px 14px;border-radius:2px;margin-bottom:20px;}
-  .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:12px;}
+  .page-title{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:300;line-height:1.1;color:var(--ivory);margin-bottom:10px;}
   .page-title em{font-style:italic;color:var(--gold);}
-  .user-greeting{font-size:14px;color:var(--warm);}
-  .user-greeting strong{color:var(--ivory);font-weight:500;}
-
-  /* DIVIDER */
-  .section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,130,0.2),transparent);margin:40px 0;}
-
-  /* SECTION LABEL */
-  .section-label{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--warm);margin-bottom:24px;}
-
-  /* PRODUCT GRID */
-  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-bottom:48px;}
+  .user-email-txt{font-size:13px;color:var(--warm);}
+  .user-email-txt strong{color:var(--ivory);font-weight:500;}
 
   /* PRODUCT CARD */
-  .product-card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:36px;position:relative;overflow:hidden;transition:border-color .3s;}
-  .product-card:hover{border-color:rgba(196,168,130,0.35);}
-  .product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s;}
-  .product-card:hover::before{opacity:1;}
-  .product-card__icon{font-size:28px;margin-bottom:16px;}
-  .product-card__label{font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
-  .product-card__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:10px;}
-  .product-card__desc{font-size:13px;color:var(--warm);line-height:1.65;margin-bottom:24px;}
-  .product-card__action{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .25s,transform .25s;}
-  .product-card__action:hover{background:#D4B892;transform:translateY(-1px);}
-  .product-card__badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--gold);font-weight:500;}
-  .product-card__badge::before{content:'✓';font-weight:700;}
+  .product-card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;overflow:hidden;margin-bottom:24px;}
+  .product-card__head{padding:32px 36px 0;}
+  .product-card__icon{font-size:28px;margin-bottom:14px;}
+  .product-card__label{font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+  .product-card__title{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:var(--ivory);margin-bottom:8px;}
+  .product-card__desc{font-size:13px;color:var(--warm);line-height:1.65;margin-bottom:0;}
+  .product-card__price{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:var(--gold);margin:16px 0 0;}
 
-  /* PENDING STATE */
-  .pending-card{background:rgba(196,168,130,0.04);border:1px solid rgba(196,168,130,0.1);border-radius:8px;padding:36px;text-align:center;}
-  .pending-card__icon{font-size:36px;margin-bottom:16px;}
-  .pending-card__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:10px;}
-  .pending-card__text{font-size:13px;color:var(--warm);line-height:1.7;max-width:400px;margin:0 auto 24px;}
-  .pending-card__wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:rgba(196,168,130,0.1);border:1px solid rgba(196,168,130,0.2);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .25s;}
-  .pending-card__wa:hover{background:rgba(196,168,130,0.18);}
+  .divider-line{height:1px;background:rgba(196,168,130,0.1);margin:24px 0;}
 
-  /* INFO CARDS */
-  .info-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;margin-top:40px;}
-  .info-card{background:rgba(255,255,255,0.02);border:1px solid rgba(196,168,130,0.1);border-radius:6px;padding:24px;}
-  .info-card__label{font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--warm);margin-bottom:8px;}
-  .info-card__value{font-size:14px;color:var(--ivory);font-weight:400;}
+  /* STEPS */
+  .steps-area{padding:0 36px 36px;}
+
+  /* STEP INDICATOR */
+  .step-indicator{display:flex;align-items:center;gap:0;margin-bottom:28px;}
+  .step-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0;transition:all .3s;}
+  .step-dot.active{background:var(--gold);color:var(--darker);}
+  .step-dot.done{background:rgba(76,175,110,0.2);color:var(--green);border:1px solid rgba(76,175,110,0.3);}
+  .step-dot.pending{background:rgba(196,168,130,0.08);color:var(--warm);border:1px solid rgba(196,168,130,0.15);}
+  .step-line{flex:1;height:1px;background:rgba(196,168,130,0.12);}
+  .step-label{font-size:10px;font-weight:500;letter-spacing:0.06em;margin-top:6px;text-align:center;}
+
+  .step-wrap{position:relative;}
+  .step-item{display:flex;flex-direction:column;align-items:center;}
+
+  /* PANELS */
+  .panel{display:none;}
+  .panel.active{display:block;}
+
+  /* BESTEL PANEL */
+  .order-features{display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+  .order-feature{font-size:12px;color:var(--warm);display:flex;align-items:center;gap:8px;}
+  .order-feature::before{content:'✓';color:var(--gold);font-weight:600;flex-shrink:0;}
+  .btn-order{width:100%;padding:15px 28px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background .25s,transform .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
+  .btn-order:hover{background:#D4B892;transform:translateY(-1px);}
+  .btn-order:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+  /* WACHT PANEL */
+  .wait-box{background:rgba(196,168,130,0.05);border:1px solid rgba(196,168,130,0.12);border-radius:6px;padding:24px;text-align:center;}
+  .wait-box__icon{font-size:36px;margin-bottom:12px;}
+  .wait-box__title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ivory);margin-bottom:8px;}
+  .wait-box__text{font-size:13px;color:var(--warm);line-height:1.7;}
+  .wa-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:10px 20px;background:rgba(196,168,130,0.08);border:1px solid rgba(196,168,130,0.2);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .2s;}
+  .wa-link:hover{background:rgba(196,168,130,0.16);}
+
+  /* CODE PANEL */
+  .code-form{margin-bottom:0;}
+  .code-input-row{display:flex;gap:10px;align-items:flex-start;}
+  .code-input{flex:1;padding:14px 16px;background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.2);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:16px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;outline:none;transition:border-color .2s;}
+  .code-input:focus{border-color:rgba(196,168,130,0.5);}
+  .code-input::placeholder{font-size:12px;letter-spacing:0.06em;text-transform:none;font-weight:300;color:rgba(155,142,126,0.5);}
+  .btn-validate{padding:14px 22px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background .2s;white-space:nowrap;flex-shrink:0;}
+  .btn-validate:hover{background:#D4B892;}
+  .btn-validate:disabled{opacity:0.5;cursor:not-allowed;}
+  .code-hint{font-size:11px;color:var(--warm);margin-top:8px;opacity:0.7;}
+  .error-msg{font-size:12px;color:var(--red);margin-top:10px;display:none;padding:10px 14px;background:rgba(196,98,91,0.08);border:1px solid rgba(196,98,91,0.2);border-radius:4px;}
+  .error-msg.show{display:block;}
+
+  /* DOWNLOAD PANEL */
+  .download-box{text-align:center;padding:8px 0;}
+  .download-box__icon{font-size:48px;margin-bottom:16px;}
+  .download-box__title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ivory);margin-bottom:8px;}
+  .download-box__text{font-size:13px;color:var(--warm);line-height:1.7;max-width:380px;margin:0 auto 24px;}
+  .download-box__warning{font-size:11px;color:rgba(196,168,130,0.7);background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.12);border-radius:4px;padding:10px 14px;margin-bottom:24px;line-height:1.6;}
+  .btn-download{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:all .25s;font-size:12px;}
+  .btn-download:hover{background:#D4B892;transform:translateY(-1px);}
+  .btn-download:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+  /* DONE PANEL */
+  .done-box{text-align:center;padding:16px 0;}
+  .done-box__icon{font-size:48px;margin-bottom:16px;}
+  .done-box__title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ivory);margin-bottom:8px;}
+  .done-box__text{font-size:13px;color:var(--warm);line-height:1.7;}
+  .done-badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:rgba(76,175,110,0.08);border:1px solid rgba(76,175,110,0.2);border-radius:4px;font-size:12px;color:var(--green);}
+
+  /* INFO ROW */
+  .info-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:32px;}
+  .info-card{background:rgba(255,255,255,0.02);border:1px solid rgba(196,168,130,0.1);border-radius:6px;padding:18px 20px;}
+  .info-card__label{font-size:9px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--warm);margin-bottom:6px;}
+  .info-card__value{font-size:13px;color:var(--ivory);}
   .info-card__value a{color:var(--gold);text-decoration:none;}
-  .info-card__value a:hover{text-decoration:underline;}
+
+  /* LOADING */
+  .spinner-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:16px;}
+  .spinner{width:32px;height:32px;border:2px solid rgba(196,168,130,0.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spinner-txt{font-size:12px;color:var(--warm);}
 
   /* FOOTER */
-  footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(196,168,130,0.1);margin-top:auto;}
+  footer{text-align:center;padding:32px 24px;border-top:1px solid rgba(196,168,130,0.08);}
   footer p{font-size:12px;color:var(--warm);}
   footer a{color:var(--gold);text-decoration:none;}
 
-  /* STATES */
-  #loading-state,#account-state,#no-products-state{display:none;}
-  #loading-state.active,#account-state.active,#no-products-state.active{display:block;}
-
-  /* LOADING SPINNER */
-  .loading-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:40vh;gap:16px;}
-  .spinner{width:32px;height:32px;border:2px solid rgba(196,168,130,0.15);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .loading-text{font-size:12px;color:var(--warm);letter-spacing:0.08em;}
+  /* PDF GENERATION OVERLAY */
+  #pdf-overlay{display:none;position:fixed;inset:0;background:rgba(26,18,16,0.92);z-index:999;flex-direction:column;align-items:center;justify-content:center;gap:20px;}
+  #pdf-overlay.show{display:flex;}
+  #pdf-overlay .spinner{width:48px;height:48px;}
+  #pdf-overlay p{font-size:13px;color:var(--warm);max-width:280px;text-align:center;line-height:1.6;}
 
   @media(max-width:600px){
     main{padding:100px 16px 60px;}
-    .products-grid{grid-template-columns:1fr;}
+    .product-card__head,.steps-area{padding-left:20px;padding-right:20px;}
+    .code-input-row{flex-direction:column;}
+    .btn-validate{width:100%;}
     .info-row{grid-template-columns:1fr;}
-    .nav-right{gap:12px;}
   }
 </style>
 </head>
 <body>
+
+<!-- PDF GENERATION OVERLAY -->
+<div id="pdf-overlay">
+  <div class="spinner"></div>
+  <p>Jouw persoonlijke Privacy Kaart wordt aangemaakt met jouw naam en watermerk…</p>
+</div>
 
 <nav class="nav">
   <div class="nav-inner">
@@ -117,18 +170,17 @@
 </nav>
 
 <main>
-
-  <!-- LOADING -->
-  <div id="loading-state" class="active">
-    <div class="loading-wrap">
+  <!-- LOADING STATE -->
+  <div id="loading-state">
+    <div class="spinner-wrap">
       <div class="spinner"></div>
-      <span class="loading-text">Even geduld…</span>
+      <span class="spinner-txt">Laden…</span>
     </div>
   </div>
 
-  <!-- ACCOUNT DASHBOARD -->
-  <div id="account-state">
-    <div class="account-header">
+  <!-- ACCOUNT CONTENT -->
+  <div id="account-content" style="display:none;">
+    <div class="page-header">
       <div class="ornament">
         <span class="ornament-line l"></span>
         <span class="ornament-diamond"></span>
@@ -136,25 +188,129 @@
       </div>
       <span class="label">Mijn account</span>
       <h1 class="page-title">Welkom<br><em>terug</em></h1>
-      <p class="user-greeting">Ingelogd als <strong id="user-email"></strong></p>
+      <p class="user-email-txt">Ingelogd als <strong id="user-email-display"></strong></p>
     </div>
 
-    <div class="section-divider"></div>
+    <!-- PRIVACY KAART PRODUCT -->
+    <div class="product-card" id="privacyKaartCard">
+      <div class="product-card__head">
+        <div class="product-card__icon">🛡️</div>
+        <div class="product-card__label">Privacy &amp; bescherming</div>
+        <h2 class="product-card__title">Privacy Kaart</h2>
+        <p class="product-card__desc">Één document dat jouw fotograaf, DJ, videograaf en Bridal Stylist exact vertelt wat wel en niet mag op jouw grote dag.</p>
+        <div class="product-card__price" id="priceDisplay"><sup style="font-size:18px;vertical-align:super;">€</sup>30</div>
+      </div>
 
-    <p class="section-label">Jouw producten</p>
+      <div class="divider-line" style="margin:20px 36px;"></div>
 
-    <!-- PRODUCTS CONTAINER -->
-    <div class="products-grid" id="products-grid"></div>
+      <!-- STEP INDICATOR -->
+      <div class="steps-area">
+        <div style="display:flex;align-items:flex-start;gap:0;margin-bottom:32px;" id="stepIndicator">
+          <div class="step-item">
+            <div class="step-dot" id="dot1">1</div>
+            <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Bestellen</div>
+          </div>
+          <div class="step-line" style="margin-top:14px;"></div>
+          <div class="step-item">
+            <div class="step-dot" id="dot2">2</div>
+            <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Code invoeren</div>
+          </div>
+          <div class="step-line" style="margin-top:14px;"></div>
+          <div class="step-item">
+            <div class="step-dot" id="dot3">3</div>
+            <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Downloaden</div>
+          </div>
+        </div>
 
-    <!-- NO PRODUCTS YET -->
-    <div id="no-products-state">
-      <div class="pending-card">
-        <div class="pending-card__icon">⏳</div>
-        <h2 class="pending-card__title">Betaling in behandeling</h2>
-        <p class="pending-card__text">
-          Je account is aangemaakt — goed bezig! Zodra je betaling van €30 is verwerkt, wordt jouw toegang geactiveerd. Je ontvangt een Tikkie via WhatsApp.
-        </p>
-        <a href="https://wa.me/31613115286" class="pending-card__wa">📲 WhatsApp sturen</a>
+        <!-- PANEL 1: BESTEL -->
+        <div class="panel active" id="panel-bestel">
+          <div class="order-features">
+            <div class="order-feature">Persoonlijk document met jouw naam &amp; datum</div>
+            <div class="order-feature">Unieke licentiecode als bewijs van eigendom</div>
+            <div class="order-feature">Watermerk &amp; tracerbeveiliging</div>
+            <div class="order-feature">Printklaar PDF — juridisch geldig</div>
+            <div class="order-feature">Eenmalige download, altijd beschikbaar in je account</div>
+          </div>
+          <!-- Hidden Netlify Form for order notification -->
+          <form name="privacy-kaart-bestelling" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="orderForm" style="display:none;">
+            <input type="hidden" name="form-name" value="privacy-kaart-bestelling">
+            <input type="hidden" name="bot-field">
+            <input type="hidden" name="email" id="orderEmail">
+            <input type="hidden" name="product" value="Privacy Kaart — €30">
+          </form>
+          <button class="btn-order" id="orderBtn" onclick="submitOrder()">
+            <span>Bestel Privacy Kaart — €30 →</span>
+          </button>
+          <p style="font-size:11px;color:var(--warm);margin-top:12px;text-align:center;">Na bestelling ontvang jij van mij een persoonlijke downloadcode.</p>
+        </div>
+
+        <!-- PANEL 1B: WACHT OP CODE -->
+        <div class="panel" id="panel-wacht">
+          <div class="wait-box">
+            <div class="wait-box__icon">📬</div>
+            <h3 class="wait-box__title">Bestelling ontvangen!</h3>
+            <p class="wait-box__text">Ik heb jouw bestelling ontvangen en stuur je snel een persoonlijke downloadcode via WhatsApp. Heb je al een code ontvangen?</p>
+            <a href="https://wa.me/31613115286" class="wa-link" target="_blank">📲 WhatsApp sturen</a>
+          </div>
+          <div style="margin-top:20px;">
+            <p style="font-size:12px;color:var(--warm);margin-bottom:12px;font-weight:600;letter-spacing:0.08em;">Heb je je code al ontvangen? Voer hem hier in:</p>
+            <div class="code-form">
+              <div class="code-input-row">
+                <input class="code-input" type="text" id="codeInput" placeholder="ARO-XXXX-XXXX" maxlength="12" oninput="formatCode(this)">
+                <button class="btn-validate" id="validateBtn" onclick="validateCode()">Valideren</button>
+              </div>
+              <p class="code-hint">De code bestaat uit 12 tekens, zoals: ARO-K7M2-P9Q4</p>
+              <div class="error-msg" id="codeError"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2: CODE INVOER (direct naar hier als bestelstatus al "besteld" is) -->
+        <div class="panel" id="panel-code">
+          <p style="font-size:13px;color:var(--warm);margin-bottom:20px;line-height:1.6;">
+            Je ontvangt van mij een downloadcode via WhatsApp. Voer hem hieronder in:
+          </p>
+          <div class="code-form">
+            <div class="code-input-row">
+              <input class="code-input" type="text" id="codeInput2" placeholder="ARO-XXXX-XXXX" maxlength="12" oninput="formatCode(this)">
+              <button class="btn-validate" id="validateBtn2" onclick="validateCode2()">Valideren</button>
+            </div>
+            <p class="code-hint">De code bestaat uit 12 tekens, zoals: ARO-K7M2-P9Q4</p>
+            <div class="error-msg" id="codeError2"></div>
+          </div>
+          <div style="margin-top:20px;text-align:center;">
+            <a href="https://wa.me/31613115286" class="wa-link" target="_blank">📲 Nog geen code? WhatsApp sturen</a>
+          </div>
+        </div>
+
+        <!-- PANEL 3: DOWNLOAD -->
+        <div class="panel" id="panel-download">
+          <div class="download-box">
+            <div class="download-box__icon">🎉</div>
+            <h3 class="download-box__title">Jouw Privacy Kaart is klaar!</h3>
+            <p class="download-box__text">Code gevalideerd. Klik op de knop om jouw persoonlijke PDF te downloaden.</p>
+            <div class="download-box__warning">
+              ⚠️ <strong>Let op:</strong> Je kunt de PDF maar <strong>één keer downloaden</strong>. Sla het bestand goed op na het downloaden.
+            </div>
+            <button class="btn-download" id="downloadBtn" onclick="downloadPDF()">
+              ⬇ Download mijn Privacy Kaart PDF
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 4: KLAAR (al gedownload) -->
+        <div class="panel" id="panel-done">
+          <div class="done-box">
+            <div class="done-box__icon">✅</div>
+            <h3 class="done-box__title">Gedownload</h3>
+            <p class="done-box__text">Jouw Privacy Kaart is succesvol gedownload en opgeslagen. Bewaar de PDF goed — dit is jouw persoonlijke document.</p>
+            <div class="done-badge">✓ Privacy Kaart is in jouw bezit</div>
+            <p style="margin-top:20px;font-size:12px;color:var(--warm);">
+              Vragen of iets verloren? <a href="https://wa.me/31613115286" style="color:var(--gold);">WhatsApp sturen →</a>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -162,145 +318,558 @@
     <div class="info-row">
       <div class="info-card">
         <div class="info-card__label">E-mailadres</div>
-        <div class="info-card__value" id="info-email">—</div>
+        <div class="info-card__value" id="info-email-display">—</div>
       </div>
       <div class="info-card">
         <div class="info-card__label">Hulp nodig?</div>
         <div class="info-card__value"><a href="https://wa.me/31613115286">WhatsApp: 06 13 11 52 86</a></div>
       </div>
-      <div class="info-card">
-        <div class="info-card__label">Wachtwoord wijzigen</div>
-        <div class="info-card__value"><a href="#" onclick="sendPasswordReset(); return false;">Stuur reset-link</a></div>
-      </div>
     </div>
   </div>
-
 </main>
 
 <footer>
-  <p>&copy; 2026 Aroussa Wedding Planner &mdash; <a href="/">Terug naar de website</a></p>
+  <p>&copy; 2026 Aroussa Wedding Planner — <a href="/">Terug naar website</a></p>
 </footer>
 
+<!-- jsPDF via CDN for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script>
-// ── PRODUCT CATALOGUE ──────────────────────────────────────────────────────
-// Add more products here in the future:
-var PRODUCTS = [
-  {
-    role: 'privacy-kaart',
-    icon: '🛡️',
-    label: 'Privacy & bescherming',
-    title: 'Privacy Kaart',
-    desc: 'Jouw persoonlijke document waarmee fotograaf, DJ, videograaf en Bridal Stylist exact weten wat wel en niet mag op jouw grote dag.',
-    link: '/kaart/privacy-kaart'
-  }
-  // Future products go here, e.g. { role: 'stappenplan', icon: '📋', ... }
-];
+// ── STATE KEYS ─────────────────────────────────────────────────────────────
+var SK_ORDER    = 'aroussa_pk_ordered';
+var SK_DOWNLOAD = 'aroussa_pk_downloaded';
+var SK_TOKEN    = 'aroussa_pk_token';
+var SK_NAAM     = 'aroussa_pk_naam';
 
-// ── AUTH GUARD & INIT ──────────────────────────────────────────────────────
+var currentUser = null;
+var downloadToken = null;
+var klantNaam = '';
+
+// ── AUTH INIT ─────────────────────────────────────────────────────────────
 (function() {
-  // Keep body hidden until auth is confirmed
   document.body.style.visibility = 'hidden';
-
-  function showPage() {
-    document.body.style.visibility = '';
-  }
-
-  function checkUser(user) {
-    if (!user) {
-      window.location.href = '/login?redirect=/mijn-account';
-      return;
-    }
-    showPage();
-    renderDashboard(user);
-  }
-
-  if (window.netlifyIdentity) {
-    netlifyIdentity.on('init', function(user) {
-      checkUser(user);
-    });
-    netlifyIdentity.on('logout', function() {
-      window.location.href = '/';
-    });
-    netlifyIdentity.init();
-  } else {
-    // Fallback if widget loads late
-    setTimeout(function() {
-      var user = window.netlifyIdentity && netlifyIdentity.currentUser();
-      if (!user) {
-        window.location.href = '/login?redirect=/mijn-account';
-      } else {
-        showPage();
-        renderDashboard(user);
-      }
-    }, 2000);
-  }
 })();
 
-// ── RENDER DASHBOARD ───────────────────────────────────────────────────────
-function renderDashboard(user) {
-  document.getElementById('loading-state').classList.remove('active');
-  document.getElementById('account-state').classList.add('active');
-
-  var email = user.email || '';
-  document.getElementById('user-email').textContent = email;
-  document.getElementById('info-email').textContent = email;
-
-  var roles = (user.app_metadata && user.app_metadata.roles) || [];
-  var isAdmin = roles.indexOf('admin') !== -1;
-
-  // Render product cards
-  var grid = document.getElementById('products-grid');
-  var hasProducts = false;
-
-  PRODUCTS.forEach(function(p) {
-    if (isAdmin || roles.indexOf(p.role) !== -1) {
-      hasProducts = true;
-      var card = document.createElement('div');
-      card.className = 'product-card';
-      card.innerHTML =
-        '<div class="product-card__icon">' + p.icon + '</div>' +
-        '<div class="product-card__label">' + p.label + '</div>' +
-        '<h2 class="product-card__title">' + p.title + '</h2>' +
-        '<p class="product-card__desc">' + p.desc + '</p>' +
-        '<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">' +
-          '<a href="' + p.link + '" class="product-card__action">Openen →</a>' +
-          '<span class="product-card__badge">Actief</span>' +
-        '</div>';
-      grid.appendChild(card);
+if (window.netlifyIdentity) {
+  netlifyIdentity.on('init', function(user) {
+    if (!user) {
+      window.location.href = '/login?redirect=/mijn-account';
+    } else {
+      currentUser = user;
+      document.body.style.visibility = '';
+      init(user);
     }
   });
+  netlifyIdentity.on('logout', function() {
+    window.location.href = '/';
+  });
+  netlifyIdentity.init();
+} else {
+  setTimeout(function() {
+    var u = window.netlifyIdentity && netlifyIdentity.currentUser();
+    if (!u) { window.location.href = '/login?redirect=/mijn-account'; return; }
+    currentUser = u;
+    document.body.style.visibility = '';
+    init(u);
+  }, 2000);
+}
 
-  // If admin, also show an admin note
-  if (isAdmin) {
-    var adminCard = document.createElement('div');
-    adminCard.className = 'product-card';
-    adminCard.innerHTML =
-      '<div class="product-card__icon">⚙️</div>' +
-      '<div class="product-card__label">Beheer</div>' +
-      '<h2 class="product-card__title">Admin toegang</h2>' +
-      '<p class="product-card__desc">Je hebt beheerderstoegang tot alle producten.</p>' +
-      '<a href="https://app.netlify.com" target="_blank" class="product-card__action" style="background:rgba(196,168,130,0.15);color:var(--gold);border:1px solid rgba(196,168,130,0.3);">Netlify dashboard →</a>';
-    grid.appendChild(adminCard);
-  }
+// ── INIT DASHBOARD ────────────────────────────────────────────────────────
+function init(user) {
+  document.getElementById('loading-state').style.display = 'none';
+  document.getElementById('account-content').style.display = 'block';
 
-  if (!hasProducts) {
-    document.getElementById('no-products-state').style.display = 'block';
+  var email = user.email || '';
+  document.getElementById('user-email-display').textContent = email;
+  document.getElementById('info-email-display').textContent = email;
+  document.getElementById('orderEmail').value = email;
+
+  // Determine current state from localStorage
+  var downloaded = tryGet(SK_DOWNLOAD + ':' + email);
+  var ordered    = tryGet(SK_ORDER + ':' + email);
+  var token      = tryGet(SK_TOKEN + ':' + email);
+  var naam       = tryGet(SK_NAAM + ':' + email);
+
+  if (naam) klantNaam = naam;
+
+  if (downloaded === '1') {
+    goPanel('done');
+    updateDots(4);
+  } else if (token) {
+    downloadToken = token;
+    goPanel('download');
+    updateDots(3);
+  } else if (ordered === '1') {
+    goPanel('code');
+    updateDots(2);
+  } else {
+    goPanel('bestel');
+    updateDots(1);
   }
 }
 
-// ── ACTIONS ────────────────────────────────────────────────────────────────
+// ── PANEL NAVIGATION ─────────────────────────────────────────────────────
+function goPanel(name) {
+  ['bestel','wacht','code','download','done'].forEach(function(n) {
+    var el = document.getElementById('panel-' + n);
+    if (el) el.classList.toggle('active', n === name);
+  });
+}
+
+function updateDots(step) {
+  for (var i = 1; i <= 3; i++) {
+    var dot = document.getElementById('dot' + i);
+    if (i < step)       { dot.className = 'step-dot done'; dot.textContent = '✓'; }
+    else if (i === step) { dot.className = 'step-dot active'; dot.textContent = i; }
+    else                { dot.className = 'step-dot pending'; dot.textContent = i; }
+  }
+  // Hide price after ordering
+  var price = document.getElementById('priceDisplay');
+  if (price) price.style.display = step > 1 ? 'none' : '';
+}
+
+// ── ORDER SUBMIT ──────────────────────────────────────────────────────────
+function submitOrder() {
+  var btn = document.getElementById('orderBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span>Bestelling versturen…</span>';
+
+  var form = document.getElementById('orderForm');
+  var data = new FormData(form);
+
+  fetch('/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: new URLSearchParams(data).toString()
+  })
+  .then(function() {
+    var email = currentUser ? currentUser.email : '';
+    trySet(SK_ORDER + ':' + email, '1');
+    goPanel('wacht');
+    updateDots(2);
+  })
+  .catch(function() {
+    // Show wacht panel anyway (fallback)
+    var email = currentUser ? currentUser.email : '';
+    trySet(SK_ORDER + ':' + email, '1');
+    goPanel('wacht');
+    updateDots(2);
+  });
+}
+
+// ── CODE FORMATTING ───────────────────────────────────────────────────────
+function formatCode(input) {
+  var val = input.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (val.length > 3 && val.slice(0,3) !== 'ARO') {
+    // allow free typing
+  }
+  // Format as ARO-XXXX-XXXX
+  var parts = [];
+  if (val.length >= 3) parts.push(val.slice(0,3));
+  else { input.value = val; return; }
+  if (val.length >= 7) parts.push(val.slice(3,7));
+  else if (val.length > 3) { input.value = parts.join('') + (val.length > 3 ? '-' + val.slice(3) : ''); return; }
+  if (val.length >= 11) parts.push(val.slice(7,11));
+  else if (val.length > 7) { input.value = parts.join('-') + '-' + val.slice(7); return; }
+  input.value = parts.join('-');
+}
+
+// ── CODE VALIDATION (wacht panel) ────────────────────────────────────────
+function validateCode() {
+  doValidate('codeInput', 'validateBtn', 'codeError');
+}
+function validateCode2() {
+  doValidate('codeInput2', 'validateBtn2', 'codeError2');
+}
+
+async function doValidate(inputId, btnId, errorId) {
+  var codeRaw = document.getElementById(inputId).value.trim().toUpperCase();
+  var btn = document.getElementById(btnId);
+  var errEl = document.getElementById(errorId);
+
+  errEl.classList.remove('show');
+
+  if (codeRaw.replace(/-/g,'').length < 11) {
+    errEl.textContent = 'Voer een volledige code in (ARO-XXXX-XXXX).';
+    errEl.classList.add('show');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = '…';
+
+  try {
+    var email = currentUser ? currentUser.email : '';
+    var resp = await fetch('/.netlify/functions/validate-code', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: codeRaw, email: email })
+    });
+
+    var data = await resp.json();
+
+    if (data.valid) {
+      downloadToken = data.downloadToken;
+      klantNaam = data.naam || '';
+      trySet(SK_TOKEN + ':' + email, downloadToken);
+      trySet(SK_NAAM + ':' + email, klantNaam);
+      goPanel('download');
+      updateDots(3);
+    } else {
+      errEl.textContent = data.reason || 'Ongeldige code.';
+      errEl.classList.add('show');
+    }
+  } catch(e) {
+    errEl.textContent = 'Verbindingsfout. Controleer je internet en probeer opnieuw.';
+    errEl.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Valideren';
+  }
+}
+
+// ── PDF DOWNLOAD ──────────────────────────────────────────────────────────
+async function downloadPDF() {
+  var btn = document.getElementById('downloadBtn');
+  btn.disabled = true;
+  btn.textContent = 'Aanmaken…';
+
+  document.getElementById('pdf-overlay').classList.add('show');
+
+  try {
+    await generatePrivacyKaartPDF();
+    var email = currentUser ? currentUser.email : '';
+    trySet(SK_DOWNLOAD + ':' + email, '1');
+    // Remove token (can't re-download with same token logic)
+    tryRemove(SK_TOKEN + ':' + email);
+    goPanel('done');
+    updateDots(4);
+  } catch(e) {
+    btn.disabled = false;
+    btn.textContent = '⬇ Download mijn Privacy Kaart PDF';
+    alert('Er ging iets mis bij het aanmaken van de PDF. Probeer opnieuw of neem contact op via WhatsApp.');
+  } finally {
+    document.getElementById('pdf-overlay').classList.remove('show');
+  }
+}
+
+// ── PDF GENERATOR ─────────────────────────────────────────────────────────
+async function generatePrivacyKaartPDF() {
+  var { jsPDF } = window.jspdf;
+  var doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+  var email = currentUser ? currentUser.email : '';
+  var naam = klantNaam || email.split('@')[0];
+  var docId = 'ARO-' + Date.now().toString(36).toUpperCase().slice(-8);
+  var datum = new Date().toLocaleDateString('nl-NL', { day:'numeric', month:'long', year:'numeric' });
+
+  // ── COLORS ──
+  var gold   = [196, 168, 130];
+  var dark   = [26, 18, 16];
+  var ivory  = [245, 240, 232];
+  var warm   = [155, 142, 126];
+  var white  = [255, 255, 255];
+
+  var W = 210, H = 297; // A4
+
+  // ── BACKGROUND ──
+  doc.setFillColor(...dark);
+  doc.rect(0, 0, W, H, 'F');
+
+  // ── WATERMARK (diagonal, repeated) ──
+  doc.saveGraphicsState();
+  doc.setGState(new doc.GState({ opacity: 0.06 }));
+  doc.setTextColor(...gold);
+  doc.setFontSize(11);
+  doc.setFont('helvetica', 'bold');
+  for (var wx = -20; wx < W + 60; wx += 70) {
+    for (var wy = -20; wy < H + 60; wy += 40) {
+      doc.text(naam.toUpperCase() + '  •  AROUSSA', wx, wy, { angle: 45 });
+    }
+  }
+  doc.restoreGraphicsState();
+
+  // ── GOLD BORDER ──
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.4);
+  doc.rect(10, 10, W - 20, H - 20);
+  doc.setLineWidth(0.15);
+  doc.rect(12, 12, W - 24, H - 24);
+
+  // ── HEADER BAND ──
+  doc.setFillColor(...gold);
+  doc.rect(0, 0, W, 6, 'F');
+  doc.rect(0, H - 6, W, 6, 'F');
+
+  // ── LOGO AREA ──
+  doc.setTextColor(...gold);
+  doc.setFontSize(26);
+  doc.setFont('times', 'normal');
+  doc.text('Aroussa', W / 2, 36, { align: 'center' });
+
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...warm);
+  doc.setCharSpace(3);
+  doc.text('WEDDING PLANNER', W / 2, 42, { align: 'center' });
+  doc.setCharSpace(0);
+
+  // Ornament line
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.3);
+  doc.line(30, 46, W - 30, 46);
+  // Diamond center
+  var cx = W / 2;
+  doc.setFillColor(...gold);
+  doc.circle(cx, 46, 1, 'F');
+
+  // ── LABEL ──
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...warm);
+  doc.setCharSpace(2);
+  doc.text('OFFICIEEL PRIVACYDOCUMENT', W / 2, 55, { align: 'center' });
+  doc.setCharSpace(0);
+
+  // ── MAIN TITLE ──
+  doc.setFontSize(32);
+  doc.setFont('times', 'italic');
+  doc.setTextColor(...ivory);
+  doc.text('Privacy Kaart', W / 2, 70, { align: 'center' });
+
+  doc.setFontSize(11);
+  doc.setFont('times', 'italic');
+  doc.setTextColor(...gold);
+  doc.text('Bescherming van jouw bruiloft', W / 2, 78, { align: 'center' });
+
+  // ── DIVIDER ──
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.15);
+  doc.line(25, 83, W - 25, 83);
+
+  // ── OWNER BLOCK ──
+  var y = 92;
+  doc.setFillColor(30, 22, 20);
+  doc.roundedRect(20, y - 4, W - 40, 28, 2, 2, 'F');
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.2);
+  doc.roundedRect(20, y - 4, W - 40, 28, 2, 2, 'S');
+
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...warm);
+  doc.setCharSpace(1.5);
+  doc.text('EIGENAAR', 26, y + 3);
+  doc.setCharSpace(0);
+
+  doc.setFontSize(16);
+  doc.setFont('times', 'normal');
+  doc.setTextColor(...ivory);
+  doc.text(naam, 26, y + 12);
+
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...warm);
+  doc.text(email, 26, y + 19);
+
+  // Document ID on the right
+  doc.setFontSize(7);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...warm);
+  doc.setCharSpace(1);
+  doc.text('DOC.ID', W - 26, y + 3, { align: 'right' });
+  doc.setCharSpace(0);
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...gold);
+  doc.text(docId, W - 26, y + 12, { align: 'right' });
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...warm);
+  doc.text(datum, W - 26, y + 19, { align: 'right' });
+
+  y += 36;
+
+  // ── INTRO TEXT ──
+  doc.setFontSize(9);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...warm);
+  var intro = 'Dit document is persoonlijk opgesteld voor ' + naam + ' en bevat haar privacyinstructies voor alle dienstverleners op haar bruiloft. Dit document is juridisch bindend en dient ondertekend te worden door elke dienstverlener voor aanvang van de werkzaamheden.';
+  var lines = doc.splitTextToSize(intro, W - 50);
+  doc.text(lines, 25, y);
+  y += lines.length * 5 + 8;
+
+  // ── SECTIONS ──
+  var sections = [
+    {
+      title: '1. FOTOGRAFIEBESCHERMING',
+      items: [
+        'Foto\'s worden uitsluitend gedeeld na schriftelijke toestemming van de bruid.',
+        'Publicatie op sociale media (Instagram, Facebook, TikTok e.d.) is NIET toegestaan zonder voorafgaande goedkeuring.',
+        'Gebruik als portfoliomateriaal is alleen toegestaan na expliciete, schriftelijke toestemming.',
+        'Raw bestanden worden niet gedeeld met derden.',
+        'De bruid heeft recht op inzage en bezwaar bij elk gebruik van haar beeldmateriaal.'
+      ]
+    },
+    {
+      title: '2. VIDEO & LIVESTREAM',
+      items: [
+        'Videomateriaal valt onder dezelfde regels als fotografiemateriaal.',
+        'Livestreaming van de ceremonie of feest is verboden zonder toestemming.',
+        'Behind-the-scenes content mag niet worden gepubliceerd.',
+        'De bruid is de enige rechthebbende op alle gemaakte beelden.'
+      ]
+    },
+    {
+      title: '3. STYLING & BRIDAL STYLIST',
+      items: [
+        'Foto\'s van de styling, haaropsteking of make-up mogen niet worden geplaatst zonder toestemming.',
+        'De Bridal Stylist mag de naam van de bruid niet gebruiken in reclame of testimonials.',
+        'Reviews of "before & after" content vereisen schriftelijke goedkeuring.'
+      ]
+    },
+    {
+      title: '4. DJ & GELUIDSDIENSTEN',
+      items: [
+        'Opnames van de ceremonie of het feest mogen niet openbaar worden gedeeld.',
+        'De DJ mag geen setlists of klantinformatie openbaar maken.',
+        'Promotionele content van de avond is niet toegestaan zonder toestemming van de bruid.'
+      ]
+    },
+    {
+      title: '5. OVERIGE DIENSTVERLENERS',
+      items: [
+        'Dit document is van toepassing op alle dienstverleners die aanwezig zijn op de bruiloft.',
+        'Door aanvaarding van deze opdracht gaat de dienstverlener akkoord met deze privacyvoorwaarden.',
+        'Overtreding kan leiden tot juridische stappen conform de AVG (Algemene Verordening Gegevensbescherming).'
+      ]
+    }
+  ];
+
+  sections.forEach(function(section) {
+    // Check space
+    if (y > H - 50) {
+      doc.addPage();
+      doc.setFillColor(...dark);
+      doc.rect(0, 0, W, H, 'F');
+      doc.setDrawColor(...gold);
+      doc.setLineWidth(0.4);
+      doc.rect(10, 10, W - 20, H - 20);
+      doc.setFillColor(...gold);
+      doc.rect(0, 0, W, 6, 'F');
+      doc.rect(0, H - 6, W, 6, 'F');
+      y = 22;
+    }
+
+    // Section title
+    doc.setFillColor(40, 30, 26);
+    doc.rect(20, y - 3, W - 40, 8, 'F');
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(...gold);
+    doc.setCharSpace(1);
+    doc.text(section.title, 25, y + 2);
+    doc.setCharSpace(0);
+    y += 10;
+
+    section.items.forEach(function(item) {
+      if (y > H - 20) {
+        doc.addPage();
+        doc.setFillColor(...dark);
+        doc.rect(0, 0, W, H, 'F');
+        doc.setDrawColor(...gold);
+        doc.setLineWidth(0.4);
+        doc.rect(10, 10, W - 20, H - 20);
+        doc.setFillColor(...gold);
+        doc.rect(0, 0, W, 6, 'F');
+        doc.rect(0, H - 6, W, 6, 'F');
+        y = 22;
+      }
+      doc.setFontSize(8.5);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...ivory);
+      var itemLines = doc.splitTextToSize('• ' + item, W - 60);
+      doc.text(itemLines, 30, y);
+      y += itemLines.length * 5 + 2;
+    });
+    y += 6;
+  });
+
+  // ── SIGNATURE BLOCK ──
+  if (y > H - 60) {
+    doc.addPage();
+    doc.setFillColor(...dark);
+    doc.rect(0, 0, W, H, 'F');
+    doc.setDrawColor(...gold);
+    doc.setLineWidth(0.4);
+    doc.rect(10, 10, W - 20, H - 20);
+    doc.setFillColor(...gold);
+    doc.rect(0, 0, W, 6, 'F');
+    doc.rect(0, H - 6, W, 6, 'F');
+    y = 22;
+  }
+
+  y += 4;
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.15);
+  doc.line(25, y, W - 25, y);
+  y += 8;
+
+  doc.setFontSize(8);
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(...gold);
+  doc.setCharSpace(1.5);
+  doc.text('HANDTEKENING DIENSTVERLENER', 25, y);
+  doc.setCharSpace(0);
+  y += 10;
+
+  var sigY = y + 18;
+  // Signature lines
+  var cols = [25, W / 2 + 5];
+  var labels = [['Naam dienstverlener', 'Datum'], ['Bedrijfsnaam', 'Handtekening']];
+  cols.forEach(function(xPos, ci) {
+    labels[ci].forEach(function(lbl, ri) {
+      doc.setFontSize(7);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...warm);
+      doc.text(lbl, xPos, sigY + ri * 18);
+      doc.setDrawColor(60, 45, 40);
+      doc.setLineWidth(0.3);
+      doc.line(xPos, sigY + ri * 18 + 8, xPos + (W / 2 - 20), sigY + ri * 18 + 8);
+    });
+  });
+
+  y = sigY + 42;
+
+  // ── FOOTER ──
+  doc.setDrawColor(...gold);
+  doc.setLineWidth(0.15);
+  doc.line(25, H - 20, W - 25, H - 20);
+
+  doc.setFontSize(6.5);
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(...warm);
+  doc.text('Privacy Kaart — ' + naam + '  •  ' + docId + '  •  aroussaplanner.com  •  ' + datum, W / 2, H - 15, { align: 'center' });
+  doc.text('Dit document is persoonlijk en beveiligd. Niet geldig zonder eigenaarsinformatie. Beschermd door AVG.', W / 2, H - 10, { align: 'center' });
+
+  // ── SAVE ──
+  var safeNaam = naam.replace(/[^a-zA-Z0-9]/g, '-');
+  doc.save('Aroussa-Privacy-Kaart-' + safeNaam + '.pdf');
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function tryGet(key) {
+  try { return localStorage.getItem(key); } catch(e) { return null; }
+}
+function trySet(key, val) {
+  try { localStorage.setItem(key, val); } catch(e) {}
+}
+function tryRemove(key) {
+  try { localStorage.removeItem(key); } catch(e) {}
+}
 function doLogout() {
-  if (window.netlifyIdentity) {
-    netlifyIdentity.logout();
-  }
-}
-
-function sendPasswordReset() {
-  if (!window.netlifyIdentity) return;
-  var user = netlifyIdentity.currentUser();
-  if (!user || !user.email) return;
-  // Netlify Identity widget handles this via the modal
-  netlifyIdentity.open('login');
+  if (window.netlifyIdentity) netlifyIdentity.logout();
 }
 </script>
 
