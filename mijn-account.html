@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
 <link rel="apple-touch-icon" href="/logo-512.png">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <style>
   :root{--darker:#1A1210;--dark:#221916;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--green:#4CAF6E;--red:#C4625B;}
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
@@ -169,7 +170,7 @@
 </nav>
 
 <main>
-  <!-- EMAIL ENTRY (standaard zichtbaar; JS verbergt dit als e-mail al bekend is) -->
+  <!-- LOGIN SCHERM (standaard zichtbaar; verborgen na inloggen via Netlify Identity) -->
   <div id="email-entry">
     <div class="page-header">
       <div class="ornament">
@@ -179,21 +180,18 @@
       </div>
       <span class="label">Privacy Kaart</span>
       <h1 class="page-title">Jouw<br><em>account</em></h1>
-      <p class="user-email-txt">Voer jouw e-mailadres in om verder te gaan.</p>
+      <p class="user-email-txt">Log in om jouw bestelling en download te beheren.</p>
     </div>
     <div class="product-card">
       <div class="product-card__head" style="padding-bottom:36px;">
-        <div class="product-card__icon">🛡️</div>
-        <h2 class="product-card__title">Privacy Kaart</h2>
-        <p class="product-card__desc" style="margin-bottom:24px;">Voer hieronder het e-mailadres in dat je hebt opgegeven bij je bestelling.</p>
-        <div class="code-input-row">
-          <input type="email" id="emailEntryInput" class="code-input" placeholder="jouw@email.nl"
-            style="text-transform:none;letter-spacing:0.02em;font-size:14px;"
-            oninput="document.getElementById('emailEntryError').classList.remove('show')"
-            onkeydown="if(event.key==='Enter')setEmail()">
-          <button class="btn-validate" onclick="setEmail()">Verder →</button>
-        </div>
-        <div class="error-msg" id="emailEntryError"></div>
+        <div class="product-card__icon">🔐</div>
+        <h2 class="product-card__title">Inloggen</h2>
+        <p class="product-card__desc" style="margin-bottom:24px;">
+          Log in met het e-mailadres waarmee je de Privacy Kaart hebt besteld. Heb je nog geen account? Dan kun je er hieronder een aanmaken.
+        </p>
+        <button class="btn-validate" style="width:100%;padding:15px;font-size:12px;" onclick="netlifyIdentity.open('login')">
+          Inloggen / Aanmelden →
+        </button>
         <p style="font-size:11px;color:var(--warm);margin-top:16px;">
           Heb je nog geen bestelling gedaan? <a href="/" style="color:var(--gold);">Ga naar de website →</a>
         </p>
@@ -377,30 +375,24 @@ var currentUser = null;
 var downloadToken = null;
 var klantNaam = '';
 
-// ── AUTH INIT ─────────────────────────────────────────────────────────────
-// email-entry is visible by default in HTML; hide it only when we have a stored email.
-(function() {
-  var storedEmail = tryGet('aroussa_email');
-  if (storedEmail) {
+// ── AUTH INIT (Netlify Identity) ─────────────────────────────────────────
+netlifyIdentity.on('init', function(user) {
+  if (user) {
     document.getElementById('email-entry').style.display = 'none';
-    init({ email: storedEmail });
+    init(user);
   }
-  // else: email-entry remains visible — no JS needed
-})();
+  // else: login screen (#email-entry) stays visible — no action needed
+});
 
-function setEmail() {
-  var val = (document.getElementById('emailEntryInput').value || '').trim().toLowerCase();
-  var errEl = document.getElementById('emailEntryError');
-  if (!val || !val.includes('@') || !val.includes('.')) {
-    errEl.textContent = 'Voer een geldig e-mailadres in.';
-    errEl.classList.add('show');
-    return;
-  }
-  trySet('aroussa_email', val);
+netlifyIdentity.on('login', function(user) {
+  netlifyIdentity.close();
   document.getElementById('email-entry').style.display = 'none';
-  // init() shows account-content directly — no need for loading spinner here
-  init({ email: val });
-}
+  init(user);
+});
+
+netlifyIdentity.on('logout', function() {
+  window.location.href = '/';
+});
 
 // ── INIT DASHBOARD ────────────────────────────────────────────────────────
 function init(user) {
@@ -913,8 +905,7 @@ function tryRemove(key) {
   try { localStorage.removeItem(key); } catch(e) {}
 }
 function doLogout() {
-  tryRemove('aroussa_email');
-  window.location.href = '/';
+  netlifyIdentity.logout();
 }
 </script>
 

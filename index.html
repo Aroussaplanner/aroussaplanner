@@ -1342,5 +1342,19 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
 </div>
 
 
+<!-- Netlify Identity widget: handles email confirmation redirects (#confirmation_token) -->
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on('init', function(user) {
+      if (!user) {
+        window.netlifyIdentity.on('login', function() {
+          // After confirming email, redirect to account page
+          document.location.href = '/mijn-account';
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
