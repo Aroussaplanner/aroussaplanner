@@ -4,6 +4,7 @@
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
+  # Supabase env vars: SUPABASE_URL, SUPABASE_ANON_KEY (set in Netlify dashboard)
 
 [[redirects]]
   from = "/*"
