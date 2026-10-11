@@ -234,7 +234,7 @@ async function generateCode() {
         logout();
         return;
       }
-      showError('genError', data.error || 'Er is iets misgegaan.');
+      showError('genError', (data.error || 'Er is iets misgegaan.') + (data.detail ? ' — Detail: ' + data.detail : ''));
       return;
     }
 
