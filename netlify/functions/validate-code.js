@@ -2,8 +2,6 @@
 // Customer endpoint: validates a one-time code and marks it used on success
 // Returns signed download token if valid
 
-const { getStore } = require('@netlify/blobs');
-
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': 'https://aroussaplanner.com',
@@ -31,17 +29,52 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Code en email zijn verplicht' }) };
   }
 
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'Serverconfiguratie ontbreekt.' }),
+    };
+  }
+
   const normalizedCode = code.trim().toUpperCase();
   const normalizedEmail = email.toLowerCase().trim();
 
-  const store = getStore('download-codes');
+  const sbHeaders = {
+    'apikey': SUPABASE_ANON_KEY,
+    'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+    'Content-Type': 'application/json',
+  };
 
-  // Look up code
+  // Look up code in Supabase
   let codeData;
   try {
-    codeData = await store.get(normalizedCode, { type: 'json' });
-  } catch {
-    codeData = null;
+    const resp = await fetch(
+      `${SUPABASE_URL}/rest/v1/download_codes?code=eq.${encodeURIComponent(normalizedCode)}&select=*`,
+      { headers: sbHeaders }
+    );
+
+    if (!resp.ok) {
+      console.error('Supabase lookup error:', resp.status, await resp.text());
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Verbindingsfout. Probeer opnieuw.' }),
+      };
+    }
+
+    const rows = await resp.json();
+    codeData = rows && rows.length > 0 ? rows[0] : null;
+  } catch (err) {
+    console.error('Fetch error in validate-code lookup:', err);
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'Verbindingsfout. Probeer opnieuw.' }),
+    };
   }
 
   if (!codeData) {
@@ -63,7 +96,9 @@ exports.handler = async (event) => {
 
   // Check if already used
   if (codeData.used) {
-    const usedDate = codeData.usedAt ? new Date(codeData.usedAt).toLocaleDateString('nl-NL') : 'onbekend';
+    const usedDate = codeData.used_at
+      ? new Date(codeData.used_at).toLocaleDateString('nl-NL')
+      : 'onbekend';
     return {
       statusCode: 200,
       headers,
@@ -75,12 +110,33 @@ exports.handler = async (event) => {
   }
 
   // Mark as used
-  const updatedData = {
-    ...codeData,
-    used: true,
-    usedAt: new Date().toISOString(),
-  };
-  await store.setJSON(normalizedCode, updatedData);
+  try {
+    const patchResp = await fetch(
+      `${SUPABASE_URL}/rest/v1/download_codes?code=eq.${encodeURIComponent(normalizedCode)}`,
+      {
+        method: 'PATCH',
+        headers: { ...sbHeaders, 'Prefer': 'return=minimal' },
+        body: JSON.stringify({ used: true, used_at: new Date().toISOString() }),
+      }
+    );
+
+    if (!patchResp.ok) {
+      console.error('Supabase update error:', patchResp.status, await patchResp.text());
+      // Still return valid=false so the user doesn't get a token for an unupdated code
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Activatie mislukt. Probeer opnieuw.' }),
+      };
+    }
+  } catch (err) {
+    console.error('Fetch error in validate-code update:', err);
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: 'Verbindingsfout. Probeer opnieuw.' }),
+    };
+  }
 
   // Generate a simple signed download token (base64 encoded, good for 24h)
   const tokenPayload = {

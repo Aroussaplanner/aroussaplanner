@@ -35,16 +35,14 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Email en naam zijn verplicht' }) };
   }
 
-  // Diagnostiek: check blobs context
-  const blobsCtx = process.env.NETLIFY_BLOBS_CONTEXT;
-  if (!blobsCtx) {
+  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
+
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({
-        error: 'Opslaan mislukt. Probeer opnieuw.',
-        detail: 'NETLIFY_BLOBS_CONTEXT niet beschikbaar — Blobs is niet geconfigureerd voor deze omgeving.',
-      }),
+      body: JSON.stringify({ error: 'Serverconfiguratie ontbreekt. Neem contact op.' }),
     };
   }
 
@@ -55,38 +53,35 @@ exports.handler = async (event) => {
   for (let i = 0; i < 4; i++) part2 += chars[Math.floor(Math.random() * chars.length)];
   const code = `ARO-${part1}-${part2}`;
 
-  // Store code in Netlify Blobs
-  let getStore;
+  const normalizedEmail = email.toLowerCase().trim();
+
   try {
-    getStore = require('@netlify/blobs').getStore;
-  } catch (importErr) {
-    return {
-      statusCode: 500,
-      headers,
+    const resp = await fetch(`${SUPABASE_URL}/rest/v1/download_codes`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+      },
       body: JSON.stringify({
-        error: 'Opslaan mislukt. Probeer opnieuw.',
-        detail: 'Import fout: ' + (importErr && importErr.message ? importErr.message : String(importErr)),
+        code,
+        email: normalizedEmail,
+        naam: naam.trim(),
+        product,
+        used: false,
       }),
-    };
-  }
+    });
 
-  try {
-    const store = getStore('download-codes');
-    const codeData = {
-      email: email.toLowerCase().trim(),
-      naam: naam.trim(),
-      product,
-      code,
-      createdAt: new Date().toISOString(),
-      used: false,
-      usedAt: null,
-    };
-
-    await store.setJSON(code, codeData);
-
-    // Also index by email (to look up pending codes)
-    const emailKey = `email:${email.toLowerCase().trim()}:${product}`;
-    await store.setJSON(emailKey, { code, createdAt: codeData.createdAt });
+    if (!resp.ok) {
+      const errText = await resp.text();
+      console.error('Supabase insert error:', resp.status, errText);
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Opslaan mislukt. Probeer opnieuw.' }),
+      };
+    }
 
     return {
       statusCode: 200,
@@ -94,20 +89,17 @@ exports.handler = async (event) => {
       body: JSON.stringify({
         success: true,
         code,
-        email,
-        naam,
+        email: normalizedEmail,
+        naam: naam.trim(),
         product,
       }),
     };
   } catch (err) {
-    console.error('Blobs error in generate-code:', err);
+    console.error('Fetch error in generate-code:', err);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({
-        error: 'Opslaan mislukt. Probeer opnieuw.',
-        detail: err && err.message ? err.message : String(err),
-      }),
+      body: JSON.stringify({ error: 'Verbindingsfout. Probeer opnieuw.' }),
     };
   }
 };
