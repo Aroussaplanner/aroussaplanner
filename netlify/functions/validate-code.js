@@ -29,10 +29,10 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Code en email zijn verplicht' }) };
   }
 
-  const SUPABASE_URL = process.env.SUPABASE_URL;
+  const SUPABASE_URL = process.env.SUPABASE_URL || 'https://rgordytqhaionboljwlz.supabase.co';
   const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY;
 
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+  if (!SUPABASE_ANON_KEY) {
     return {
       statusCode: 500,
       headers,
