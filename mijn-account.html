@@ -351,8 +351,14 @@ var klantNaam = '';
   document.body.style.visibility = 'hidden';
 })();
 
+// Fallback: als Identity na 6 seconden nog geen init heeft gestuurd, doorsturen
+var _authTimeout = setTimeout(function() {
+  window.location.href = '/login?redirect=/mijn-account';
+}, 6000);
+
 if (window.netlifyIdentity) {
   netlifyIdentity.on('init', function(user) {
+    clearTimeout(_authTimeout);
     if (!user) {
       window.location.href = '/login?redirect=/mijn-account';
     } else {
@@ -366,6 +372,7 @@ if (window.netlifyIdentity) {
   });
   netlifyIdentity.init();
 } else {
+  clearTimeout(_authTimeout);
   setTimeout(function() {
     var u = window.netlifyIdentity && netlifyIdentity.currentUser();
     if (!u) { window.location.href = '/login?redirect=/mijn-account'; return; }
