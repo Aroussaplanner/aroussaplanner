@@ -2,8 +2,6 @@
 // Admin-only endpoint: generates a one-time download code for a customer
 // Protected by ADMIN_SECRET environment variable
 
-const { getStore } = require('@netlify/blobs');
-
 exports.handler = async (event) => {
   const headers = {
     'Access-Control-Allow-Origin': 'https://aroussaplanner.com',
@@ -37,6 +35,19 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Email en naam zijn verplicht' }) };
   }
 
+  // Diagnostiek: check blobs context
+  const blobsCtx = process.env.NETLIFY_BLOBS_CONTEXT;
+  if (!blobsCtx) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        error: 'Opslaan mislukt. Probeer opnieuw.',
+        detail: 'NETLIFY_BLOBS_CONTEXT niet beschikbaar — Blobs is niet geconfigureerd voor deze omgeving.',
+      }),
+    };
+  }
+
   // Generate unique code: ARO-XXXX-XXXX (uppercase alphanum, no confusing chars)
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   let part1 = '', part2 = '';
@@ -45,6 +56,20 @@ exports.handler = async (event) => {
   const code = `ARO-${part1}-${part2}`;
 
   // Store code in Netlify Blobs
+  let getStore;
+  try {
+    getStore = require('@netlify/blobs').getStore;
+  } catch (importErr) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({
+        error: 'Opslaan mislukt. Probeer opnieuw.',
+        detail: 'Import fout: ' + (importErr && importErr.message ? importErr.message : String(importErr)),
+      }),
+    };
+  }
+
   try {
     const store = getStore('download-codes');
     const codeData = {
