@@ -80,11 +80,7 @@
   .btn-order:hover{background:#D4B892;transform:translateY(-1px);}
   .btn-order:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 
-  /* WACHT PANEL */
-  .wait-box{background:rgba(196,168,130,0.05);border:1px solid rgba(196,168,130,0.12);border-radius:6px;padding:24px;text-align:center;}
-  .wait-box__icon{font-size:36px;margin-bottom:12px;}
-  .wait-box__title{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ivory);margin-bottom:8px;}
-  .wait-box__text{font-size:13px;color:var(--warm);line-height:1.7;}
+  /* WA LINK */
   .wa-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:10px 20px;background:rgba(196,168,130,0.08);border:1px solid rgba(196,168,130,0.2);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:background .2s;}
   .wa-link:hover{background:rgba(196,168,130,0.16);}
 
@@ -103,17 +99,15 @@
 
   /* DOWNLOAD PANEL */
   .download-box{text-align:center;padding:8px 0;}
-  .download-box__icon{font-size:48px;margin-bottom:16px;}
   .download-box__title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--ivory);margin-bottom:8px;}
   .download-box__text{font-size:13px;color:var(--warm);line-height:1.7;max-width:380px;margin:0 auto 24px;}
   .download-box__warning{font-size:11px;color:rgba(196,168,130,0.7);background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.12);border-radius:4px;padding:10px 14px;margin-bottom:24px;line-height:1.6;}
-  .btn-download{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:all .25s;font-size:12px;}
+  .btn-download{display:inline-flex;align-items:center;gap:10px;padding:16px 36px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:all .25s;}
   .btn-download:hover{background:#D4B892;transform:translateY(-1px);}
   .btn-download:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 
   /* DONE PANEL */
   .done-box{text-align:center;padding:16px 0;}
-  .done-box__icon{font-size:48px;margin-bottom:16px;}
   .done-box__title{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ivory);margin-bottom:8px;}
   .done-box__text{font-size:13px;color:var(--warm);line-height:1.7;}
   .done-badge{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 20px;background:rgba(76,175,110,0.08);border:1px solid rgba(76,175,110,0.2);border-radius:4px;font-size:12px;color:var(--green);}
@@ -234,95 +228,66 @@
       <div class="steps-area">
         <div style="display:flex;align-items:flex-start;gap:0;margin-bottom:32px;" id="stepIndicator">
           <div class="step-item">
-            <div class="step-dot" id="dot1">1</div>
-            <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Bestellen</div>
+            <div class="step-dot active" id="dot1">1</div>
+            <div class="step-label" style="font-size:9px;color:var(--warm);width:72px;">Code invoeren</div>
           </div>
           <div class="step-line" style="margin-top:14px;"></div>
           <div class="step-item">
-            <div class="step-dot" id="dot2">2</div>
-            <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Code invoeren</div>
-          </div>
-          <div class="step-line" style="margin-top:14px;"></div>
-          <div class="step-item">
-            <div class="step-dot" id="dot3">3</div>
+            <div class="step-dot pending" id="dot2">2</div>
             <div class="step-label" style="font-size:9px;color:var(--warm);width:60px;">Downloaden</div>
           </div>
         </div>
 
-        <!-- PANEL 1: BESTEL -->
+        <!-- PANEL: BESTEL + CODE (slim, past zich aan) -->
         <div class="panel active" id="panel-bestel">
-          <div class="order-features">
-            <div class="order-feature">Persoonlijk document met jouw naam &amp; datum</div>
-            <div class="order-feature">Unieke licentiecode als bewijs van eigendom</div>
-            <div class="order-feature">Watermerk &amp; tracerbeveiliging</div>
-            <div class="order-feature">Printklaar PDF — juridisch geldig</div>
-            <div class="order-feature">Eenmalige download, altijd beschikbaar in je account</div>
-          </div>
-          <!-- Hidden Netlify Form for order notification -->
+
+          <!-- Verborgen Netlify Form -->
           <form name="privacy-kaart-bestelling" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="orderForm" style="display:none;">
             <input type="hidden" name="form-name" value="privacy-kaart-bestelling">
             <input type="hidden" name="bot-field">
             <input type="hidden" name="email" id="orderEmail">
             <input type="hidden" name="product" value="Privacy Kaart — €30">
           </form>
-          <button class="btn-order" id="orderBtn" onclick="submitOrder()">
-            <span>Bestel Privacy Kaart — €30 →</span>
-          </button>
-          <p style="font-size:11px;color:var(--warm);margin-top:12px;text-align:center;">Na bestelling ontvang jij van mij een persoonlijke downloadcode via WhatsApp.</p>
 
-          <!-- Code invoer voor klanten die al een code hebben ontvangen -->
-          <div style="margin-top:28px;padding-top:24px;border-top:1px solid rgba(196,168,130,0.1);">
-            <p style="font-size:12px;color:var(--warm);margin-bottom:12px;font-weight:600;letter-spacing:0.06em;">Al een code ontvangen via WhatsApp? Voer hem direct in:</p>
-            <div class="code-form">
-              <div class="code-input-row">
-                <input class="code-input" type="text" id="codeInput0" placeholder="ARO-XXXX-XXXX" maxlength="13" oninput="formatCode(this)">
-                <button class="btn-validate" id="validateBtn0" onclick="validateCode0()">Activeren</button>
-              </div>
-              <p class="code-hint">De code staat in het WhatsApp-bericht van Aroussa.</p>
-              <div class="error-msg" id="codeError0"></div>
+          <!-- Sectie A: Nog niet besteld -->
+          <div id="sectie-bestel">
+            <div class="order-features">
+              <div class="order-feature">Persoonlijk document met jouw naam &amp; datum</div>
+              <div class="order-feature">Unieke licentiecode als bewijs van eigendom</div>
+              <div class="order-feature">Watermerk &amp; tracerbeveiliging</div>
+              <div class="order-feature">Printklaar PDF — juridisch geldig</div>
+            </div>
+            <button class="btn-order" id="orderBtn" onclick="submitOrder()">
+              <span>Bestel Privacy Kaart — €30</span>
+            </button>
+            <p style="font-size:11px;color:var(--warm);margin-top:10px;text-align:center;">Na betaling ontvang je een persoonlijke downloadcode via WhatsApp.</p>
+          </div>
+
+          <!-- Sectie B: Bestelling ontvangen (zichtbaar na bestellen) -->
+          <div id="sectie-bevestiging" style="display:none;margin-bottom:20px;">
+            <div style="background:rgba(76,175,110,0.07);border:1px solid rgba(76,175,110,0.2);border-radius:6px;padding:14px 18px;">
+              <p style="font-size:13px;color:var(--ivory);margin:0;">Bestelling ontvangen — je krijgt snel een code via WhatsApp.</p>
             </div>
           </div>
-        </div>
 
-        <!-- PANEL 1B: WACHT OP CODE -->
-        <div class="panel" id="panel-wacht">
-          <div class="wait-box">
-            <h3 class="wait-box__title">Bestelling ontvangen!</h3>
-            <p class="wait-box__text">Ik heb jouw bestelling ontvangen en stuur je snel een persoonlijke downloadcode via WhatsApp. Heb je al een code ontvangen?</p>
-            <a href="https://wa.me/31613115286" class="wa-link" target="_blank">WhatsApp sturen</a>
-          </div>
-          <div style="margin-top:20px;">
-            <p style="font-size:12px;color:var(--warm);margin-bottom:12px;font-weight:600;letter-spacing:0.08em;">Heb je je code al ontvangen? Voer hem hier in:</p>
+          <!-- Code invoer: altijd zichtbaar -->
+          <div style="margin-top:24px;padding-top:20px;border-top:1px solid rgba(196,168,130,0.1);">
+            <p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">Code invoeren</p>
             <div class="code-form">
               <div class="code-input-row">
                 <input class="code-input" type="text" id="codeInput" placeholder="ARO-XXXX-XXXX" maxlength="13" oninput="formatCode(this)">
-                <button class="btn-validate" id="validateBtn" onclick="validateCode()">Valideren</button>
+                <button class="btn-validate" id="validateBtn" onclick="validateCode()">Activeren</button>
               </div>
-              <p class="code-hint">De code bestaat uit 13 tekens, zoals: ARO-K7M2-P9Q4</p>
+              <p class="code-hint">De code staat in het WhatsApp-bericht van Aroussa.</p>
               <div class="error-msg" id="codeError"></div>
             </div>
-          </div>
-        </div>
-
-        <!-- PANEL 2: CODE INVOER (direct naar hier als bestelstatus al "besteld" is) -->
-        <div class="panel" id="panel-code">
-          <p style="font-size:13px;color:var(--warm);margin-bottom:20px;line-height:1.6;">
-            Je ontvangt van mij een downloadcode via WhatsApp. Voer hem hieronder in:
-          </p>
-          <div class="code-form">
-            <div class="code-input-row">
-              <input class="code-input" type="text" id="codeInput2" placeholder="ARO-XXXX-XXXX" maxlength="13" oninput="formatCode(this)">
-              <button class="btn-validate" id="validateBtn2" onclick="validateCode2()">Valideren</button>
+            <div style="margin-top:14px;text-align:center;">
+              <a href="https://wa.me/31613115286" class="wa-link" style="font-size:11px;padding:8px 18px;" target="_blank">Nog geen code? WhatsApp sturen</a>
             </div>
-            <p class="code-hint">De code bestaat uit 13 tekens, zoals: ARO-K7M2-P9Q4</p>
-            <div class="error-msg" id="codeError2"></div>
-          </div>
-          <div style="margin-top:20px;text-align:center;">
-            <a href="https://wa.me/31613115286" class="wa-link" target="_blank">Nog geen code? WhatsApp sturen</a>
           </div>
         </div>
 
-        <!-- PANEL 3: DOWNLOAD -->
+        <!-- PANEL: DOWNLOAD -->
         <div class="panel" id="panel-download">
           <div class="download-box">
             <h3 class="download-box__title">Jouw Privacy Kaart is klaar!</h3>
@@ -336,12 +301,12 @@
           </div>
         </div>
 
-        <!-- PANEL 4: KLAAR (al gedownload) -->
+        <!-- PANEL: KLAAR -->
         <div class="panel" id="panel-done">
           <div class="done-box">
             <h3 class="done-box__title">Gedownload</h3>
             <p class="done-box__text">Jouw Privacy Kaart is succesvol gedownload en opgeslagen. Bewaar de PDF goed — dit is jouw persoonlijke document.</p>
-            <div class="done-badge">✓ Privacy Kaart is in jouw bezit</div>
+            <div class="done-badge">Privacy Kaart is in jouw bezit</div>
             <p style="margin-top:20px;font-size:12px;color:var(--warm);">
               Vragen of iets verloren? <a href="https://wa.me/31613115286" style="color:var(--gold);">WhatsApp sturen →</a>
             </p>
@@ -415,7 +380,6 @@ function init(user) {
   document.getElementById('info-email-display').textContent = email;
   document.getElementById('orderEmail').value = email;
 
-  // Determine current state from localStorage
   var downloaded = tryGet(SK_DOWNLOAD + ':' + email);
   var ordered    = tryGet(SK_ORDER + ':' + email);
   var token      = tryGet(SK_TOKEN + ':' + email);
@@ -425,38 +389,44 @@ function init(user) {
 
   if (downloaded === '1') {
     goPanel('done');
-    updateDots(4);
+    updateDots(3);
   } else if (token) {
     downloadToken = token;
     goPanel('download');
-    updateDots(3);
-  } else if (ordered === '1') {
-    goPanel('code');
     updateDots(2);
   } else {
     goPanel('bestel');
     updateDots(1);
+    if (ordered === '1') {
+      // Al besteld: verberg bestelknop, toon bevestiging
+      document.getElementById('sectie-bestel').style.display = 'none';
+      document.getElementById('sectie-bevestiging').style.display = 'block';
+      document.getElementById('priceDisplay').style.display = 'none';
+    }
   }
 }
 
 // ── PANEL NAVIGATION ─────────────────────────────────────────────────────
 function goPanel(name) {
-  ['bestel','wacht','code','download','done'].forEach(function(n) {
+  ['bestel','download','done'].forEach(function(n) {
     var el = document.getElementById('panel-' + n);
     if (el) el.classList.toggle('active', n === name);
   });
 }
 
 function updateDots(step) {
-  for (var i = 1; i <= 3; i++) {
-    var dot = document.getElementById('dot' + i);
-    if (i < step)       { dot.className = 'step-dot done'; dot.textContent = '✓'; }
-    else if (i === step) { dot.className = 'step-dot active'; dot.textContent = i; }
-    else                { dot.className = 'step-dot pending'; dot.textContent = i; }
+  var dot1 = document.getElementById('dot1');
+  var dot2 = document.getElementById('dot2');
+  if (step === 1) {
+    dot1.className = 'step-dot active'; dot1.textContent = '1';
+    dot2.className = 'step-dot pending'; dot2.textContent = '2';
+  } else if (step === 2) {
+    dot1.className = 'step-dot done'; dot1.textContent = '✓';
+    dot2.className = 'step-dot active'; dot2.textContent = '2';
+  } else {
+    dot1.className = 'step-dot done'; dot1.textContent = '✓';
+    dot2.className = 'step-dot done'; dot2.textContent = '✓';
   }
-  // Hide price after ordering
-  var price = document.getElementById('priceDisplay');
-  if (price) price.style.display = step > 1 ? 'none' : '';
 }
 
 // ── ORDER SUBMIT ──────────────────────────────────────────────────────────
@@ -476,15 +446,17 @@ function submitOrder() {
   .then(function() {
     var email = currentUser ? currentUser.email : '';
     trySet(SK_ORDER + ':' + email, '1');
-    goPanel('wacht');
-    updateDots(2);
+    // Toon bevestiging in hetzelfde panel
+    document.getElementById('sectie-bestel').style.display = 'none';
+    document.getElementById('sectie-bevestiging').style.display = 'block';
+    document.getElementById('priceDisplay').style.display = 'none';
   })
   .catch(function() {
-    // Show wacht panel anyway (fallback)
     var email = currentUser ? currentUser.email : '';
     trySet(SK_ORDER + ':' + email, '1');
-    goPanel('wacht');
-    updateDots(2);
+    document.getElementById('sectie-bestel').style.display = 'none';
+    document.getElementById('sectie-bevestiging').style.display = 'block';
+    document.getElementById('priceDisplay').style.display = 'none';
   });
 }
 
@@ -506,14 +478,8 @@ function formatCode(input) {
 }
 
 // ── CODE VALIDATION ───────────────────────────────────────────────────────
-function validateCode0() {
-  doValidate('codeInput0', 'validateBtn0', 'codeError0');
-}
 function validateCode() {
   doValidate('codeInput', 'validateBtn', 'codeError');
-}
-function validateCode2() {
-  doValidate('codeInput2', 'validateBtn2', 'codeError2');
 }
 
 async function doValidate(inputId, btnId, errorId) {
@@ -548,7 +514,7 @@ async function doValidate(inputId, btnId, errorId) {
       trySet(SK_TOKEN + ':' + email, downloadToken);
       trySet(SK_NAAM + ':' + email, klantNaam);
       goPanel('download');
-      updateDots(3);
+      updateDots(2);
     } else {
       errEl.textContent = data.reason || 'Ongeldige code.';
       errEl.classList.add('show');
@@ -558,7 +524,7 @@ async function doValidate(inputId, btnId, errorId) {
     errEl.classList.add('show');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Valideren';
+    btn.textContent = 'Activeren';
   }
 }
 
@@ -576,7 +542,7 @@ async function downloadPDF() {
     }
     if (!window.jspdf) {
       btn.disabled = false;
-      btn.textContent = '⬇ Download mijn Privacy Kaart PDF';
+      btn.textContent = 'Download mijn Privacy Kaart PDF';
       alert('De PDF-bibliotheek kon niet worden geladen. Controleer je internet en probeer opnieuw.');
       return;
     }
@@ -588,10 +554,9 @@ async function downloadPDF() {
     await generatePrivacyKaartPDF();
     var email = currentUser ? currentUser.email : '';
     trySet(SK_DOWNLOAD + ':' + email, '1');
-    // Remove token (can't re-download with same token logic)
     tryRemove(SK_TOKEN + ':' + email);
     goPanel('done');
-    updateDots(4);
+    updateDots(3);
   } catch(e) {
     btn.disabled = false;
     btn.textContent = '⬇ Download mijn Privacy Kaart PDF';
