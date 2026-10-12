@@ -1391,56 +1391,79 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
   var closeBtn = document.getElementById('appBannerClose');
   var deferredPrompt = null;
   var shown = false;
+  var autoHideTimer = null;
 
-  // Niet tonen als al als app geopend
+  // Niet tonen als app al geïnstalleerd is (standalone modus)
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) return;
-  // Niet tonen als al weggetipt
+  // Niet tonen als eerder weggetipt
   try { if (localStorage.getItem('appBannerDismissed')) return; } catch(e) {}
+
+  function hideBanner() {
+    banner.classList.remove('show');
+    if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; }
+  }
+
+  function dismiss() {
+    hideBanner();
+    try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+  }
 
   function showBanner() {
     if (shown) return;
     shown = true;
-    setTimeout(function() { banner.classList.add('show'); }, 1800);
+    setTimeout(function() {
+      banner.classList.add('show');
+      // Auto-verberg na 15 seconden als er niks mee gedaan wordt
+      autoHideTimer = setTimeout(hideBanner, 15000);
+    }, 1800);
   }
 
-  // Android / Chrome: vang de install-prompt op
-  window.addEventListener('beforeinstallprompt', function(e) {
-    e.preventDefault();
-    deferredPrompt = e;
-    showBanner();
-    installBtn.addEventListener('click', function() {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(function() {
-        deferredPrompt = null;
-        banner.classList.remove('show');
-        try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
-      });
-    });
-  });
+  // Pauzeer auto-hide als de klant de banner aanraakt/aanwijst
+  banner.addEventListener('mouseenter', function() { if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; } });
+  banner.addEventListener('touchstart', function() { if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; } }, { passive: true });
 
-  // iOS Safari: toon handmatige instructie
-  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-  if (isIOS && isSafari) {
+  // iOS detectie — inclusief iPadOS 13+ (toont zich als Mac)
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  // Alleen in Safari, niet in Chrome/Firefox/Edge op iOS
+  var isIOSSafari = isIOS && /Safari/i.test(navigator.userAgent) &&
+    !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent);
+
+  if (isIOSSafari) {
+    // iPhone/iPad in Safari: toon uitleg voor "Zet op beginscherm"
     installBtn.textContent = 'Hoe?';
     installBtn.addEventListener('click', function() {
-      alert('Tik op het deel-icoontje onderin Safari \n(het vierkantje met pijltje omhoog ↑)\nen kies "Zet op beginscherm".');
-      banner.classList.remove('show');
+      hideBanner();
       try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+      setTimeout(function() {
+        alert('Tik op het deel-icoontje onderaan Safari\n(vierkantje met pijltje omhoog ↑)\nen kies "Zet op beginscherm".');
+      }, 300);
     });
     showBanner();
+
+  } else {
+    // Android & Chrome desktop: gebruik native install prompt
+    window.addEventListener('beforeinstallprompt', function(e) {
+      e.preventDefault();
+      deferredPrompt = e;
+      showBanner();
+    });
+
+    installBtn.addEventListener('click', function() {
+      if (!deferredPrompt) return;
+      hideBanner();
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function(result) {
+        deferredPrompt = null;
+        if (result.outcome === 'accepted') {
+          try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+        }
+      });
+    });
   }
 
-  // Sluiten
-  closeBtn.addEventListener('click', function() {
-    banner.classList.remove('show');
-    try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
-  });
-
-  // Verberg na installatie
-  window.addEventListener('appinstalled', function() {
-    banner.classList.remove('show');
-  });
+  closeBtn.addEventListener('click', dismiss);
+  window.addEventListener('appinstalled', hideBanner);
 })();
 
 // PWA Service Worker registratie
