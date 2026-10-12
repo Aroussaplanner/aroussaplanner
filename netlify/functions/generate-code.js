@@ -23,7 +23,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
-  const { adminSecret, email, naam, product = 'privacy-kaart' } = body;
+  const { adminSecret, email, naam, product } = body;
 
   // Verify admin secret
   const ADMIN_SECRET = process.env.ADMIN_SECRET;
@@ -33,6 +33,16 @@ exports.handler = async (event) => {
 
   if (!email || !naam) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Email en naam zijn verplicht' }) };
+  }
+
+  // Validate product
+  const VALID_PRODUCTS = [
+    'bruid-checklist', 'contract-checklist', 'rode-vlaggen-gids',
+    'whatsapp-scripts', 'dagvan-draaiboek', 'ziana-gids',
+    'budget-calculator', 'bruiloft-tijdlijn', 'complete-bundel',
+  ];
+  if (!product || !VALID_PRODUCTS.includes(product)) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Ongeldig of ontbrekend product.' }) };
   }
 
   const SUPABASE_URL = 'https://rgordytqhaionboljwlz.supabase.co';
