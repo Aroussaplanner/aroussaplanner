@@ -9,8 +9,14 @@
 <meta name="robots" content="index, follow">
 <meta name="author" content="Aroussa">
 <link rel="canonical" href="https://aroussaplanner.com/">
-<link rel="icon" type="image/png" sizes="512x512" href="logo-512.png">
-<link rel="apple-touch-icon" href="logo-512.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="apple-touch-icon" sizes="512x512" href="/logo-512.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2D2520">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Aroussa">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://aroussaplanner.com/">
 <meta property="og:title" content="Aroussa | Online Wedding Planner voor de Marokkaanse Bruid in Nederland">
@@ -1355,6 +1361,31 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
       }
     });
   }
+</script>
+<script>
+// PWA Service Worker registratie
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then(function(reg) {
+        // Controleer op updates
+        reg.addEventListener('updatefound', function() {
+          var newSW = reg.installing;
+          if (newSW) {
+            newSW.addEventListener('statechange', function() {
+              if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+                // Nieuwe versie beschikbaar — activeer direct
+                newSW.postMessage({ type: 'SKIP_WAITING' });
+              }
+            });
+          }
+        });
+      })
+      .catch(function(err) {
+        console.warn('SW registratie mislukt:', err);
+      });
+  });
+}
 </script>
 </body>
 </html>
