@@ -263,6 +263,12 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .app-banner__btn:hover{background:#D4B892;}
 .app-banner__close{background:none;border:none;color:var(--warm);font-size:16px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1;transition:color 0.2s;}
 .app-banner__close:hover{color:var(--ivory);}
+.app-banner__ios-guide{display:none;flex:1;align-items:center;gap:10px;min-width:0;}
+.app-banner__ios-guide svg{flex-shrink:0;}
+.app-banner__ios-guide p{font-size:12px;color:var(--ivory);line-height:1.5;margin:0;}
+.app-banner__ios-guide p em{color:var(--gold);font-style:normal;font-weight:700;}
+.app-banner.ios-mode .app-banner__icon,.app-banner.ios-mode .app-banner__text,.app-banner.ios-mode .app-banner__btn{display:none;}
+.app-banner.ios-mode .app-banner__ios-guide{display:flex;}
 .sticky-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(26,18,16,0.97);border-top:1px solid rgba(196,168,130,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;z-index:998;transform:translateY(100%);transition:transform 0.4s ease;backdrop-filter:blur(12px);}
 .sticky-bar.visible{transform:translateY(0);}
 .sticky-bar__text{font-size:13px;color:var(--ivory);}
@@ -1282,6 +1288,10 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
     <strong>Download de Aroussa App</strong>
     <span>Altijd bij de hand — gratis op je telefoon</span>
   </div>
+  <div class="app-banner__ios-guide" id="iosGuide">
+    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#c6a15b"/><path d="M15 5v13" stroke="#1A1210" stroke-width="2.2" stroke-linecap="round"/><path d="M10 9l5-5 5 5" stroke="#1A1210" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 17v8h14v-8" stroke="#1A1210" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <p>Tik op <em>het deel-icoontje</em> onderin Safari<br>→ kies <em>"Zet op beginscherm"</em></p>
+  </div>
   <button class="app-banner__btn" id="appInstallBtn">Installeer</button>
   <button class="app-banner__close" id="appBannerClose" aria-label="Sluiten">&#x2715;</button>
 </div>
@@ -1430,14 +1440,12 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
     !/CriOS|FxiOS|EdgiOS|OPiOS/.test(navigator.userAgent);
 
   if (isIOSSafari) {
-    // iPhone/iPad in Safari: toon uitleg voor "Zet op beginscherm"
+    // iPhone/iPad in Safari: toon inline uitleg in de banner zelf (geen alert)
     installBtn.textContent = 'Hoe?';
     installBtn.addEventListener('click', function() {
-      hideBanner();
-      try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
-      setTimeout(function() {
-        alert('Tik op het deel-icoontje onderaan Safari\n(vierkantje met pijltje omhoog ↑)\nen kies "Zet op beginscherm".');
-      }, 300);
+      banner.classList.add('ios-mode');
+      if (autoHideTimer) { clearTimeout(autoHideTimer); autoHideTimer = null; }
+      autoHideTimer = setTimeout(dismiss, 12000);
     });
     showBanner();
 
