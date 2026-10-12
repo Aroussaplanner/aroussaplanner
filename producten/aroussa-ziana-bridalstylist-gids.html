@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>De Ziana / Bridalstylist Gids · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E;--red:#C0392B;--green:#27AE60}
+body{background:#d0c8be;font-family:'Montserrat',sans-serif;font-weight:300;color:var(--dark);font-size:10pt}
+.page{width:210mm;min-height:297mm;background:var(--ivory);margin:12mm auto;padding:21mm 16mm 18mm;position:relative;page-break-after:always;break-after:page;overflow:hidden}
+@media print{body{background:none}.page{margin:0;padding:19mm 14mm 16mm;box-shadow:none}.no-print{display:none}}
+.wm{position:absolute;left:50%;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:3px;white-space:nowrap;pointer-events:none;z-index:0;color:rgba(196,168,130,0.08)}
+.wm-mid{top:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:22pt}
+.wm-top{top:20%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.wm-bot{top:78%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.klant-balk{position:absolute;top:0;left:0;right:0;background:var(--darker);padding:1.8mm 5mm;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.klant-balk span{font-size:5.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,168,130,0.4)}
+.klant-balk .kcode{color:rgba(196,168,130,0.65)!important}
+.page>*:not(.wm):not(.klant-balk){position:relative;z-index:1}
+.page-footer{position:absolute;bottom:9mm;left:16mm;right:16mm;display:flex;justify-content:space-between;align-items:center;font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);border-top:0.5pt solid var(--gold);padding-top:3.5mm}
+.footer-code{color:rgba(196,168,130,0.5)!important;font-size:6pt}
+/* COVER */
+.cover{background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:297mm;padding:20mm}
+.cover .wm,.cover .klant-balk{display:none}
+.cover-brand{font-family:'Italiana',serif;font-size:28pt;color:var(--gold);letter-spacing:3px;margin-bottom:3mm}
+.cover-tagline{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:20mm}
+.cover-ornament{width:40mm;height:0.5pt;background:var(--gold);margin:0 auto 20mm;opacity:0.5}
+.cover-label{font-size:8pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6mm}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:36pt;font-weight:300;color:var(--ivory);line-height:1.05;margin-bottom:6mm}
+.cover-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14pt;color:rgba(247,242,234,0.6);line-height:1.4;max-width:120mm;margin:0 auto 16mm}
+.cover-klant{background:rgba(196,168,130,0.08);border:0.5pt solid rgba(196,168,130,0.3);padding:4mm 10mm;margin-bottom:12mm}
+.cover-klant-label{font-size:7pt;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:2mm}
+.cover-klant-naam{font-family:'Cormorant Garamond',serif;font-size:16pt;color:var(--gold);font-weight:300}
+.cover-klant-code{font-size:8pt;color:var(--bronze);margin-top:2mm;font-weight:600;letter-spacing:2px}
+.cover-price{display:inline-block;border:0.5pt solid rgba(196,168,130,0.4);padding:3mm 8mm;font-size:9pt;color:var(--gold);font-weight:600;letter-spacing:2px;margin-bottom:8mm}
+.cover-bottom{font-size:7pt;color:var(--warm);letter-spacing:2px;text-transform:uppercase}
+/* TYPOGRAFIE */
+.page-label{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:4mm;display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:26pt;font-weight:400;color:var(--dark);line-height:1.1;margin-bottom:5mm}
+.page-title em{font-style:italic;color:var(--bronze)}
+.intro-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13pt;color:var(--warm);line-height:1.6;margin-bottom:6mm}
+.body-text{font-size:9.5pt;line-height:1.75;color:var(--dark);margin-bottom:4mm}
+.divider{height:0.5pt;background:var(--gold);opacity:0.3;margin:5mm 0}
+/* HOOFDSTUK */
+.chapter-header{background:var(--beige);padding:4mm 6mm;margin-bottom:4mm;display:flex;align-items:baseline;gap:4mm}
+.chapter-num{font-family:'Cormorant Garamond',serif;font-size:22pt;font-weight:300;color:var(--gold);opacity:0.5;line-height:1;flex-shrink:0}
+.chapter-title{font-family:'Cormorant Garamond',serif;font-size:15pt;font-weight:400;color:var(--dark);line-height:1.2}
+/* VRAGEN KAARTEN */
+.vraag-list{list-style:none;margin-bottom:5mm}
+.vraag-item{display:flex;gap:3mm;align-items:flex-start;padding:3mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.vraag-item:last-child{border-bottom:none}
+.vraag-icon{font-size:8pt;color:var(--gold);flex-shrink:0;margin-top:1pt;font-weight:600}
+.vraag-text{font-size:9pt;line-height:1.6;color:var(--dark)}
+.vraag-text strong{font-weight:600;color:var(--dark);display:block;margin-bottom:1mm}
+/* ROD VLAGGEN */
+.flag-item{display:flex;gap:3mm;align-items:flex-start;padding:3mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.flag-item:last-child{border-bottom:none}
+.flag-icon{font-size:8pt;color:var(--red);flex-shrink:0;margin-top:1pt;font-weight:600}
+.flag-text{font-size:9pt;line-height:1.6;color:var(--dark)}
+.flag-text strong{font-weight:600;color:var(--dark);display:block;margin-bottom:1mm}
+/* TIP */
+.tip-box{background:var(--sand);border-left:2pt solid var(--gold);padding:4mm 5mm;margin:4mm 0}
+.tip-label{font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;display:block}
+.tip-text{font-size:9pt;line-height:1.6;color:var(--dark)}
+/* WOORDENLIJST */
+.word-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-bottom:5mm}
+.word-card{background:var(--beige);padding:3mm 4mm}
+.word-term{font-family:'Cormorant Garamond',serif;font-size:13pt;font-weight:400;color:var(--dark);margin-bottom:1mm}
+.word-def{font-size:8pt;color:var(--warm);line-height:1.5}
+/* CHECKLIST */
+.check-row{display:flex;gap:3mm;align-items:flex-start;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.check-box{width:4mm;height:4mm;border:0.75pt solid var(--gold);flex-shrink:0;margin-top:1pt}
+.check-text{font-size:9pt;line-height:1.5;color:var(--dark)}
+/* PRIJSTABEL */
+.price-table{width:100%;border-collapse:collapse;margin-bottom:4mm;font-size:8.5pt}
+.price-table th{background:var(--beige);padding:2.5mm 3mm;text-align:left;font-size:7.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold)}
+.price-table td{padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);color:var(--dark)}
+.price-table tr:nth-child(even) td{background:var(--sand)}
+/* VERGELIJKINGSTABEL */
+.vergelijk-table{width:100%;border-collapse:collapse;font-size:8pt;margin-bottom:4mm}
+.vergelijk-table th{background:var(--dark);color:var(--ivory);padding:2.5mm 3mm;text-align:left;font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1pt solid var(--gold)}
+.vergelijk-table td{padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);vertical-align:top}
+.vergelijk-table tr:nth-child(even) td{background:var(--sand)}
+/* INHOUDSOPGAVE */
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.toc-title{font-size:10pt;color:var(--dark)}
+.toc-dots{flex:1;border-bottom:0.5pt dotted rgba(196,168,130,0.4);margin:0 3mm 1mm}
+.toc-page{font-size:9pt;color:var(--warm);flex-shrink:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.print-btn{position:fixed;top:15px;right:15px;background:#2D2520;color:#F7F2EA;border:none;padding:10px 24px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;z-index:999}
+.print-btn:hover{background:#C4A882;color:#2D2520}
+</style>
+<script>
+const p=new URLSearchParams(window.location.search);
+const KN=p.get('naam')?decodeURIComponent(p.get('naam')).toUpperCase():'AROUSSA KLANT';
+const KC=p.get('code')?p.get('code').toUpperCase():'ARO-0000';
+const WT=KN+' \u00b7 '+KC;
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.wm').forEach(e=>{e.textContent=WT});
+  document.querySelectorAll('.kn').forEach(e=>{e.textContent=KN});
+  document.querySelectorAll('.kc').forEach(e=>{e.textContent=KC});
+  const cn=document.getElementById('cv-naam');const cc=document.getElementById('cv-code');
+  if(cn)cn.textContent=KN==='AROUSSA KLANT'?'[Naam klant]':KN;
+  if(cc)cc.textContent='Bestelcode: '+KC;
+});
+</script>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">Exclusieve Gids</div>
+  <div class="cover-title">De Ziana /<br>Bridalstylist Gids</div>
+  <div class="cover-subtitle">Alles wat je moet weten over de meest cruciale persoon op jouw feest</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cv-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cv-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">&euro;39</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- P2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Welkom</span>
+  <h1 class="page-title">Waarom deze <em>gids?</em></h1>
+  <p class="intro-text">De Ziana is de meest cruciale persoon op jouw Marokkaanse bruiloft. En ook de persoon waar bruiden het meest van teleurgesteld raken.</p>
+  <div class="divider"></div>
+  <p class="body-text">Ze is degene die jou de hele dag bijstaat, jou helpt bij elke outfit, jou opmaakt en je haar doet, de sieraden aandoet, de timing bewaakt en voor jou zorgt terwijl iedereen om je heen feest. Als dat goed gaat, is je bruiloft magisch. Als dat misgaat — en dat gaat weleens mis — zit jij midden in de mooiste dag van je leven te huilen terwijl niemand iets doorheeft.</p>
+  <p class="body-text">Dit is de gids die je beschermt. Je leert wat een Ziana precies doet, wat er in het pakket hoort, wat je van tevoren moet afspreken en hoe je de rode vlaggen herkent voordat je een aanbetaling doet.</p>
+
+  <div class="tip-box">
+    <span class="tip-label">Boek vroeg</span>
+    <p class="tip-text">De beste Ziana's in Nederland zijn 12 tot 18 maanden van tevoren volgeboekt. Begin je zoektocht minstens een jaar voor je feestdatum. Populaire datums in de zomer zijn als eerste weg.</p>
+  </div>
+
+  <div class="divider"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:4mm;">Inhoud</h3>
+  <div class="toc-item"><span class="toc-title">01 &nbsp; Wat doet een Ziana precies?</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+  <div class="toc-item"><span class="toc-title">02 &nbsp; De woordenlijst &mdash; ken de termen</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
+  <div class="toc-item"><span class="toc-title">03 &nbsp; Wat zit er in een pakket?</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">04 &nbsp; Prijzen en wat je kunt verwachten</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  <div class="toc-item"><span class="toc-title">05 &nbsp; De intakegesprek &mdash; vragen die je MOET stellen</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+  <div class="toc-item"><span class="toc-title">06 &nbsp; Rode vlaggen herkennen</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+  <div class="toc-item"><span class="toc-title">07 &nbsp; Het contract &mdash; wat erin moet staan</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-item"><span class="toc-title">08 &nbsp; Eigen jurken vs. jurken van de Ziana</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+  <div class="toc-item"><span class="toc-title">09 &nbsp; Op de dag zelf &mdash; wat je mag verwachten</span><span class="toc-dots"></span><span class="toc-page">13</span></div>
+  <div class="toc-item"><span class="toc-title">Ultieme Keuzechecklist</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P3 WAT DOET EEN ZIANA -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">01</span><span class="chapter-title">Wat doet een Ziana precies?</span></div>
+  <p class="body-text">Een Ziana is veel meer dan een kledingverhuurster. Ze combineert de rol van stylist, visagist, haarstyliste, sieradenstylist, persoonlijk begeleider en in veel gevallen ook feestcoördinator. Ze staat jou de gehele dag bij &mdash; van de eerste outfit tot de allerlaatste.</p>
+
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Kledingstyling en aankleding</strong>Ze levert de lebsa's (Marokkaanse bruidskleding) en helpt jou bij elke wisseling van outfit. Ze past de kleding aan op jouw lichaam, snoert de gorzja en zorgt dat alles perfect zit. Dit vraagt timing, geduld en vakmanschap.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Make-up en haar per outfit</strong>Bij elke outfit hoort een andere make-uplook en kapsel. De Ziana doet jouw make-up en haar opnieuw per wisseling, zodat je bij elke entree er perfect uitziet. Dit is tijdintensief en vereist ervaring.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Sieradenstyling</strong>Ze levert de bijpassende sieraden per outfit (tiaras, nekkettingen, armbanden, oorbellen) en stemt deze af op de kleur en stijl van elke lebsa. De sieraden zijn doorgaans inbegrepen in het pakket of huur.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Begeleiding en coördinatie</strong>Ze bewaakt de timing van jouw dag, communiceert met de fotograaf over entrees en stelt ervoor in dat jij op het juiste moment op de juiste plek bent. Ze is jouw persoonlijke dag-coördinator.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Emotionele steun</strong>Ze is de persoon die naast jou staat als alles overweldigend wordt. Op je trouwdag heb je iemand nodig die jou kalm houdt, die jou herinnert om te eten en te drinken en die kleine problemen oplost voordat jij ze ziet.</span></li>
+  </ul>
+
+  <div class="tip-box">
+    <span class="tip-label">Ziana vs. losse bridalstylist</span>
+    <p class="tip-text">Een Ziana levert ook de kleding. Een losse bridalstylist doet alleen haar, make-up en begeleiding &mdash; jij brengt je eigen jurken. Weet wat je boekt. Als je eigen jurken hebt, heb je een losse bridalstylist nodig en geen Ziana-pakket. Dat kan goedkoper zijn maar minder inclusief.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P4 WOORDENLIJST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">02</span><span class="chapter-title">De woordenlijst &mdash; ken de termen</span></div>
+  <p class="body-text">Als je een intake hebt met een Ziana, gooit ze termen om je heen die niet iedereen kent. Dit zijn de meest voorkomende.</p>
+
+  <div class="word-grid">
+    <div class="word-card"><div class="word-term">Lebsa / Lbesi</div><div class="word-def">De traditionele Marokkaanse bruidskleding. De meervoudsvorm is lebsaat of lbesi. Elke bruid heeft meerdere lebsa's op haar feest.</div></div>
+    <div class="word-card"><div class="word-term">Takchita / Takshita</div><div class="word-def">Tweedelig traditioneel Marokkaans kledingstuk: een onderjurk (dfina) met een rijkversierd overkleed (gorzja) erover. Iconisch op bruiloften.</div></div>
+    <div class="word-card"><div class="word-term">Gorzja / Ghorzia</div><div class="word-def">Het overkleed van de takchita. Rijkversierd met borduurwerk, lovertjes en kralen. Het sluiten van de gorzja is een ritueel op zichzelf.</div></div>
+    <div class="word-card"><div class="word-term">Dfina</div><div class="word-def">De onderjurk van de takchita. Draagt het overkleed en geeft de jurk vorm en volume.</div></div>
+    <div class="word-card"><div class="word-term">Kaftan / Caftan</div><div class="word-def">Ééndeligs traditioneel kledingstuk. Eenvoudiger dan de takchita maar minstens zo elegant. Wordt ook gedragen op verlovingen en henna-avonden.</div></div>
+    <div class="word-card"><div class="word-term">3amaria / Amaria</div><div class="word-def">De traditionele draagstoel waarop de bruid de zaal wordt binnengedragen. Hoog model voor de bruid, laag model (mida) voor de bruidegom.</div></div>
+    <div class="word-card"><div class="word-term">Gorzja-ingang</div><div class="word-def">De ceremoniële entree waarbij de bruid de zaal inkomt in haar eerste officiële outfit. Een van de meest gefotografeerde momenten van de avond.</div></div>
+    <div class="word-card"><div class="word-term">Haaropvulling / Extensions</div><div class="word-def">Kunsthaar dat de Ziana gebruikt voor bepaalde kapsels. Vereist een borg bij sommige Ziana's en moet na afloop worden ingeleverd.</div></div>
+    <div class="word-card"><div class="word-term">Sluier / Hijab-styling</div><div class="word-def">Niet alle Ziana's doen hijab-styling. Check dit expliciet bij de intake als jij een hijab draagt.</div></div>
+    <div class="word-card"><div class="word-term">Henna-avond styling</div><span class="word-def">Sommige Ziana-pakketten zijn inclusief styling voor de henna-avond en de verloving. Controleer altijd wat precies inbegrepen is.</span></div>
+    <div class="word-card"><div class="word-term">Intake</div><div class="word-def">Het eerste persoonlijke gesprek waarbij jullie de pakketten bespreken, de jurken passen en de afspraken vastleggen. Altijd vooraf doen.</div></div>
+    <div class="word-card"><div class="word-term">Borg</div><div class="word-def">Waarborgsom voor gehuurde items (lebsa's, sieraden, extensions). Wordt terugbetaald bij tijdige inlevering in goede staat.</div></div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Tip</span>
+    <p class="tip-text">Als een Ziana termen gebruikt die jij niet begrijpt, vraag altijd om uitleg. Vage omschrijvingen in een gesprek worden nog vager in een contract. Zorg dat je precies weet waar je voor betaalt.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P5 WAT ZIT IN EEN PAKKET -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">03</span><span class="chapter-title">Wat zit er in een pakket?</span></div>
+  <p class="body-text">Ziana-pakketten variëren enorm per styliste. Sommige zijn inclusief alles, andere alleen styling zonder kleding. Dit is wat er typisch in een volledig pakket zit, en wat er soms extra kost.</p>
+
+  <table class="vergelijk-table">
+    <thead><tr><th style="width:40%;">Onderdeel</th><th style="width:30%;">Doorgaans inbegrepen</th><th style="width:30%;">Soms extra kosten</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Lebsa's (aantal)</strong></td><td style="color:var(--green);">1, 2 of 3 afhankelijk van pakket</td><td>Extra lebsa: €150-500 toeslag</td></tr>
+      <tr><td><strong>Make-up per outfit</strong></td><td style="color:var(--green);">Ja, bij elke wisseling</td><td>Soms losse prijs per look</td></tr>
+      <tr><td><strong>Haarstyling per outfit</strong></td><td style="color:var(--green);">Ja, inclusief haaropvulling</td><td>Extensions aparte borg</td></tr>
+      <tr><td><strong>Bruidssieraden</strong></td><td style="color:var(--green);">Huur inbegrepen</td><td>Designer sieraden: toeslag</td></tr>
+      <tr><td><strong>Sluier</strong></td><td style="color:var(--green);">Ja, bij de meeste pakketten</td><td>Soms bij los loket</td></tr>
+      <tr><td><strong>Gorzja-ingang begeleiding</strong></td><td style="color:var(--green);">Ja</td><td></td></tr>
+      <tr><td><strong>Henna-avond styling</strong></td><td>Soms in luxepakket</td><td>Vaak apart te boeken</td></tr>
+      <tr><td><strong>Verloving styling</strong></td><td>Soms in luxepakket</td><td>Vaak apart te boeken</td></tr>
+      <tr><td><strong>Hijab-styling</strong></td><td>Niet altijd</td><td>Controleer expliciet</td></tr>
+      <tr><td><strong>Reiskosten</strong></td><td>Soms binnen regio</td><td>Buiten straal: extra kosten</td></tr>
+      <tr><td><strong>Bruidsbank / stoelen</strong></td><td>Soms in luxepakket</td><td>Vaak apart te huren</td></tr>
+      <tr><td><strong>Assistente</strong></td><td>Bij luxepakket</td><td>Soms toeslag voor extra hulp</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <span class="tip-label">Vraag altijd een itemlijst</span>
+    <p class="tip-text">Een goede Ziana geeft je een schriftelijke lijst van alles wat inbegrepen is in het pakket. Staat iets er niet op? Dan is het niet inbegrepen. "Dat doen we er gewoon bij" is geen contractafspraak.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P6 PRIJZEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">04</span><span class="chapter-title">Prijzen en wat je kunt verwachten</span></div>
+  <p class="body-text">De prijs van een Ziana hangt af van het aantal lebsa's, de naam van de styliste, de regio en wat er precies inbegrepen is. Dit zijn de realistische ranges in Nederland 2024-2025.</p>
+
+  <table class="price-table">
+    <thead><tr><th style="width:22%;">Type pakket</th><th style="width:20%;">Prijs range</th><th style="width:58%;">Wat je ervoor krijgt</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Basis</strong></td><td style="color:var(--bronze);font-weight:600;">&euro;800 tot &euro;1.500</td><td>1-2 lebsa's, make-up, haarstyling, sieraden. Kleinere of startende styliste. Geen assistente.</td></tr>
+      <tr><td><strong>Midden</strong></td><td style="color:var(--bronze);font-weight:600;">&euro;1.500 tot &euro;2.500</td><td>2-3 lebsa's, make-up per outfit, haarstyling, sieraden, begeleiding in de zaal. Ervaren styliste.</td></tr>
+      <tr><td><strong>Uitgebreid</strong></td><td style="color:var(--bronze);font-weight:600;">&euro;2.500 tot &euro;3.500</td><td>3-4 lebsa's inclusief gorzja-ceremonie, make-up + haar per outfit, designer sieraden, assistente, henna styling inbegrepen.</td></tr>
+      <tr><td><strong>Exclusief / top</strong></td><td style="color:var(--bronze);font-weight:600;">&euro;3.500 tot &euro;4.500+</td><td>Onbeperkt of 4+ lebsa's, designer kleding (Fatim Filali, Caftan By Judy e.a.), full team, verloving + henna + bruiloft alles inbegrepen.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <span class="tip-label">Wat is een normale aanbetaling?</span>
+    <p class="tip-text">Een aanbetaling van 30 tot 50% bij boeking is normaal. Sommige Ziana's vragen de helft van het pakket direct bij boeking. Dit is acceptabel mits er een contract is getekend. Nooit het volledige bedrag vooraf betalen. Nooit betalen zonder contract.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:13pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">Borg &mdash; weet waar je voor tekent</h3>
+  <p class="body-text">De meeste Ziana's vragen een borg voor de gehuurde lebsa's, sieraden en eventuele extensions. Dit is normaal. Wat je moet weten:</p>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">De borg voor 1 lebsa ligt doorgaans tussen &euro;250 en &euro;500.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Extensions of haaropvulling: extra borg van &euro;50-100, moet volgende dag teruggebracht worden.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Te laat inleveren kan leiden tot extra kosten. Leg de retourverplichting en datum schriftelijk vast.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Schade aan gehuurde kleding of sieraden kan in rekening worden gebracht. Controleer de staat bij ontvangst.</span></li>
+  </ul>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P7 INTAKEGESPREK VRAGEN DEEL 1 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">05</span><span class="chapter-title">Het intakegesprek &mdash; vragen die je MOET stellen</span></div>
+  <p class="body-text">Het intakegesprek is jouw kans om de Ziana echt te leren kennen. Niet alleen haar jurken, ook hoe ze werkt, hoe ze communiceert en hoe ze met jou omgaat. Gebruik deze vragen.</p>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 4mm;">Over haar ervaring en werk</h3>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Hoeveel bruiloften heeft u al verzorgd en kunt u mij beelden laten zien van recente feesten?</strong>Vraag om een volledig voorbeeld van een avond, niet alleen de highlights. Consistente kwaliteit over 4-5 outfits zegt meer dan één perfecte shot.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Heeft u ervaring met bruiloften van mijn omvang?</strong>Een bruiloft met 300 gasten vraagt anders timing en coördinatie dan een intieme bruiloft met 100 gasten. Vraag naar vergelijkbare feesten in haar portfolio.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Werkt u alleen of met een team? Wie staat er naast u op de dag zelf?</strong>Grotere feesten met meerdere outfits vragen een assistente. Weet wie er op de dag aanwezig zal zijn.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Kunt u ook hijab-styling verzorgen?</strong>Niet alle Ziana's doen hijab-styling vanwege persoonlijke geloofsovertuiging. Vraag dit direct en zonder omheen te draaien.</span></li>
+  </ul>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;margin-top:4mm;background:var(--beige);padding:2mm 4mm;">Over het pakket en de kleding</h3>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Hoeveel lebsa's zijn inbegrepen en kan ik ze van tevoren passen?</strong>Je mag altijd de jurken passen voor je boekt. Staat ze dit niet toe, is dat een rode vlag.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Zijn de sieraden en sluiers inbegrepen? Zijn ze huur of eigendom?</strong>Zorg dat je weet wat je bij terugkomst moet inleveren en wat je mag houden.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Zijn er kosten voor een proef make-up of proef kapsel?</strong>Een proef is altijd aan te raden. Sommige Ziana's bieden dit gratis aan, anderen vragen een kleine vergoeding. Dat is normaal. Maak er gebruik van.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Wat is de toeslag voor een designer lebsa?</strong>Designer labels zoals Fatim Filali Idrissi, Caftan By Judy en Maison Janati vragen een toeslag van &euro;150-500 per jurk. Vraag dit van tevoren.</span></li>
+  </ul>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P8 INTAKEGESPREK VRAGEN DEEL 2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">05</span><span class="chapter-title">Intakegesprek &mdash; vervolg</span></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 4mm;">Over de dag zelf en de timing</h3>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Hoe laat bent u aanwezig op de dag zelf en hoe lang duurt de voorbereiding?</strong>Een goede Ziana is vroeg aanwezig, lang voor de gasten. Afhankelijk van het aantal outfits kan de voorbereiding 2 tot 5 uur duren.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Werkt u samen met de fotograaf voor de timing van de entrees?</strong>De mooiste foto's van de gorzja-ingang zijn het resultaat van goede afstemming tussen de Ziana en de fotograaf. Vraag hoe ze dit aanpakt.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Tot hoe laat bent u aanwezig?</strong>Sommige Ziana's vertrekken na de eerste paar outfits. Anderen blijven tot het einde. Leg de eindtijd en de precieze aanwezigheid schriftelijk vast.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Wat is uw back-up als u de dag zelf niet kunt komen?</strong>Geen back-up is geen optie. Ziekte, ongeluk of persoonlijke omstandigheid zijn geen uitzondering. Leg schriftelijk vast wat er bij uitval van de Ziana zelf geregeld wordt.</span></li>
+  </ul>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;margin-top:4mm;background:var(--beige);padding:2mm 4mm;">Over betaling en contract</h3>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Wat is de aanbetaling en wanneer is de resterende betaling verschuldigd?</strong>Nooit volledige betaling vooraf. Contract tekenen voor aanbetaling doen.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Wat zijn de reiskosten en vallen die binnen uw straal?</strong>Sommige Ziana's berekenen reiskosten buiten een bepaalde straal (bijv. 100 km). Vraag dit bij de intake.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Wat zijn de annuleringsvoorwaarden?</strong>Als jij moet annuleren of de datum wijzigt, wat zijn dan de financiële consequenties? Dit moet in het contract staan.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">?</span><span class="vraag-text"><strong>Werkt u met een contract?</strong>Elke serieuze Ziana werkt met een schriftelijke overeenkomst. Geen contract, geen boeking.</span></li>
+  </ul>
+
+  <div class="tip-box">
+    <span class="tip-label">Na de intake</span>
+    <p class="tip-text">Neem altijd 24 tot 48 uur bedenktijd na een intake. Laat je niet onder druk zetten om ter plekke te betalen. Een goede Ziana begrijpt dat je nadenkt over een beslissing die deze grootte is.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P9 RODE VLAGGEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">06</span><span class="chapter-title">Rode vlaggen herkennen</span></div>
+  <p class="body-text">Dit zijn de signalen die je herkent voordat je een aanbetaling doet. Eén rode vlag is reden voor extra vragen. Meerdere tegelijk zijn reden om verder te kijken.</p>
+
+  <ul class="vraag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze vraagt het volledige bedrag vooraf</strong>Dit is de grootste rode vlag. Er is geen geldige reden om jou alles te laten betalen voordat één dienst is geleverd. Standaard is 30 tot 50% aanbetaling bij boeking.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen contract of geen bereidheid om een contract te tekenen</strong>Mondeling is niets waard. Geen contract betekent geen bewijs van wat er beloofd is. Elke serieuze Ziana werkt schriftelijk.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze laat je de jurken niet van tevoren passen</strong>Jij betaalt duizenden euro's voor kleding die jij niet van tevoren hebt gezien op jouw lichaam. Dit is niet normaal en ook niet acceptabel.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze kan geen recent werk laten zien van een volledig feest</strong>Een goede Ziana heeft beelden van hoe de bruid er de hele avond uitziet, niet alleen de beste vijf shots. Vraag om een galerie van een volledige avond.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze reageert traag of vaag voor boeking</strong>Hoe ze nu communiceert is hoe ze communiceert op de dag zelf. Als je al voor boeking op berichten moet wachten, is dat een signaal.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze heeft geen back-up bij ziekte of noodgeval</strong>Op de dag zelf kan ze niet presteren of ontbreekt ze volledig. Zonder back-up draagt jij het risico.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze snauwd jou of familieleden af tijdens het feest</strong>Er zijn helaas gedocumenteerde gevallen van Ziana's die een bruid afsnauwen terwijl de bruid al van streek was. Jij bent de opdrachtgever. Ze werkt voor jou. Respectloze communicatie op de dag zelf is onaacceptabel.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>De prijs verandert na de intake of er verschijnen verborgen kosten</strong>Als de offerte na het gesprek opeens hoger is dan besproken zonder duidelijke reden, is dat geen vergissing.</span></li>
+  </ul>
+
+  <div class="tip-box">
+    <span class="tip-label">Vertrouw ook op je gevoel</span>
+    <p class="tip-text">Als je na een intake met een Ziana een gespannen of onprettig gevoel hebt, ook al zag het werk er goed uit, is dat informatie. Jij staat de hele dag naast haar. Jullie moeten als een team kunnen werken.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P10 RODE VLAGGEN 2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">06</span><span class="chapter-title">Rode vlaggen &mdash; vervolg</span></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 4mm;">Rode vlaggen bij reviews en reputatie</h3>
+  <ul class="vraag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Alleen generieke positieve reviews zonder inhoud</strong>"Ze was fantastisch" zegt niets. Echte ervaringen beschrijven specifieke momenten: de timing, de kwaliteit per outfit, hoe ze met stress omging. Zoek naar dat soort reviews.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Reviews van profielen die alleen reviews plaatsen</strong>Accounts zonder eigen content die uitsluitend reviews achterlaten zijn een signaal. Kijk naar het profiel achter de review.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Inconsistente kwaliteit in het portfolio</strong>Bij sommige feesten ziet de make-up er goed uit, bij anderen niet. Kwaliteitswisselingen zijn een teken van inconsistentie, niet van groei.</span></li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 4mm;">Rode vlaggen op de dag zelf</h3>
+  <ul class="vraag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze is te laat op de dag zelf</strong>De voorbereiding begint vroeg. Als de Ziana later aankomt dan afgesproken, wordt alles gehaast en verliest de bruid haar ontspannen voorbereiding.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze stuurt een vervanging die de bruid nooit eerder heeft ontmoet</strong>Je hebt gebookt voor haar, niet voor haar collega die de bruid nooit heeft gezien. Leg schriftelijk vast dat jij bij wijzigingen vooraf akkoord moet geven.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze negeert de tijdsplanning</strong>Outfits te laat, entrees te laat, catering wacht op de bruid die nog aan het omkleden is. Dit kost de bruid kostbare momenten met haar gasten.</span></li>
+  </ul>
+
+  <div class="tip-box">
+    <span class="tip-label">Wat je kunt doen als het misgaat</span>
+    <p class="tip-text">Als de Ziana op de dag zelf niet levert wat er afgesproken is, noteer alles schriftelijk. Stuur dezelfde avond een WhatsApp met een beschrijving van wat er fout ging. Verwijs naar het contract. Als er sprake is van wanprestatie heb je recht op schadevergoeding of gedeeltelijke terugbetaling. Gebruik de WhatsApp Scripts Bundel van Aroussa voor de juiste bewoording.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P11 HET CONTRACT -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">07</span><span class="chapter-title">Het contract &mdash; wat erin moet staan</span></div>
+  <p class="body-text">Een contract beschermt jou én de Ziana. Alles wat niet in het contract staat, is niet afgesproken. Gebruik dit als checklist voordat je tekent.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Basisgegevens</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Naam en contactgegevens Ziana</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Naam bruid en eventueel bruidegom</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Datum en locatie van het feest</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aankomsttijd Ziana op locatie</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Eindtijd van aanwezigheid</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Kleding en sieraden</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Naam of omschrijving van elke lebsa</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aantal outfits inclusief henna en gorzja</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Welke sieraden zijn inbegrepen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Sluier inbegrepen ja / nee</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Borsbedragen voor huuritems</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Retourdatum voor gehuurde items</span></div>
+    </div>
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Styling en diensten</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Make-up per outfit inbegrepen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Haarstyling per outfit inbegrepen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Hijab-styling indien van toepassing</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Assistente aanwezig ja / nee</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Henna-avond inbegrepen ja / nee</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Betaling en annulering</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Totaalprijs inclusief BTW</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aanbetalingsbedrag en datum</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Restbetaling datum</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Annuleringsregeling beide kanten</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Back-up regeling bij uitval Ziana</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Reiskosten inbegrepen of apart</span></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">De volgorde is altijd</span>
+    <p class="tip-text">Intake. Jurken passen. Proef make-up en haar (optioneel). Contract tekenen. Dan pas aanbetaling. Nooit andersom. Als de Ziana vraagt om eerst te betalen voordat er iets op papier staat, is dat een signaal.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P12 EIGEN JURKEN VS ZIANA JURKEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">08</span><span class="chapter-title">Eigen jurken vs. jurken van de Ziana</span></div>
+  <p class="body-text">Een van de meest besproken keuzes bij het boeken van een Ziana: neem je haar jurken of breng je je eigen lebsa's mee? Beide opties hebben voor- en nadelen die afhangen van jouw situatie.</p>
+
+  <table class="vergelijk-table">
+    <thead><tr><th style="width:35%;">Criterium</th><th style="width:32.5%;">Jurken van de Ziana</th><th style="width:32.5%;">Eigen jurken</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Kosten</strong></td><td>Inbegrepen in pakket of huurprijs</td><td>Aparte aankoop of huur: €150-2.000+ p.st.</td></tr>
+      <tr><td><strong>Keuzevrijheid</strong></td><td>Afhankelijk van haar collectie</td><td>Volledig naar eigen wens en smaak</td></tr>
+      <tr><td><strong>Aanpassingen</strong></td><td>Beperkt, de jurk is van haar</td><td>Kan volledig aanpassen worden</td></tr>
+      <tr><td><strong>Kwaliteitsrisico</strong></td><td>Je ziet de jurk pas bij passessie</td><td>Je koopt zelf en weet exact wat je krijgt</td></tr>
+      <tr><td><strong>Designer opties</strong></td><td>Topziana's werken met Fatim Filali e.a.</td><td>Zelf te bestellen of te kopen in Marokko</td></tr>
+      <tr><td><strong>Gemak op de dag</strong></td><td>Alles bij één persoon geregeld</td><td>Zelf meenemen, inpakken, coördineren</td></tr>
+      <tr><td><strong>Losse bridalstylist</strong></td><td>Niet van toepassing</td><td>Dan alleen make-up en haar nodig</td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <span class="tip-label">Jurk van Marokko of Dubai</span>
+    <p class="tip-text">Veel bruiden laten jurken maken in Marokko of kopen ze in Dubai. Dat kan een besparing opleveren van 40 tot 70% per jurk. Houd wel rekening met leveringstijd (minstens 3 maanden), de kans op afwijkingen van het ontwerp en het feit dat aanpassingen na levering nog nodig kunnen zijn. Als je eigen jurken neemt, heb je geen volledig Ziana-pakket nodig maar alleen een losse bridalstylist.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">Proef make-up &mdash; altijd doen</h3>
+  <p class="body-text">Een proef make-up en kapsel is geen verplichting maar een investering. Je ziet of de stijl van de Ziana bij jouw gezicht past en of de kwaliteit overeenkomt met het portfolio. Plan dit minimaal 6 tot 8 weken voor het feest.</p>
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Neem referentiebeelden mee van looks die jij mooi vindt. Hoe concreter jij bent, hoe beter ze jou kan bedienen.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Sommige Ziana's vragen een kleine vergoeding voor een proef. Dat is normaal &mdash; het kost tijd.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text">Als je na de proef niet tevreden bent, zeg dat direct. Een goede Ziana staat open voor feedback en past aan.</span></li>
+  </ul>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P13 OP DE DAG ZELF -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <div class="chapter-header"><span class="chapter-num">09</span><span class="chapter-title">Op de dag zelf &mdash; wat je mag verwachten</span></div>
+  <p class="body-text">Weet wat normaal is en wat niet. Dit zijn de verwachtingen die jij mag stellen aan een professionele Ziana op jouw feestdag.</p>
+
+  <ul class="vraag-list">
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze is op tijd aanwezig, zoals afgesproken</strong>De voorbereiding begint vroeg. Leg de aankomsttijd vast in het contract. Als ze te laat is, bel dan direct &mdash; niet wachten.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze zorgt dat jij eet en drinkt voor de zaal in gaat</strong>De bruid vergeet zichzelf. Een goede Ziana zorgt dat er voor en tijdens de outfitswisselingen iets te eten en drinken is.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze communiceert met de fotograaf over entrees</strong>De gorzja-ingang, de taartceremonie en de 3amaria-rit zijn de meest gefotografeerde momenten. Ze stemt dit af met de fotograaf zodat jij er op je best uitziet.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze is rustig en professioneel, ook als het druk wordt</strong>Er zijn altijd momenten waarop het drukker of vertrager gaat dan gepland. Een ervaren Ziana blijft kalm en lost het op zonder dat jij dit merkt.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze behandelt jou en je familie met respect</strong>Ze is ingehuurd om jou te bedienen, niet andersom. Respectloze communicatie is niet normaal en niet acceptabel, ongeacht hoe druk het is.</span></li>
+    <li class="vraag-item"><span class="vraag-icon">✦</span><span class="vraag-text"><strong>Ze zorgt voor nette overdracht van gehuurde items</strong>Aan het einde van de avond vertelt ze jou wat er teruggebracht moet worden, hoe en wanneer. Ze geeft een overzicht van alles wat je hebt gehuurd.</span></li>
+  </ul>
+
+  <div class="two-col" style="margin-top:4mm;">
+    <div class="tip-box">
+      <span class="tip-label">Geef referentiebeelden mee</span>
+      <p class="tip-text">Maak voor het feest een map met referentiebeelden per outfit. Zo weet de Ziana exact wat jij wil bij elke look. Deel dit ook met de fotograaf zodat de gewenste sfeer per outfit duidelijk is.</p>
+    </div>
+    <div class="tip-box">
+      <span class="tip-label">Noodkit voor de dag</span>
+      <p class="tip-text">Vraag de Ziana of zij een kleine noodkit meebrengt: naald en draad, veiligheidsspelden, extra make-up voor bijwerken, haarspelden. De meeste professionele stylistes doen dit standaard.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P14 ULTIEME KEUZECHECKLIST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Jouw tool</span>
+  <h1 class="page-title">De Ultieme <em>Keuzechecklist</em></h1>
+  <p style="font-size:9pt;color:var(--warm);margin-bottom:4mm;">Gebruik dit als leidraad bij elk intakegesprek. Vink aan wat je hebt gecontroleerd en bevestigd.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:11pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Werk en ervaring</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Portfolio van een volledige avond gezien</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Kwaliteit consistent over meerdere feesten</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Ervaring met vergelijkbare feestgrootte</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Reviews gelezen en betrouwbaar bevonden</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:11pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Pakket en jurken</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Jurken gepast of ingepland om te passen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aantal lebsa's en outfits duidelijk</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Sieraden en sluiers inbegrepen bevestigd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Hijab-styling besproken indien van toepassing</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Eventuele designer toeslagen gevraagd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Borg- en retourbedingen duidelijk</span></div>
+    </div>
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:11pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Dag van en timing</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aankomsttijd vastgelegd in contract</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Eindtijd aanwezigheid bevestigd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Back-up bij ziekte geregeld</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Team / assistente bekend</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Proef make-up en haar ingepland</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:11pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Contract en betaling</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Schriftelijk contract aanwezig</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Itemlijst van inbegrepen diensten</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aanbetaling na contract tekenen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Geen volledig bedrag vooraf gevraagd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Annuleringsregeling beide kanten</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Reiskosten afgesproken</span></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">Aroussa helpt</span>
+    <p class="tip-text">Twijfel je na het lezen van deze gids over jouw keuze of wil je sparren over een specifieke situatie? Aroussa biedt persoonlijke begeleiding via een Quick Scan van 30 minuten. Je legt jouw situatie voor en krijgt direct advies.</p>
+    <p class="tip-text" style="margin-top:2mm;">aroussaplanner.com &middot; aroussaplanner@gmail.com</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Ziana / Bridalstylist Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools en transparantie op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Rode Vlaggen Gids &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">WhatsApp Scripts Bundel &middot; &euro;29</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+</body>
+</html>

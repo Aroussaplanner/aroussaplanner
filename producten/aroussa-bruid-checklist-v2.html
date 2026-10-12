@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>De Bruid Checklist · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E;--green:#27AE60;--red:#C0392B}
+body{background:#d0c8be;font-family:'Montserrat',sans-serif;font-weight:300;color:var(--dark);font-size:10pt}
+.page{width:210mm;min-height:297mm;background:var(--ivory);margin:12mm auto;padding:21mm 15mm 18mm;position:relative;page-break-after:always;break-after:page;overflow:hidden}
+@media print{body{background:none}.page{margin:0;padding:19mm 13mm 16mm;box-shadow:none}.no-print{display:none}}
+.wm{position:absolute;left:50%;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:3px;white-space:nowrap;pointer-events:none;z-index:0;color:rgba(196,168,130,0.08)}
+.wm-mid{top:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:22pt}
+.wm-top{top:20%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.wm-bot{top:78%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.klant-balk{position:absolute;top:0;left:0;right:0;background:var(--darker);padding:1.8mm 5mm;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.klant-balk span{font-size:5.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,168,130,0.4)}
+.klant-balk .kcode{color:rgba(196,168,130,0.65)!important}
+.page>*:not(.wm):not(.klant-balk){position:relative;z-index:1}
+.page-footer{position:absolute;bottom:8mm;left:15mm;right:15mm;display:flex;justify-content:space-between;align-items:center;font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);border-top:0.5pt solid var(--gold);padding-top:3mm}
+.footer-code{color:rgba(196,168,130,0.5)!important;font-size:6pt}
+
+/* COVER */
+.cover{background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:297mm;padding:20mm}
+.cover .wm,.cover .klant-balk{display:none}
+.cover-brand{font-family:'Italiana',serif;font-size:28pt;color:var(--gold);letter-spacing:3px;margin-bottom:3mm}
+.cover-tagline{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:20mm}
+.cover-ornament{width:40mm;height:0.5pt;background:var(--gold);margin:0 auto 20mm;opacity:0.5}
+.cover-label{font-size:8pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6mm}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:40pt;font-weight:300;color:var(--ivory);line-height:1.05;margin-bottom:6mm}
+.cover-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14pt;color:rgba(247,242,234,0.6);line-height:1.4;max-width:120mm;margin:0 auto 16mm}
+.cover-klant{background:rgba(196,168,130,0.08);border:0.5pt solid rgba(196,168,130,0.3);padding:4mm 10mm;margin-bottom:12mm}
+.cover-klant-label{font-size:7pt;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:2mm}
+.cover-klant-naam{font-family:'Cormorant Garamond',serif;font-size:16pt;color:var(--gold);font-weight:300}
+.cover-klant-code{font-size:8pt;color:var(--bronze);margin-top:2mm;font-weight:600;letter-spacing:2px}
+.cover-price{display:inline-block;border:0.5pt solid rgba(196,168,130,0.4);padding:3mm 8mm;font-size:9pt;color:var(--gold);font-weight:600;letter-spacing:2px;margin-bottom:8mm}
+.cover-bottom{font-size:7pt;color:var(--warm);letter-spacing:2px;text-transform:uppercase}
+
+/* TYPOGRAFIE */
+.page-label{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:3mm;display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:24pt;font-weight:400;color:var(--dark);line-height:1.1;margin-bottom:4mm}
+.page-title em{font-style:italic;color:var(--bronze)}
+.body-text{font-size:9pt;line-height:1.75;color:var(--dark);margin-bottom:3mm}
+.divider{height:0.5pt;background:var(--gold);opacity:0.3;margin:3mm 0}
+.tip-box{background:var(--sand);border-left:2pt solid var(--gold);padding:3mm 4mm;margin:3mm 0}
+.tip-label{font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;display:block}
+.tip-text{font-size:8.5pt;line-height:1.6;color:var(--dark)}
+.info-box{background:var(--beige);padding:3mm 4mm;margin:3mm 0;border-left:2pt solid var(--bronze)}
+.info-text{font-size:8.5pt;line-height:1.6;color:var(--dark)}
+
+/* FASE HEADER */
+.fase-donker{background:var(--dark);padding:3.5mm 5mm;display:flex;align-items:baseline;gap:4mm;margin-bottom:0}
+.fase-goud{background:var(--gold);padding:3.5mm 5mm;display:flex;align-items:baseline;gap:4mm;margin-bottom:0}
+.f-num{font-family:'Cormorant Garamond',serif;font-size:24pt;font-weight:300;line-height:1;flex-shrink:0;opacity:0.4}
+.f-num-d{color:var(--gold)}
+.f-num-g{color:var(--dark)}
+.f-title{font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;line-height:1.2}
+.f-title-d{color:var(--ivory)}
+.f-title-g{color:var(--dark)}
+.f-sub{font-size:7.5pt;margin-left:auto;flex-shrink:0}
+.f-sub-d{color:var(--warm)}
+.f-sub-g{color:rgba(45,37,32,0.55)}
+
+/* CHECKLIST */
+.cl{background:var(--ivory)}
+.cr{display:flex;gap:2.5mm;align-items:flex-start;padding:2mm 4mm;border-bottom:0.5pt solid rgba(196,168,130,0.12)}
+.cr:nth-child(even){background:var(--sand)}
+.cr.trad{border-left:2pt solid var(--gold)}
+.cb{width:4mm;height:4mm;border:0.75pt solid var(--gold);flex-shrink:0;margin-top:0.8mm}
+.ct{font-size:8.5pt;line-height:1.45;color:var(--dark);flex:1}
+.cn{font-size:7pt;color:var(--warm);font-style:italic;margin-top:0.5mm;display:block}
+.tag{display:inline-block;font-size:6pt;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:0.5mm 2mm;margin-right:2mm;vertical-align:middle}
+.tag-t{background:rgba(196,168,130,0.2);color:var(--bronze)}
+.tag-u{background:rgba(192,57,43,0.1);color:var(--red)}
+.tag-i{background:rgba(45,37,32,0.08);color:var(--dark)}
+
+/* OUTFIT KAART */
+.ok{background:var(--dark);padding:3mm 4mm;margin-bottom:2.5mm}
+.ok-nr{font-family:'Cormorant Garamond',serif;font-size:20pt;font-weight:300;color:rgba(196,168,130,0.4);float:right;line-height:1}
+.ok-label{font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm;display:block}
+.ok-grid{display:grid;grid-template-columns:1fr 1fr;gap:2mm;margin-top:2mm}
+.ok-v{font-size:7pt;color:var(--warm);margin-bottom:0.5mm}
+.ok-i{display:block;border-bottom:0.5pt solid rgba(196,168,130,0.35);height:3.5mm}
+.ok-checks{display:flex;gap:4mm;margin-top:2.5mm;flex-wrap:wrap}
+.ok-c{display:flex;gap:1.5mm;align-items:center;font-size:7pt;color:rgba(247,242,234,0.55)}
+.ok-cb{width:3.5mm;height:3.5mm;border:0.5pt solid rgba(196,168,130,0.45);flex-shrink:0}
+
+/* BEAUTY TABEL */
+.bt{width:100%;border-collapse:collapse;font-size:8pt;margin-bottom:3mm}
+.bt th{background:var(--beige);padding:2mm 2.5mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold)}
+.bt td{padding:2mm 2.5mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);vertical-align:middle}
+.bt tr:nth-child(even) td{background:var(--sand)}
+.inf{display:inline-block;border-bottom:0.75pt solid var(--gold);min-width:26mm;height:3.5mm;vertical-align:bottom}
+
+/* DAG-VAN TAS */
+.tas-kol{display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;margin-bottom:3mm}
+.tash{background:var(--dark);padding:2.5mm 3.5mm}
+.tash-l{font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:1.5mm;display:block}
+.tasb{background:var(--ivory);padding:0}
+.tas-r{display:flex;gap:2mm;align-items:flex-start;padding:1.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.1);font-size:7.5pt;color:var(--dark)}
+.tas-r:nth-child(even){background:var(--sand)}
+.tas-c{width:3.5mm;height:3.5mm;border:0.5pt solid var(--gold);flex-shrink:0;margin-top:0.5mm}
+
+/* NIKAH BLOK */
+.nikah-blok{background:var(--dark);padding:4mm 5mm;margin-bottom:3mm}
+.nikah-titel{font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--gold);margin-bottom:3mm}
+.nikah-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+.ng-veld{font-size:7pt;color:var(--warm);margin-bottom:1mm}
+.ng-inv{display:block;border-bottom:0.5pt solid rgba(196,168,130,0.4);height:4mm}
+
+/* TIJDLIJN BLOK */
+.tl-rij{display:grid;grid-template-columns:18mm 8mm 1fr;align-items:stretch;margin-bottom:0}
+.tl-tijd{font-size:7.5pt;font-weight:600;color:var(--bronze);padding:2.5mm 2mm 2.5mm 0;text-align:right;border-bottom:0.5pt solid rgba(196,168,130,0.12);line-height:1.3}
+.tl-dot-kol{display:flex;flex-direction:column;align-items:center;padding:0 2mm}
+.tl-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);margin-top:4mm;flex-shrink:0}
+.tl-dot-m{width:9px;height:9px;background:var(--dark);border:1.5pt solid var(--gold)}
+.tl-lijn{flex:1;width:1px;background:rgba(196,168,130,0.2);margin:0 auto}
+.tl-inhoud{padding:2mm 0 3mm 2mm;border-bottom:0.5pt solid rgba(196,168,130,0.1)}
+.tl-event{font-size:8.5pt;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:1mm}
+.tl-detail{font-size:7.5pt;color:var(--warm);line-height:1.5}
+
+/* TOC */
+.toc-i{display:flex;justify-content:space-between;align-items:baseline;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.toc-t{font-size:10pt;color:var(--dark)}
+.toc-d{flex:1;border-bottom:0.5pt dotted rgba(196,168,130,0.4);margin:0 3mm 1mm}
+.toc-p{font-size:9pt;color:var(--warm);flex-shrink:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3mm}
+
+.print-btn{position:fixed;top:15px;right:15px;background:#2D2520;color:#F7F2EA;border:none;padding:10px 24px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;z-index:999}
+.print-btn:hover{background:#C4A882;color:#2D2520}
+</style>
+<script>
+const p=new URLSearchParams(window.location.search);
+const KN=p.get('naam')?decodeURIComponent(p.get('naam')).toUpperCase():'AROUSSA KLANT';
+const KC=p.get('code')?p.get('code').toUpperCase():'ARO-0000';
+const WT=KN+' \u00b7 '+KC;
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.wm').forEach(e=>{e.textContent=WT});
+  document.querySelectorAll('.kn').forEach(e=>{e.textContent=KN});
+  document.querySelectorAll('.kc').forEach(e=>{e.textContent=KC});
+  const cn=document.getElementById('cv-naam');const cc=document.getElementById('cv-code');
+  if(cn)cn.textContent=KN==='AROUSSA KLANT'?'[Naam klant]':KN;
+  if(cc)cc.textContent='Bestelcode: '+KC;
+});
+</script>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">De Ultieme Voorbereiding</div>
+  <div class="cover-title">De Bruid<br>Checklist</div>
+  <div class="cover-subtitle">Van 12 maanden voor het feest tot de allerlaatste minuut &mdash; niets vergeten</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cv-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cv-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">&euro;25</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- P2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Jouw gids</span>
+  <h1 class="page-title">Jouw complete <em>bruid checklist</em></h1>
+  <p class="body-text">Een Marokkaanse bruiloft is geen gewone bruiloft. Je bereidt je voor op meerdere outfits, traditionele rituelen, de Kitbah, een hammam, een henna-avond, de gorzja en een hele avond vol bijzondere momenten. Er is veel te regelen en nog meer te onthouden.</p>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-bottom:3mm;">
+    <div class="tip-box"><span class="tip-label">Goudkleurig randje</span><p class="tip-text">Items met een goudkleurig randje links zijn traditionele Marokkaanse rituelen of gebruiken. Ze zijn niet verplicht maar diepgeworteld in de cultuur. Bespreek met je familie welke tradities voor jullie gelden.</p></div>
+    <div class="tip-box"><span class="tip-label">Hoe gebruik je dit</span><p class="tip-text">Werk fase voor fase. Vink af zodra iets geregeld is. Schrijf namen en data in de invulvelden. Kopieer de relevante pagina's voor de Ziana en je dag-coördinator.</p></div>
+  </div>
+  <div class="divider"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:13pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">Inhoud</h3>
+  <div class="toc-i"><span class="toc-t">Fase 1 &nbsp; 12 maanden en eerder</span><span class="toc-d"></span><span class="toc-p">3</span></div>
+  <div class="toc-i"><span class="toc-t">Fase 2 &nbsp; 6 maanden en 4 maanden</span><span class="toc-d"></span><span class="toc-p">4</span></div>
+  <div class="toc-i"><span class="toc-t">Fase 3 &nbsp; 2 maanden en 1 maand</span><span class="toc-d"></span><span class="toc-p">5</span></div>
+  <div class="toc-i"><span class="toc-t">Fase 4 &nbsp; Week voor het feest</span><span class="toc-d"></span><span class="toc-p">6</span></div>
+  <div class="toc-i"><span class="toc-t">Nikah / Kitbah planning</span><span class="toc-d"></span><span class="toc-p">7</span></div>
+  <div class="toc-i"><span class="toc-t">Hammam dag &mdash; ritueel &amp; checklist</span><span class="toc-d"></span><span class="toc-p">8</span></div>
+  <div class="toc-i"><span class="toc-t">Henna-avond &mdash; Laylat al-Henna</span><span class="toc-d"></span><span class="toc-p">9</span></div>
+  <div class="toc-i"><span class="toc-t">Dag van het feest</span><span class="toc-d"></span><span class="toc-p">10</span></div>
+  <div class="toc-i"><span class="toc-t">Outfit checklist per lebsa</span><span class="toc-d"></span><span class="toc-p">11</span></div>
+  <div class="toc-i"><span class="toc-t">Beauty en verzorging rooster</span><span class="toc-d"></span><span class="toc-p">12</span></div>
+  <div class="toc-i"><span class="toc-t">Dag-van tas &mdash; drie kolommen</span><span class="toc-d"></span><span class="toc-p">13</span></div>
+  <div class="toc-i"><span class="toc-t">Praktische tijdlijn &mdash; feestdag</span><span class="toc-d"></span><span class="toc-p">14</span></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P3 FASE 1 + 2 VROEG -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="fase-donker"><span class="f-num f-num-d">01</span><span class="f-title f-title-d">12 maanden voor het feest</span><span class="f-sub f-sub-d">De basis leggen</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Budget bepaald en budgetverdeling gemaakt<span class="cn">Gebruik de Aroussa Budget Calculator. Realistisch: gemiddeld feest 200 gasten = €22.000 tot €32.000.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Gastenlijst globaal opgesteld &mdash; aantal gasten bepaalt alles</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Feestzalen bezocht, vergeleken en geboekt (contract getekend)<span class="cn">Populaire zalen zijn 12 maanden van tevoren volgeboekt. Wacht niet.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Datum definitief vastgesteld en gecommuniceerd aan beide families</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Ziana / bridalstylist intakes gepland<span class="cn">De beste Ziana's zijn 12 tot 18 maanden volgeboekt. Begin vroeg met oriënteren.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Ziana geboekt (contract tekenen, daarna aanbetaling)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Fotograaf en videograaf georiënteerd en geboekt</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Nikah / Kitbah datum en locatie besproken met beide families<span class="cn">Zie pagina 7 voor de volledige Nikah planning checklist.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Burgerlijk huwelijk (gemeente) gepland &mdash; dit doet de meeste stellen 6 maanden voor het feest<span class="cn">Vereist voor Nikah én voor de officiële erkenning in Nederland.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Mahr (bruidsschat) besproken en vastgelegd<span class="cn">De mahr is een verplicht islamitisch onderdeel van de Nikah. Geld, goud of sieraden. Exclusief eigendom van de bruid.</span></div></div>
+  </div>
+
+  <div style="height:2.5mm;"></div>
+  <div class="fase-goud"><span class="f-num f-num-g">02</span><span class="f-title f-title-g">9 maanden voor het feest</span><span class="f-sub f-sub-g">Grote leveranciers boeken</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Cateraar vergeleken, proeverij gehad, geboekt (halal-garantie schriftelijk)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">DJ of Dakka Marrakchia groep georiënteerd en geboekt</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Decorateur geboekt en moodboard gedeeld</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Save-the-date verstuurd naar gasten</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Shebka / gouden sieraden van de schoonfamilie besproken<span class="cn">De shebka zijn sieraden die de schoonfamilie schenkt aan de bruid. Traditioneel goud of juwelen. Soms gedragen tijdens het feest.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Jheez (trousseau / bruidsuitzet) beginnen samen te stellen<span class="cn">De jheez zijn de huishoudelijke artikelen, kleding en cadeaus die de bruid meeneemt naar haar nieuwe huis. Wordt soms ook tentoongesteld aan gasten.</span></div></div>
+  </div>
+  <div class="tip-box" style="margin-top:2.5mm;"><span class="tip-label">Altijd</span><p class="tip-text">Elk contract: eerst lezen met de Contract Checklist van Aroussa, dan tekenen, dan pas aanbetaling. Nooit andersom.</p></div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P4 FASE 3 + 4 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="fase-donker"><span class="f-num f-num-d">03</span><span class="f-title f-title-d">6 maanden voor het feest</span><span class="f-sub f-sub-d">Styling en kledij</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Lebsa's passen bij de Ziana &mdash; keuze gemaakt<span class="cn">Minimaal 6 maanden vooraf zodat aanpassingen nog mogelijk zijn. Neem referentiebeelden mee.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Witte bruidsjurk besteld / gereserveerd<span class="cn">Let op leveringstijd bij bestellingen uit Marokko, Dubai of Turkije: minimaal 3 tot 4 maanden plus eventuele aanpassingen.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Moodboard per outfit samengesteld (kleur, haar, make-up, sieraden, entreemuziekselectie)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">3amaria / draagstoel gereserveerd en bevestigd</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Trouwauto geboekt (datum, tijd, locatie, chauffeur)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Uitnodigingen ontworpen, besteld en verstuurd</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Henna-artiest geboekt voor henna-avond<span class="cn">Controleer haar portfolio, stijl (traditioneel of modern) en vraag om een allergie-proefafspraak 2 weken voor de henna-avond.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Kohl gekocht voor traditionele oogopmaak<span class="cn">Traditionele Marokkaanse bruid draagt kohl (khol), een donkere oogversiering. Koop echte kohl bij een Marokkaanse winkel, niet een gewone oogpotlood.</span></div></div>
+  </div>
+
+  <div style="height:2.5mm;"></div>
+  <div class="fase-goud"><span class="f-num f-num-g">04</span><span class="f-title f-title-g">4 maanden voor het feest</span><span class="f-sub f-sub-g">Details vastleggen</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Sieraden per outfit gekozen en aangeschaft of gereserveerd<span class="cn">Bewaar sieraden per outfit in aparte gelabelde zakjes. Merknummer op het zakje: zakje 1, 2, 3, 4.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Schoenen per outfit gekocht en thuis ingelopen</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Menu definitief besproken met cateraar<span class="cn">Bastilla, soep, tagine, couscous, pastilla, chebakia, baklava &mdash; bespreek elk gerecht en de volgorde van serveren.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Definitief gastaantal doorgegeven aan zaal en cateraar</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Alle contracten opnieuw nagelezen met de Contract Checklist</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Nazar / blauwe oog amulet geregeld voor bescherming<span class="cn">Nazar staat voor bescherming tegen het boze oog. Een traditioneel amulet dat veel bruiden dragen of meenemen op de feestdag.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Zoetigheden voor gasten geregeld (chebakia, baklava, briwat, amandeltaartjes)</div></div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P5 FASE 5 + 6 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="fase-donker"><span class="f-num f-num-d">05</span><span class="f-title f-title-d">2 maanden voor het feest</span><span class="f-sub f-sub-d">Proeven en testen</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Proef make-up gedaan &mdash; minimaal 6 tot 8 weken voor het feest<span class="cn">Neem referentiebeelden mee per outfit. Geef direct feedback. Een goede Ziana past aan.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Proef haar gedaan &mdash; inclusief hijab-styling indien van toepassing</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Feedback na proef gegeven en eventuele aanpassingen bevestigd</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span><span class="tag tag-u">Verplicht</span>Allergie-proef henna gedaan &mdash; minimaal 2 tot 3 weken voor de henna-avond<span class="cn">Klein beetje henna op de binnenpols, 24 uur laten zitten. Roodheid of jeuk? Dan niet verder gaan met deze henna.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag-van Draaiboek opgesteld en verstuurd aan alle leveranciers</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag-coördinator aangewezen en volledig gebrieft</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Tweede aanbetalingen gedaan aan leveranciers die dit vereisen</div></div>
+  </div>
+
+  <div style="height:2.5mm;"></div>
+  <div class="fase-goud"><span class="f-num f-num-g">06</span><span class="f-title f-title-g">1 maand voor het feest</span><span class="f-sub f-sub-g">Afronden</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Alle leveranciers bevestigd via WhatsApp (datum, tijd, locatie)<span class="cn">Gebruik Script 24 uit de WhatsApp Scripts Bundel voor de juiste bevestigingsberichten.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Alle lebsa's opgehaald voor finale pasbeurt en gestoomd</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Sieraden per outfit in gelabelde zakjes gelegd</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Slotbetalingen gepland in agenda</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Trouwauto bevestigd (chauffeur, tijd, route)</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Hammam dag gepland met familie en vriendinnen</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Henna-avond praktisch geregeld: locatie, catering, muziek, artiest, gasten</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Rozenwater limonade en atay (Marokkaanse muntthee) geregeld voor gasten<span class="cn">Atay na3na3 is onmisbaar bij elke Marokkaanse bruiloft. Bespreek met de cateraar wanneer dit geserveerd wordt.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Verse melk en dadels geregeld voor de ceremonie</div></div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P6 WEEK VOOR + DAG VOOR -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="fase-donker"><span class="f-num f-num-d">07</span><span class="f-title f-title-d">Week voor het feest</span><span class="f-sub f-sub-d">Laatste details</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct"><span class="tag tag-u">Urgent</span>Alle leveranciers nogmaals bevestigd</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Nagels gepland &mdash; minimaal 48 uur voor het feest</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Ontharing gepland &mdash; minimaal 48 uur voor het feest</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Wenkbrauwen gepland &mdash; 3 tot 5 dagen van tevoren, nooit dag zelf</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Wimpers aangebracht of gepland (als niet via Ziana)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag-van tas gepakt (zie pagina 13)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">WhatsApp-groep dag-van aangemaakt met alle leveranciers</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Slotbetalingen overgemaakt aan alle leveranciers</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Cadeautafel of enveloppendoos geregeld</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Hammam gedaan &mdash; ghassoul klei, beldi zeep, argan olie</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Henna-avond gehad &mdash; henna 's nachts laten zitten voor beste kleur</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Paspoort of ID-bewijs gecontroleerd op geldigheid<span class="cn">Zeker als jullie na de bruiloft op huwelijksreis gaan. Pas aanvragen duurt minimaal 5 weken.</span></div></div>
+  </div>
+
+  <div style="height:2.5mm;"></div>
+  <div class="fase-goud"><span class="f-num f-num-g">08</span><span class="f-title f-title-g">Dag voor het feest</span><span class="f-sub f-sub-g">Rust nemen</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct">Vroeg naar bed &mdash; alles is geregeld</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Goed gegeten, veel water gedronken</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Telefoon volledig opgeladen en powerbank klaargelegd</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Outfit voor morgen definitief klaargelegd op volgorde</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Henna-handen niet nat maken &mdash; kleur wordt zo dieper</div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:3mm;">
+    <span class="tip-label">De avond voor het feest</span>
+    <p class="tip-text">Alles is geregeld. Leg je telefoon weg. Eet goed. Omring je met je naaste familie. De dag van morgen begint met rust, niet met stress.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P7 NIKAH / KITBAH -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Islamitisch huwelijk</span>
+  <h1 class="page-title">Nikah <em>Kitbah planning</em></h1>
+  <p class="body-text">De Nikah (ook wel Kitbah of Kitab) is de islamitische bezegeling van het huwelijk. In aanwezigheid van een imam of adoul, getuigen en beide families worden de huwelijksafspraken vastgelegd, inclusief de mahr. In Nederland regelen de meeste koppels daarnaast ook het burgerlijk huwelijk bij de gemeente.</p>
+
+  <div class="nikah-blok">
+    <div class="nikah-titel">Nikah gegevens</div>
+    <div class="nikah-grid">
+      <div><div class="ng-veld">Datum Nikah</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Locatie Nikah (thuis / moskee / feestzaal)</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Naam imam of adoul</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Contactgegevens imam</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Getuige bruid (wali)</div><span class="ng-inv"></span></div>
+      <div><div class="ng-veld">Getuige bruidegom</div><span class="ng-inv"></span></div>
+    </div>
+    <div style="margin-top:3mm;"><div class="ng-veld">Mahr (bruidsschat) &mdash; bedrag of beschrijving</div><span class="ng-inv" style="min-width:130mm;"></span></div>
+  </div>
+
+  <div class="fase-goud" style="margin-bottom:0;"><span class="f-title f-title-g" style="font-size:12pt;">Nikah checklist</span></div>
+  <div class="cl">
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Islamitisch</span>Imam of adoul geboekt en datum bevestigd</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Islamitisch</span>Twee getuigen aangewezen (minstens twee islamitische volwassen mannen)</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Islamitisch</span>Mahr vastgesteld en besproken met beide families</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Islamitisch</span>Nikah-document of huwelijksakte van de imam bewaard als kopie</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Burgerlijk huwelijk gemeente gepland en datum bevestigd<span class="cn">Minimaal 14 dagen van tevoren aanmelden bij de gemeente. Kies een datum voor het feest.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Benodigde documenten voor burgerlijk huwelijk gecontroleerd<span class="cn">Paspoort of ID (beide partijen), geboorteakte, bewijs van ongehuwde staat. Informeer bij jouw gemeente naar de exacte vereisten.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Trouwboekje / huwelijksakte na de voltrekking in bewaring</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Fotograaf voor de Nikah-ceremonie geregeld (apart of dezelfde)</div></div>
+  </div>
+
+  <div class="info-box" style="margin-top:3mm;">
+    <p class="info-text">De Nikah en het burgerlijk huwelijk zijn twee verschillende zaken. De Nikah is de islamitische bezegeling, het burgerlijk huwelijk is de wettelijke erkenning in Nederland. Beide zijn belangrijk. Bespreek met je partner en families welke volgorde en welke dag jullie kiezen voor elk.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P8 HAMMAM DAG -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Traditioneel ritueel</span>
+  <h1 class="page-title">De Hammam <em>dag</em></h1>
+  <p class="body-text">De hammam is een eeuwenoud reinigingsritueel dat de bruid voorbereidt op haar huwelijk. Lichamelijk en spiritueel. Traditioneel gaat de Marokkaanse bruid 5 dagen voor het feest naar de hammam, begeleid door vrouwelijke familieleden. In Nederland plannen de meeste bruiden dit 1 tot 3 dagen van tevoren.</p>
+
+  <div class="nikah-blok">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;">
+      <div><div class="ng-veld">Datum hammam</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Naam / locatie hammam</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Aankomsttijd</div><span class="ng-inv"></span></div>
+      <div><div class="ng-veld">Wie gaan mee</div><span class="ng-inv"></span></div>
+    </div>
+  </div>
+
+  <div class="fase-goud" style="margin-bottom:0;"><span class="f-title f-title-g" style="font-size:12pt;">Wat meenemen</span></div>
+  <div class="cl">
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Ghassoul klei &mdash; traditionele haarwas voor de bruid<span class="cn">Klei van Marokkaans gesteente die het haar reinigt, versterkt en verzacht. Verkrijgbaar bij Marokkaanse of Arabische winkels.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Beldi zeep (savon beldi) &mdash; zwarte zeep van gefermenteerde olijfolie<span class="cn">Gebruikt voor het scrubben van het lichaam. Laat het 5 tot 10 minuten intrekken voor het beste resultaat.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Argan olie &mdash; voor huid en haar na de behandeling</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Kessa wanten (scrubhandschoenen) &mdash; eigen paar meenemen</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Badpak of badkleding</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Extra badhanddoeken &mdash; minimaal twee</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Slippers voor in de hammam</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Vochtinbrengende crème voor na afloop</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Geld voor fooi meenemen</div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:3mm;">
+    <span class="tip-label">Hammam tips voor de bruid</span>
+    <p class="tip-text">Laat je niet te hard scrubben en niet te lang op één plek. Jouw huid kan gevoelig reageren, zeker als je daarna henna krijgt of een make-upproef hebt gepland. Plan de hammam nooit op de dag direct voor de henna als je een gevoelige huid hebt. Drink voor en na veel water.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P9 HENNA AVOND -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Traditioneel ritueel</span>
+  <h1 class="page-title">Henna-avond <em>Laylat al-Henna</em></h1>
+  <p class="body-text">De henna-avond is de nacht voor of enkele dagen voor het huwelijksfeest. De handen en soms voeten van de bruid worden versierd met traditionele henna-patronen als symbool van geluk, gezondheid en bescherming. Vrouwelijke familieleden zingen, dansen en vieren samen.</p>
+
+  <div class="nikah-blok">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3mm;">
+      <div><div class="ng-veld">Datum henna-avond</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Locatie</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Henna-artiest naam</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Tel. henna-artiest</div><span class="ng-inv" style="margin-bottom:3mm;"></span></div>
+      <div><div class="ng-veld">Aanvangstijd</div><span class="ng-inv"></span></div>
+      <div><div class="ng-veld">Aantal gasten</div><span class="ng-inv"></span></div>
+    </div>
+  </div>
+
+  <div class="fase-goud" style="margin-bottom:0;"><span class="f-title f-title-g" style="font-size:12pt;">Henna-avond checklist</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct"><span class="tag tag-u">Verplicht</span>Allergie-proef gedaan minimaal 2 tot 3 weken van tevoren<span class="cn">Kleine hoeveelheid henna 24 uur op de binnenpols. Roodheid of jeuk? Dan niet doorgaan.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Referentiebeelden gewenst patroon aan artiest gestuurd</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Henna-jurk (kaftan of djellaba) voor de avond klaargelegd<span class="cn">Kies voor wijde mouwen die makkelijk uitgedaan kunnen worden terwijl de henna nog droog is.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Naam van de bruidegom wordt verborgen in het henna-patroon<span class="cn">Klassieke Marokkaanse traditie. Op de huwelijksnacht zoekt de bruidegom zijn naam. Vertel dit van tevoren aan de henna-artiest.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Catering voor gasten geregeld (Marokkaanse thee, zoetjes, harira of soep)<span class="cn">Atay na3na3 (Marokkaanse muntthee) is onmisbaar bij de henna-avond.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Muziek geregeld (playlist of live muzikanten)</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Kaarsen en rozenwater klaargelegd voor de sfeer</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Fotograaf of telefoon klaar voor herinneringsfoto's</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Henna 's nachts laten zitten &mdash; minimaal 6 tot 8 uur<span class="cn">Hoe langer, hoe donkerder het patroon. Wikkel met plastic of een warme handdoek voor het beste resultaat.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag erna handen de eerste uren niet nat maken</div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:2.5mm;">
+    <span class="tip-label">Henna-kleur verdiepen</span>
+    <p class="tip-text">Citroensap of suikerwater aanbrengen op de henna terwijl die nog nat is, helpt de kleur te verdiepen. Warmte (stoom of een warme kamer) terwijl de henna op de huid zit versterkt ook het resultaat. Laat het zo lang mogelijk zitten voor de donkerste kleur.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P10 DAG VAN HET FEEST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="fase-donker"><span class="f-num f-num-d">09</span><span class="f-title f-title-d">Dag van het feest</span><span class="f-sub f-sub-d">Genieten</span></div>
+  <div class="cl">
+    <div class="cr"><div class="cb"></div><div class="ct"><span class="tag tag-u">Eerst dit</span>Goed ontbijt gegeten en veel water gedronken<span class="cn">De bruid vergeet zichzelf op de drukste dag van haar leven. Eet voordat de Ziana arriveert.</span></div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Telefoon volledig opgeladen en powerbank in de tas</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag-van tas mee (zie pagina 13)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Alle outfits hangen klaar op de locatie in volgorde 1 t/m 4</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Sieradenzakjes klaargelegd per outfit (genummerd)</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Referentiebeelden per outfit klaarliggen voor de Ziana</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Ziana heeft het draaiboek en outfitoverzicht</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Dag-coördinator heeft het draaiboek en alle contacten</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Telefoon afgegeven aan vertrouwd persoon bij binnenkomst zaal</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Verse melk en dadels klaargelegd voor de ontvangstceremonie</div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Gorzja-jurk is de eerste outfit waarmee je de zaal betreedt<span class="cn">Dit is het moment waarnaar iedereen uitkijkt. Zorg dat de fotograaf klaarstaat.</span></div></div>
+    <div class="cr trad"><div class="cb"></div><div class="ct"><span class="tag tag-t">Traditie</span>Kohl opgemaakt &mdash; traditionele oogversiering</div></div>
+    <div class="cr"><div class="cb"></div><div class="ct">Noodkit aanwezig bij Ziana (naald, draad, pijnstillers, pleisters, haarspelden)</div></div>
+  </div>
+
+  <div class="two-col" style="margin-top:3mm;">
+    <div class="tip-box">
+      <span class="tip-label">Jij bent de bruid</span>
+      <p class="tip-text">Vandaag regelt de dag-coördinator alles. Jij hoeft niets te regelen. Geniet van elk moment, elke outfit, elke dans, elke omhelzing. Dit is jouw dag.</p>
+    </div>
+    <div class="tip-box">
+      <span class="tip-label">Eten en drinken</span>
+      <p class="tip-text">Vraag de Ziana bij elke outfitwissel een glas water en een hapje klaar te zetten. Een bruid die niet eet, voelt zich halverwege de avond niet goed. Zorg goed voor jezelf.</p>
+    </div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P11 OUTFIT CHECKLIST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Per lebsa</span>
+  <h1 class="page-title">Outfit checklist <em>per lebsa</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Vul per outfit alle details in. Houd dit overzicht bij de outfits en geef een kopie aan je Ziana.</p>
+
+  <div class="ok">
+    <span class="ok-nr">1</span>
+    <span class="ok-label">Eerste outfit &mdash; Gorzja / Opening</span>
+    <div class="ok-grid">
+      <div><div class="ok-v">Naam / omschrijving</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kleur</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Sieraden</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Schoenen</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kapsel</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Make-up stijl</div><span class="ok-i"></span></div>
+    </div>
+    <div class="ok-checks">
+      <div class="ok-c"><div class="ok-cb"></div>Gestoomd</div>
+      <div class="ok-c"><div class="ok-cb"></div>Sieraden in zakje</div>
+      <div class="ok-c"><div class="ok-cb"></div>Schoenen ingelopen</div>
+      <div class="ok-c"><div class="ok-cb"></div>Refs bij Ziana</div>
+    </div>
+  </div>
+
+  <div class="ok">
+    <span class="ok-nr">2</span>
+    <span class="ok-label">Tweede outfit</span>
+    <div class="ok-grid">
+      <div><div class="ok-v">Naam / omschrijving</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kleur</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Sieraden</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Schoenen</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kapsel</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Make-up stijl</div><span class="ok-i"></span></div>
+    </div>
+    <div class="ok-checks">
+      <div class="ok-c"><div class="ok-cb"></div>Gestoomd</div>
+      <div class="ok-c"><div class="ok-cb"></div>Sieraden in zakje</div>
+      <div class="ok-c"><div class="ok-cb"></div>Schoenen ingelopen</div>
+      <div class="ok-c"><div class="ok-cb"></div>Refs bij Ziana</div>
+    </div>
+  </div>
+
+  <div class="ok">
+    <span class="ok-nr">3</span>
+    <span class="ok-label">Derde outfit</span>
+    <div class="ok-grid">
+      <div><div class="ok-v">Naam / omschrijving</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kleur</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Sieraden</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Schoenen</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kapsel</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Make-up stijl</div><span class="ok-i"></span></div>
+    </div>
+    <div class="ok-checks">
+      <div class="ok-c"><div class="ok-cb"></div>Gestoomd</div>
+      <div class="ok-c"><div class="ok-cb"></div>Sieraden in zakje</div>
+      <div class="ok-c"><div class="ok-cb"></div>Schoenen ingelopen</div>
+      <div class="ok-c"><div class="ok-cb"></div>Refs bij Ziana</div>
+    </div>
+  </div>
+
+  <div class="ok">
+    <span class="ok-nr">4</span>
+    <span class="ok-label">Vierde outfit &mdash; Eindlook / Taartceremonie</span>
+    <div class="ok-grid">
+      <div><div class="ok-v">Naam / omschrijving</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kleur</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Sieraden</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Schoenen</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Kapsel</div><span class="ok-i"></span></div>
+      <div><div class="ok-v">Make-up stijl</div><span class="ok-i"></span></div>
+    </div>
+    <div class="ok-checks">
+      <div class="ok-c"><div class="ok-cb"></div>Gestoomd</div>
+      <div class="ok-c"><div class="ok-cb"></div>Sieraden in zakje</div>
+      <div class="ok-c"><div class="ok-cb"></div>Schoenen ingelopen</div>
+      <div class="ok-c"><div class="ok-cb"></div>Refs bij Ziana</div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P12 BEAUTY ROOSTER -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Planning</span>
+  <h1 class="page-title">Beauty &amp; verzorging <em>rooster</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Plan alles ruim van tevoren. De juiste volgorde en timing zijn cruciaal voor het beste resultaat op het feest.</p>
+
+  <table class="bt">
+    <thead><tr><th style="width:34%;">Beauty taak</th><th style="width:20%;">Wanneer plannen</th><th style="width:23%;">Datum gepland</th><th style="width:23%;">Naam / salon</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Proef make-up</strong></td><td style="color:var(--bronze);">6 tot 8 weken voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Proef haar / hijab-styling</strong></td><td style="color:var(--bronze);">6 tot 8 weken voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Allergie-proef henna</strong></td><td style="color:var(--red);">2 tot 3 weken voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Tandarts / tanden bleken</strong></td><td style="color:var(--bronze);">1 tot 2 maanden voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Gezichtsbehandeling</strong></td><td style="color:var(--bronze);">2 weken voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Lichaamsontharing</strong></td><td style="color:var(--bronze);">48 uur voor feest</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Wenkbrauwen</strong></td><td style="color:var(--bronze);">3 tot 5 dagen voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Nagels handen</strong></td><td style="color:var(--bronze);">48 uur voor feest</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Nagels voeten</strong></td><td style="color:var(--bronze);">48 uur voor feest</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Wimpers / extensions</strong></td><td style="color:var(--bronze);">24 tot 48 uur voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Hammam</strong></td><td style="color:var(--bronze);">2 tot 5 dagen voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Henna-avond</strong></td><td style="color:var(--bronze);">1 tot 2 dagen voor</td><td><span class="inf" style="min-width:24mm;"></span></td><td><span class="inf" style="min-width:24mm;"></span></td></tr>
+      <tr><td><strong>Haar wassen (laatste keer)</strong></td><td style="color:var(--bronze);">Dag voor het feest</td><td><span class="inf" style="min-width:24mm;"></span></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <span class="tip-label">De juiste volgorde</span>
+    <p class="tip-text">Ontharing altijd minstens 48 uur voor het feest zodat eventuele roodheid weg is. Wenkbrauwen nooit dag zelf. Nagels voor de henna zodat de henna over de nagels mooi doorloopt. Wimpers altijd voor de make-upproef zodat je het totaalplaatje kunt beoordelen.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P13 DAG-VAN TAS -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Dag-van tas</span>
+  <h1 class="page-title">Alles in <em>jouw tas</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Pak deze tas de avond voor het feest. Verdeel over twee tassen: één bij de Ziana (beauty en kleding noodkit), één bij een vertrouwde familielid (persoonlijk en praktisch).</p>
+
+  <div class="tas-kol">
+    <div>
+      <div class="tash"><span class="tash-l">Praktisch</span></div>
+      <div class="tasb">
+        <div class="tas-r"><div class="tas-c"></div>Telefoon volledig opgeladen</div>
+        <div class="tas-r"><div class="tas-c"></div>Powerbank (vol opgeladen)</div>
+        <div class="tas-r"><div class="tas-c"></div>Draaiboek (gedrukt)</div>
+        <div class="tas-r"><div class="tas-c"></div>Alle contacten leveranciers</div>
+        <div class="tas-r"><div class="tas-c"></div>Contant geld voor fooi</div>
+        <div class="tas-r"><div class="tas-c"></div>Pinpas</div>
+        <div class="tas-r"><div class="tas-c"></div>Identiteitsbewijs</div>
+        <div class="tas-r"><div class="tas-c"></div>Sleutels woning</div>
+        <div class="tas-r"><div class="tas-c"></div>Oplader telefoon</div>
+      </div>
+    </div>
+    <div>
+      <div class="tash"><span class="tash-l">Beauty noodkit</span></div>
+      <div class="tasb">
+        <div class="tas-r"><div class="tas-c"></div>Lippenstift voor bijwerken</div>
+        <div class="tas-r"><div class="tas-c"></div>Dekkende foundation bijwerken</div>
+        <div class="tas-r"><div class="tas-c"></div>Blotting papers</div>
+        <div class="tas-r"><div class="tas-c"></div>Wimpernlijm reserve</div>
+        <div class="tas-r"><div class="tas-c"></div>Haarspelden extra voorraad</div>
+        <div class="tas-r"><div class="tas-c"></div>Haarlak</div>
+        <div class="tas-r"><div class="tas-c"></div>Mini parfum</div>
+        <div class="tas-r"><div class="tas-c"></div>Wattenstaafjes</div>
+        <div class="tas-r"><div class="tas-c"></div>Kohl voor bijwerken</div>
+      </div>
+    </div>
+    <div>
+      <div class="tash"><span class="tash-l">Gezondheid &amp; nood</span></div>
+      <div class="tasb">
+        <div class="tas-r"><div class="tas-c"></div>Pijnstillers (paracetamol)</div>
+        <div class="tas-r"><div class="tas-c"></div>Maagzuurremmers (rennies)</div>
+        <div class="tas-r"><div class="tas-c"></div>Antihistamine (allergie)</div>
+        <div class="tas-r"><div class="tas-c"></div>Pleisters (huidkleur)</div>
+        <div class="tas-r"><div class="tas-c"></div>Maandverband / tampons</div>
+        <div class="tas-r"><div class="tas-c"></div>Vochtinbrengende crème</div>
+        <div class="tas-r"><div class="tas-c"></div>Lippenbalsem</div>
+        <div class="tas-r"><div class="tas-c"></div>Waterfles</div>
+        <div class="tas-r"><div class="tas-c"></div>Snack (voor bruid)</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:2mm;">
+    <div>
+      <div class="tash"><span class="tash-l">Kleding noodkit (bij Ziana)</span></div>
+      <div class="tasb">
+        <div class="tas-r"><div class="tas-c"></div>Naald en draad (bijpassende kleuren)</div>
+        <div class="tas-r"><div class="tas-c"></div>Veiligheidsspelden (diverse maten)</div>
+        <div class="tas-r"><div class="tas-c"></div>Dubbelzijdig tape kleding</div>
+        <div class="tas-r"><div class="tas-c"></div>Comfortabele schoenen voor later</div>
+        <div class="tas-r"><div class="tas-c"></div>Nagellijm reserve</div>
+      </div>
+    </div>
+    <div>
+      <div class="tash"><span class="tash-l">Marokkaanse specials</span></div>
+      <div class="tasb">
+        <div class="tas-r"><div class="tas-c"></div>Rozenwater (voor gezicht bijwerken)</div>
+        <div class="tas-r"><div class="tas-c"></div>Tissues goede kwaliteit</div>
+        <div class="tas-r"><div class="tas-c"></div>Nazar amulet</div>
+        <div class="tas-r"><div class="tas-c"></div>Dua kaartje of gebedsboekje</div>
+        <div class="tas-r"><div class="tas-c"></div>Mini argan olie (droge huid/haar)</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P14 PRAKTISCHE TIJDLIJN FEESTDAG -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Referentie</span>
+  <h1 class="page-title">Praktische tijdlijn <em>feestdag</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Gebaseerd op een standaard Marokkaans feest in Nederland met eerste entree om 19:00. Pas de tijden aan op jouw draaiboek. Dit is een richtlijn, geen verplichting.</p>
+
+  <div class="tl-rij">
+    <div class="tl-tijd">12:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Ziana arriveert voor voorbereiding</div><div class="tl-detail">Locatie voorbereiding (thuis of kleedruimte). Eerste outfit wordt klaargelegd.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">12:30</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Start voorbereiding bruid &mdash; make-up en haar eerste look</div><div class="tl-detail">Goed ontbijt voor aanvang. Fotograaf arriveert voor getting-ready shots.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">14:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Eerste outfit klaar &mdash; bruid aangekleed voor gorzja</div><div class="tl-detail">Getting-ready foto's afgerond. Buffer ingepland voor eventuele vertraging.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">14:45</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Dakka Marrakchia en fotograaf arriveren bij zaal</div><div class="tl-detail">Soundcheck DJ. Decorateur klaar. Zaal gereed gecontroleerd door dag-coördinator.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">15:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Bruid ophalen (gorzja) &mdash; vertrek van het ouderlijk huis</div><div class="tl-detail">Trouwauto staat klaar. Familie en Dakka-groep begeleiden de bruid.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">15:30</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Melk en dadels bij ouderlijk huis &mdash; familiefoto's</div><div class="tl-detail">Traditionele ceremonie. Fotograaf legt dit vast. Bruidegom ontvangt bruid.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">17:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Deuren open &mdash; ontvangst gasten</div><div class="tl-detail">Koffie, thee en koekjes door catering. Muziek start.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">19:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Entree bruid &mdash; eerste jurk (Zaffa-processie)</div><div class="tl-detail">3amaria of te voet. Dakka-groep speelt. Gasten staan op. Fotograaf klaarstaan.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">19:15</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Theeshow en zoetjes &mdash; bruid op de bruidsbank</div><div class="tl-detail">Catering serveert Marokkaanse thee en koekjes.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">20:15</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Bruid naar kleedkamer &mdash; tweede outfit</div><div class="tl-detail">Gasten eten en dansen. DJ draait.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">21:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Entree tweede outfit &mdash; diner begint</div><div class="tl-detail">Bruidspaar schuift aan tafel met familie.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">21:30</div>
+    <div class="tl-dot-kol"><div class="tl-dot"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Catering serveert het diner &mdash; tot ca. 23:00</div><div class="tl-detail">Bastilla, soep, hoofdgerecht, dessert, thee.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">23:30</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Derde en vierde outfit &mdash; taartceremonie</div><div class="tl-detail">Bruidstaart aansnijden. Foto's bruidspaar. Laatste dansen.</div></div>
+  </div>
+  <div class="tl-rij">
+    <div class="tl-tijd">02:00</div>
+    <div class="tl-dot-kol"><div class="tl-dot tl-dot-m"></div><div class="tl-lijn"></div></div>
+    <div class="tl-inhoud"><div class="tl-event">Einde feest</div><div class="tl-detail">DJ stopt. Gasten vertrekken. Bruid en bruidegom staan klaar voor uitwuiven.</div></div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>De Bruid Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools en transparantie op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Rode Vlaggen Gids &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">De Ziana / Bridalstylist Gids &middot; &euro;39</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Contract Checklist &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+</body>
+</html>

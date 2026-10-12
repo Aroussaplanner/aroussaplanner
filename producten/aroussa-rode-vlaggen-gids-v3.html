@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Rode Vlaggen Gids · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ivory: #F7F2EA;
+  --beige: #EDE6D6;
+  --sand:  #F2EDE0;
+  --gold:  #C4A882;
+  --bronze:#8B7355;
+  --dark:  #2D2520;
+  --darker:#1A1210;
+  --warm:  #9B8E7E;
+}
+
+body {
+  background: #d0c8be;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  color: var(--dark);
+  font-size: 10pt;
+}
+
+/* ── PAGINA ── */
+.page {
+  width: 210mm;
+  min-height: 297mm;
+  background: var(--ivory);
+  margin: 12mm auto;
+  padding: 21mm 16mm 18mm;
+  position: relative;
+  page-break-after: always;
+  break-after: page;
+  overflow: hidden;
+}
+
+@media print {
+  body { background: none; }
+  .page { margin: 0; padding: 19mm 14mm 16mm; box-shadow: none; }
+  .no-print { display: none; }
+}
+
+/* ── WATERMERK LAGEN ── */
+.wm { position: absolute; left: 50%; font-family: 'Montserrat', sans-serif;
+  font-weight: 700; letter-spacing: 3px; white-space: nowrap;
+  pointer-events: none; z-index: 0; color: rgba(196,168,130,0.08); }
+.wm-mid { top: 50%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 22pt; }
+.wm-top { top: 20%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 17pt; }
+.wm-bot { top: 78%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 17pt; }
+
+/* ── KLANTBALK BOVENAAN ELKE PAGINA ── */
+.klant-balk {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: var(--darker); padding: 1.8mm 5mm;
+  display: flex; justify-content: space-between; align-items: center; z-index: 10;
+}
+.klant-balk span { font-size: 5.5pt; font-weight: 600; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(196,168,130,0.4); }
+.klant-balk .kcode { color: rgba(196,168,130,0.65) !important; }
+
+/* Alle content boven watermerk */
+.page > *:not(.wm):not(.klant-balk) { position: relative; z-index: 1; }
+
+/* ── FOOTER ── */
+.page-footer {
+  position: absolute; bottom: 9mm; left: 16mm; right: 16mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 6.5pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--warm); border-top: 0.5pt solid var(--gold); padding-top: 3.5mm;
+}
+.footer-code { color: rgba(196,168,130,0.5) !important; font-size: 6pt; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--dark); display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; min-height: 297mm; padding: 20mm;
+}
+.cover .wm, .cover .klant-balk { display: none; }
+.cover-brand { font-family: 'Italiana', serif; font-size: 28pt; color: var(--gold); letter-spacing: 3px; margin-bottom: 3mm; }
+.cover-tagline { font-size: 7pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--warm); margin-bottom: 20mm; }
+.cover-ornament { width: 40mm; height: 0.5pt; background: var(--gold); margin: 0 auto 20mm; opacity: 0.5; }
+.cover-label { font-size: 8pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 6mm; }
+.cover-title { font-family: 'Cormorant Garamond', serif; font-size: 42pt; font-weight: 300; color: var(--ivory); line-height: 1.1; margin-bottom: 6mm; }
+.cover-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16pt; color: rgba(247,242,234,0.6); line-height: 1.4; max-width: 120mm; margin: 0 auto 16mm; }
+.cover-klant { background: rgba(196,168,130,0.08); border: 0.5pt solid rgba(196,168,130,0.3); padding: 4mm 10mm; margin-bottom: 12mm; }
+.cover-klant-label { font-size: 7pt; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--warm); margin-bottom: 2mm; }
+.cover-klant-naam { font-family: 'Cormorant Garamond', serif; font-size: 16pt; color: var(--gold); font-weight: 300; }
+.cover-klant-code { font-size: 8pt; color: var(--bronze); margin-top: 2mm; font-weight: 600; letter-spacing: 2px; }
+.cover-price { display: inline-block; border: 0.5pt solid rgba(196,168,130,0.4); padding: 3mm 8mm; font-size: 9pt; color: var(--gold); font-weight: 600; letter-spacing: 2px; margin-bottom: 8mm; }
+.cover-bottom { margin-top: auto; font-size: 7pt; color: var(--warm); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── TYPOGRAFIE ── */
+.page-label { font-size: 7pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 4mm; display: block; }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: 28pt; font-weight: 400; color: var(--dark); line-height: 1.1; margin-bottom: 6mm; }
+.page-title em { font-style: italic; color: var(--bronze); }
+.intro-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13pt; color: var(--warm); line-height: 1.6; margin-bottom: 8mm; }
+.body-text { font-size: 9.5pt; line-height: 1.75; color: var(--dark); margin-bottom: 5mm; }
+.divider { height: 0.5pt; background: var(--gold); opacity: 0.3; margin: 6mm 0; }
+
+/* ── HOOFDSTUK ── */
+.chapter-header { background: var(--beige); padding: 5mm 7mm; margin-bottom: 5mm; display: flex; align-items: baseline; gap: 4mm; }
+.chapter-num { font-family: 'Cormorant Garamond', serif; font-size: 24pt; font-weight: 300; color: var(--gold); opacity: 0.5; line-height: 1; flex-shrink: 0; }
+.chapter-title { font-family: 'Cormorant Garamond', serif; font-size: 16pt; font-weight: 400; color: var(--dark); line-height: 1.2; }
+
+/* ── RODE VLAGGEN ── */
+.flag-list { list-style: none; margin-bottom: 5mm; }
+.flag-item { display: flex; gap: 3mm; align-items: flex-start; padding: 3mm 0; border-bottom: 0.5pt solid rgba(196,168,130,0.15); }
+.flag-item:last-child { border-bottom: none; }
+.flag-icon { font-size: 8pt; color: #C0392B; flex-shrink: 0; margin-top: 1pt; font-weight: 600; }
+.flag-text { font-size: 9pt; line-height: 1.6; color: var(--dark); }
+.flag-text strong { font-weight: 600; color: var(--dark); display: block; margin-bottom: 1mm; }
+
+/* ── TIP ── */
+.tip-box { background: var(--sand); border-left: 2pt solid var(--gold); padding: 4mm 5mm; margin: 4mm 0; }
+.tip-label { font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 2mm; display: block; }
+.tip-text { font-size: 9pt; line-height: 1.6; color: var(--dark); }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; margin-bottom: 5mm; }
+.check-item { display: flex; gap: 3mm; align-items: flex-start; padding: 2.5mm 0; border-bottom: 0.5pt solid rgba(196,168,130,0.15); }
+.check-box { width: 4mm; height: 4mm; border: 0.75pt solid var(--gold); flex-shrink: 0; margin-top: 1pt; }
+.check-text { font-size: 9pt; line-height: 1.5; color: var(--dark); }
+
+/* ── INHOUDSOPGAVE ── */
+.toc-item { display: flex; justify-content: space-between; align-items: baseline; padding: 2.5mm 0; border-bottom: 0.5pt solid rgba(196,168,130,0.15); }
+.toc-title { font-size: 10pt; color: var(--dark); }
+.toc-dots { flex: 1; border-bottom: 0.5pt dotted rgba(196,168,130,0.4); margin: 0 3mm 1mm; }
+.toc-page { font-size: 9pt; color: var(--warm); flex-shrink: 0; }
+
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+
+/* ── PRINT BTN ── */
+.print-btn { position: fixed; top: 15px; right: 15px; background: #2D2520; color: #F7F2EA; border: none; padding: 10px 24px; font-family: Montserrat, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; z-index: 999; }
+.print-btn:hover { background: #C4A882; color: #2D2520; }
+</style>
+
+<script>
+// Lees klantgegevens uit URL-parameters
+// Gebruik: bestand.html?naam=Fatima+El+Amrani&code=ARO-2847
+const params = new URLSearchParams(window.location.search);
+const KLANT_NAAM = params.get('naam')
+  ? decodeURIComponent(params.get('naam')).toUpperCase()
+  : 'AROUSSA KLANT';
+const KLANT_CODE = params.get('code')
+  ? params.get('code').toUpperCase()
+  : 'ARO-0000';
+const WM_TEKST = KLANT_NAAM + ' \u00b7 ' + KLANT_CODE;
+
+document.addEventListener('DOMContentLoaded', () => {
+  // Vul watermerk in op alle pagina's
+  document.querySelectorAll('.wm').forEach(el => { el.textContent = WM_TEKST; });
+  // Vul klantbalk in
+  document.querySelectorAll('.kn').forEach(el => { el.textContent = KLANT_NAAM; });
+  document.querySelectorAll('.kc').forEach(el => { el.textContent = KLANT_CODE; });
+  // Cover
+  const cn = document.getElementById('cover-naam');
+  const cc = document.getElementById('cover-code');
+  if (cn) cn.textContent = KLANT_NAAM === 'AROUSSA KLANT' ? '[Naam klant]' : KLANT_NAAM;
+  if (cc) cc.textContent = 'Bestelcode: ' + KLANT_CODE;
+});
+</script>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">Bescherming Gids</div>
+  <div class="cover-title">Rode Vlaggen<br>Gids</div>
+  <div class="cover-subtitle">Herken problematische leveranciers voordat je betaalt</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cover-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cover-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">25</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- PAGINA 2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <span class="page-label">Welkom</span>
+  <h1 class="page-title">Waarom deze <em>gids?</em></h1>
+  <p class="intro-text">Je steekt tijd, geld en emotie in je feest. Dan verdien je leveranciers die dat serieus nemen. Deze gids helpt je herkennen wanneer dat niet zo is.</p>
+  <div class="divider"></div>
+  <p class="body-text">Of je nu een bruiloft, henna-avond, verloving of babyfeest organiseert, je werkt met leveranciers die soms mondelinge afspraken maken, onduidelijke contracten hanteren of aanbetalingen vragen die nergens op slaan. Niet altijd met kwade bedoelingen, maar het gevolg is hetzelfde: jij staat met een probleem en niemand die helpt.</p>
+  <p class="body-text">Deze gids geeft je de kennis om dat vooraf te herkennen. Niet als wantrouwen, maar als voorbereiding.</p>
+
+  <div class="tip-box">
+    <span class="tip-label">Hoe gebruik je deze gids</span>
+    <p class="tip-text">Lees de rode vlaggen per categorie door voordat je een eerste gesprek ingaat. Eén rode vlag hoeft geen dealbreaker te zijn. Een combinatie van meerdere is een signaal om verder te kijken.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:4mm;">Inhoud</h3>
+  <div class="toc-item"><span class="toc-title">01 &nbsp; Ziana / Bridalstylist</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+  <div class="toc-item"><span class="toc-title">02 &nbsp; Feestzaal</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
+  <div class="toc-item"><span class="toc-title">03 &nbsp; Catering</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">04 &nbsp; Fotograaf &amp; Video</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  <div class="toc-item"><span class="toc-title">05 &nbsp; DJ &amp; Band</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+  <div class="toc-item"><span class="toc-title">06 &nbsp; Decoratie</span><span class="toc-dots"></span><span class="toc-page">8</span></div>
+  <div class="toc-item"><span class="toc-title">07 &nbsp; Contracten</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+  <div class="toc-item"><span class="toc-title">08 &nbsp; Aanbetalingen</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+  <div class="toc-item"><span class="toc-title">09 &nbsp; Communicatie</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-item"><span class="toc-title">10 &nbsp; Reviews &amp; Werk</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+  <div class="toc-item"><span class="toc-title">11 &nbsp; Prijstransparantie</span><span class="toc-dots"></span><span class="toc-page">13</span></div>
+  <div class="toc-item"><span class="toc-title">Ultieme Checklist</span><span class="toc-dots"></span><span class="toc-page">14</span></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 3 ZIANA / BRIDALSTYLIST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">01</span><span class="chapter-title">Ziana / Bridalstylist</span></div>
+  <p class="body-text">De Ziana of bridalstylist is het gezicht van jouw feest. Ze begeleidt jou de hele dag. Een goede keuze maakt alles mooier. Een slechte keuze merk je pas als het te laat is.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze vraagt het volledige bedrag vooraf</strong>Het vragen van de volledige som voordat één dienst is geleverd is de grootste rode vlag die er is. Dit is niet gebruikelijk en biedt jou geen enkele bescherming als er iets misgaat.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen schriftelijk contract</strong>Mondelinge afspraken zijn niets waard. Elke serieuze Ziana of bridalstylist werkt met een contract. Geen contract betekent geen boeking, hoe sympathiek ze ook overkomt.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze reageert traag of vaag voor boeking</strong>Hoe ze nu communiceren is hoe ze communiceren op jouw feestdag. Als je nu al op antwoorden moet wachten, weet je genoeg.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Het portfolio toont niet haar eigen werk</strong>Gedeelde foto's van anderen zeggen niets over haar kwaliteit. Vraag altijd om beelden van feesten die zij persoonlijk heeft verzorgd.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen oplossing bij ziekte of uitval</strong>Wat als ze de dag zelf niet kan komen? Een professionele bridalstylist heeft hier een antwoord op. Geen back-up betekent dat jij het risico draagt.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Vaag over wat er precies inbegrepen is</strong>Hoeveel outfits, hoeveel uur aanwezig, reiskosten, assistentie. Dit moet ze concreet kunnen benoemen. Als ze dat niet doet, is er ook geen duidelijke afspraak.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Kijk altijd naar haar werk</span>
+    <p class="tip-text">Bekijk haar Instagram, vraag om beelden van recente feesten en kijk of de kwaliteit consistent is. Lees ook de reviews op haar pagina. Echte ervaringen bevatten details. Generieke complimenten zeggen weinig.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 4 FEESTZAAL -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">02</span><span class="chapter-title">Feestzaal</span></div>
+  <p class="body-text">De zaal is vaak de grootste post op je feestbudget. Een fout hier is moeilijk te herstellen. Wees kritisch voordat je een aanbetaling doet.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen schriftelijke overeenkomst</strong>Altijd een huurcontract met datum, tijd, ruimte, capaciteit, prijs en annuleringsregeling. Niets mondeling.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Onverwachte extra kosten na boeking</strong>Vraag vooraf naar alle kosten. Als schoonmaak, beveiliging of BTW pas later worden genoemd, is dat opzet.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen bezichtiging mogelijk</strong>Je boekt nooit een zaal zonder hem eerst te zien. Weigeren ze een bezichtiging te plannen, dan is er iets dat ze liever niet laten zien.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen duidelijke annuleringsregeling</strong>Wat als jij moet annuleren? En als de zaal zelf een probleem heeft? Beide scenario's moeten schriftelijk staan.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen vast aanspreekpunt op de dag zelf</strong>Met wie kun je bellen als er iets is op de avond zelf? Als ze dit niet direct kunnen benoemen, is er geen verantwoordelijkheid geregeld.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen duidelijkheid over eindtijd</strong>Mag de muziek tot 02:00? Of stoppen ze om 24:00? Leg het schriftelijk vast om verrassingen te voorkomen.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Vraag altijd</span>
+    <p class="tip-text">Wie is mijn aanspreekpunt op de dag zelf? Wat zijn de huisregels rondom muziek en eindtijd? Zijn er andere evenementen gepland op dezelfde dag? Dit zijn vragen die elke serieuze zaal direct kan beantwoorden.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 5 CATERING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">03</span><span class="chapter-title">Catering</span></div>
+  <p class="body-text">Catering is na de zaal de grootste kostenpost. Bij 200 gasten praat je snel over 7.000 tot 14.000 euro. Controleer alles schriftelijk.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Prijs per persoon niet schriftelijk vastgelegd</strong>Altijd de prijs per persoon, het minimale en maximale aantal gasten en wat er precies inbegrepen is op papier. "We spreken het af" is geen afspraak.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen schriftelijke halal-garantie</strong>Voor veel bruiden is dit niet onderhandelbaar. Zorg dat het expliciet in het contract staat, niet alleen mondeling bevestigd.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Plotselinge prijsverhoging vlak voor het feest</strong>Dit is juridisch aanvechtbaar als er een schriftelijke overeenkomst is. Zonder contract sta je machteloos.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen duidelijkheid over bediening en opruimen</strong>Is bediening inbegrepen? Wie ruimt op en wanneer? Dit heeft ook invloed op de eindtijd van de zaal.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Tip</span>
+    <p class="tip-text">Je kunt altijd vragen om een proeverij, zeker bij grotere opdrachten. Veel cateraars staan hier voor open. Het is geen vereiste, maar het geeft je een goed beeld van wat je kunt verwachten en het laat zien dat zij zelfverzekerd zijn over hun werk.</p>
+  </div>
+  <div class="tip-box">
+    <span class="tip-label">Wat er minimaal in het contract moet staan</span>
+    <p class="tip-text">Prijs per persoon. Minimum en maximum gastaantal. Wat precies inbegrepen is inclusief bediening. Halal-garantie. Aankomsttijd en opbouwtijd. Wat er geldt bij annulering of wijziging van het aantal gasten.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 6 FOTOGRAAF -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">04</span><span class="chapter-title">Fotograaf &amp; Video</span></div>
+  <p class="body-text">Foto en video zijn de herinneringen die overblijven. Dit is niet het moment om te bezuinigen of genoegen te nemen met onduidelijke afspraken.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen duidelijkheid over levertijd</strong>Wanneer ontvang je de foto's? Hoeveel bewerkte beelden? Leg dit schriftelijk vast. Maanden wachten zonder contract is geen uitzondering. Het is de regel als er niets is afgesproken.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen back-up bij ziekte of noodgeval</strong>Wat als de fotograaf ziek is op jouw feestdag? Serieuze professionals hebben hier een antwoord op. Als ze dat niet hebben, draag jij het risico.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Alleen hun beste shots zijn zichtbaar</strong>Vijf perfecte foto's zeggen niets over consistente kwaliteit. Vraag om referentiebeelden van een volledig feest of om een voorbeeld van eerder montagewerk.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Onduidelijkheid over gebruik van jouw beelden</strong>Mogen ze jouw beelden gebruiken voor promotie? Mag jij ze printen? Dit hoort in het contract te staan.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Vraag om een intake</span>
+    <p class="tip-text">Een goede fotograaf neemt de tijd voor een persoonlijk gesprek vooraf. Ze vragen naar jouw wensen, de stijl van het feest en de planning van de dag. Als er geen intake is, is er ook geen afstemming. Dat merk je in de resultaten.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 7 DJ & BAND -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">05</span><span class="chapter-title">DJ &amp; Band</span></div>
+  <p class="body-text">Muziek bepaalt de sfeer van het feest van begin tot eind. Een DJ die te laat arriveert of slecht materiaal heeft, kan een hele avond verwoesten.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen duidelijkheid over opbouwtijd</strong>Een DJ heeft minimaal 1 tot 2 uur nodig voor opbouw en soundcheck. Leg vast wanneer ze aanwezig moeten zijn, niet wanneer de muziek begint.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen back-up apparatuur</strong>Wat als de laptop crasht of een speaker uitvalt? Professionele DJ's hebben altijd een back-up. Dit is een basale vereiste, geen luxe.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen ervaring met de stijl die je wil</strong>Vraag om voorbeelden van eerder werk bij vergelijkbare feesten. Kunnen ze de muziek spelen die jij wil? Dat is een concrete vraag die een concreet antwoord verdient.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen contract over eindtijd en extra uren</strong>Tot hoe laat spelen ze? Wat kost extra tijd? Wat als het feest uitloopt? Dit hoort allemaal schriftelijk geregeld te zijn.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Test de bereikbaarheid</span>
+    <p class="tip-text">Stuur een berichtje op een doordeweekse avond en kijk wanneer ze reageren. Bel eens onverwacht. Dit geeft je een eerlijker beeld dan een gezellig eerste gesprek op een afgesproken moment.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 8 DECORATIE -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">06</span><span class="chapter-title">Decoratie</span></div>
+  <p class="body-text">Decoratie kan prachtig zijn maar ook een valstrik. Foto's op Instagram zijn niet altijd wat jij op jouw feest krijgt. Wees specifiek in je afspraken.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen itemlijst in het contract</strong>Wat precies wordt geleverd moet per item zijn omschreven. Bloemstukken, tafelkleden, verlichting, backdrop. Niets mag vaag blijven.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen opbouw- en afbouwtijd afgesproken</strong>Wanneer zijn ze er? Wanneer wordt alles opgeruimd? Dit moet in lijn zijn met de huurovereenkomst van de zaal.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen alternatief als producten niet beschikbaar zijn</strong>Wat als de bloemen die zijn beloofd niet leverbaar zijn? Staat er in het contract wat het alternatief is? Zo niet, dan beslis jij niet meer.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Vaagheid over huur versus eigendom</strong>Sommige items zijn huur. Wanneer moet je ze teruggeven? Wat bij schade? Dit moet schriftelijk geregeld zijn.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Maak een moodboard</span>
+    <p class="tip-text">Stuur een moodboard toe bij je offerteaanvraag en vraag om een schriftelijke bevestiging dat de decoratie overeenkomt met jouw gewenste stijl. Dit voorkomt verrassingen op de dag zelf.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 9 CONTRACTEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">07</span><span class="chapter-title">Contracten</span></div>
+  <p class="body-text">Een goed contract beschermt beide partijen. Geen contract of een slecht contract beschermt niemand. Dit zijn de signalen die je herkent voordat je tekent.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Alles mondeling</strong>Zonder schriftelijke overeenkomst heb je juridisch niets in handen. Hoe vertrouwd de persoon ook voelt.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Datum, tijd en locatie ontbreken</strong>De drie basisgegevens moeten altijd schriftelijk staan. Ontbreken ze dan vul het aan vóór je tekent.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen annuleringsregeling voor beide kanten</strong>Wat als jij moet annuleren? En als de leverancier uitvalt? Beide scenario's moeten beschreven zijn, niet alleen de ene kant.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Vage omschrijving van de dienst</strong>"Volledige begeleiding op de dag" is geen afspraak. Hoeveel uur, hoeveel personen, wat precies. Dit moet concreet staan.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Prijs die nog kan wijzigen</strong>De prijs staat vast op het moment van tekenen. Elke clausule die ruimte laat voor prijswijziging is onacceptabel.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Onthoud</span>
+    <p class="tip-text">Je tekent alleen contracten die je volledig begrijpt. Twijfel je aan een clausule dan vraag je om uitleg of laat je het nalezen. Dat is je recht, geen overdrijving.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 10 AANBETALINGEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">08</span><span class="chapter-title">Aanbetalingen</span></div>
+  <p class="body-text">Aanbetalingen zijn normaal. Maar de manier waarop ze worden gevraagd vertelt je veel over hoe een leverancier werkt.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze vragen het volledige bedrag vooraf</strong>Dit is de grootste rode vlag. Het vragen van de volledige som vóór de dienst is geleverd is niet gebruikelijk en biedt jou geen enkele bescherming. Er is geen goede reden voor.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Je betaalt vóór er een contract is getekend</strong>De volgorde is altijd: contract tekenen, daarna aanbetaling doen. Nooit andersom. Als een leverancier vraagt om eerst te betalen voordat er iets op papier staat, is dat een signaal.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen bewijs van betaling</strong>Of je nu contant betaalt of via de bank, zorg altijd voor een factuur of kwitantie. Dat is jouw bewijs als er later iets fout gaat.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen terugbetalingsregeling bij niet-nakoming</strong>Als de leverancier niet levert, krijg je dan je geld terug? Dit hoort in het contract te staan. Staat het er niet in dan vraag je om aanpassing vóór je tekent.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Wat gebruikelijk is</span>
+    <p class="tip-text">Een aanbetaling van 20 tot 50% bij boeking is normaal in deze branche. Sommige leveranciers vragen 50% en dat kan. Wat nooit normaal is, is het volledige bedrag vooraf. De resterende betaling volgt doorgaans enkele weken voor het feest of op de dag zelf. Leg dit altijd schriftelijk vast.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 11 COMMUNICATIE -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">09</span><span class="chapter-title">Communicatie</span></div>
+  <p class="body-text">Hoe een leverancier communiceert vóór boeking is hoe ze communiceren op de dag zelf. Dit zijn de waarschuwingssignalen.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Reactietijd van meer dan 48 uur</strong>Als ze nu al niet reageren, hoe is het dan twee weken voor jouw feest? Streef naar leveranciers die binnen 24 uur reageren.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Vage of uitwijkende antwoorden</strong>Concrete vragen verdienen concrete antwoorden. Als iemand steeds uitwijkt of zegt "dat regelen we wel", is er reden voor.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Geen vast aanspreekpunt</strong>Elke keer iemand anders? Dan is er geen verantwoordelijkheid. Zorg voor één vaste persoon die jij kunt aanspreken voor, tijdens en na het feest.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze verwijzen je steeds door</strong>Jij hebt een overeenkomst met één persoon. Die persoon is jouw aanspreekpunt. Doorverwijzen naar partners of familieleden is geen professionele service.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Test dit vroeg</span>
+    <p class="tip-text">Stuur een onverwacht berichtje op een avond en kijk wanneer ze reageren. Bel eens onverwacht. Dit geeft een eerlijker beeld dan een gezellig eerste gesprek op een afgesproken moment.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 12 REVIEWS & WERK -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">10</span><span class="chapter-title">Reviews &amp; Werk</span></div>
+  <p class="body-text">Hoe iemand bekendstaat in de branche zegt meer dan wat ze zelf over zichzelf zeggen. Kijk verder dan de mooiste foto's.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Alleen positieve reviews zonder enige inhoud</strong>Echte ervaringen bevatten details. "Ze was geweldig!" zonder meer is waarschijnlijk gevraagd of nep. Zoek naar reviews die iets concreets beschrijven.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Reviews van lege profielen</strong>Kijk naar het profiel achter de review. Accounts zonder activiteit die alleen maar reviews plaatsen zijn een signaal.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze kunnen geen recent werk laten zien</strong>Wie actief is in deze branche heeft recent werk. Kan ze dat niet laten zien of wijkt ze steeds af, dan is er iets wat ze liever niet toont.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Kwaliteit is inconsistent</strong>Bekijk niet alleen de beste vijf foto's maar het geheel. Is de kwaliteit door de avond heen consistent? Dat is wat jij op jouw dag mag verwachten.</span></li>
+  </ul>
+  <div class="tip-box">
+    <span class="tip-label">Kijk verder dan Instagram</span>
+    <p class="tip-text">Zoek de naam ook op via Google. Zijn er ervaringen te vinden buiten hun eigen pagina om? Dat zijn doorgaans de meest ongefiltreerde beoordelingen. Vraag ook altijd om referentiebeelden of voorbeelden van vergelijkbaar eerder werk.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 13 PRIJSTRANSPARANTIE -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="chapter-header"><span class="chapter-num">11</span><span class="chapter-title">Prijstransparantie</span></div>
+  <p class="body-text">Niemand weet wat normaal is in de feestbranche en leveranciers weten dat. Nu weet jij het ook.</p>
+  <ul class="flag-list">
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Ze weigeren een schriftelijke offerte</strong>Een offerte is een basisrecht. "Ik zeg je de prijs als we een afspraak maken" is een tactiek om je te lokken zonder dat je kunt vergelijken.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>De prijs verandert na het eerste gesprek</strong>Als het bedrag opeens hoger is dan eerder besproken zonder logische verklaring, is dat niet per ongeluk.</span></li>
+    <li class="flag-item"><span class="flag-icon">🚩</span><span class="flag-text"><strong>Druk om snel te beslissen</strong>"Dit aanbod is alleen vandaag geldig" of "er zijn nog twee andere geïnteresseerden" zijn verkooptactieken. Neem altijd de tijd die je nodig hebt. Een goede leverancier begrijpt dat.</span></li>
+  </ul>
+
+  <div style="margin-top:5mm;">
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:4mm;">Prijsbenchmarks Nederland 2026</h3>
+    <div class="two-col">
+      <div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">ZIANA / BRIDALSTYLIST</span><span style="font-size:9pt;">&euro;1.200 tot &euro;3.000</span></div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">FEESTZAAL</span><span style="font-size:9pt;">&euro;3.000 tot &euro;10.000</span></div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">FOTOGRAAF</span><span style="font-size:9pt;">&euro;1.500 tot &euro;3.500</span></div>
+      </div>
+      <div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">CATERING P.P.</span><span style="font-size:9pt;">&euro;35 tot &euro;70 p.p.</span></div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">DJ &amp; BAND</span><span style="font-size:9pt;">&euro;800 tot &euro;2.000</span></div>
+        <div style="background:var(--beige);padding:3mm 4mm;margin-bottom:2mm;"><span style="font-size:8pt;font-weight:600;color:var(--gold);display:block;margin-bottom:1mm;">DECORATIE</span><span style="font-size:9pt;">&euro;1.500 tot &euro;5.000</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">Gebruik deze benchmarks</span>
+    <p class="tip-text">Prijzen variëren per regio, ervaring en wat er precies inbegrepen is. Gebruik deze bedragen als referentiepunt, niet als absolute norm. Een offerte die ver buiten deze bandbreedte valt verdient altijd een extra vraag.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 14 ULTIEME CHECKLIST -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <span class="page-label">Jouw tool</span>
+  <h1 class="page-title">De Ultieme <em>Checklist</em></h1>
+  <p style="font-size:9pt;color:var(--warm);margin-bottom:5mm;">Gebruik dit bij elk eerste gesprek met een leverancier. Vink aan wat je hebt bevestigd.</p>
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Communicatie</h3>
+      <ul class="checklist">
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Reageert binnen 48 uur</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Vast aanspreekpunt bekend</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Bereikbaar via telefoon</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Concrete antwoorden gegeven</span></li>
+      </ul>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Contract</h3>
+      <ul class="checklist">
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Schriftelijk contract aanwezig</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Datum, tijd en locatie vermeld</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Prijs schriftelijk vastgelegd</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Annuleringsregeling voor beide kanten</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Dienst concreet omschreven</span></li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Betaling</h3>
+      <ul class="checklist">
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Contract getekend vóór aanbetaling</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Geen volledig bedrag vooraf gevraagd</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Bewijs van betaling ontvangen</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Terugbetalingsregeling vastgelegd</span></li>
+      </ul>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Werk &amp; Reviews</h3>
+      <ul class="checklist">
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Recent werk gezien</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Reviews gelezen en gecontroleerd</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Kwaliteit consistent bevonden</span></li>
+        <li class="check-item"><div class="check-box"></div><span class="check-text">Back-up bij uitval geregeld</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">Onthoud</span>
+    <p class="tip-text">Eén rode vlag is een reden om extra vragen te stellen. Meerdere tegelijk zijn een reden om verder te kijken. Vertrouw ook op je eigen gevoel. Als iets niet goed voelt, is dat informatie.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Rode Vlaggen Gids</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools, begeleiding en transparantie vind je op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">WhatsApp Scripts Bundel &middot; &euro;29</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">De Ziana / Bridalstylist Gids &middot; &euro;39</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);letter-spacing:1px;">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+
+</body>
+</html>

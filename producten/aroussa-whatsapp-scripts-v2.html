@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>WhatsApp Scripts Bundel · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page { size: A4; margin: 0; }
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --ivory: #F7F2EA; --beige: #EDE6D6; --sand: #F2EDE0;
+  --gold: #C4A882; --bronze: #8B7355; --dark: #2D2520;
+  --darker: #1A1210; --warm: #9B8E7E;
+}
+body { background: #d0c8be; font-family: 'Montserrat', sans-serif; font-weight: 300; color: var(--dark); font-size: 10pt; }
+
+/* ── PAGINA ── */
+.page {
+  width: 210mm; min-height: 297mm; background: var(--ivory);
+  margin: 12mm auto; padding: 21mm 16mm 18mm;
+  position: relative; page-break-after: always; break-after: page; overflow: hidden;
+}
+@media print {
+  body { background: none; }
+  .page { margin: 0; padding: 19mm 14mm 16mm; box-shadow: none; }
+  .no-print { display: none; }
+}
+
+/* ── WATERMERK ── */
+.wm { position: absolute; left: 50%; font-family: 'Montserrat', sans-serif;
+  font-weight: 700; letter-spacing: 3px; white-space: nowrap;
+  pointer-events: none; z-index: 0; color: rgba(196,168,130,0.08); }
+.wm-mid { top: 50%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 22pt; }
+.wm-top { top: 20%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 17pt; }
+.wm-bot { top: 78%; transform: translate(-50%,-50%) rotate(-35deg); font-size: 17pt; }
+
+/* ── KLANTBALK ── */
+.klant-balk {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: var(--darker); padding: 1.8mm 5mm;
+  display: flex; justify-content: space-between; align-items: center; z-index: 10;
+}
+.klant-balk span { font-size: 5.5pt; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(196,168,130,0.4); }
+.klant-balk .kcode { color: rgba(196,168,130,0.65) !important; }
+
+.page > *:not(.wm):not(.klant-balk) { position: relative; z-index: 1; }
+
+/* ── FOOTER ── */
+.page-footer {
+  position: absolute; bottom: 9mm; left: 16mm; right: 16mm;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 6.5pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--warm); border-top: 0.5pt solid var(--gold); padding-top: 3.5mm;
+}
+.footer-code { color: rgba(196,168,130,0.5) !important; font-size: 6pt; }
+
+/* ── COVER ── */
+.cover {
+  background: var(--dark); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; min-height: 297mm; padding: 20mm;
+}
+.cover .wm, .cover .klant-balk { display: none; }
+.cover-brand { font-family: 'Italiana', serif; font-size: 28pt; color: var(--gold); letter-spacing: 3px; margin-bottom: 3mm; }
+.cover-tagline { font-size: 7pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--warm); margin-bottom: 20mm; }
+.cover-ornament { width: 40mm; height: 0.5pt; background: var(--gold); margin: 0 auto 20mm; opacity: 0.5; }
+.cover-label { font-size: 8pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 6mm; }
+.cover-title { font-family: 'Cormorant Garamond', serif; font-size: 40pt; font-weight: 300; color: var(--ivory); line-height: 1.1; margin-bottom: 6mm; }
+.cover-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15pt; color: rgba(247,242,234,0.6); line-height: 1.4; max-width: 120mm; margin: 0 auto 16mm; }
+.cover-klant { background: rgba(196,168,130,0.08); border: 0.5pt solid rgba(196,168,130,0.3); padding: 4mm 10mm; margin-bottom: 12mm; }
+.cover-klant-label { font-size: 7pt; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--warm); margin-bottom: 2mm; }
+.cover-klant-naam { font-family: 'Cormorant Garamond', serif; font-size: 16pt; color: var(--gold); font-weight: 300; }
+.cover-klant-code { font-size: 8pt; color: var(--bronze); margin-top: 2mm; font-weight: 600; letter-spacing: 2px; }
+.cover-price { display: inline-block; border: 0.5pt solid rgba(196,168,130,0.4); padding: 3mm 8mm; font-size: 9pt; color: var(--gold); font-weight: 600; letter-spacing: 2px; margin-bottom: 8mm; }
+.cover-bottom { font-size: 7pt; color: var(--warm); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── TYPOGRAFIE ── */
+.page-label { font-size: 7pt; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 4mm; display: block; }
+.page-title { font-family: 'Cormorant Garamond', serif; font-size: 28pt; font-weight: 400; color: var(--dark); line-height: 1.1; margin-bottom: 6mm; }
+.page-title em { font-style: italic; color: var(--bronze); }
+.intro-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13pt; color: var(--warm); line-height: 1.6; margin-bottom: 6mm; }
+.body-text { font-size: 9.5pt; line-height: 1.75; color: var(--dark); margin-bottom: 5mm; }
+.divider { height: 0.5pt; background: var(--gold); opacity: 0.3; margin: 5mm 0; }
+
+/* ── CATEGORIE HEADER ── */
+.cat-header {
+  background: var(--dark); padding: 4mm 6mm; margin-bottom: 4mm;
+  display: flex; align-items: baseline; gap: 4mm;
+}
+.cat-num { font-family: 'Cormorant Garamond', serif; font-size: 20pt; font-weight: 300; color: var(--gold); opacity: 0.6; line-height: 1; flex-shrink: 0; }
+.cat-title { font-family: 'Cormorant Garamond', serif; font-size: 14pt; font-weight: 400; color: var(--ivory); line-height: 1.2; }
+.cat-sub { font-size: 8pt; color: var(--warm); margin-left: auto; flex-shrink: 0; }
+
+/* ── SCRIPT CARD ── */
+.script-card { margin-bottom: 5mm; border-left: 2pt solid var(--gold); }
+.script-header { background: var(--beige); padding: 2.5mm 4mm; display: flex; align-items: center; gap: 3mm; }
+.script-num { font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); flex-shrink: 0; }
+.script-title { font-size: 9pt; font-weight: 600; color: var(--dark); }
+.script-body { background: var(--sand); padding: 3.5mm 4mm; }
+.script-text { font-size: 9pt; line-height: 1.7; color: var(--dark); font-style: italic; }
+.script-note { margin-top: 2mm; font-size: 8pt; color: var(--warm); line-height: 1.5; font-style: normal; }
+.script-tag { display: inline-block; font-size: 7pt; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--bronze); background: rgba(196,168,130,0.15); padding: 1mm 3mm; margin-bottom: 2mm; }
+
+/* ── TIP ── */
+.tip-box { background: var(--sand); border-left: 2pt solid var(--gold); padding: 3.5mm 4.5mm; margin: 3mm 0; }
+.tip-label { font-size: 7pt; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 2mm; display: block; }
+.tip-text { font-size: 9pt; line-height: 1.6; color: var(--dark); }
+
+/* ── LAYOUT ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+.toc-item { display: flex; justify-content: space-between; align-items: baseline; padding: 2.5mm 0; border-bottom: 0.5pt solid rgba(196,168,130,0.15); }
+.toc-title { font-size: 10pt; color: var(--dark); }
+.toc-dots { flex: 1; border-bottom: 0.5pt dotted rgba(196,168,130,0.4); margin: 0 3mm 1mm; }
+.toc-page { font-size: 9pt; color: var(--warm); flex-shrink: 0; }
+
+.print-btn { position: fixed; top: 15px; right: 15px; background: #2D2520; color: #F7F2EA; border: none; padding: 10px 24px; font-family: Montserrat, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; z-index: 999; }
+.print-btn:hover { background: #C4A882; color: #2D2520; }
+</style>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const KLANT_NAAM = params.get('naam') ? decodeURIComponent(params.get('naam')).toUpperCase() : 'AROUSSA KLANT';
+const KLANT_CODE = params.get('code') ? params.get('code').toUpperCase() : 'ARO-0000';
+const WM_TEKST = KLANT_NAAM + ' \u00b7 ' + KLANT_CODE;
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.wm').forEach(el => { el.textContent = WM_TEKST; });
+  document.querySelectorAll('.kn').forEach(el => { el.textContent = KLANT_NAAM; });
+  document.querySelectorAll('.kc').forEach(el => { el.textContent = KLANT_CODE; });
+  const cn = document.getElementById('cover-naam');
+  const cc = document.getElementById('cover-code');
+  if (cn) cn.textContent = KLANT_NAAM === 'AROUSSA KLANT' ? '[Naam klant]' : KLANT_NAAM;
+  if (cc) cc.textContent = 'Bestelcode: ' + KLANT_CODE;
+});
+</script>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">Communicatie Bundel</div>
+  <div class="cover-title">WhatsApp<br>Scripts Bundel</div>
+  <div class="cover-subtitle">25 kant-en-klare berichten voor elk lastig moment met leveranciers</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cover-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cover-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">&euro;29</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- PAGINA 2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <span class="page-label">Welkom</span>
+  <h1 class="page-title">Hoe gebruik je <em>deze bundel?</em></h1>
+  <p class="intro-text">Je hoeft nooit meer te twijfelen over wat je schrijft. Kopieer, pas aan en verstuur.</p>
+  <div class="divider"></div>
+  <p class="body-text">De meeste mensen weten niet wat ze moeten schrijven als een leverancier niet reageert, een prijs opeens hoger is of er een probleem is op de feestdag. Ze wachten, twijfelen of schrijven iets dat te emotioneel of te vaag is.</p>
+  <p class="body-text">Deze bundel geeft je 25 professionele, duidelijke berichten voor elke situatie. Kopieer ze letterlijk of pas ze aan op jouw situatie. Ze zijn geschreven om duidelijk, respectvol én effectief te zijn.</p>
+
+  <div class="tip-box">
+    <span class="tip-label">Hoe gebruik je de scripts</span>
+    <p class="tip-text">Zoek de situatie die bij jou past. Kopieer het bericht. Vul [naam], [datum] en [dienst] in met jouw gegevens. Lees het bericht nog een keer door voor je verstuurt. Stuur en wacht maximaal 48 uur op antwoord.</p>
+  </div>
+
+  <div class="divider"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">De 5 categorieën</h3>
+  <div class="toc-item"><span class="toc-title">Categorie 1 &nbsp; Eerste contact en informatie opvragen</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+  <div class="toc-item"><span class="toc-title">Categorie 2 &nbsp; Prijsonderhandeling en offertes</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">Categorie 3 &nbsp; Contracten en aanbetalingen</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+  <div class="toc-item"><span class="toc-title">Categorie 4 &nbsp; Opvolging en problemen</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+  <div class="toc-item"><span class="toc-title">Categorie 5 &nbsp; Dag-van en klachten</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 3 EERSTE CONTACT 1/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">01</span><span class="cat-title">Eerste contact en informatie opvragen</span><span class="cat-sub">Scripts 1 t/m 3</span></div>
+  <p class="body-text" style="margin-bottom:4mm;">Gebruik deze berichten als je voor het eerst contact opneemt. Duidelijk, professioneel en direct zodat de leverancier weet dat jij serieus bent.</p>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 01</span><span class="script-title">Eerste contact opnemen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je neemt voor het eerst contact op</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik ben op zoek naar een [Ziana / bridalstylist / fotograaf / cateraar] voor mijn feest op [datum] in [stad]. Het gaat om ongeveer [aantal] gasten.<br><br>Kunt u mij meer vertellen over uw diensten, beschikbaarheid op die datum en uw tarieven? Ik hoor graag van u."</p>
+      <p class="script-note">Vul altijd datum, locatie en aantal gasten in. Hoe specifieker jij bent, hoe sneller je een nuttig antwoord krijgt.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 02</span><span class="script-title">Schriftelijke offerte opvragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Na een gesprek wil je een offerte op papier</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Bedankt voor ons gesprek. Ik zou graag een schriftelijke offerte ontvangen met daarin de prijs, een overzicht van wat inbegrepen is en de betalingsregeling. Kunt u mij dit per e-mail of WhatsApp sturen?"</p>
+      <p class="script-note">Nooit betalen of bevestigen zonder schriftelijke offerte. Dit bericht maakt dat duidelijk zonder confrontatie.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 03</span><span class="script-title">Portfolio en werk opvragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je wilt haar werk zien voordat je verdere stappen zet</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Voordat ik een beslissing maak zou ik graag voorbeelden van uw recente werk zien. Kunt u mij foto's of beelden sturen van een feest dat u de afgelopen maanden heeft verzorgd? Dit helpt mij om een goed beeld te krijgen van uw stijl en kwaliteit."</p>
+      <p class="script-note">Vraag altijd naar recent werk, niet alleen de beste vijf foto's. Consistente kwaliteit over een hele avond zegt meer dan één perfecte shot.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 4 EERSTE CONTACT 2/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">01</span><span class="cat-title">Eerste contact en informatie opvragen</span><span class="cat-sub">Scripts 4 t/m 5</span></div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 04</span><span class="script-title">Beschikbaarheid controleren</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je wilt weten of de datum vrij is voor je verdere tijd investeert</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Bent u beschikbaar op [datum]? Graag wil ik dit eerst weten voordat we verdere details bespreken."</p>
+      <p class="script-note">Stel deze vraag altijd als eerste, voor je te veel tijd steekt in een gesprek over iemand die toch niet beschikbaar is.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 05</span><span class="script-title">Ervaring met dit type feest navragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je wilt weten of de leverancier ervaring heeft met jouw type feest</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik organiseer een Marokkaans feest. Heeft u eerder Marokkaanse bruiloften of feesten verzorgd? Zo ja, kunt u mij een voorbeeld geven of beelden laten zien? Dit helpt mij om een goede keuze te maken."</p>
+      <p class="script-note">Specifieke ervaring met dit type feest is geen vereiste maar wel een pluspunt, zeker voor de Ziana / bridalstylist, catering en decoratie.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Gouden tip voor eerste contact</span>
+    <p class="tip-text">Stuur altijd een WhatsApp-bericht en een spraakbericht als opvolging als ze niet reageren. Sommige leveranciers reageren sneller op audio dan tekst. Wacht maximaal 48 uur en gebruik dan Script 16 als opvolging.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 5 PRIJSONDERHANDELING 1/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">02</span><span class="cat-title">Prijsonderhandeling en offertes</span><span class="cat-sub">Scripts 6 t/m 8</span></div>
+  <p class="body-text" style="margin-bottom:4mm;">Prijzen zijn bespreekbaar, vaker dan je denkt. Gebruik deze scripts om professioneel te onderhandelen zonder de relatie te beschadigen.</p>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 06</span><span class="script-title">Prijs te hoog, om korting vragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De offerte is hoger dan je budget</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Bedankt voor uw offerte. Uw diensten spreken mij erg aan. De prijs valt echter buiten mijn budget van [bedrag]. Is er ruimte om dit aan te passen, of zijn er opties om de prijs te verlagen, bijvoorbeeld door bepaalde elementen weg te laten?"</p>
+      <p class="script-note">Wees eerlijk over je budget. Vraag altijd naar alternatieven. Een leverancier die kan meebewegen is een goede leverancier.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 07</span><span class="script-title">Concurrerende offerte vergelijken</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je hebt een goedkopere offerte van een concurrent</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik heb ook offertes bij andere leveranciers opgevraagd. Ik ben het meest enthousiast over uw werk, maar ik heb een vergelijkbare offerte ontvangen voor [lager bedrag]. Is het mogelijk om hierop aan te sluiten? Ik zou liever met u samenwerken."</p>
+      <p class="script-note">Wees eerlijk. Dit werkt alleen als je ook echt een andere offerte hebt. Noem nooit een bedrag dat je verzonnen hebt.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 08</span><span class="script-title">Prijs die opeens gestegen is</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De prijs is hoger dan eerder gecommuniceerd</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>In ons gesprek op [datum] heeft u een prijs van [eerder bedrag] genoemd. De offerte die ik nu heb ontvangen vermeldt [nieuw bedrag]. Kunt u uitleggen wat het verschil verklaart? Ik ga ervan uit dat we de eerder besproken prijs aanhouden."</p>
+      <p class="script-note">Verwijs altijd naar de datum van het eerdere gesprek. Noteer altijd genoemde prijzen direct na een gesprek.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 6 PRIJSONDERHANDELING 2/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">02</span><span class="cat-title">Prijsonderhandeling en offertes</span><span class="cat-sub">Scripts 9 t/m 10</span></div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 09</span><span class="script-title">Wat is precies inbegrepen?</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De offerte is onduidelijk over wat er inbegrepen is</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Bedankt voor de offerte. Voordat ik een beslissing neem wil ik graag weten wat er precies inbegrepen is in dit bedrag. Kunt u een gedetailleerde lijst sturen van alles wat de prijs omvat, inclusief reiskosten, aantal uren en eventuele assistentie?"</p>
+      <p class="script-note">Een goede leverancier stuurt dit zonder problemen. Ontbreken er zaken in de lijst dan vraag je om aanpassing van het contract.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 10</span><span class="script-title">Offerte beleefd afwijzen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je kiest voor een andere leverancier</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Bedankt voor uw tijd en de offerte die u heeft opgesteld. Na overweging heb ik besloten voor een andere leverancier te kiezen. Ik waardeer uw professionaliteit en wie weet tot een andere keer."</p>
+      <p class="script-note">Altijd netjes afsluiten. De branche is klein. Een goede indruk achterlaten kost niets.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Onderhandelen werkt, als je dit weet</span>
+    <p class="tip-text">Onderhandelen is normaal. Leveranciers rekenen soms een hogere prijs in verwachting dat er onderhandeld wordt. Vraag altijd vriendelijk maar direct. Het slechtste wat kan gebeuren is dat ze nee zeggen, en dan weet je waar je staat.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 7 CONTRACTEN 1/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">03</span><span class="cat-title">Contracten en aanbetalingen</span><span class="cat-sub">Scripts 11 t/m 13</span></div>
+  <p class="body-text" style="margin-bottom:4mm;">Gebruik deze scripts om contracten op te vragen, aanpassingen te vragen en aanbetalingen te bespreken. Altijd professioneel en schriftelijk.</p>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 11</span><span class="script-title">Contract opvragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je bent bijna akkoord maar er is nog geen contract</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik ben blij dat we tot een akkoord zijn gekomen. Kunt u het contract opsturen? Zodra ik dit heb doorgelezen en akkoord ga, stuur ik de aanbetaling over. Ik wil graag alles schriftelijk vastleggen."</p>
+      <p class="script-note">Betaal nooit een aanbetaling zonder ondertekend contract. Altijd in deze volgorde: contract tekenen, daarna aanbetaling.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 12</span><span class="script-title">Aanpassing in het contract vragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Er ontbreekt iets in het contract of je wilt iets aangepast hebben</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik heb het contract gelezen. Ik zou graag het volgende punt aangepast zien: [beschrijf het punt, bijvoorbeeld 'de annuleringsregeling ontbreekt' of 'de eindtijd staat niet vermeld']. Kunt u een aangepaste versie sturen? Dan teken ik direct."</p>
+      <p class="script-note">Wees concreet over wat je wilt aanpassen. Vage feedback leidt tot vage aanpassingen.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 13</span><span class="script-title">Aanbetaling te hoog, onderhandelen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De gevraagde aanbetaling is meer dan 50%</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik zie dat u [percentage]% aanbetaling vraagt. In de branche is 20 tot 30% bij boeking gebruikelijk. Bent u bereid om dit aan te passen naar [percentage]%? Het resterende bedrag betaal ik graag twee weken voor het feest."</p>
+      <p class="script-note">Dit is een zakelijk verzoek, geen aanval. De meeste leveranciers gaan hiermee akkoord als je vriendelijk maar direct bent. Nooit het volledige bedrag vooraf betalen.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 8 CONTRACTEN 2/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">03</span><span class="cat-title">Contracten en aanbetalingen</span><span class="cat-sub">Scripts 14 t/m 15</span></div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 14</span><span class="script-title">Betalingsbewijs opvragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je hebt betaald maar geen bevestiging ontvangen</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik heb de aanbetaling van [bedrag] overgemaakt op [datum]. Kunt u de ontvangst bevestigen en een factuur of kwitantie sturen? Ik houd dit graag bij voor mijn administratie."</p>
+      <p class="script-note">Vraag altijd om een schriftelijke bevestiging van elke betaling. Dit is jouw bewijs bij een conflict.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 15</span><span class="script-title">Datumwijziging doorgeven</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De datum van het feest is veranderd</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik moet u helaas informeren dat de datum van ons feest is gewijzigd. De nieuwe datum is [nieuwe datum]. Bent u op deze datum beschikbaar? En wat zijn de gevolgen van deze wijziging voor ons contract? Graag hoor ik van u."</p>
+      <p class="script-note">Communiceer datumwijzigingen altijd schriftelijk en zo snel mogelijk. Hoe eerder je dit meldt, hoe groter de kans dat de leverancier beschikbaar is.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">De drie regels van betalingen</span>
+    <p class="tip-text">Betaal altijd per bank zodat er een spoor is. Vraag na elke betaling om een factuur of kwitantie als bewijs. Betaal nooit meer dan 50% voordat de dienst is geleverd, en nooit het volledige bedrag vooraf.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 9 OPVOLGING 1/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">04</span><span class="cat-title">Opvolging en problemen</span><span class="cat-sub">Scripts 16 t/m 18</span></div>
+  <p class="body-text" style="margin-bottom:4mm;">Leveranciers die niet reageren of afspraken niet nakomen vragen om een directe maar professionele aanpak. Gebruik deze scripts.</p>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 16</span><span class="script-title">Geen reactie, eerste opvolging</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je hebt 48 uur geleden een bericht gestuurd zonder reactie</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Op [datum] heb ik u een bericht gestuurd maar nog geen reactie ontvangen. Ik begrijp dat u het druk heeft. Kunt u mij laten weten wanneer u tijd heeft om te reageren? Ik hoor graag van u."</p>
+      <p class="script-note">Vriendelijk maar duidelijk. Dit geeft de leverancier de kans om te reageren zonder zich aangevallen te voelen.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 17</span><span class="script-title">Geen reactie, tweede opvolging</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Na de eerste opvolging nog steeds geen reactie</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Dit is mijn tweede bericht zonder reactie. Ik heb uw diensten graag geboekt, maar ik heb voor [datum] een antwoord nodig om een beslissing te kunnen maken. Als ik voor die datum niets hoor, ga ik verder met een andere leverancier."</p>
+      <p class="script-note">Stel een concrete deadline. Dit creëert urgentie zonder agressief te zijn.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 18</span><span class="script-title">Afspraak die niet nagekomen is</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Er is een afspraak gemaakt die niet is nagekomen</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Op [datum] heeft u toegezegd om [wat er beloofd was]. Dit is tot nu toe niet gebeurd. Ik verzoek u vriendelijk dit alsnog te doen voor [datum]. Kunt u mij bevestigen wanneer dit geregeld wordt?"</p>
+      <p class="script-note">Verwijs altijd naar de specifieke afspraak met datum. Hoe concreter je bent, hoe moeilijker het is om te omzeilen.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 10 OPVOLGING 2/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">04</span><span class="cat-title">Opvolging en problemen</span><span class="cat-sub">Scripts 19 t/m 20</span></div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 19</span><span class="script-title">Annulering door jou</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je moet de boeking annuleren</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Tot mijn spijt moet ik de boeking voor [datum] annuleren. Ik verzoek u de annuleringsregeling uit ons contract toe te passen en mij schriftelijk te bevestigen welk bedrag ik terugkrijg en wanneer. Bedankt voor uw begrip."</p>
+      <p class="script-note">Verwijs altijd naar het contract bij een annulering. Heb je geen contract dan is dit moeilijker. Reden te meer om altijd een contract te hebben.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 20</span><span class="script-title">Terugbetaling vragen</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je hebt recht op terugbetaling maar ontvangt niets</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Op [datum] heb ik de boeking geannuleerd. Volgens onze overeenkomst heb ik recht op terugbetaling van [bedrag]. Ik heb dit bedrag nog niet ontvangen. Kunt u mij laten weten wanneer de betaling gedaan wordt? Als ik voor [datum] niets heb ontvangen, ben ik genoodzaakt verdere stappen te ondernemen."</p>
+      <p class="script-note">"Verdere stappen ondernemen" is bewust vaag. Dit kan juridisch zijn, maar ook een melding bij de Consumentenbond of een publieke review. Dat weet de leverancier ook.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Als ze blijven zwijgen</span>
+    <p class="tip-text">Na drie berichten zonder reactie stuur je een aangetekende brief via de post. Dit is juridisch sterker dan WhatsApp en toont aan dat je serieus bent. Bewaar alle berichten als bewijs.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 11 DAG-VAN 1/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">05</span><span class="cat-title">Dag-van en klachten</span><span class="cat-sub">Scripts 21 t/m 23</span></div>
+  <p class="body-text" style="margin-bottom:4mm;">Op de feestdag zelf is er geen tijd voor lange gesprekken. Gebruik deze korte, directe berichten om snel te handelen.</p>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 21</span><span class="script-title">Leverancier te laat op de dag zelf</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De leverancier is niet op tijd aanwezig</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>U zou om [tijdstip] aanwezig zijn maar we zien u nog niet. Kunt u mij laten weten waar u bent en wanneer u arriveert? Wij rekenen op u."</p>
+      <p class="script-note">Kort en direct. Geen uitleg nodig. Dit is de dag zelf, alles staat op het spel. Bel ook direct na dit bericht.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 22</span><span class="script-title">Service wijkt af van de afspraak</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: De geleverde dienst klopt niet met wat er is afgesproken</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik zie dat [beschrijf het probleem] niet overeenkomt met wat we hebben afgesproken in ons contract. In het contract staat [wat er afgesproken was]. Kunt u dit direct rechtzetten? Ik verwacht dat u de afgesproken dienst levert."</p>
+      <p class="script-note">Verwijs altijd naar het contract. Heb het contract bij de hand op de feestdag, bij voorkeur als screenshot op je telefoon.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 23</span><span class="script-title">Formele klacht indienen na het feest</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Het feest is voorbij en er zijn zaken niet goed verlopen</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ik wil u laten weten dat ik niet tevreden ben over de geleverde dienst op [datum]. Specifiek betreft het [beschrijf het probleem]. Dit is niet in overeenstemming met onze overeenkomst. Ik verzoek u om een passende oplossing, namelijk [wat je verwacht: terugbetaling / aanvulling / etc.]. Kunt u mij voor [datum] laten weten hoe u dit oplost?"</p>
+      <p class="script-note">Wees concreet en specifiek. Vage klachten zijn moeilijk op te lossen of te negeren. Bewaar alle bewijs voor je dit bericht verstuurt.</p>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 12 DAG-VAN 2/2 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="cat-header"><span class="cat-num">05</span><span class="cat-title">Dag-van en klachten</span><span class="cat-sub">Scripts 24 t/m 25</span></div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 24</span><span class="script-title">Bevestiging sturen een week voor het feest</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Je stuurt een week van tevoren een bevestigingsbericht</span>
+      <p class="script-text">"Goedemiddag [naam],<br><br>Ons feest is over één week op [datum] in [locatie]. Ik wil graag de afspraken bevestigen: u bent aanwezig om [tijdstip] voor [wat ze leveren]. Klopt dit? Als dit correct is, stuur mij dan een bevestiging. Dan zie ik u volgende week."</p>
+      <p class="script-note">Stuur dit altijd één week voor het feest. Dit voorkomt verrassingen en toont dat jij georganiseerd bent.</p>
+    </div>
+  </div>
+
+  <div class="script-card">
+    <div class="script-header"><span class="script-num">Script 25</span><span class="script-title">Positieve review vragen na het feest</span></div>
+    <div class="script-body">
+      <span class="script-tag">Situatie: Het feest was geweldig en je wilt de leverancier bedanken</span>
+      <p class="script-text">"Hoi [naam],<br><br>Ik wil je heel erg bedanken voor je geweldige werk op [datum]. We zijn heel blij met hoe alles verlopen is. Als je wilt, laat ik graag een review achter op [Google / Instagram]. Zou jij ook bereid zijn om mij als referentie te noemen bij anderen?"</p>
+      <p class="script-note">Reviews en referenties helpen goede leveranciers groeien. Help degenen die het verdienen, dat versterkt de hele branche.</p>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Bewaar altijd alles</span>
+    <p class="tip-text">Sla alle WhatsApp-gesprekken op. Maak screenshots van beloften, prijsafspraken en bevestigingen. Exporteer WhatsApp-chats naar e-mail als back-up. Dit is jouw bewijs als er ooit een conflict ontstaat.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- PAGINA 13 SNELREFERENTIE -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <span class="page-label">Overzicht</span>
+  <h1 class="page-title">Alle 25 scripts <em>op één pagina</em></h1>
+  <p class="body-text" style="margin-bottom:4mm;">Gebruik dit als snelreferentie om snel het juiste script te vinden.</p>
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 3mm;">Eerste contact en informatie</h3>
+      <div style="font-size:8.5pt;line-height:2.1;color:var(--dark);">
+        <div>01 &nbsp; Eerste contact opnemen</div>
+        <div>02 &nbsp; Schriftelijke offerte opvragen</div>
+        <div>03 &nbsp; Portfolio en werk opvragen</div>
+        <div>04 &nbsp; Beschikbaarheid controleren</div>
+        <div>05 &nbsp; Ervaring met dit type feest navragen</div>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;margin-top:4mm;background:var(--beige);padding:2mm 3mm;">Prijsonderhandeling</h3>
+      <div style="font-size:8.5pt;line-height:2.1;color:var(--dark);">
+        <div>06 &nbsp; Korting vragen</div>
+        <div>07 &nbsp; Concurrent offerte vergelijken</div>
+        <div>08 &nbsp; Prijs die gestegen is</div>
+        <div>09 &nbsp; Wat is inbegrepen?</div>
+        <div>10 &nbsp; Offerte beleefd afwijzen</div>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;margin-top:4mm;background:var(--beige);padding:2mm 3mm;">Contracten en betaling</h3>
+      <div style="font-size:8.5pt;line-height:2.1;color:var(--dark);">
+        <div>11 &nbsp; Contract opvragen</div>
+        <div>12 &nbsp; Aanpassing in contract vragen</div>
+        <div>13 &nbsp; Aanbetaling te hoog</div>
+        <div>14 &nbsp; Betalingsbewijs opvragen</div>
+        <div>15 &nbsp; Datumwijziging doorgeven</div>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;background:var(--beige);padding:2mm 3mm;">Opvolging en problemen</h3>
+      <div style="font-size:8.5pt;line-height:2.1;color:var(--dark);">
+        <div>16 &nbsp; Geen reactie, eerste opvolging</div>
+        <div>17 &nbsp; Geen reactie, tweede opvolging</div>
+        <div>18 &nbsp; Afspraak niet nagekomen</div>
+        <div>19 &nbsp; Annulering door jou</div>
+        <div>20 &nbsp; Terugbetaling vragen</div>
+      </div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;color:var(--dark);margin-bottom:3mm;margin-top:4mm;background:var(--beige);padding:2mm 3mm;">Dag-van en klachten</h3>
+      <div style="font-size:8.5pt;line-height:2.1;color:var(--dark);">
+        <div>21 &nbsp; Leverancier te laat</div>
+        <div>22 &nbsp; Service wijkt af van afspraak</div>
+        <div>23 &nbsp; Formele klacht indienen</div>
+        <div>24 &nbsp; Bevestiging week van tevoren</div>
+        <div>25 &nbsp; Review vragen na feest</div>
+      </div>
+      <div class="tip-box" style="margin-top:5mm;">
+        <span class="tip-label">Onthoud</span>
+        <p class="tip-text">Pas elk script aan op jouw eigen woorden en situatie. De toon is een richtlijn. Jouw persoonlijkheid maakt het effectiever.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>WhatsApp Scripts Bundel</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools, begeleiding en transparantie vind je op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">Rode Vlaggen Gids &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">De Ziana / Bridalstylist Gids &middot; &euro;39</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);letter-spacing:1px;">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);letter-spacing:1px;">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+
+</body>
+</html>

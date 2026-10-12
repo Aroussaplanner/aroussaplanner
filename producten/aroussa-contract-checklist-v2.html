@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Contract Checklist · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E;--red:#C0392B;--green:#27AE60}
+body{background:#d0c8be;font-family:'Montserrat',sans-serif;font-weight:300;color:var(--dark);font-size:10pt}
+.page{width:210mm;min-height:297mm;background:var(--ivory);margin:12mm auto;padding:21mm 15mm 18mm;position:relative;page-break-after:always;break-after:page;overflow:hidden}
+@media print{body{background:none}.page{margin:0;padding:19mm 13mm 16mm;box-shadow:none}.no-print{display:none}}
+.wm{position:absolute;left:50%;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:3px;white-space:nowrap;pointer-events:none;z-index:0;color:rgba(196,168,130,0.08)}
+.wm-mid{top:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:22pt}
+.wm-top{top:20%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.wm-bot{top:78%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.klant-balk{position:absolute;top:0;left:0;right:0;background:var(--darker);padding:1.8mm 5mm;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.klant-balk span{font-size:5.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,168,130,0.4)}
+.klant-balk .kcode{color:rgba(196,168,130,0.65)!important}
+.page>*:not(.wm):not(.klant-balk){position:relative;z-index:1}
+.page-footer{position:absolute;bottom:8mm;left:15mm;right:15mm;display:flex;justify-content:space-between;align-items:center;font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);border-top:0.5pt solid var(--gold);padding-top:3mm}
+.footer-code{color:rgba(196,168,130,0.5)!important;font-size:6pt}
+
+/* COVER */
+.cover{background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:297mm;padding:20mm}
+.cover .wm,.cover .klant-balk{display:none}
+.cover-brand{font-family:'Italiana',serif;font-size:28pt;color:var(--gold);letter-spacing:3px;margin-bottom:3mm}
+.cover-tagline{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:20mm}
+.cover-ornament{width:40mm;height:0.5pt;background:var(--gold);margin:0 auto 20mm;opacity:0.5}
+.cover-label{font-size:8pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6mm}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:40pt;font-weight:300;color:var(--ivory);line-height:1.05;margin-bottom:6mm}
+.cover-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14pt;color:rgba(247,242,234,0.6);line-height:1.4;max-width:120mm;margin:0 auto 16mm}
+.cover-klant{background:rgba(196,168,130,0.08);border:0.5pt solid rgba(196,168,130,0.3);padding:4mm 10mm;margin-bottom:12mm}
+.cover-klant-label{font-size:7pt;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:2mm}
+.cover-klant-naam{font-family:'Cormorant Garamond',serif;font-size:16pt;color:var(--gold);font-weight:300}
+.cover-klant-code{font-size:8pt;color:var(--bronze);margin-top:2mm;font-weight:600;letter-spacing:2px}
+.cover-price{display:inline-block;border:0.5pt solid rgba(196,168,130,0.4);padding:3mm 8mm;font-size:9pt;color:var(--gold);font-weight:600;letter-spacing:2px;margin-bottom:8mm}
+.cover-bottom{font-size:7pt;color:var(--warm);letter-spacing:2px;text-transform:uppercase}
+
+/* TYPOGRAFIE */
+.page-label{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:3mm;display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:24pt;font-weight:400;color:var(--dark);line-height:1.1;margin-bottom:4mm}
+.page-title em{font-style:italic;color:var(--bronze)}
+.body-text{font-size:9pt;line-height:1.75;color:var(--dark);margin-bottom:3mm}
+.divider{height:0.5pt;background:var(--gold);opacity:0.3;margin:4mm 0}
+.tip-box{background:var(--sand);border-left:2pt solid var(--gold);padding:3mm 4mm;margin:3mm 0}
+.tip-label{font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;display:block}
+.tip-text{font-size:8.5pt;line-height:1.6;color:var(--dark)}
+
+/* CONTRACT BLOK */
+.contract-block{margin-bottom:5mm}
+.contract-header{background:var(--dark);padding:3.5mm 5mm;display:flex;justify-content:space-between;align-items:center;margin-bottom:0}
+.contract-title{font-family:'Cormorant Garamond',serif;font-size:15pt;font-weight:400;color:var(--ivory)}
+.contract-sub{font-size:7.5pt;color:var(--warm)}
+.contract-info{background:var(--beige);padding:2.5mm 4mm;display:grid;grid-template-columns:1fr 1fr 1fr;gap:2mm;margin-bottom:0}
+.ci-label{font-size:6.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);margin-bottom:1mm;display:block}
+.inf{display:inline-block;border-bottom:0.75pt solid var(--gold);min-width:28mm;height:3.5mm;vertical-align:bottom}
+.inf-sm{min-width:16mm}
+.inf-full{display:block;width:100%;border-bottom:0.75pt solid rgba(196,168,130,0.3);height:3.5mm}
+
+/* CHECKLIST */
+.check-section{background:var(--ivory)}
+.check-row{display:flex;gap:2.5mm;align-items:flex-start;padding:2mm 4mm;border-bottom:0.5pt solid rgba(196,168,130,0.12)}
+.check-row:nth-child(even){background:var(--sand)}
+.check-box{width:4mm;height:4mm;border:0.75pt solid var(--gold);flex-shrink:0;margin-top:0.8mm}
+.check-box-red{border-color:var(--red)}
+.check-text{font-size:8.5pt;line-height:1.45;color:var(--dark);flex:1}
+.check-note{font-size:7pt;color:var(--warm);font-style:italic;margin-top:0.5mm;display:block}
+.check-status{display:flex;gap:2mm;align-items:center;margin-left:2mm;flex-shrink:0}
+.status-opt{font-size:6.5pt;color:var(--warm);display:flex;align-items:center;gap:1mm;white-space:nowrap}
+.status-box{width:3mm;height:3mm;border:0.5pt solid var(--warm)}
+
+/* SCORE BALK */
+.score-balk{background:var(--dark);padding:3mm 5mm;display:flex;justify-content:space-between;align-items:center}
+.score-label{font-size:7.5pt;color:var(--warm)}
+.score-val{font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:300;color:var(--gold)}
+
+/* TOC */
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.toc-title{font-size:10pt;color:var(--dark)}
+.toc-dots{flex:1;border-bottom:0.5pt dotted rgba(196,168,130,0.4);margin:0 3mm 1mm}
+.toc-page{font-size:9pt;color:var(--warm);flex-shrink:0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+
+.print-btn{position:fixed;top:15px;right:15px;background:#2D2520;color:#F7F2EA;border:none;padding:10px 24px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;z-index:999}
+.print-btn:hover{background:#C4A882;color:#2D2520}
+</style>
+<script>
+const p=new URLSearchParams(window.location.search);
+const KN=p.get('naam')?decodeURIComponent(p.get('naam')).toUpperCase():'AROUSSA KLANT';
+const KC=p.get('code')?p.get('code').toUpperCase():'ARO-0000';
+const WT=KN+' \u00b7 '+KC;
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.wm').forEach(e=>{e.textContent=WT});
+  document.querySelectorAll('.kn').forEach(e=>{e.textContent=KN});
+  document.querySelectorAll('.kc').forEach(e=>{e.textContent=KC});
+  const cn=document.getElementById('cv-naam');const cc=document.getElementById('cv-code');
+  if(cn)cn.textContent=KN==='AROUSSA KLANT'?'[Naam klant]':KN;
+  if(cc)cc.textContent='Bestelcode: '+KC;
+});
+</script>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">Juridische Bescherming Tool</div>
+  <div class="cover-title">Contract<br>Checklist</div>
+  <div class="cover-subtitle">Controleer elk contract voordat je tekent &mdash; per leverancier, punt voor punt</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cv-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cv-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">&euro;25</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- P2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Welkom</span>
+  <h1 class="page-title">Waarom elk contract <em>checken?</em></h1>
+  <p class="body-text">Een contract beschermt jou alleen als het de juiste punten bevat. Een slecht contract is soms gevaarlijker dan geen contract, omdat het je een vals gevoel van zekerheid geeft. Gebruik deze checklist vóór je tekent, niet erna.</p>
+  <div class="divider"></div>
+
+  <div class="two-col" style="margin-bottom:3mm;">
+    <div class="tip-box"><span class="tip-label">De regel die alles bepaalt</span><p class="tip-text">Eerst contract tekenen, dan pas aanbetaling doen. Nooit andersom. Elke leverancier die andersom vraagt, geeft je een signaal over hoe ze met jou zullen omgaan.</p></div>
+    <div class="tip-box"><span class="tip-label">Wat staat er niet in?</span><p class="tip-text">Wat niet schriftelijk staat, is niet afgesproken. "Dat doen we er gewoon bij" of "Dat spreek ik wel mondeling af" zijn geen afspraken. Als het er niet in staat, laat je het aanpassen voor je tekent.</p></div>
+  </div>
+
+  <div class="divider"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">Inhoud</h3>
+  <div class="toc-item"><span class="toc-title">Algemene contractpunten &mdash; elke leverancier</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+  <div class="toc-item"><span class="toc-title">Feestzaal &amp; locatie</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
+  <div class="toc-item"><span class="toc-title">Catering</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">Ziana / Bridalstylist</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  <div class="toc-item"><span class="toc-title">Fotograaf &amp; Videograaf</span><span class="toc-dots"></span><span class="toc-page">7</span></div>
+  <div class="toc-item"><span class="toc-title">DJ &amp; Muziek</span><span class="toc-dots"></span><span class="toc-page">8</span></div>
+  <div class="toc-item"><span class="toc-title">Decoratie</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+  <div class="toc-item"><span class="toc-title">Aanbetalingen &amp; betalingsregeling</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+  <div class="toc-item"><span class="toc-title">Scoreoverzicht &amp; samenvatting</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-item"><span class="toc-title">Notities &amp; opmerkingen per leverancier</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+
+  <div class="tip-box" style="margin-top:3mm;">
+    <span class="tip-label">Hoe gebruik je deze checklist</span>
+    <p class="tip-text">Vink elk punt aan zodra het schriftelijk bevestigd is in het contract. Staat iets niet in het contract? Vraag de leverancier om aanpassing vóór je tekent. Bij elke checklist is ruimte voor een notitie of paginanummer in het contract zodat je snel terugvindt waar de afspraak staat.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P3 ALGEMENE CONTRACTPUNTEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Van toepassing op elk contract</span>
+  <h1 class="page-title">Algemene <em>contractpunten</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Deze punten horen in elk contract te staan, ongeacht de leverancier. Controleer ze altijd als eerste.</p>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Basis van elk contract</span><span class="contract-sub">Verplicht aanwezig</span></div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Naam en contactgegevens van beide partijen zijn vermeld<span class="check-note">Jouw naam EN de naam/handelsnaam van de leverancier staan beide in het contract.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Datum van het feest staat schriftelijk vermeld<span class="check-note">Dag, maand en jaar. Een datum "half augustus" is geen contract.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Adres van de locatie staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">De dienst is concreet en gedetailleerd omschreven<span class="check-note">Niet "volledige begeleiding". Wel: hoeveel uur, wat precies, door wie.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">De totaalprijs staat vermeld inclusief eventuele BTW</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Betalingsregeling is opgenomen (aanbetaling, restbetaling, datum)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen<span class="check-note">Wat als jij annuleert? Wat als de leverancier uitvalt of annuleert?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Wat er gebeurt bij wanprestatie of niet-nakoming staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Handtekening van de leverancier aanwezig</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Datum van ondertekening aanwezig</div></div>
+    </div>
+  </div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Rode vlaggen in contracten</span><span class="contract-sub">Stop, vraag uitleg</span></div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box check-box-red"></div><div class="check-text" style="color:var(--red);">Clausule dat de prijs nog kan wijzigen zonder jouw akkoord<span class="check-note" style="color:rgba(192,57,43,0.7);">Prijs staat vast op moment van tekenen. Geen uitzonderingen.</span></div></div>
+      <div class="check-row"><div class="check-box check-box-red"></div><div class="check-text" style="color:var(--red);">Volledige betaling vooraf vereist vóór ondertekening<span class="check-note" style="color:rgba(192,57,43,0.7);">Altijd: contract tekenen, dan pas betalen.</span></div></div>
+      <div class="check-row"><div class="check-box check-box-red"></div><div class="check-text" style="color:var(--red);">Geen annuleringsregeling voor de leverancier zelf<span class="check-note" style="color:rgba(192,57,43,0.7);">Als de leverancier uitvalt, heb jij recht op terugbetaling en/of vervanging.</span></div></div>
+      <div class="check-row"><div class="check-box check-box-red"></div><div class="check-text" style="color:var(--red);">Vage omschrijving van de dienst ("volledige service", "alles inbegrepen")<span class="check-note" style="color:rgba(192,57,43,0.7);">Vraag om specificatie. Vaag is niets waard voor de rechter.</span></div></div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Twijfel je aan een clausule?</span>
+    <p class="tip-text">Stuur de leverancier een WhatsApp met de vraag om uitleg of aanpassing. Gebruik Script 12 uit de WhatsApp Scripts Bundel voor de juiste bewoording. Je hoeft niets te tekenen wat je niet volledig begrijpt.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P4 FEESTZAAL -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Feestzaal &amp; Locatie</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam zaal</span><span class="inf"></span></div>
+      <div><span class="ci-label">Contractdatum</span><span class="inf"></span></div>
+      <div><span class="ci-label">Totaalprijs</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Datum, begintijd en eindtijd staan schriftelijk vermeld<span class="check-note">Inclusief of het feest tot 02:00 of 03:00 mag doorlopen. Eindtijd muziek apart vermeld?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Welke ruimtes zijn gereserveerd staat concreet omschreven<span class="check-note">Zaalopstelling, gebruik van keuken, kleedkamers, terras. Alles wat relevant is staat erin.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Maximale capaciteit voor het feest staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Is eigen catering toegestaan? Staat dit schriftelijk?<span class="check-note">Sommige zalen verplichten eigen catering te gebruiken of rekenen een horecavergoeding.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Horecavergoeding of cateringuitkoopbedrag is vermeld<span class="check-note">Bij De Parel bijv. €12,50 p.p. min. €2.500. Dit hoort expliciet in het contract.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Schoonmaakkosten en/of borgbedrag zijn vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Beveiligingskosten zijn vermeld (indien van toepassing)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Parkeerregeling voor gasten is besproken en vastgelegd</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Opbouwtijd decorateur is opgenomen (wanneer mogen zij binnen)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Afbouwtijd en opruimregeling staan vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Naam aanspreekpunt dag-van staat in het contract</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Geluidsregels en eindtijd muziek staan schriftelijk</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Is de datum exclusief gereserveerd? Staan er andere evenementen die dag?</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Prijswijziging alleen met schriftelijk akkoord beide partijen</div></div>
+    </div>
+    <div class="score-balk">
+      <span class="score-label">Aangevinkt:</span>
+      <span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 15</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Let extra op bij Marokkaanse feesten</span>
+    <p class="tip-text">Zijn gescheiden ruimtes voor mannen en vrouwen mogelijk? Heeft de zaal een hoge genoeg plafond voor de 3amaria? Is er een aparte ingang voor backstage? Zijn de keukenruimtes groot genoeg voor Marokkaanse catering?</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P5 CATERING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Catering</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam cateraar</span><span class="inf"></span></div>
+      <div><span class="ci-label">Prijs per persoon</span><span class="inf"></span></div>
+      <div><span class="ci-label">Aantal gasten</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Prijs per persoon staat schriftelijk vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Minimum en maximum gastaantal staat vermeld<span class="check-note">Wat als het aantal gasten wijzigt? Welke range accepteert de cateraar zonder meerprijs?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Halal-garantie staat expliciet en schriftelijk in het contract<span class="check-note">Niet mondeling bevestigd, maar zwart op wit. Dit is niet onderhandelbaar.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Menuomschrijving is opgenomen (welke gangen, welke gerechten)<span class="check-note">Bastilla, soep, hoofdgerecht (kip / lamsvlees / vis), garnituur, dessert, thee, brood.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Bediening inbegrepen staat vermeld (ja of nee)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aankomsttijd cateraar voor opbouw staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Opruimtijd na het feest staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Dranken (al dan niet inbegrepen) staan omschreven<span class="check-note">Frisdrank, sap, thee, water. Zijn deze inbegrepen in de prijs per persoon?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Bruidstaart en zoetjes staan vermeld (inbegrepen of apart)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Allergieën en dieetwensen gasten kunnen worden doorgegeven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Wat er bij wijziging gastenaantal (meer/minder) geldt staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Betalingsregeling staat vermeld (aanbetaling, restbetaling, datum)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Eventuele huurkosten servies/bestek/tafeldecoratie zijn vermeld</div></div>
+    </div>
+    <div class="score-balk">
+      <span class="score-label">Aangevinkt:</span>
+      <span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 14</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">De halal-garantie</span>
+    <p class="tip-text">Vraag expliciet om de certificering of leveranciersnaam voor het halal-vlees. "Wij werken altijd halal" is niet voldoende. Een naam of certificaat schriftelijk is het enige dat telt.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P6 ZIANA -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Ziana / Bridalstylist</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam Ziana</span><span class="inf"></span></div>
+      <div><span class="ci-label">Pakketprijs</span><span class="inf"></span></div>
+      <div><span class="ci-label">Borgbedrag</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aantal lebsa's / outfits staat vermeld met beschrijving<span class="check-note">Niet "2 jurken" maar omschrijving per outfit. Of tenminste de namen / kleuren.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Make-up per outfit inbegrepen staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Haarstyling per outfit inbegrepen staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Sieraden en sluiers inbegrepen (huur of eigendom) staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aankomsttijd dag-van staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Eindtijd aanwezigheid staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Eventuele assistente staat vermeld (wie, aanwezig ja/nee)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Reiskosten staan vermeld (inbegrepen of apart, tot welke afstand)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Borgbedrag voor huuritems staat vermeld<span class="check-note">Per lebsa, per sieraad, per extension. En wanneer het wordt terugbetaald.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Retourdatum voor huuritems staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Back-up regeling bij ziekte of uitval staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Hijab-styling (indien van toepassing) staat bevestigd</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Henna-avond styling (inbegrepen of apart) staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Designer toeslagen zijn vermeld als van toepassing</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Betalingsregeling staat vermeld (aanbetaling, restbetaling)</div></div>
+    </div>
+    <div class="score-balk">
+      <span class="score-label">Aangevinkt:</span>
+      <span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 16</span>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">De volgorde bij de Ziana</span>
+    <p class="tip-text">Intake. Jurken passen. Proef make-up en haar. Contract tekenen. Dan pas aanbetaling. Nooit eerder betalen dan tekenen. Wie vraagt om betaling voor het contract klaar is, geeft een signaal.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P7 FOTOGRAAF -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Fotograaf &amp; Videograaf</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam fotograaf</span><span class="inf"></span></div>
+      <div><span class="ci-label">Prijs</span><span class="inf"></span></div>
+      <div><span class="ci-label">Naam videograaf</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aanwezig van hoe laat tot hoe laat staat vermeld<span class="check-note">Inclusief of getting-ready shots inbegrepen zijn.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Minimum aantal bewerkte foto's staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Levertijd voor de foto's staat vermeld<span class="check-note">Gemiddeld 4 tot 8 weken. Leg het schriftelijk vast.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Hoe worden de foto's geleverd staat omschreven (digitaal, USB, print)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Auteursrecht en gebruiksrecht staan omschreven<span class="check-note">Mag jij de foto's printen, verkopen, op sociale media plaatsen? Mag de fotograaf ze gebruiken voor promotie?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Back-up regeling bij ziekte of uitval staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Wat er bij verlies van beeldmateriaal geldt staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Eventuele assistentfotograaf staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Reiskosten staan vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 10</span></div>
+  </div>
+
+  <div style="height:3mm;"></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Video specifiek</span><span class="contract-sub"></span></div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Lengte van de video staat vermeld (korte clip, volledige film, beide)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Reels voor sociale media (ja/nee) en levertijd staan vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Muziek in de video (licenties, eigen keuze, royalty-free) is besproken</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Levertijd voor de video staat vermeld</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 4</span></div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Foto's van de 3amaria en entrees</span>
+    <p class="tip-text">Geef de fotograaf een schriftelijke lijst van must-have shots: elke outfit-entree, de gorzja, de melk- en dadelceremonie, de 3amaria, de taartceremonie en de families. Bespreek dit voor het feest en leg het vast in bijlage bij het contract.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P8 DJ & MUZIEK -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">DJ &amp; Muziek</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam DJ</span><span class="inf"></span></div>
+      <div><span class="ci-label">Prijs</span><span class="inf"></span></div>
+      <div><span class="ci-label">Naam groep / Dakka</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aankomst- en opbouwtijd staat vermeld<span class="check-note">Minimaal 1,5 tot 2 uur voor het feest begint voor opbouw en soundcheck.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Speeltijd van hoe laat tot hoe laat staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Eindtijd muziek staat vermeld en is in lijn met de zaalregels</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Prijs voor extra uren staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Geluidsapparatuur (eigen set of zaalinstallatie) staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Back-up apparatuur staat vermeld (wat bij technisch defect)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Back-up DJ bij ziekte of uitval staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Stijl muziek staat omschreven (Arabisch, Marokkaans, Berber, westers)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Ruimte voor muziekwensen of verboden nummers staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 10</span></div>
+  </div>
+
+  <div style="height:3mm;"></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Dakka Marrakchia / Muziekgroep</span><span class="contract-sub">Indien van toepassing</span></div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aantal optredens en duur per optreden staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aankomsttijd en vertrekttijd staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aantal personen in de groep staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Ruimtevereisten (hoogte, oppervlakte) zijn besproken met de zaal</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Catering voor de groep (indien vereist) staat omschreven</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 5</span></div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Zaal en DJ op één lijn</span>
+    <p class="tip-text">Controleer of de zaal de eindtijd die de DJ verwacht ook toestaat. Een DJ die tot 02:00 boekt terwijl de zaal om 24:00 sluit is een conflict dat jij vooraf oplost, niet op de dag zelf.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P9 DECORATIE -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">Decoratie &amp; Styling</span><span class="contract-sub">Vul eerst in</span></div>
+    <div class="contract-info">
+      <div><span class="ci-label">Naam decorateur</span><span class="inf"></span></div>
+      <div><span class="ci-label">Totaalprijs</span><span class="inf"></span></div>
+      <div><span class="ci-label">Contractdatum</span><span class="inf"></span></div>
+    </div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Itemlijst van alle geleverde decoratie staat in het contract<span class="check-note">Tafelkleden, stoelhoezen, bloemen, verlichting, backdrop, kandelaars, etc. Per item.</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Opbouwtijd (wanneer zijn ze in de zaal) staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Afbouwtijd staat vermeld en is in lijn met de zaalovereenkomst</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Wat zijn huuritems en wat zijn eigendomsitems staat omschreven</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Retourverplichting voor huuritems staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Wat er bij beschadiging van huuritems geldt staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Alternatief bij niet-leverbare items staat omschreven<span class="check-note">Wat als de bloemen die zijn beloofd niet beschikbaar zijn? Wie beslist dan?</span></div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Bruidsbank / bruidsstoelen staan vermeld (inbegrepen of apart)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Kleur en stijl zijn schriftelijk of via moodboard vastgelegd</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Verlichting en type verlichting staan vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Annuleringsregeling voor beide kanten is opgenomen</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Betalingsregeling staat vermeld</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 12</span></div>
+  </div>
+
+  <div style="height:3mm;"></div>
+
+  <div class="contract-block">
+    <div class="contract-header"><span class="contract-title">3amaria &amp; Specials</span><span class="contract-sub">Indien van toepassing</span></div>
+    <div class="check-section">
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Aankomsttijd en vertrekttijd draagstoel en team staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Borgbedrag en retourverplichting staat vermeld</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">Kledij voor dragers inbegrepen staat vermeld</div></div>
+    </div>
+    <div class="score-balk"><span class="score-label">Aangevinkt:</span><span class="score-val"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span> / 3</span></div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Moodboard als contractbijlage</span>
+    <p class="tip-text">Voeg je moodboard toe als bijlage bij het decoratiecontract. Vraag de decorateur schriftelijk te bevestigen dat de geleverde decoratie hiermee overeenkomt. Dit geeft je juridisch houvast als de uitvoering afwijkt van wat jij had verwacht.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P10 AANBETALINGEN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Financieel overzicht</span>
+  <h1 class="page-title">Aanbetalingen &amp; <em>betalingsregeling</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Gebruik dit overzicht om per leverancier de betalingsregeling vast te leggen en te bewaken.</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:8pt;margin-bottom:4mm;">
+    <thead>
+      <tr>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:22%;">Leverancier</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:13%;">Totaal</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:13%;">Aanbetaling</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:14%;">Datum betaald</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:13%;">Restbetaling</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:14%;">Datum rest</th>
+        <th style="background:var(--beige);padding:2mm 3mm;text-align:center;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold);width:11%;">Factuur</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Feestzaal</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Catering</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Ziana / Bridalstylist</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Fotograaf</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">DJ</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Decorateur</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Videograaf</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);">Overig</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><div style="width:4mm;height:4mm;border:0.75pt solid var(--gold);margin:auto;"></div></td></tr>
+      <tr style="background:var(--dark);">
+        <td style="padding:2.5mm 3mm;color:var(--gold);font-weight:600;font-size:8.5pt;">TOTAAL</td>
+        <td style="padding:2.5mm 3mm;"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span></td>
+        <td style="padding:2.5mm 3mm;"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span></td>
+        <td colspan="4" style="padding:2.5mm 3mm;color:rgba(155,142,126,0.6);font-size:7.5pt;font-style:italic;">Altijd per bank. Altijd factuur bewaren.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="two-col">
+    <div class="tip-box"><span class="tip-label">Drie betaalregels</span><p class="tip-text">Altijd per bank betalen zodat er een spoor is. Nooit meer dan 50% vooraf. Nooit het volledige bedrag voor de dienst is geleverd.</p></div>
+    <div class="tip-box"><span class="tip-label">Factuur bij elke betaling</span><p class="tip-text">Vraag na elke betaling een factuur of kwitantie. Bewaar ze allemaal op één plek. Dit is jouw bewijs bij een conflict.</p></div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P11 SCOREOVERZICHT -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Jouw overzicht</span>
+  <h1 class="page-title">Scoreoverzicht <em>per leverancier</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Vul hier het aantal aangevinkte punten per leverancier in. Zo zie je in één oogopslag welke contracten volledig zijn en welke nog aandacht nodig hebben.</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:8.5pt;margin-bottom:4mm;">
+    <thead>
+      <tr>
+        <th style="background:var(--dark);padding:2.5mm 3mm;text-align:left;color:var(--ivory);font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1pt solid var(--gold);width:30%;">Leverancier</th>
+        <th style="background:var(--dark);padding:2.5mm 3mm;text-align:center;color:var(--ivory);font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1pt solid var(--gold);width:15%;">Max. punten</th>
+        <th style="background:var(--dark);padding:2.5mm 3mm;text-align:center;color:var(--ivory);font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1pt solid var(--gold);width:15%;">Jouw score</th>
+        <th style="background:var(--dark);padding:2.5mm 3mm;text-align:left;color:var(--ivory);font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1pt solid var(--gold);width:40%;">Status / actie</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Feestzaal</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">15</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Catering</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">14</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Ziana / Bridalstylist</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">16</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Fotograaf</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">10</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Videograaf</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">4</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">DJ</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">10</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Dakka / Muziekgroep</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">5</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr style="background:var(--sand);"><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">Decoratie</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">12</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-weight:500;">3amaria</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;color:var(--warm);">3</td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:center;"><span class="inf inf-sm"></span></td><td style="padding:2.5mm 3mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);"><span class="inf" style="min-width:50mm;"></span></td></tr>
+      <tr style="background:var(--dark);">
+        <td style="padding:2.5mm 3mm;color:var(--gold);font-weight:600;">TOTAAL</td>
+        <td style="padding:2.5mm 3mm;text-align:center;color:var(--gold);font-weight:600;">89</td>
+        <td style="padding:2.5mm 3mm;text-align:center;"><span class="inf inf-sm" style="border-color:rgba(196,168,130,0.4);"></span></td>
+        <td style="padding:2.5mm 3mm;color:var(--warm);font-size:7.5pt;font-style:italic;">Score 89/89 = alles contractueel geregeld</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <span class="tip-label">Wat betekent jouw score?</span>
+    <p class="tip-text">75 tot 89 aangevinkt: jouw contracten zijn grotendeels compleet. Bekijk de ontbrekende punten en vraag aanpassing. 50 tot 74: er zijn meerdere punten die aandacht nodig hebben. Ga terug naar de leveranciers. Onder 50: er missen cruciale afspraken. Zet alle contracten op de agenda voor aanpassing vóór je verdere aanbetalingen doet.</p>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P12 NOTITIES -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Notities</span>
+  <h1 class="page-title">Notities per <em>leverancier</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Schrijf hier vragen, ontbrekende punten of afspraken per leverancier die nog moeten worden opgenomen in het contract.</p>
+
+  <div class="two-col">
+    <div>
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Feestzaal</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Catering</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Ziana / Bridalstylist</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Fotograaf</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;"></div>
+    </div>
+    <div>
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">DJ &amp; Muziek</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Decoratie</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:1.5mm;"><span style="font-size:7.5pt;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bronze);">Overig / extra</span></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:1mm;"></div>
+      <div style="border-bottom:0.5pt solid rgba(196,168,130,0.2);height:9mm;margin-bottom:3mm;"></div>
+
+      <div style="background:var(--dark);padding:3mm 4mm;">
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;">Hulp nodig?</div>
+        <div style="font-size:8pt;color:rgba(247,242,234,0.75);line-height:1.6;">aroussaplanner.com<br>aroussaplanner@gmail.com</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Contract Checklist</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools en transparantie op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Rode Vlaggen Gids &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">WhatsApp Scripts Bundel &middot; &euro;29</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">De Ziana / Bridalstylist Gids &middot; &euro;39</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+</body>
+</html>

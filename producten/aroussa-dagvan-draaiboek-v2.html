@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<title>Dag-Van Draaiboek · Aroussa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:0}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E}
+body{background:#d0c8be;font-family:'Montserrat',sans-serif;font-weight:300;color:var(--dark);font-size:10pt}
+.page{width:210mm;min-height:297mm;background:var(--ivory);margin:12mm auto;padding:21mm 15mm 18mm;position:relative;page-break-after:always;break-after:page;overflow:hidden}
+@media print{body{background:none}.page{margin:0;padding:19mm 13mm 16mm;box-shadow:none}.no-print{display:none}}
+.wm{position:absolute;left:50%;font-family:'Montserrat',sans-serif;font-weight:700;letter-spacing:3px;white-space:nowrap;pointer-events:none;z-index:0;color:rgba(196,168,130,0.08)}
+.wm-mid{top:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:22pt}
+.wm-top{top:20%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.wm-bot{top:78%;transform:translate(-50%,-50%) rotate(-35deg);font-size:17pt}
+.klant-balk{position:absolute;top:0;left:0;right:0;background:var(--darker);padding:1.8mm 5mm;display:flex;justify-content:space-between;align-items:center;z-index:10}
+.klant-balk span{font-size:5.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(196,168,130,0.4)}
+.klant-balk .kcode{color:rgba(196,168,130,0.65)!important}
+.page>*:not(.wm):not(.klant-balk){position:relative;z-index:1}
+.page-footer{position:absolute;bottom:8mm;left:15mm;right:15mm;display:flex;justify-content:space-between;align-items:center;font-size:6.5pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);border-top:0.5pt solid var(--gold);padding-top:3mm}
+.footer-code{color:rgba(196,168,130,0.5)!important;font-size:6pt}
+/* COVER */
+.cover{background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:297mm;padding:20mm}
+.cover .wm,.cover .klant-balk{display:none}
+.cover-brand{font-family:'Italiana',serif;font-size:28pt;color:var(--gold);letter-spacing:3px;margin-bottom:3mm}
+.cover-tagline{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--warm);margin-bottom:20mm}
+.cover-ornament{width:40mm;height:0.5pt;background:var(--gold);margin:0 auto 20mm;opacity:0.5}
+.cover-label{font-size:8pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:6mm}
+.cover-title{font-family:'Cormorant Garamond',serif;font-size:40pt;font-weight:300;color:var(--ivory);line-height:1.05;margin-bottom:6mm}
+.cover-subtitle{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14pt;color:rgba(247,242,234,0.6);line-height:1.4;max-width:120mm;margin:0 auto 16mm}
+.cover-klant{background:rgba(196,168,130,0.08);border:0.5pt solid rgba(196,168,130,0.3);padding:4mm 10mm;margin-bottom:12mm}
+.cover-klant-label{font-size:7pt;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:2mm}
+.cover-klant-naam{font-family:'Cormorant Garamond',serif;font-size:16pt;color:var(--gold);font-weight:300}
+.cover-klant-code{font-size:8pt;color:var(--bronze);margin-top:2mm;font-weight:600;letter-spacing:2px}
+.cover-price{display:inline-block;border:0.5pt solid rgba(196,168,130,0.4);padding:3mm 8mm;font-size:9pt;color:var(--gold);font-weight:600;letter-spacing:2px;margin-bottom:8mm}
+.cover-bottom{font-size:7pt;color:var(--warm);letter-spacing:2px;text-transform:uppercase}
+/* TYPOGRAFIE */
+.page-label{font-size:7pt;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:3mm;display:block}
+.page-title{font-family:'Cormorant Garamond',serif;font-size:24pt;font-weight:400;color:var(--dark);line-height:1.1;margin-bottom:5mm}
+.page-title em{font-style:italic;color:var(--bronze)}
+.body-text{font-size:9pt;line-height:1.75;color:var(--dark);margin-bottom:3mm}
+.divider{height:0.5pt;background:var(--gold);opacity:0.3;margin:4mm 0}
+.tip-box{background:var(--sand);border-left:2pt solid var(--gold);padding:3mm 4mm;margin:3mm 0}
+.tip-label{font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;display:block}
+.tip-text{font-size:8.5pt;line-height:1.6;color:var(--dark)}
+/* TIJDLIJN */
+.timeline-row{display:grid;grid-template-columns:18mm 8mm 1fr;gap:0;margin-bottom:0;align-items:stretch}
+.tl-time{font-size:7.5pt;font-weight:600;color:var(--bronze);padding:2.5mm 2mm 2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15);text-align:right;line-height:1.3}
+.tl-dot-col{display:flex;flex-direction:column;align-items:center;padding:0 2mm}
+.tl-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:3.5mm;flex-shrink:0}
+.tl-dot-main{width:10px;height:10px;background:var(--dark);border:1.5pt solid var(--gold)}
+.tl-line{flex:1;width:1px;background:rgba(196,168,130,0.2);margin:0 auto}
+.tl-content{padding:2mm 0 3mm 2mm;border-bottom:0.5pt solid rgba(196,168,130,0.12)}
+.tl-event{font-size:8.5pt;font-weight:600;color:var(--dark);line-height:1.3;margin-bottom:1mm}
+.tl-detail{font-size:7.5pt;color:var(--warm);line-height:1.5}
+.tl-input{display:inline-block;border-bottom:0.75pt solid var(--gold);min-width:16mm;height:3.5mm;vertical-align:bottom}
+.tl-input-wide{min-width:30mm}
+.tl-input-full{display:block;width:100%;border-bottom:0.75pt solid rgba(196,168,130,0.3);height:4mm;margin-top:1mm}
+/* LEVERANCIERS */
+.leverancier-card{background:var(--sand);padding:3mm 4mm;margin-bottom:2mm;display:grid;grid-template-columns:26mm 1fr 1fr;gap:2mm;align-items:center}
+.lev-rol{font-size:7pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze)}
+.lev-naam{font-size:8.5pt;color:var(--dark);font-weight:500}
+.lev-tel{font-size:8.5pt;color:var(--warm)}
+.inf{display:inline-block;border-bottom:0.75pt solid var(--gold);min-width:35mm;height:4mm;vertical-align:bottom}
+.inf-sm{min-width:20mm}
+.inf-full{display:block;width:100%;border-bottom:0.75pt solid rgba(196,168,130,0.3);height:4mm;margin-top:1mm}
+/* OUTFIT PLANNING */
+.outfit-card{background:var(--dark);padding:4mm 5mm;margin-bottom:3mm}
+.outfit-num{font-family:'Cormorant Garamond',serif;font-size:22pt;font-weight:300;color:var(--gold);opacity:0.5;float:right;line-height:1}
+.outfit-label{font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;display:block}
+.outfit-grid{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:3mm}
+.outfit-field{font-size:7.5pt;color:var(--warm);margin-bottom:1mm}
+.outfit-val{font-size:8.5pt;color:var(--ivory)}
+/* COMMUNICATIE */
+.comm-table{width:100%;border-collapse:collapse;font-size:8pt;margin-bottom:3mm}
+.comm-table th{background:var(--beige);padding:2mm 2.5mm;text-align:left;font-weight:600;font-size:7pt;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);border-bottom:1pt solid var(--gold)}
+.comm-table td{padding:2mm 2.5mm;border-bottom:0.5pt solid rgba(196,168,130,0.15);vertical-align:top}
+.comm-table tr:nth-child(even) td{background:var(--sand)}
+/* NOODPLAN */
+.nood-row{display:flex;gap:3mm;align-items:flex-start;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-size:8.5pt;color:var(--dark)}
+.nood-icon{font-size:9pt;flex-shrink:0;margin-top:1pt}
+/* TWEE KOL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.check-row{display:flex;gap:3mm;align-items:flex-start;padding:2mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15);font-size:8.5pt;color:var(--dark)}
+.check-box{width:4mm;height:4mm;border:0.75pt solid var(--gold);flex-shrink:0;margin-top:0.5mm}
+.toc-item{display:flex;justify-content:space-between;align-items:baseline;padding:2.5mm 0;border-bottom:0.5pt solid rgba(196,168,130,0.15)}
+.toc-title{font-size:10pt;color:var(--dark)}
+.toc-dots{flex:1;border-bottom:0.5pt dotted rgba(196,168,130,0.4);margin:0 3mm 1mm}
+.toc-page{font-size:9pt;color:var(--warm);flex-shrink:0}
+.print-btn{position:fixed;top:15px;right:15px;background:#2D2520;color:#F7F2EA;border:none;padding:10px 24px;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;z-index:999}
+.print-btn:hover{background:#C4A882;color:#2D2520}
+.sec-header{background:var(--dark);padding:3mm 5mm;margin-bottom:3mm;display:flex;justify-content:space-between;align-items:center}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--ivory)}
+.sec-sub{font-size:7.5pt;color:var(--warm)}
+</style>
+<script>
+const p=new URLSearchParams(window.location.search);
+const KN=p.get('naam')?decodeURIComponent(p.get('naam')).toUpperCase():'AROUSSA KLANT';
+const KC=p.get('code')?p.get('code').toUpperCase():'ARO-0000';
+const WT=KN+' \u00b7 '+KC;
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.wm').forEach(e=>{e.textContent=WT});
+  document.querySelectorAll('.kn').forEach(e=>{e.textContent=KN});
+  document.querySelectorAll('.kc').forEach(e=>{e.textContent=KC});
+  const cn=document.getElementById('cv-naam');const cc=document.getElementById('cv-code');
+  if(cn)cn.textContent=KN==='AROUSSA KLANT'?'[Naam klant]':KN;
+  if(cc)cc.textContent='Bestelcode: '+KC;
+});
+</script>
+</head>
+<body>
+<button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
+
+<!-- COVER -->
+<div class="page cover">
+  <div class="cover-brand">Aroussa</div>
+  <div class="cover-tagline">De Online Wedding Planner van Nederland</div>
+  <div class="cover-ornament"></div>
+  <div class="cover-label">Planning Tool</div>
+  <div class="cover-title">Dag-Van<br>Draaiboek</div>
+  <div class="cover-subtitle">Jouw complete planning voor de mooiste dag van je leven &mdash; minuut voor minuut</div>
+  <div class="cover-klant">
+    <div class="cover-klant-label">Persoonlijk exemplaar voor</div>
+    <div class="cover-klant-naam" id="cv-naam">Aroussa Klant</div>
+    <div class="cover-klant-code" id="cv-code">Bestelcode: ARO-0000</div>
+  </div>
+  <div class="cover-price">&euro;29</div>
+  <div class="cover-bottom">aroussaplanner.com &middot; &copy; 2026 Aroussa &middot; Alle rechten voorbehouden</div>
+</div>
+
+<!-- P2 INLEIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Welkom</span>
+  <h1 class="page-title">Hoe gebruik je <em>dit draaiboek?</em></h1>
+  <p class="body-text">Dit draaiboek is jouw persoonlijke planning voor de dag zelf. Vul het volledig in, print drie exemplaren en geef die aan jouw coördinator, jouw Ziana en jouw fotograaf. Dan hoef jij op de dag zelf nergens aan te denken.</p>
+  <div class="divider"></div>
+  <div class="two-col" style="margin-bottom:3mm;">
+    <div class="tip-box"><span class="tip-label">Stap 1 &nbsp; Vul in</span><p class="tip-text">Vul alle tijden, namen en contactgegevens in. Begin met de leverancierspagina. Elke persoon die op de dag zelf een rol speelt, staat erin.</p></div>
+    <div class="tip-box"><span class="tip-label">Stap 2 &nbsp; Deel het</span><p class="tip-text">Print minimaal drie exemplaren: één voor jezelf, één voor je dag-coördinator en één voor de Ziana / bridalstylist. Stuur ook een digitale versie naar de fotograaf.</p></div>
+  </div>
+  <div class="two-col" style="margin-bottom:3mm;">
+    <div class="tip-box"><span class="tip-label">Stap 3 &nbsp; Bevestig</span><p class="tip-text">Stuur een week voor het feest een bevestigingsbericht naar elke leverancier met de tijden uit dit draaiboek. Gebruik de WhatsApp Scripts Bundel voor de juiste bewoording.</p></div>
+    <div class="tip-box"><span class="tip-label">Stap 4 &nbsp; Bewaar</span><p class="tip-text">Sla het digitale bestand op je telefoon op. Als er iets wijzigt op de dag, heb je het direct bij de hand zonder dat je iedereen opnieuw hoeft te bellen.</p></div>
+  </div>
+  <div class="divider"></div>
+  <h3 style="font-family:'Cormorant Garamond',serif;font-size:14pt;font-weight:400;color:var(--dark);margin-bottom:3mm;">Inhoud</h3>
+  <div class="toc-item"><span class="toc-title">Basisgegevens feest</span><span class="toc-dots"></span><span class="toc-page">3</span></div>
+  <div class="toc-item"><span class="toc-title">Leveranciers &amp; contactpersonen</span><span class="toc-dots"></span><span class="toc-page">4</span></div>
+  <div class="toc-item"><span class="toc-title">Outfitplanning</span><span class="toc-dots"></span><span class="toc-page">5</span></div>
+  <div class="toc-item"><span class="toc-title">Tijdlijn voorbereiding (ochtend)</span><span class="toc-dots"></span><span class="toc-page">6</span></div>
+  <div class="toc-item"><span class="toc-title">Tijdlijn feest (avond)</span><span class="toc-dots"></span><span class="toc-page">7-8</span></div>
+  <div class="toc-item"><span class="toc-title">Communicatieplan dag-van</span><span class="toc-dots"></span><span class="toc-page">9</span></div>
+  <div class="toc-item"><span class="toc-title">Noodplan &amp; probleemoplossing</span><span class="toc-dots"></span><span class="toc-page">10</span></div>
+  <div class="toc-item"><span class="toc-title">Dag-van checklist bruid</span><span class="toc-dots"></span><span class="toc-page">11</span></div>
+  <div class="toc-item"><span class="toc-title">Notitieruimte</span><span class="toc-dots"></span><span class="toc-page">12</span></div>
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P3 BASISGEGEVENS -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Basisgegevens</span>
+  <h1 class="page-title">Feest<em>gegevens</em></h1>
+
+  <div style="background:var(--beige);padding:4mm 5mm;margin-bottom:3mm;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:5mm;">
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Naam bruid</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Naam bruidegom</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Datum feest</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Dag van de week</div>
+        <span class="inf"></span>
+      </div>
+      <div style="grid-column:1/-1;">
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Naam &amp; adres feestzaal</div>
+        <span class="inf" style="min-width:120mm;"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Telefoon zaal (dag-van)</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Aanspreekpunt zaal</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Deuren open gasten</div>
+        <span class="inf"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Eindtijd feest</div>
+        <span class="inf"></span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--dark);padding:4mm 5mm;margin-bottom:3mm;">
+    <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:3mm;">Sleutelpersonen dag-van</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4mm;">
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Dag-coördinator (naam)</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Tel. dag-coördinator</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Ziana / Bridalstylist (naam)</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Tel. Ziana</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Fotograaf (naam)</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+      <div>
+        <div style="font-size:7pt;color:var(--warm);margin-bottom:1mm;">Tel. fotograaf</div>
+        <span class="inf" style="border-color:rgba(196,168,130,0.4);"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <span class="tip-label">Drie exemplaren</span>
+    <p class="tip-text">Geef een gedrukt exemplaar aan jouw dag-coördinator, jouw Ziana en bewaar er een voor jezelf. Stuur ook een digitale versie (screenshot of PDF) naar de fotograaf, DJ en zaal. Zo heeft iedereen dezelfde informatie.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P4 LEVERANCIERS -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Contacten</span>
+  <h1 class="page-title">Leveranciers &amp; <em>contactpersonen</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Vul hier de contactgegevens in van iedereen die op de dag zelf een rol speelt. Dit is het eerste dat je raadpleegt als er iets is.</p>
+
+  <div style="background:var(--beige);padding:2mm 3mm;margin-bottom:2mm;display:grid;grid-template-columns:26mm 1fr 1fr;gap:2mm;">
+    <span style="font-size:6.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);">Rol</span>
+    <span style="font-size:6.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);">Naam &amp; bedrijf</span>
+    <span style="font-size:6.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);">Telefoonnummer</span>
+  </div>
+
+  <!-- Leverancierkaarten -->
+  <div class="leverancier-card"><div class="lev-rol">Feestzaal</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Aanspreekpunt zaal</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Ziana / Bridalstylist</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Assistente Ziana</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Fotograaf</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Videograaf</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Cateraar</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">DJ</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Dakka / muziekgroep</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Decorateur</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">3amaria draagstoelen</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Trouwauto chauffeur</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Dag-coördinator</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Overig</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+  <div class="leverancier-card"><div class="lev-rol">Overig</div><div class="lev-naam"><span class="inf"></span></div><div class="lev-tel"><span class="inf"></span></div></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P5 OUTFITPLANNING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Styling Planning</span>
+  <h1 class="page-title">Outfit<em>planning</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Vul per outfit alle details in. Geef dit overzicht ook aan je Ziana zodat zij precies weet wat de volgorde is en welke sieraden en kapsels erbij horen.</p>
+
+  <!-- Outfit 1 -->
+  <div class="outfit-card">
+    <span class="outfit-num">1</span>
+    <span class="outfit-label">Eerste outfit &mdash; Opening / Gorzja-entree</span>
+    <div class="outfit-grid">
+      <div><div class="outfit-field">Naam / omschrijving lebsa</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kleur</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kapsel</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Make-up stijl</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Sieraden</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Gepland tijdstip entree</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+    </div>
+  </div>
+
+  <!-- Outfit 2 -->
+  <div class="outfit-card">
+    <span class="outfit-num">2</span>
+    <span class="outfit-label">Tweede outfit</span>
+    <div class="outfit-grid">
+      <div><div class="outfit-field">Naam / omschrijving lebsa</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kleur</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kapsel</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Make-up stijl</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Sieraden</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Gepland tijdstip entree</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+    </div>
+  </div>
+
+  <!-- Outfit 3 -->
+  <div class="outfit-card">
+    <span class="outfit-num">3</span>
+    <span class="outfit-label">Derde outfit</span>
+    <div class="outfit-grid">
+      <div><div class="outfit-field">Naam / omschrijving lebsa</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kleur</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kapsel</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Make-up stijl</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Sieraden</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Gepland tijdstip entree</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+    </div>
+  </div>
+
+  <!-- Outfit 4 -->
+  <div class="outfit-card">
+    <span class="outfit-num">4</span>
+    <span class="outfit-label">Vierde outfit &mdash; Eindlook / Taartceremonie</span>
+    <div class="outfit-grid">
+      <div><div class="outfit-field">Naam / omschrijving lebsa</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kleur</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Kapsel</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Make-up stijl</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Sieraden</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+      <div><div class="outfit-field">Gepland tijdstip</div><div class="outfit-val"><span class="inf" style="border-color:rgba(196,168,130,0.4);"></span></div></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P6 TIJDLIJN VOORBEREIDING -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Tijdlijn</span>
+  <h1 class="page-title">Voorbereiding <em>ochtend &amp; middag</em></h1>
+
+  <!-- Tijdlijn voorbereiding -->
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Ziana / Bridalstylist arriveert op locatie</div><div class="tl-detail">Adres voorbereiding: <span class="tl-input tl-input-wide"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Start voorbereiding bruid &mdash; eerste look</div><div class="tl-detail">Make-up en haar voor de gorzja-entree</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Fotograaf arriveert voor getting-ready shots</div><div class="tl-detail">Fotograaf: <span class="tl-input"></span> &nbsp; Tel: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Eerste outfit klaar &mdash; bruid aangekleed</div><div class="tl-detail">Laatste foto's voorbereiding. Buffer voor vertraging: 30 minuten.</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Vertrek van huis &mdash; gorzja</div><div class="tl-detail">Trouwauto: <span class="tl-input"></span> &nbsp; Chauffeur: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Aankomst bij de feestzaal (backstage)</div><div class="tl-detail">Ingang backstage: <span class="tl-input tl-input-wide"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Cateraar arriveert / opbouw catering</div><div class="tl-detail">Cateraar: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">DJ / muziekgroep arriveert voor soundcheck</div><div class="tl-detail">Ruimte minimaal 2 uur voor opbouw. DJ: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Decorateur klaar / zaal gereed voor gasten</div><div class="tl-detail">Controle zaalinrichting door dag-coördinator</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Deuren open voor gasten</div><div class="tl-detail">Ontvangst gasten. Muziek start. Welkomstdrankjes.</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">3amaria &amp; draagstoelen klaarstaan</div><div class="tl-detail">Draagstoelteam aanwezig voor entree</div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:3mm;">
+    <span class="tip-label">Buffer inbouwen</span>
+    <p class="tip-text">Plan overal 20 tot 30 minuten buffer. Een Marokkaanse bruiloft loopt vrijwel altijd iets uit op de voorbereiding. Dat is normaal. Wie een strakke planning heeft zonder buffer, raakt gestrest. Wie buffer heeft, geniet.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P7 TIJDLIJN FEEST DEEL 1 -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Tijdlijn feest</span>
+  <h1 class="page-title">Feestprogramma <em>avond deel 1</em></h1>
+
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Entree bruid &amp; bruidegom &mdash; Outfit 1</div><div class="tl-detail">Zaffa-processie. Muziek: <span class="tl-input"></span>. 3amaria: ja / nee</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Bruid en bruidegom nemen plaatsen op de bruidsbank</div><div class="tl-detail">Fotograaf maakt portretten op de bruidsbank</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Melk- &amp; dadelceremonie</div><div class="tl-detail">Traditionele verwelkoming. Wie voert dit uit: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Start diner / catering</div><div class="tl-detail">Catering: <span class="tl-input"></span> &nbsp; Aantal gangen: <span class="tl-input inf-sm"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Outfit 2 &mdash; tweede entree bruid</div><div class="tl-detail">Bruid gaat omkleden. Aankondiging door DJ. Muziek: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Danssessie / muziek</div><div class="tl-detail">DJ of Dakka groep: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Outfit 3 &mdash; derde entree bruid</div><div class="tl-detail">Muziek: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Desserts / zoetjes / thee</div><div class="tl-detail">Catering verzorgt thee en baklava ronde</div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Outfit 4 &mdash; eindlook bruid</div><div class="tl-detail">Aankleding voor de taartceremonie. Muziek: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Taartceremonie</div><div class="tl-detail">Aansnijden taart. Bruidstaart: <span class="tl-input"></span>. Muziek: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Dans &amp; muziek &mdash; afsluiting feest</div><div class="tl-detail">DJ speelt tot: <span class="tl-input"></span></div></div>
+  </div>
+  <div class="timeline-row">
+    <div class="tl-time"><span class="inf inf-sm"></span></div>
+    <div class="tl-dot-col"><div class="tl-dot tl-dot-main"></div><div class="tl-line"></div></div>
+    <div class="tl-content"><div class="tl-event">Einde feest &mdash; gasten vertrekken</div><div class="tl-detail">Eindtijd zaal: <span class="tl-input"></span>. Opruimen catering/decoratie: <span class="tl-input"></span></div></div>
+  </div>
+
+  <div class="tip-box" style="margin-top:3mm;">
+    <span class="tip-label">Afspraken met de DJ</span>
+    <p class="tip-text">Geef de DJ een schriftelijke lijst van de muziek die je wil per entree, per dans en voor de taartceremonie. Leg ook vast welke nummers je absoluut NIET wil horen. Dit voorkomt verrassingen op de dag zelf.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P8 EXTRA TIJDLIJN / MUZIEKPLAN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Muziek &amp; Extra</span>
+  <h1 class="page-title">Muziek &amp; <em>aanvullende momenten</em></h1>
+
+  <div class="sec-header" style="margin-bottom:3mm;"><span class="sec-title">Muziekplan per moment</span></div>
+  <table class="comm-table">
+    <thead><tr><th style="width:35%;">Moment</th><th style="width:40%;">Muziek / nummer / artiest</th><th style="width:25%;">Tijdsduur</th></tr></thead>
+    <tbody>
+      <tr><td>Entree gasten / ontvangst</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Entree bruid outfit 1 (gorzja)</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Entree bruid outfit 2</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Entree bruid outfit 3</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Entree bruid outfit 4</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Taartceremonie</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Eerste dans bruidspaar</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Dakka Marrakchia optreden</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+      <tr><td>Afsluiting avond</td><td><span class="inf"></span></td><td><span class="inf inf-sm"></span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <div class="sec-header" style="margin-bottom:3mm;"><span class="sec-title">Extra momenten &amp; wensen</span><span class="sec-sub">Optioneel</span></div>
+
+  <div class="two-col" style="margin-bottom:3mm;">
+    <div>
+      <div style="font-size:7.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">3amaria &mdash; draagstoelmoment</div>
+      <div class="timeline-row" style="margin-bottom:2mm;">
+        <div class="tl-time" style="font-size:7.5pt;"><span class="inf inf-sm"></span></div>
+        <div class="tl-dot-col"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content"><div class="tl-detail">Welk outfit: <span class="tl-input"></span></div></div>
+      </div>
+      <div style="font-size:7.5pt;color:var(--warm);">Muziek bij 3amaria: <span class="inf"></span></div>
+    </div>
+    <div>
+      <div style="font-size:7.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Vuurwerk / special effects</div>
+      <div style="font-size:7.5pt;color:var(--warm);margin-bottom:2mm;">Tijdstip: <span class="inf inf-sm"></span></div>
+      <div style="font-size:7.5pt;color:var(--warm);">Type effect: <span class="inf"></span></div>
+    </div>
+  </div>
+
+  <div style="font-size:7.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;">Aankondigingen die de DJ doet</div>
+  <table class="comm-table">
+    <thead><tr><th style="width:35%;">Moment</th><th>Tekst aankondiging (of: DJ bepaalt zelf)</th></tr></thead>
+    <tbody>
+      <tr><td>Entree bruid</td><td><span class="inf" style="min-width:80mm;"></span></td></tr>
+      <tr><td>Diner start</td><td><span class="inf" style="min-width:80mm;"></span></td></tr>
+      <tr><td>Taartceremonie</td><td><span class="inf" style="min-width:80mm;"></span></td></tr>
+      <tr><td>Einde avond</td><td><span class="inf" style="min-width:80mm;"></span></td></tr>
+    </tbody>
+  </table>
+
+  <div style="font-size:7.5pt;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--bronze);margin-bottom:2mm;margin-top:3mm;">Nummers die NIET gespeeld mogen worden</div>
+  <span class="inf" style="min-width:150mm;display:block;margin-bottom:3mm;"></span>
+
+  <div class="tip-box"><span class="tip-label">Foto-instructie aan fotograaf</span><p class="tip-text">Stuur de fotograaf een lijst van momenten die zij sowieso moeten vastleggen: elke entree, de melk- en dadelceremonie, de 3amaria, het taartsnijden en de families op de bruidsbank. Alles daartussenin is vrij.</p></div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P9 COMMUNICATIEPLAN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Communicatie</span>
+  <h1 class="page-title">Communicatie<em>plan dag-van</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Op de dag zelf communiceert de dag-coördinator namens jou. Jij hoeft niets te regelen. Leg hieronder vast wie waarvoor verantwoordelijk is.</p>
+
+  <table class="comm-table">
+    <thead><tr><th style="width:32%;">Situatie</th><th style="width:30%;">Wie handelt het af</th><th style="width:38%;">Hoe / contactpersoon</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Leverancier is te laat</strong></td><td><span class="inf"></span></td><td>Bel direct: <span class="inf"></span></td></tr>
+      <tr><td><strong>Catering probleem</strong></td><td><span class="inf"></span></td><td>Cateraar: <span class="inf"></span></td></tr>
+      <tr><td><strong>DJ of muziek valt uit</strong></td><td><span class="inf"></span></td><td>Back-up: <span class="inf"></span></td></tr>
+      <tr><td><strong>Ziana niet bereikbaar</strong></td><td><span class="inf"></span></td><td>Assistente: <span class="inf"></span></td></tr>
+      <tr><td><strong>Uitloop van het programma</strong></td><td><span class="inf"></span></td><td>Afstemmen met zaal en DJ</td></tr>
+      <tr><td><strong>Gast wordt onwel</strong></td><td><span class="inf"></span></td><td>EHBO: 112 of <span class="inf"></span></td></tr>
+      <tr><td><strong>Outfit probleem</strong></td><td><span class="inf"></span></td><td>Ziana + noodkit</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <div class="sec-header" style="margin-bottom:3mm;"><span class="sec-title">WhatsApp groep dag-van</span><span class="sec-sub">Maak dit aan voor het feest</span></div>
+  <p class="body-text">Maak een WhatsApp-groep aan met de dag-coördinator, Ziana, fotograaf en DJ. Zo kan iedereen direct communiceren zonder dat het via jou gaat. Naam van de groep:</p>
+  <span class="inf" style="min-width:100mm;margin-bottom:3mm;"></span>
+
+  <div style="font-size:8.5pt;font-weight:600;color:var(--dark);margin-bottom:2mm;margin-top:4mm;">Leden van de WhatsApp-groep:</div>
+  <div class="two-col">
+    <div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Dag-coördinator</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Ziana / Bridalstylist</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Fotograaf</span></div>
+    </div>
+    <div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Videograaf</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">DJ</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aanspreekpunt zaal</span></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">Jij communiceert niet op de dag zelf</span>
+    <p class="tip-text">Geef je telefoon aan een vertrouwde persoon als je de zaal binnenkomt. Jij bent de bruid. De dag-coördinator regelt alles. Als jij op je telefoon zit te kijken, mis je de mooiste momenten van de avond.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P10 NOODPLAN -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Noodplan</span>
+  <h1 class="page-title">Noodplan &amp; <em>probleemoplossing</em></h1>
+  <p class="body-text" style="margin-bottom:3mm;">Problemen op de dag zelf zijn zeldzaam maar niet onmogelijk. Dit zijn de meest voorkomende en hoe je ermee omgaat.</p>
+
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">Ziana is te laat of niet bereikbaar</strong><span style="font-size:8.5pt;color:var(--warm);">Bel direct haar assistente. Is die ook niet bereikbaar, bel dan de back-up stylist als die is afgesproken in het contract. Documenteer alles schriftelijk voor een eventuele klacht achteraf.</span></div></div>
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">Outfit past niet of is beschadigd</strong><span style="font-size:8.5pt;color:var(--warm);">De Ziana heeft een noodkit met naald, draad en veiligheidsspelden. Vraag haar dit standaard mee te nemen. Een kleine scheur of loszittend detail is bijna altijd te repareren. Verander de volgorde van outfits als een bepaalde jurk echt niet gedragen kan worden.</span></div></div>
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">DJ of muziek valt uit</strong><span style="font-size:8.5pt;color:var(--warm);">Vraag bij boeking altijd naar een back-up plan. De meeste professionele DJ's hebben een back-up laptop. Als de DJ zelf uitvalt, is een Spotify-playlist via de geluidsinstallatie van de zaal tijdelijk een oplossing.</span></div></div>
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">Catering heeft te weinig eten</strong><span style="font-size:8.5pt;color:var(--warm);">Controleer bij de cateraar of het definitieve gastenaantal is doorgegeven. Bij een tekort: minder gangen serveren, porties aanpassen of dessert overslaan. Documenteer het probleem voor nabespreking.</span></div></div>
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">Het programma loopt sterk uit</strong><span style="font-size:8.5pt;color:var(--warm);">Bespreek met de dag-coördinator welke momenten ingekort kunnen worden. Combineer bijvoorbeeld twee dansen in één. Verleng het diner niet als de zaal om middernacht sluit. Spreek dit preventief af met de DJ en het zaalmanagement.</span></div></div>
+  <div class="nood-row"><span class="nood-icon">⚡</span><div><strong style="display:block;margin-bottom:1mm;">Bruid is overweldigd of van streek</strong><span style="font-size:8.5pt;color:var(--warm);">De Ziana of dag-coördinator neemt de bruid even apart. Rustige ruimte, water, moment om op adem te komen. De make-up wordt bijgewerkt. Een korte pauze van 10 minuten is geen probleem. Dit is normaal op een grote dag.</span></div></div>
+
+  <div class="divider"></div>
+
+  <div class="sec-header" style="margin-bottom:3mm;"><span class="sec-title">Noodkit bruid</span><span class="sec-sub">Zorg dat dit aanwezig is op de dag</span></div>
+  <div class="two-col">
+    <div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Naald en draad (bijpassende kleur)</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Veiligheidsspelden (diverse maten)</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Pijnstillers en maagzuurremmers</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Pleisters (dunne, huidkleurige)</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Lippenstift bijvullen</span></div>
+    </div>
+    <div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Make-up voor bijwerken (bij Ziana)</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Haarspelden extra voorraad</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Comfortabele schoenen voor later</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Water en snack (voor bruid alleen)</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Telefoon volledig opgeladen + powerbank</span></div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P11 CHECKLIST BRUID -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Checklist</span>
+  <h1 class="page-title">Dag-van <em>checklist bruid</em></h1>
+  <p class="body-text" style="margin-bottom:4mm;">Doorloop dit op de ochtend van het feest. Als alles aangevinkt is, ben je er klaar voor.</p>
+
+  <div class="two-col">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Administratief</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Draaiboek bij dag-coördinator</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Draaiboek bij Ziana / bridalstylist</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Alle leveranciers bevestigd deze week</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">WhatsApp groep dag-van actief</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Slotbetalingen gedaan of gepland</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aanrijroute naar zaal bekend</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Caftans &amp; outfits</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Alle outfits gereed en gestoomd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Sieraden per outfit in apart zakje</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Schoenen per outfit klaargelegd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Sluiers per outfit gecontroleerd</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Praktisch</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Goede nacht geslapen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Goed ontbijt gegeten</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Telefoon volledig opgeladen</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Noodkit bij de Ziana</span></div>
+    </div>
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;color:var(--dark);">Feestzaal</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Zaal betaling voldaan</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aanspreekpunt zaal gebeld vandaag</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Eindtijd bevestigd</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Fotografie</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Fotograaf heeft aankomsttijd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Lijst met must-have shots gedeeld</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Videograaf op de hoogte van tijdlijn</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">Ziana</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aankomsttijd bevestigd</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Outfitoverzicht gedeeld</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Referentiebeelden per outfit meegegeven</span></div>
+
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:12pt;font-weight:400;margin-bottom:3mm;margin-top:4mm;color:var(--dark);">DJ &amp; muziek</h3>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Muzieklijst per entree doorgegeven</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Verboden nummers doorgegeven</span></div>
+      <div class="check-row"><div class="check-box"></div><span class="check-text">Aankomsttijd DJ bevestigd</span></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="margin-top:4mm;">
+    <span class="tip-label">Het allerbelangrijkste</span>
+    <p class="tip-text">Alles is geregeld. Jij hoeft vandaag alleen maar de bruid te zijn. Vertrouw op je dag-coördinator, vertrouw op je Ziana, vertrouw op je leveranciers. Jij hebt ze zorgvuldig gekozen. Geniet van elke minuut.</p>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- P12 NOTITIES -->
+<div class="page">
+  <div class="wm wm-mid"></div><div class="wm wm-top"></div><div class="wm wm-bot"></div>
+  <div class="klant-balk"><span class="kn"></span><span>&copy; 2026 Aroussa &middot; Persoonlijk exemplaar</span><span class="kcode kc"></span></div>
+  <span class="page-label">Notities</span>
+  <h1 class="page-title">Jouw <em>notities &amp; wensen</em></h1>
+  <p class="body-text" style="margin-bottom:4mm;">Schrijf hier alles op wat niet in een standaard veld past. Persoonlijke wensen, speciale instructies voor de dag-coördinator of berichten voor leveranciers.</p>
+
+  <!-- Notitieruimte -->
+  <div style="display:flex;flex-direction:column;gap:5mm;flex:1;">
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+    <div style="border-bottom:0.5pt solid rgba(196,168,130,0.25);height:10mm;"></div>
+  </div>
+
+  <div style="background:var(--dark);padding:4mm 5mm;margin-top:5mm;display:flex;justify-content:space-between;align-items:center;">
+    <div>
+      <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:2mm;">Hulp nodig?</div>
+      <div style="font-size:8.5pt;color:rgba(247,242,234,0.75);">aroussaplanner.com &middot; aroussaplanner@gmail.com</div>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:7pt;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);margin-bottom:2mm;">Quick Scan &mdash; 30 min</div>
+      <div style="font-size:8.5pt;color:rgba(247,242,234,0.75);">Persoonlijk advies op jouw situatie</div>
+    </div>
+  </div>
+
+  <div class="page-footer"><span>Aroussa &middot; aroussaplanner.com</span><span>Dag-Van Draaiboek</span><span class="footer-code kc"></span></div>
+</div>
+
+<!-- BACKCOVER -->
+<div class="page cover" style="justify-content:space-between;">
+  <div style="text-align:center;margin-top:auto;">
+    <div class="cover-brand" style="margin-bottom:2mm;">Aroussa</div>
+    <div style="font-size:7pt;letter-spacing:3px;text-transform:uppercase;color:var(--warm);margin-bottom:10mm;">De Online Wedding Planner van Nederland</div>
+    <div class="cover-ornament"></div>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16pt;color:rgba(247,242,234,0.6);max-width:120mm;margin:0 auto 10mm;line-height:1.5;">Meer tools en transparantie op aroussaplanner.com</p>
+    <div style="display:flex;flex-direction:column;gap:3mm;align-items:center;margin-bottom:10mm;">
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Rode Vlaggen Gids &middot; &euro;25</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">WhatsApp Scripts Bundel &middot; &euro;29</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Budget Calculator &middot; &euro;34</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">De Ziana / Bridalstylist Gids &middot; &euro;39</div>
+      <div style="border:0.5pt solid rgba(196,168,130,0.3);padding:2mm 6mm;font-size:8pt;color:var(--warm);">Complete Bundle alle 8 gidsen &middot; &euro;119</div>
+    </div>
+    <div class="cover-ornament"></div>
+    <div style="font-size:8pt;color:var(--warm);letter-spacing:2px;">aroussaplanner.com</div>
+  </div>
+  <div style="text-align:center;margin-bottom:10mm;">
+    <div style="font-size:7pt;color:rgba(155,142,126,0.5);">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
+  </div>
+</div>
+</body>
+</html>

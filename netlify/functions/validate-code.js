@@ -86,17 +86,25 @@ exports.handler = async (event) => {
     };
   }
 
-  // Check if already used
+  // Check if already used — allow re-access for the SAME email (returning customer)
   if (codeData.used) {
-    const usedDate = codeData.used_at
-      ? new Date(codeData.used_at).toLocaleDateString('nl-NL')
-      : 'onbekend';
+    const tokenPayload = {
+      email: normalizedEmail,
+      naam: codeData.naam,
+      product: codeData.product,
+      code: normalizedCode,
+      exp: Date.now() + 24 * 60 * 60 * 1000,
+    };
+    const downloadToken = Buffer.from(JSON.stringify(tokenPayload)).toString('base64');
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
-        valid: false,
-        reason: `Deze code is al gebruikt op ${usedDate}. Neem contact op via WhatsApp als je hulp nodig hebt.`,
+        valid: true,
+        downloadToken,
+        naam: codeData.naam,
+        product: codeData.product,
+        returning: true,
       }),
     };
   }

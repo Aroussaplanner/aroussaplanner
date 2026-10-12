@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aroussa — Bruiloft Tijdlijn</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E;--green:#27AE60;--red:#C0392B;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:16px;}
+body{background:var(--ivory);color:var(--dark);font-family:'Montserrat',sans-serif;font-weight:300;min-height:100vh;}
+
+/* HEADER */
+.header{background:var(--darker);position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(196,168,130,0.15);}
+.header-top{display:flex;align-items:center;justify-content:space-between;padding:14px 24px;flex-wrap:wrap;gap:8px;}
+.brand{font-family:'Italiana',serif;font-size:24px;color:var(--gold);letter-spacing:2px;line-height:1;}
+.brand-sub{font-size:7.5px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--warm);}
+.header-actions{display:flex;gap:6px;flex-wrap:wrap;}
+.btn{display:inline-flex;align-items:center;gap:4px;font-family:'Montserrat',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:8px 14px;border:none;cursor:pointer;transition:all 0.2s;}
+.btn--gold{background:var(--gold);color:var(--dark);}
+.btn--gold:hover{background:var(--ivory);}
+.btn--outline{background:transparent;color:var(--warm);border:1px solid rgba(196,168,130,0.3);}
+.btn--outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* PROGRESS */
+.prog-bar{padding:10px 24px;display:flex;align-items:center;gap:16px;background:rgba(0,0,0,0.2);}
+.prog-num{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--gold);line-height:1;min-width:32px;}
+.prog-label{font-size:7.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);}
+.prog-track{flex:1;min-width:60px;height:3px;background:rgba(196,168,130,0.2);}
+.prog-fill{height:3px;background:var(--gold);transition:width 0.4s;}
+.prog-pct{font-size:11px;font-weight:600;color:var(--gold);min-width:80px;text-align:right;}
+
+/* DATE BANNER */
+.date-banner{background:var(--dark);padding:16px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.date-group{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.d-label{font-size:8px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--warm);margin-bottom:3px;}
+.date-input{background:rgba(196,168,130,0.1);border:1px solid rgba(196,168,130,0.3);color:var(--ivory);font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;padding:7px 12px;outline:none;transition:border-color 0.2s;min-width:160px;}
+.date-input:focus{border-color:var(--gold);}
+.naam-input{background:rgba(196,168,130,0.08);border:1px solid rgba(196,168,130,0.2);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:11px;padding:8px 11px;outline:none;min-width:150px;}
+.naam-input:focus{border-color:var(--gold);}
+.naam-input::placeholder{color:rgba(155,142,126,0.35);font-style:italic;}
+.countdown{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:300;color:var(--gold);font-style:italic;margin-left:auto;}
+
+/* CONTAINER */
+.container{max-width:880px;margin:0 auto;padding:24px 16px 80px;}
+
+/* CURRENT PHASE */
+.cur-phase{background:var(--gold);padding:12px 18px;margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.cp-label{font-size:7.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);margin-bottom:2px;}
+.cp-text{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--dark);}
+
+/* LEGEND */
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;padding:10px 14px;background:var(--sand);}
+.leg-item{display:flex;align-items:center;gap:5px;font-size:9px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--warm);}
+.leg-dot{width:10px;height:10px;border-radius:50%;}
+.trad-bar{width:14px;height:12px;background:rgba(196,168,130,0.25);border-left:3px solid var(--gold);}
+
+/* TIMELINE */
+.timeline{position:relative;}
+.timeline::before{content:'';position:absolute;left:31px;top:0;bottom:0;width:1px;background:rgba(196,168,130,0.2);}
+
+/* PHASE */
+.phase{position:relative;margin-bottom:10px;}
+.phase-hdr{display:flex;align-items:stretch;cursor:pointer;user-select:none;}
+.phase-dot-col{width:64px;flex-shrink:0;display:flex;align-items:flex-start;justify-content:center;padding-top:18px;position:relative;z-index:1;}
+.dot{width:16px;height:16px;border-radius:50%;border:2px solid var(--gold);background:var(--ivory);transition:all 0.3s;flex-shrink:0;}
+.dot.done{background:var(--green);border-color:var(--green);}
+.dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(196,168,130,0.2);}
+.dot.future{background:var(--ivory);border-color:rgba(196,168,130,0.25);}
+.phase-title-block{flex:1;background:var(--dark);padding:13px 16px;display:flex;align-items:center;justify-content:space-between;transition:background 0.2s;}
+.phase-title-block:hover{background:#2a221f;}
+.phase-left{display:flex;align-items:center;gap:12px;}
+.phase-mo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:var(--gold);line-height:1;min-width:38px;}
+.phase-info .phase-name{font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:400;color:var(--ivory);}
+.phase-info .phase-dl{font-size:9.5px;font-weight:600;letter-spacing:1px;color:var(--warm);margin-top:2px;}
+.phase-info .phase-dl.overdue{color:var(--red);}
+.phase-info .phase-dl.soon{color:var(--gold);}
+.phase-info .phase-dl.ok{color:var(--green);}
+.phase-right{display:flex;align-items:center;gap:10px;}
+.phase-score{font-size:9.5px;font-weight:600;letter-spacing:1px;}
+.ph-prog{width:44px;height:3px;background:rgba(196,168,130,0.15);}
+.ph-prog-fill{height:3px;transition:width 0.3s;}
+.phase-arrow{color:var(--gold);font-size:11px;transition:transform 0.3s;}
+.phase.open .phase-arrow{transform:rotate(180deg);}
+
+.phase-body{display:none;margin-left:64px;border-left:1px solid rgba(196,168,130,0.12);}
+.phase.open .phase-body{display:block;}
+
+/* TASK */
+.task{display:flex;align-items:flex-start;border-bottom:1px solid rgba(196,168,130,0.1);transition:background 0.15s;}
+.task:nth-child(even){background:var(--sand);}
+.task.done{background:rgba(39,174,96,0.04)!important;}
+.task.done .task-label{color:var(--warm);text-decoration:line-through;}
+.task.trad{border-left:3px solid rgba(196,168,130,0.35);}
+.task.trad:not(.done) .task-label::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-right:6px;opacity:0.6;vertical-align:middle;}
+.task-tap{display:flex;align-items:flex-start;gap:11px;padding:10px 14px;flex:1;cursor:pointer;min-height:42px;}
+.chk{width:17px;height:17px;border:1.5px solid var(--gold);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.chk.on{background:var(--green);border-color:var(--green);}
+.chk.on::after{content:'✓';color:#fff;font-size:10px;font-weight:700;}
+.task-content{flex:1;}
+.task-label{font-size:12.5px;line-height:1.5;color:var(--dark);}
+.task-sub{font-size:10.5px;color:var(--warm);margin-top:2px;font-style:italic;}
+.tag{display:inline-block;font-size:7.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:1px 5px;margin-right:4px;vertical-align:middle;}
+.tag-must{background:rgba(192,57,43,0.1);color:var(--red);}
+.tag-trad{background:rgba(196,168,130,0.18);color:var(--bronze);}
+.task-del{background:none;border:none;cursor:pointer;padding:8px 10px;font-size:14px;color:rgba(155,142,126,0.3);transition:color 0.2s;align-self:center;}
+.task-del:hover{color:var(--red);}
+
+/* ADD TASK */
+.add-row{display:flex;border-top:1px solid rgba(196,168,130,0.12);}
+.add-inp{flex:1;border:none;background:transparent;font-family:'Montserrat',sans-serif;font-size:11.5px;color:var(--dark);padding:9px 12px;outline:none;}
+.add-inp::placeholder{color:rgba(155,142,126,0.3);font-style:italic;}
+.add-btn{background:none;border:none;cursor:pointer;padding:9px 13px;font-size:15px;color:var(--gold);}
+.add-btn:hover{color:var(--bronze);}
+
+/* SUMMARY */
+.summary{background:var(--dark);padding:22px;margin-top:26px;}
+.sum-title{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--ivory);margin-bottom:14px;}
+.sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:2px;margin-bottom:14px;}
+.sum-card{background:rgba(196,168,130,0.07);padding:12px 14px;}
+.sum-num{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);line-height:1;}
+.sum-lbl{font-size:7.5px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);margin-top:4px;}
+.sum-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;line-height:1.6;padding:12px 14px;background:rgba(196,168,130,0.07);color:rgba(247,242,234,0.8);}
+
+/* WATERMARK BAR */
+.wm-bar{background:var(--darker);padding:6px 24px;font-size:7px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(196,168,130,0.35);display:flex;justify-content:space-between;}
+
+/* DIAGONAL WATERMARK — alleen zichtbaar bij printen */
+.wm-diag{display:none;}
+@media print{
+  .wm-diag{
+    display:block;
+    position:fixed;
+    top:0;left:0;right:0;bottom:0;
+    pointer-events:none;
+    z-index:9999;
+    overflow:hidden;
+  }
+  .wm-diag span{
+    position:absolute;
+    font-family:'Montserrat',sans-serif;
+    font-weight:700;
+    font-size:22pt;
+    letter-spacing:3px;
+    white-space:nowrap;
+    color:rgba(196,168,130,0.07);
+    transform:rotate(-35deg);
+    transform-origin:center center;
+    pointer-events:none;
+  }
+  .wm-diag .wm1{top:18%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);}
+  .wm-diag .wm2{top:50%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);font-size:26pt;}
+  .wm-diag .wm3{top:80%;left:50%;transform:translate(-50%,-50%) rotate(-35deg);}
+}
+
+/* PRINT */
+@media print{
+  .header,.header-actions,.add-row,.btn,.legend,.cur-phase{display:none!important;}
+  .wm-bar{display:flex!important;position:fixed;top:0;left:0;right:0;z-index:9998;border-bottom:0.5pt solid rgba(196,168,130,0.25);}
+  .phase-body{display:block!important;}
+  .phase-arrow,.task-del{display:none;}
+  .timeline::before,.phase-dot-col{display:none;}
+  .phase-body{margin-left:0!important;}
+  .phase-title-block{margin-left:0;}
+  body{font-size:11px;}
+  .container{padding:0;max-width:100%;}
+  .phase{break-inside:avoid;margin-bottom:7px;}
+}
+
+@media(max-width:600px){
+  .timeline::before{left:22px;}
+  .phase-dot-col{width:46px;}
+  .phase-body{margin-left:46px;}
+  .phase-mo{font-size:20px;min-width:28px;}
+  .date-banner{flex-direction:column;gap:10px;}
+  .countdown{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<!-- WATERMARK BAR -->
+<div class="wm-bar"><span id="wmNaam">Aroussa · aroussaplanner.com</span><span id="wmCode"></span></div>
+
+<!-- DIAGONALE WATERMERKEN (zichtbaar bij printen) -->
+<div class="wm-diag" id="wmDiag">
+  <span class="wm1" id="wmD1"></span>
+  <span class="wm2" id="wmD2"></span>
+  <span class="wm3" id="wmD3"></span>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div>
+      <div class="brand">Aroussa</div>
+      <div class="brand-sub">Bruiloft Tijdlijn · aroussaplanner.com</div>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn--outline" onclick="resetAll()">↺ Reset</button>
+      <button class="btn btn--outline" onclick="exportData()">↓ Opslaan</button>
+      <button class="btn btn--outline" onclick="importData()">↑ Laden</button>
+      <button class="btn btn--gold" onclick="window.print()">⎙ Printen</button>
+    </div>
+  </div>
+  <div class="prog-bar">
+    <div><div class="prog-num" id="progNum">0</div><div class="prog-label">Taken gedaan</div></div>
+    <div style="flex:1;min-width:60px;"><div class="prog-track"><div class="prog-fill" id="progFill" style="width:0%"></div></div></div>
+    <div class="prog-pct" id="progPct">0% compleet</div>
+  </div>
+</div>
+
+<!-- DATE BANNER -->
+<div class="date-banner">
+  <div class="date-group">
+    <div>
+      <div class="d-label">Naam bruid</div>
+      <input class="naam-input" type="text" id="bruidNaam" placeholder="Jouw naam" oninput="onNaamChange()">
+    </div>
+    <div>
+      <div class="d-label">Feestdatum</div>
+      <input class="date-input" type="date" id="weddingDate" onchange="onDateChange()">
+    </div>
+  </div>
+  <div class="countdown" id="countdown">Vul je feestdatum in ↑</div>
+</div>
+
+<div class="container">
+
+  <!-- CURRENT PHASE -->
+  <div class="cur-phase" id="curPhase" style="display:none;">
+    <div>
+      <div class="cp-label">Jij zit nu in fase</div>
+      <div class="cp-text" id="curPhaseText"></div>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--green);"></div>Afgerond</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--gold);"></div>Actief</div>
+    <div class="leg-item"><div class="leg-dot" style="background:rgba(196,168,130,0.3);border:1.5px solid rgba(196,168,130,0.3);"></div>Toekomst</div>
+    <div class="leg-item"><div class="trad-bar"></div>Marokkaanse traditie</div>
+    <div class="leg-item"><span style="background:rgba(192,57,43,0.1);color:var(--red);font-size:7.5px;font-weight:700;padding:1px 5px;letter-spacing:1px;text-transform:uppercase;">MUST</span>Verplicht</div>
+  </div>
+
+  <div class="timeline" id="timeline"></div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    <div class="sum-title">Planning overzicht</div>
+    <div class="sum-grid">
+      <div class="sum-card"><div class="sum-num" id="sumDone">0</div><div class="sum-lbl">Gedaan</div></div>
+      <div class="sum-card"><div class="sum-num" id="sumLeft" style="color:var(--bronze);">0</div><div class="sum-lbl">Te doen</div></div>
+      <div class="sum-card"><div class="sum-num" id="sumOverdue" style="color:var(--red);">0</div><div class="sum-lbl">Verlopen</div></div>
+      <div class="sum-card"><div class="sum-num" id="sumPct2" style="color:var(--gold);">0%</div><div class="sum-lbl">Compleet</div></div>
+    </div>
+    <div class="sum-msg" id="sumMsg">Vul je feestdatum in om te beginnen met plannen.</div>
+  </div>
+
+</div>
+
+<script>
+// ── URL PARAMS watermark ────────────────────────────────────────
+(function(){
+  const p = new URLSearchParams(window.location.search);
+  const n = p.get('naam') ? decodeURIComponent(p.get('naam')) : '';
+  const c = p.get('code') ? p.get('code').toUpperCase() : '';
+  const wmTekst = n ? (n.toUpperCase() + (c ? ' · ' + c : '')) : '';
+
+  if(n){
+    document.getElementById('wmNaam').textContent = 'Aroussa · aroussaplanner.com · Persoonlijk exemplaar: ' + n.toUpperCase();
+    const ni = document.getElementById('bruidNaam');
+    if(ni && !ni.value) ni.value = n;
+  }
+  if(c) document.getElementById('wmCode').textContent = c;
+
+  // Diagonale watermerken voor print
+  if(wmTekst){
+    ['wmD1','wmD2','wmD3'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.textContent = wmTekst;
+    });
+  } else {
+    ['wmD1','wmD2','wmD3'].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.textContent = 'Aroussa · aroussaplanner.com';
+    });
+  }
+})();
+
+// ── PHASES DATA ───────────────────────────────────────────────────────
+const PHASES = [
+  {
+    id:'f14', months:14,
+    name:'Heel vroeg starten',
+    emoji:'',
+    tasks:[
+      {id:'t14_1',text:'Trouwdatum bespreken met beide families',sub:'Rekening houden met: ramadan, schoolvakanties, populaire weekenden',urgency:'must',trad:false},
+      {id:'t14_2',text:'Type feest bepalen: traditioneel, modern of mix',sub:'Dit bepaalt wie je nodig hebt en welk budget je nodig hebt',urgency:'must',trad:false},
+      {id:'t14_3',text:'Budget bepalen met de Aroussa Budget Calculator',sub:'Realistisch: 200 gasten = €22.000 tot €32.000 gemiddeld in NL',urgency:'must',trad:false},
+      {id:'t14_4',text:'Nikah / Kitbah datum en locatie bespreken',sub:'De islamitische bezegeling — imam, getuigen en mahr worden hier vastgelegd',urgency:'',trad:true},
+      {id:'t14_5',text:'Mahr (bruidsschat) bespreken en vastleggen',sub:'Verplicht islamitisch onderdeel. Geld, goud of sieraden — exclusief eigendom van de bruid',urgency:'',trad:true},
+      {id:'t14_6',text:'Burgerlijk huwelijk bij gemeente aanmelden',sub:'Minimaal 14 dagen voor de huwelijksdatum aanmelden. Eerder aanmelden = minder stress',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'f12', months:12,
+    name:'De basis leggen',
+    emoji:'',
+    tasks:[
+      {id:'t12_1',text:'Feestzalen bezoeken en vergelijken',sub:'Budget €2.500 (eigen catering) tot €17.000 (topzaal). Controleer: plafoonhoogte voor 3amaria, eigen catering toegestaan?',urgency:'must',trad:false},
+      {id:'t12_2',text:'Feestzaal boeken en contract tekenen',sub:'Gebruik de Aroussa Contract Checklist — let op: horecavergoeding, eindtijd muziek, opbouwtijd decorateur',urgency:'must',trad:false},
+      {id:'t12_3',text:'Definitief gastaantal schatten',sub:'Aantal gasten bepaalt alles: zaalgrootte, catering prijs, decoratie. Reken op 200 tot 300 gasten gemiddeld',urgency:'must',trad:false},
+      {id:'t12_4',text:'Datum definitief vaststellen en communiceren',sub:'Beide families, belangrijke gasten. Save the date zo snel mogelijk',urgency:'must',trad:false},
+      {id:'t12_5',text:'Ziana / Bridalstylist oriënteren — minimaal 3 opties',sub:'De beste Ziana\'s zijn 12 tot 18 maanden volgeboekt. Begin nu. Gebruik de Aroussa Ziana Gids',urgency:'must',trad:false},
+      {id:'t12_6',text:'Shebka (sieraden schoonfamilie) bespreken',sub:'Traditionele gouden sieraden die de schoonfamilie geeft. Worden soms gedragen op het feest',urgency:'',trad:true},
+    ]
+  },
+  {
+    id:'f10', months:10,
+    name:'Nikah & officieel huwelijk',
+    emoji:'',
+    tasks:[
+      {id:'t10_1',text:'Imam of adoul boeken voor de Nikah',sub:'Imam tijdig aanschrijven — populaire imams zijn snel volgeboekt',urgency:'must',trad:true},
+      {id:'t10_2',text:'Twee getuigen aanwijzen voor de Nikah',sub:'Islamitisch vereist: twee volwassen islamitische mannen als getuigen',urgency:'must',trad:true},
+      {id:'t10_3',text:'Datum en locatie Nikah definitief vastgelegd',sub:'Thuis, gebedsruimte of feestzaal. Aparte dag of onderdeel van het feest',urgency:'must',trad:true},
+      {id:'t10_4',text:'Documenten burgerlijk huwelijk gecontroleerd',sub:'Paspoort, geboorteakte, bewijs van ongehuwde staat. Informeer bij jouw gemeente',urgency:'must',trad:false},
+      {id:'t10_5',text:'Jheez (bruidsuitzet) beginnen samenstellen',sub:'Huishoudelijke artikelen, kleding, parfums. Soms tentoongesteld aan gasten. Begin vroeg',urgency:'',trad:true},
+      {id:'t10_6',text:'Honeymoon / huwelijksreis boeken',sub:'Paspoorten checken op geldigheid. Visa tijdig aanvragen',urgency:'',trad:false},
+    ]
+  },
+  {
+    id:'f9', months:9,
+    name:'Ziana & catering boeken',
+    emoji:'',
+    tasks:[
+      {id:'t9_1',text:'Ziana / Bridalstylist boeken — contract tekenen',sub:'Na intake, jurken passen, proef make-up eventueel. Altijd: contract voor aanbetaling',urgency:'must',trad:false},
+      {id:'t9_2',text:'Catering vergelijken en proeverij plannen',sub:'Vraag altijd een proefmaaltijd. Let op: halal-garantie schriftelijk vastleggen',urgency:'must',trad:false},
+      {id:'t9_3',text:'Cateraar boeken — contract tekenen',sub:'Prijs per persoon + halal-garantie + menu op papier + bediening',urgency:'must',trad:false},
+      {id:'t9_4',text:'Fotograaf en videograaf vergelijken',sub:'Vraag een volledige galerie van een eerder feest — niet alleen highlights',urgency:'must',trad:false},
+      {id:'t9_5',text:'Fotograaf en videograaf boeken — contract tekenen',sub:'Levertijd, auteursrecht, aantal foto\'s vastleggen. Back-up bij ziekte afspreken',urgency:'must',trad:false},
+      {id:'t9_6',text:'Save-the-date versturen naar gasten',sub:'Digitaal of fysiek. Geef gasten tijd om verlof aan te vragen',urgency:'',trad:false},
+    ]
+  },
+  {
+    id:'f8', months:8,
+    name:'Muziek & decoratie',
+    emoji:'',
+    tasks:[
+      {id:'t8_1',text:'DJ zoeken en beoordelen',sub:'Vraag mix-voorbeeld specifiek voor Marokkaanse feesten. Arabisch + Berber repertoire',urgency:'must',trad:false},
+      {id:'t8_2',text:'DJ boeken — contract tekenen',sub:'Eindtijd muziek, opbouwtijd (min. 2 uur), back-up apparatuur vastleggen',urgency:'must',trad:false},
+      {id:'t8_3',text:'Dakka Marrakchia groep of muziekgroep zoeken',sub:'Prijs €1.500-3.500. Check: ruimtevereisten (hoogte), catering voor de groep',urgency:'',trad:true},
+      {id:'t8_4',text:'Dakka groep boeken — contract tekenen',sub:'Aantal optredens, duur, aankomsttijd vastleggen',urgency:'',trad:true},
+      {id:'t8_5',text:'Decorateur vergelijken en portfolio beoordelen',sub:'Vraag een gedetailleerde itemlijst per prijs — niet alleen een portfolio',urgency:'must',trad:false},
+      {id:'t8_6',text:'Decorateur boeken — contract tekenen',sub:'Moodboard als contractbijlage. Opbouw- en afbouwtijd afstemmen met zaal',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'f6', months:6,
+    name:'Styling & lebsa\'s kiezen',
+    emoji:'',
+    tasks:[
+      {id:'t6_1',text:'Lebsa\'s passen bij de Ziana — keuze maken',sub:'Minimaal 6 maanden vooraf voor aanpassingen. Neem referentiebeelden mee per outfit',urgency:'must',trad:false},
+      {id:'t6_2',text:'Witte bruidsjurk besteld of gereserveerd',sub:'Bestelling uit Marokko/Dubai: min. 3-4 maanden + aanpassingen. Plan tijdig',urgency:'must',trad:false},
+      {id:'t6_3',text:'Moodboard per outfit gemaakt (haar, make-up, sieraden, muziek)',sub:'Deel met Ziana én fotograaf zodat iedereen hetzelfde beeld heeft',urgency:'must',trad:false},
+      {id:'t6_4',text:'3amaria / draagstoel gereserveerd',sub:'Huur €400-900 incl. dragers en kledij. Check plafoonhoogte zaal van tevoren',urgency:'',trad:true},
+      {id:'t6_5',text:'Trouwauto geboekt',sub:'Datum, tijd, route en chauffeur schriftelijk vastleggen',urgency:'',trad:false},
+      {id:'t6_6',text:'Henna-artiest geboekt voor henna-avond',sub:'Stijl (traditioneel/modern) controleren. Allergie-proef inplannen 2-3 weken voor',urgency:'must',trad:true},
+      {id:'t6_7',text:'Uitnodigingen ontworpen en besteld',sub:'Inclusief datum, locatie, dresscode en eventueel parkeerinformatie',urgency:'',trad:false},
+      {id:'t6_8',text:'Kohl (traditionele oogopmaak) gekocht',sub:'Echte kohl bij Marokkaanse winkel. Anders dan gewone oogpotlood — echte kohl verkleurt niet',urgency:'',trad:true},
+    ]
+  },
+  {
+    id:'f4', months:4,
+    name:'Details & sieraden',
+    emoji:'',
+    tasks:[
+      {id:'t4_1',text:'Sieraden per outfit gekozen en aangeschaft of gereserveerd',sub:'Bewaar per outfit in aparte gelabelde zakjes (zakje 1, 2, 3, 4)',urgency:'must',trad:false},
+      {id:'t4_2',text:'Schoenen per outfit gekocht en ingelopen',sub:'Minimaal een week thuis dragen. Blaren op de dag zijn vermijdbaar',urgency:'must',trad:false},
+      {id:'t4_3',text:'Uitnodigingen verstuurd met RSVP-datum',sub:'Digitaal of fysiek. Definitief gastenaantal bepalen op basis van reacties',urgency:'must',trad:false},
+      {id:'t4_4',text:'Menu definitief besproken met cateraar',sub:'Bastilla, soep, tagine, couscous, desserts, zoetjes. Halal-garantie nogmaals bevestigen',urgency:'must',trad:false},
+      {id:'t4_5',text:'Definitief gastaantal doorgegeven aan zaal en cateraar',sub:'Laatste kans voor grote aanpassingen zonder meerkosten',urgency:'must',trad:false},
+      {id:'t4_6',text:'Nazar amulet geregeld voor bescherming',sub:'Bescherming tegen het boze oog — traditioneel amulet dat veel bruiden dragen',urgency:'',trad:true},
+      {id:'t4_7',text:'Zoetigheden voor gasten geregeld',sub:'Chebakia, baklava, briwat, amandeltaartjes. Bespreek met cateraar wanneer dit wordt geserveerd',urgency:'',trad:true},
+      {id:'t4_8',text:'Alle contracten nagelezen met de Aroussa Contract Checklist',sub:'Totaal 89 controlepunten verdeeld over alle leveranciers',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'f2', months:2,
+    name:'Proeven & draaiboek',
+    emoji:'',
+    tasks:[
+      {id:'t2_1',text:'Proef make-up gedaan',sub:'Minimaal 6-8 weken voor het feest. Referentiebeelden meenemen per outfit',urgency:'must',trad:false},
+      {id:'t2_2',text:'Proef haar / hijab-styling gedaan',sub:'Feedback direct geven aan de Ziana. Goede Ziana past aan',urgency:'must',trad:false},
+      {id:'t2_3',text:'Allergie-proef henna gedaan',sub:'Minimaal 2-3 weken voor de henna-avond. Kleine hoeveelheid 24u op de pols. Roodheid of jeuk = stop',urgency:'must',trad:true},
+      {id:'t2_4',text:'Dag-Van Draaiboek opgesteld',sub:'Gebruik de Aroussa Dag-Van Draaiboek tool. Drie exemplaren printen',urgency:'must',trad:false},
+      {id:'t2_5',text:'Dag-coördinator aangewezen en volledig gebrieft',sub:'Één vertrouwde persoon die op de dag alles regelt. Jij communiceert niet meer',urgency:'must',trad:false},
+      {id:'t2_6',text:'Tweede betalingen overgemaakt',sub:'Controleer per leverancier wanneer de tussentijdse betaling verwacht wordt',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'f1', months:1,
+    name:'Finaliseren',
+    emoji:'',
+    tasks:[
+      {id:'t1_1',text:'Alle leveranciers bevestigd via WhatsApp',sub:'Datum, tijd, locatie, wat zij leveren. Gebruik de Aroussa WhatsApp Scripts Bundel (Script 24)',urgency:'must',trad:false},
+      {id:'t1_2',text:'Definitief gastaantal doorgegeven aan alle leveranciers',sub:'Na RSVP-datum — definitief doorgeven voor catering',urgency:'must',trad:false},
+      {id:'t1_3',text:'Alle lebsa\'s opgehaald voor finale pasbeurt en laten stomen',sub:'In volgorde gehangen met bijpassende sieraden en schoenen',urgency:'must',trad:false},
+      {id:'t1_4',text:'Dag-Van Draaiboek verstuurd aan alle leveranciers',sub:'WhatsApp-groep aangemaakt met dag-coördinator, Ziana, fotograaf, DJ, zaal',urgency:'must',trad:false},
+      {id:'t1_5',text:'Slotbetalingen gepland in agenda',sub:'Welke leverancier krijgt wanneer het restbedrag? Altijd per bank. Factuur bewaren',urgency:'must',trad:false},
+      {id:'t1_6',text:'Hammam dag gepland met familie en vriendinnen',sub:'1 tot 3 dagen voor het feest. Ghassoul klei, beldi zeep en argan olie meenemen',urgency:'',trad:true},
+      {id:'t1_7',text:'Henna-avond praktisch geregeld',sub:'Locatie, catering (atay na3na3), muziek, artiest, gasten bevestigd',urgency:'',trad:true},
+      {id:'t1_8',text:'Atay (Marokkaanse muntthee) en zoetjes geregeld voor henna-avond',sub:'Atay na3na3 is onmisbaar. Ook rozenwater voor de sfeer',urgency:'',trad:true},
+      {id:'t1_9',text:'Verse melk en dadels geregeld voor de ontvangstceremonie',sub:'Melk = reinheid. Dadels = vruchtbaarheid en geluk. Traditionele opening van het feest',urgency:'',trad:true},
+      {id:'t1_10',text:'Paspoorten geldig gecheckt',sub:'Zeker bij huwelijksreis. Paspoort aanvragen duurt minimaal 5 weken',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'f2w', months:0.5,
+    name:'Twee weken voor het feest',
+    emoji:'',
+    tasks:[
+      {id:'tw1',text:'Alle leveranciers nogmaals bevestigd',sub:'Script 24 uit de WhatsApp Scripts Bundel gebruiken',urgency:'must',trad:false},
+      {id:'tw2',text:'Nagels gepland — minimaal 48 uur voor feest',sub:'Nagels voor de henna zodat de henna mooi over de nagels doorloopt',urgency:'must',trad:false},
+      {id:'tw3',text:'Ontharing gepland — minimaal 48 uur voor feest',sub:'Niet vlak voor de henna of make-up — roodheid moet weg zijn',urgency:'must',trad:false},
+      {id:'tw4',text:'Wenkbrauwen gepland — 3 tot 5 dagen voor feest',sub:'Nooit op de dag zelf — roodheid',urgency:'must',trad:false},
+      {id:'tw5',text:'Wimpers gepland (als niet via Ziana)',sub:'24-48 uur voor het feest',urgency:'',trad:false},
+      {id:'tw6',text:'Dag-van tas ingepakt',sub:'Noodkit: naald, draad, pijnstillers, pleisters, lippenstift, kohl bijwerken, rozenwater, nazar',urgency:'must',trad:false},
+      {id:'tw7',text:'Alle outfits hangen klaar in volgorde 1 t/m 4',sub:'Sieraden in zakjes erbij (genummerd). Schoenen per outfit',urgency:'must',trad:false},
+      {id:'tw8',text:'Cadeautafel of enveloppendoos geregeld',sub:'Wie beheert dit op de dag? Vastleggen in het draaiboek',urgency:'',trad:false},
+      {id:'tw9',text:'Rozenwater klaargelegd voor de dag zelf',sub:'Voor bijwerken make-up en frisse huid tijdens de avond',urgency:'',trad:true},
+    ]
+  },
+  {
+    id:'fhammam', months:0.15,
+    name:'Hammam dag',
+    emoji:'',
+    tasks:[
+      {id:'fh1',text:'Ghassoul klei meegenomen',sub:'Traditionele haarwas voor de bruid — bij Marokkaanse winkel',urgency:'',trad:true},
+      {id:'fh2',text:'Beldi zeep (savon beldi) meegenomen',sub:'Zwarte zeep van olijfolie voor het scrubben van het lichaam',urgency:'',trad:true},
+      {id:'fh3',text:'Argan olie meegenomen',sub:'Na de behandeling voor huid en haar',urgency:'',trad:true},
+      {id:'fh4',text:'Kessa wanten meegenomen',sub:'Eigen scrubhandschoenen — niet te hard scrubben, zeker niet als je daarna henna hebt',urgency:'must',trad:false},
+      {id:'fh5',text:'Badpak, handdoeken en slippers klaar',sub:'',urgency:'must',trad:false},
+      {id:'fh6',text:'Vochtinbrengende crème voor na afloop klaar',sub:'Huid is extra gevoelig na de scrub — verzorgen direct na',urgency:'',trad:false},
+      {id:'fh7',text:'Niet te hard laten scrubben',sub:'Zeker niet als je daarna henna hebt gepland — huid kan rood reageren',urgency:'must',trad:false},
+      {id:'fh8',text:'Veel water drinken voor en na',sub:'',urgency:'',trad:false},
+    ]
+  },
+  {
+    id:'fhenna', months:0.07,
+    name:'Henna-avond · Laylat al-Henna',
+    emoji:'',
+    tasks:[
+      {id:'fhen1',text:'Allergie-proef was 2-3 weken geleden gedaan',sub:'Als er destijds geen reactie was: veilig om door te gaan',urgency:'must',trad:true},
+      {id:'fhen2',text:'Referentiebeelden gewenst patroon meegegeven aan artiest',sub:'Traditioneel of modern — van tevoren besproken',urgency:'must',trad:false},
+      {id:'fhen3',text:'Naam van de bruidegom wordt verborgen in het patroon',sub:'Klassieke Marokkaanse traditie. Vertel dit van tevoren aan de artiest',urgency:'',trad:true},
+      {id:'fhen4',text:'Henna-jurk (kaftan of djellaba) klaargelegd',sub:'Wijde mouwen die makkelijk uitgedaan worden terwijl henna droog is',urgency:'',trad:true},
+      {id:'fhen5',text:'Atay na3na3 (Marokkaanse muntthee) geserveerd',sub:'Onmisbaar op een henna-avond. Ook zoetjes, baklava en koekjes',urgency:'',trad:true},
+      {id:'fhen6',text:'Kaarsen en rozenwater klaargelegd',sub:'Sfeer voor de ceremonie',urgency:'',trad:true},
+      {id:'fhen7',text:'Citroensap of suikerwater aangebracht op natte henna',sub:'Verdiept de kleur. Warmte helpt ook — warm de handen boven stoom',urgency:'',trad:false},
+      {id:'fhen8',text:'Henna \'s nachts laten zitten — minimaal 6-8 uur',sub:'Hoe langer, hoe donkerder het patroon. Wikkel met plastic',urgency:'must',trad:false},
+      {id:'fhen9',text:'Handen eerste uren niet nat maken',sub:'Laat de henna verder oxideren voor de diepste kleur',urgency:'must',trad:false},
+    ]
+  },
+  {
+    id:'fday', months:0,
+    name:'De dag zelf',
+    emoji:'',
+    tasks:[
+      {id:'fd1',text:'Goed ontbijt gegeten en veel water gedronken',sub:'De bruid vergeet zichzelf. Eet VOOR de Ziana arriveert',urgency:'must',trad:false},
+      {id:'fd2',text:'Telefoon volledig opgeladen + powerbank in de tas',sub:'',urgency:'must',trad:false},
+      {id:'fd3',text:'Dag-Van Draaiboek bij de dag-coördinator',sub:'Jij communiceert vandaag niet — de coördinator regelt alles',urgency:'must',trad:false},
+      {id:'fd4',text:'Alle outfits klaarstaan op locatie in volgorde',sub:'Sieraden zakjes genummerd. Schoenen per outfit. Referentiebeelden bij Ziana',urgency:'must',trad:false},
+      {id:'fd5',text:'Noodkit aanwezig bij Ziana',sub:'Naald, draad, pijnstillers, pleisters, kohl bijwerken, haarspelden, rozenwater',urgency:'must',trad:false},
+      {id:'fd6',text:'Melk en dadels klaargelegd voor de ontvangstceremonie',sub:'Melk staat voor reinheid, dadels voor vruchtbaarheid en geluk',urgency:'',trad:true},
+      {id:'fd7',text:'Gorzja-entree is de eerste outfit waarmee je de zaal betreedt',sub:'Dit is het moment waar iedereen op wacht. Fotograaf klaarstaan',urgency:'',trad:true},
+      {id:'fd8',text:'Kohl aangebracht voor traditionele oogopmaak',sub:'',urgency:'',trad:true},
+      {id:'fd9',text:'Telefoon afgegeven aan vertrouwde persoon bij binnenkomst',sub:'Jij bent de bruid. Leg je telefoon weg en geniet',urgency:'must',trad:false},
+      {id:'fd10',text:'Geniet van elke outfit, elke entree, elke dans',sub:'Alles is geregeld. Dit moment is voor jou. Je hebt dit verdiend.',urgency:'',trad:false},
+    ]
+  }
+];
+
+let state = {};
+let weddingDate = null;
+
+function initState() {
+  PHASES.forEach(p => p.tasks.forEach(t => { if(state[t.id]===undefined) state[t.id]=false; }));
+}
+
+window.onload = () => {
+  initState();
+  loadLocal();
+  renderAll();
+};
+
+// ── DATE ─────────────────────────────────────────────────────────────────
+function onDateChange() {
+  const v = document.getElementById('weddingDate').value;
+  weddingDate = v ? new Date(v) : null;
+  updateCountdown();
+  renderAll();
+  saveLocal();
+}
+
+function onNaamChange() {
+  saveLocal();
+}
+
+function updateCountdown() {
+  const el = document.getElementById('countdown');
+  if(!weddingDate){ el.textContent='Vul je feestdatum in ↑'; return; }
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diff=Math.round((weddingDate-today)/(1000*60*60*24));
+  if(diff<0){ el.textContent=`Feest was ${Math.abs(diff)} dagen geleden`; return; }
+  if(diff===0){ el.textContent='Vandaag is het zover!'; return; }
+  el.textContent=`Nog ${diff} dagen — ${fmtDate(weddingDate)}`;
+}
+
+function getDeadline(phase) {
+  if(!weddingDate) return null;
+  const d=new Date(weddingDate);
+  if(phase.months===0) return d;
+  if(phase.months===0.07){ d.setDate(d.getDate()-2); return d; }
+  if(phase.months===0.15){ d.setDate(d.getDate()-5); return d; }
+  if(phase.months===0.5){ d.setDate(d.getDate()-14); return d; }
+  d.setMonth(d.getMonth()-Math.round(phase.months));
+  return d;
+}
+
+function dlStatus(dl) {
+  if(!dl) return 'future';
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diff=Math.round((dl-today)/(1000*60*60*24));
+  if(diff<0) return 'overdue';
+  if(diff<=30) return 'soon';
+  return 'ok';
+}
+
+function fmtDate(d) {
+  if(!d) return '';
+  return d.toLocaleDateString('nl-NL',{day:'numeric',month:'long',year:'numeric'});
+}
+
+function dlLabel(phase) {
+  const dl=getDeadline(phase);
+  if(!dl) return 'Vul je feestdatum in';
+  const s=dlStatus(dl);
+  let base;
+  if(phase.months===0) base='Op de dag zelf';
+  else if(phase.months===0.07) base=`Henna-avond — ${fmtDate(dl)}`;
+  else if(phase.months===0.15) base=`Hammam dag — ${fmtDate(dl)}`;
+  else base=`Vóór ${fmtDate(dl)}`;
+  const pre = s==='overdue'?'⚠ Verlopen — ':s==='soon'?'⏰ Binnenkort — ':'📅 ';
+  return pre+base;
+}
+
+function phaseStatus(phase) {
+  const allDone=phase.tasks.every(t=>state[t.id]);
+  if(allDone) return 'done';
+  const dl=getDeadline(phase);
+  if(!dl) return 'future';
+  const today=new Date(); today.setHours(0,0,0,0);
+  if(dl<=today) return 'active';
+  return 'future';
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function renderAll() {
+  renderTimeline();
+  updateProgress();
+  updateCurrentPhase();
+  updateCountdown();
+}
+
+function renderTimeline() {
+  const el=document.getElementById('timeline');
+  el.innerHTML=PHASES.map(p=>renderPhase(p)).join('');
+}
+
+function renderPhase(phase) {
+  const status=phaseStatus(phase);
+  const dl=getDeadline(phase);
+  const dlLbl=dlLabel(phase);
+  const dlClass=dlStatus(dl);
+  const done=phase.tasks.filter(t=>state[t.id]).length;
+  const total=phase.tasks.length;
+  const pct=total?Math.round(done/total*100):0;
+  const scoreCol=pct===100?'var(--green)':pct>0?'var(--gold)':'rgba(155,142,126,0.5)';
+  const dotClass=status==='done'?'dot done':status==='active'?'dot active':'dot future';
+  const isOpen=phase._open;
+  const moLabel=phase.months===0?'dag':
+                phase.months===0.07?'hen':
+                phase.months===0.15?'ham':
+                phase.months===0.5?'2w':
+                phase.months+'m';
+
+  const tasksHtml=phase.tasks.map(t=>renderTask(t,phase.id)).join('');
+
+  return `<div class="phase${isOpen?' open':''}" id="ph_${phase.id}">
+    <div class="phase-hdr" onclick="togglePhase('${phase.id}')">
+      <div class="phase-dot-col"><div class="${dotClass}"></div></div>
+      <div class="phase-title-block">
+        <div class="phase-left">
+          <div class="phase-mo">${moLabel}</div>
+          <div class="phase-info">
+            <div class="phase-name">${phase.name}</div>
+            <div class="phase-dl ${dlClass}">${dlLbl}</div>
+          </div>
+        </div>
+        <div class="phase-right">
+          <div class="phase-score" style="color:${scoreCol}">${done}/${total}</div>
+          <div class="ph-prog"><div class="ph-prog-fill" style="width:${pct}%;background:${pct===100?'var(--green)':pct>0?'var(--gold)':'rgba(196,168,130,0.2)'}"></div></div>
+          <div class="phase-arrow">▾</div>
+        </div>
+      </div>
+    </div>
+    <div class="phase-body">
+      ${tasksHtml}
+      <div class="add-row">
+        <input class="add-inp" id="add_${phase.id}" placeholder="Eigen taak toevoegen…" onkeydown="if(event.key==='Enter')addTask('${phase.id}')">
+        <button class="add-btn" onclick="addTask('${phase.id}')">+</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderTask(t, phaseId) {
+  const isDone=state[t.id];
+  const tagHtml=t.urgency==='must'?'<span class="tag tag-must">Must</span>':
+                t.trad?'<span class="tag tag-trad">Traditie</span>':'';
+  const delBtn=t.custom?`<button class="task-del" onclick="delTask('${t.id}','${phaseId}')">✕</button>`:'';
+  return `<div class="task${isDone?' done':''}${t.trad?' trad':''}" id="task_${t.id}">
+    <div class="task-tap" onclick="toggleTask('${t.id}','${phaseId}')">
+      <div class="chk${isDone?' on':''}"></div>
+      <div class="task-content">
+        <div class="task-label">${tagHtml}${t.text}</div>
+        ${t.sub?`<div class="task-sub">${t.sub}</div>`:''}
+      </div>
+    </div>
+    ${delBtn}
+  </div>`;
+}
+
+function togglePhase(id) {
+  const phase=PHASES.find(p=>p.id===id);
+  if(phase) phase._open=!phase._open;
+  renderTimeline();
+}
+
+function toggleTask(taskId, phaseId) {
+  state[taskId]=!state[taskId];
+  renderTimeline();
+  updateProgress();
+  updateCurrentPhase();
+  saveLocal();
+}
+
+function updatePhaseScore(phaseId) {}
+
+// ── CURRENT PHASE ─────────────────────────────────────────────────────────
+function updateCurrentPhase() {
+  const el=document.getElementById('curPhase');
+  const txt=document.getElementById('curPhaseText');
+  if(!weddingDate){ el.style.display='none'; return; }
+  const today=new Date(); today.setHours(0,0,0,0);
+  let cur=null;
+  for(const p of PHASES){
+    const dl=getDeadline(p);
+    if(dl && dl>=today && !p.tasks.every(t=>state[t.id])){
+      cur=p; break;
+    }
+  }
+  if(!cur){ el.style.display='none'; return; }
+  el.style.display='flex';
+  txt.textContent=cur.name+' — '+dlLabel(cur);
+}
+
+// ── PROGRESS ──────────────────────────────────────────────────────────────
+function updateProgress() {
+  let total=0,done=0,overdue=0;
+  const today=new Date(); today.setHours(0,0,0,0);
+  PHASES.forEach(p=>{
+    const dl=getDeadline(p);
+    const past=dl&&dl<today;
+    p.tasks.forEach(t=>{
+      total++;
+      if(state[t.id]) done++;
+      else if(past) overdue++;
+    });
+  });
+  const pct=total?Math.round(done/total*100):0;
+
+  const fill=document.getElementById('progFill');
+  if(fill){ fill.style.width=pct+'%'; fill.style.background=pct<40?'var(--red)':pct<80?'var(--gold)':'var(--green)'; }
+  document.getElementById('progNum').textContent=done;
+  document.getElementById('progPct').textContent=pct+'% compleet';
+  document.getElementById('sumDone').textContent=done;
+  document.getElementById('sumLeft').textContent=total-done;
+  document.getElementById('sumOverdue').textContent=overdue;
+  document.getElementById('sumPct2').textContent=pct+'%';
+
+  let msg='Vul je feestdatum in om te beginnen met plannen.';
+  if(weddingDate){
+    if(pct===0)      msg='Begin bij de eerste fase — 14 maanden voor het feest. Elke dag telt.';
+    else if(pct<25)  msg='Mooi begin! De feestzaal en Ziana zijn de meest tijdkritische boekingen — wacht niet.';
+    else if(pct<50)  msg='Je bent goed op weg. Controleer alle contracten met de Aroussa Contract Checklist.';
+    else if(pct<75)  msg='Meer dan half klaar! Vergeet de allergie-proef voor de henna niet in te plannen.';
+    else if(pct<95)  msg='Bijna klaar met plannen. De laatste details maken het verschil.';
+    else if(pct<100) msg='Bijna compleet! Nog een paar puntjes en je bent er helemaal klaar voor.';
+    else             msg='✓ Alles geregeld. Jij hebt dit goed gedaan. Geniet van jouw feest! — Aroussa';
+  }
+  document.getElementById('sumMsg').textContent=msg;
+}
+
+// ── ADD / DELETE TASK ─────────────────────────────────────────────────────
+function addTask(phaseId) {
+  const input=document.getElementById(`add_${phaseId}`);
+  const txt=input?.value.trim();
+  if(!txt) return;
+  const phase=PHASES.find(p=>p.id===phaseId);
+  if(!phase) return;
+  const id=`custom_${phaseId}_${Date.now()}`;
+  phase.tasks.push({id,text:txt,sub:'',urgency:'',trad:false,custom:true});
+  state[id]=false;
+  if(input) input.value='';
+  renderTimeline();
+  updateProgress();
+  saveLocal();
+}
+
+function delTask(taskId, phaseId) {
+  const phase=PHASES.find(p=>p.id===phaseId);
+  if(!phase) return;
+  phase.tasks=phase.tasks.filter(t=>t.id!==taskId);
+  delete state[taskId];
+  renderTimeline();
+  updateProgress();
+  saveLocal();
+}
+
+// ── SAVE / LOAD ────────────────────────────────────────────────────────────
+function saveLocal() {
+  const customs={};
+  PHASES.forEach(p=>{
+    const c=p.tasks.filter(t=>t.custom);
+    if(c.length) customs[p.id]=c;
+  });
+  const openPhases={};
+  PHASES.forEach(p=>{ if(p._open) openPhases[p.id]=true; });
+  const data={
+    state, customs, openPhases,
+    weddingDate:document.getElementById('weddingDate')?.value||'',
+    bruidNaam:document.getElementById('bruidNaam')?.value||'',
+  };
+  try{ localStorage.setItem('aroussa_tijdlijn_v2',JSON.stringify(data)); }catch(e){}
+}
+
+function loadLocal() {
+  try{
+    const raw=localStorage.getItem('aroussa_tijdlijn_v2');
+    if(!raw) return;
+    applyData(JSON.parse(raw));
+  }catch(e){}
+}
+
+function applyData(data) {
+  if(data.state) state={...state,...data.state};
+  if(data.customs){
+    Object.entries(data.customs).forEach(([phaseId,tasks])=>{
+      const phase=PHASES.find(p=>p.id===phaseId);
+      if(!phase) return;
+      tasks.forEach(t=>{
+        if(!phase.tasks.find(x=>x.id===t.id)){
+          phase.tasks.push(t);
+          if(state[t.id]===undefined) state[t.id]=false;
+        }
+      });
+    });
+  }
+  if(data.openPhases){
+    PHASES.forEach(p=>{ p._open=!!data.openPhases[p.id]; });
+  }
+  if(data.weddingDate){
+    const el=document.getElementById('weddingDate');
+    if(el) el.value=data.weddingDate;
+    weddingDate=data.weddingDate?new Date(data.weddingDate):null;
+  }
+  if(data.bruidNaam){
+    const el=document.getElementById('bruidNaam');
+    if(el) el.value=data.bruidNaam;
+  }
+}
+
+function resetAll() {
+  if(!confirm('Wil je alles resetten? Alle voortgang en eigen taken gaan verloren.')) return;
+  PHASES.forEach(p=>{ p.tasks=p.tasks.filter(t=>!t.custom); p._open=false; });
+  initState();
+  weddingDate=null;
+  document.getElementById('weddingDate').value='';
+  document.getElementById('bruidNaam').value='';
+  try{ localStorage.removeItem('aroussa_tijdlijn_v2'); }catch(e){}
+  renderAll();
+}
+
+function exportData() {
+  saveLocal();
+  const raw=localStorage.getItem('aroussa_tijdlijn_v2')||'{}';
+  const blob=new Blob([raw],{type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='aroussa-bruiloft-tijdlijn.json'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importData() {
+  const input=document.createElement('input');
+  input.type='file'; input.accept='.json';
+  input.onchange=e=>{
+    const file=e.target.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=ev=>{
+      try{
+        applyData(JSON.parse(ev.target.result));
+        renderAll();
+        saveLocal();
+      }catch(err){ alert('Kon het bestand niet laden.'); }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+</script>
+</body>
+</html>
