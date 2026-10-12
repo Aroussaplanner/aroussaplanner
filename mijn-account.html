@@ -272,11 +272,13 @@ var BUNDLE_PRODUCTS = ['whatsapp-scripts','dagvan-draaiboek','ziana-gids','budge
 var SK_CODE    = 'aroussa_dl_code';
 var SK_NAAM    = 'aroussa_dl_naam';
 var SK_PRODUCT = 'aroussa_dl_product';
+var SK_TOKEN   = 'aroussa_dl_token';
 
 var currentUser = null;
 var klantNaam    = '';
 var klantCode    = '';
 var klantProduct = '';
+var klantToken   = '';
 
 // ── AUTH (Netlify Identity) ───────────────────────────────────────────────
 netlifyIdentity.on('init', function(user) {
@@ -310,12 +312,45 @@ function init(user) {
   var savedCode    = tryGet(SK_CODE    + ':' + email);
   var savedNaam    = tryGet(SK_NAAM    + ':' + email);
   var savedProduct = tryGet(SK_PRODUCT + ':' + email);
+  var savedToken   = tryGet(SK_TOKEN   + ':' + email);
 
   if (savedCode && savedProduct) {
     klantCode    = savedCode;
     klantNaam    = savedNaam || '';
     klantProduct = savedProduct;
-    showProductPanel(savedProduct, savedNaam || '', savedCode);
+
+    // Check if saved token is still valid (30-day window)
+    var tokenOk = false;
+    if (savedToken) {
+      try {
+        var _d = JSON.parse(atob(savedToken));
+        tokenOk = _d.exp > Date.now();
+      } catch(e) {}
+    }
+
+    if (tokenOk) {
+      klantToken = savedToken;
+      showProductPanel(savedProduct, savedNaam || '', savedCode, savedToken);
+    } else {
+      // Token expired or missing — silently revalidate to get a fresh 30-day token
+      fetch('/.netlify/functions/validate-code', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ code: savedCode, email: email })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (data.valid && data.downloadToken) {
+          klantToken = data.downloadToken;
+          trySet(SK_TOKEN + ':' + email, klantToken);
+        }
+        showProductPanel(savedProduct, savedNaam || '', savedCode, klantToken);
+      })
+      .catch(function() {
+        // Network issue — show panel anyway without token
+        showProductPanel(savedProduct, savedNaam || '', savedCode, '');
+      });
+    }
   } else {
     goPanel('code');
     updateDots(1);
@@ -323,7 +358,7 @@ function init(user) {
 }
 
 // ── PRODUCT PANEL ─────────────────────────────────────────────────────────
-function showProductPanel(product, naam, code) {
+function showProductPanel(product, naam, code, token) {
   var box = document.getElementById('productOpenBox');
   var html = '';
 
@@ -337,7 +372,7 @@ function showProductPanel(product, naam, code) {
     BUNDLE_PRODUCTS.forEach(function(pid) {
       var p = PRODUCTS[pid];
       if (!p) return;
-      var url = p.url + '?naam=' + encodeURIComponent(naam || '') + '&code=' + encodeURIComponent(code || '');
+      var url = p.url + '?naam=' + encodeURIComponent(naam || '') + '&code=' + encodeURIComponent(code || '') + (token ? '&token=' + encodeURIComponent(token) : '');
       html += '<div class="bundle-item">';
       html += '<span class="bundle-item__name">' + p.naam + '</span>';
       html += '<a href="' + url + '" target="_blank" class="bundle-item__link">Openen →</a>';
@@ -371,7 +406,7 @@ function showProductPanel(product, naam, code) {
     }
 
     if (productUrl) {
-      var url = productUrl + '?naam=' + encodeURIComponent(naam || '') + '&code=' + encodeURIComponent(code || '');
+      var url = productUrl + '?naam=' + encodeURIComponent(naam || '') + '&code=' + encodeURIComponent(code || '') + (token ? '&token=' + encodeURIComponent(token) : '');
       html += '<a href="' + url + '" target="_blank" class="btn-download">Open jouw ' + productNaam + ' →</a>';
       if (naam && code) {
         html += '<p style="font-size:11px;color:var(--warm);margin-top:16px;">Gepersonaliseerd voor ' + naam + ' · ' + code + '</p>';
@@ -444,13 +479,15 @@ function validateCode() {
       klantNaam    = data.naam    || '';
       klantCode    = codeRaw;
       klantProduct = data.product || '';
+      klantToken   = data.downloadToken || '';
 
       // Persist for returning visits
       trySet(SK_CODE    + ':' + email, codeRaw);
       trySet(SK_NAAM    + ':' + email, klantNaam);
       trySet(SK_PRODUCT + ':' + email, klantProduct);
+      trySet(SK_TOKEN   + ':' + email, klantToken);
 
-      showProductPanel(klantProduct, klantNaam, klantCode);
+      showProductPanel(klantProduct, klantNaam, klantCode, klantToken);
     } else {
       errEl.textContent = data.reason || 'Ongeldige code.';
       errEl.classList.add('show');

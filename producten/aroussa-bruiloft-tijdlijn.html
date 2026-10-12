@@ -264,9 +264,17 @@ body{background:var(--ivory);color:var(--dark);font-family:'Montserrat',sans-ser
 <script>
 // ── URL PARAMS watermark ────────────────────────────────────────
 (function(){
-  const p = new URLSearchParams(window.location.search);
-  const n = p.get('naam') ? decodeURIComponent(p.get('naam')) : '';
-  const c = p.get('code') ? p.get('code').toUpperCase() : '';
+  // ── TOKEN GUARD ────────────────────────────────────────────────
+  var _K='bruiloft-tijdlijn';
+  var _p=new URLSearchParams(window.location.search);
+  var _t=_p.get('token')||sessionStorage.getItem('aroussa_tok_'+_K);
+  var _ok=false,_n='',_c='';
+  if(_t){try{var _d=JSON.parse(atob(_t));if(_d.exp>Date.now()&&(_d.product===_K||_d.product==='bundle'||_d.product==='complete-bundel')){_ok=true;_n=_d.naam||'';_c=(_d.code||'').toUpperCase();sessionStorage.setItem('aroussa_tok_'+_K,_t);}}catch(e){}}
+  if(!_ok){sessionStorage.removeItem('aroussa_tok_'+_K);document.addEventListener('DOMContentLoaded',function(){var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#fff9f5;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;';o.innerHTML='<div style="text-align:center;max-width:420px;padding:2rem"><div style="font-size:3rem;margin-bottom:1rem">&#x1F512;</div><h2 style="color:#7a3b1e;margin-bottom:.75rem">Geen toegang</h2><p style="color:#555;line-height:1.7;margin-bottom:1.5rem">Dit document is persoonlijk en beveiligd. Log in via Mijn Account om toegang te krijgen.</p><a href="/mijn-account" style="background:#7a3b1e;color:#fff;padding:.75rem 1.75rem;border-radius:6px;text-decoration:none;font-size:.95rem">Naar Mijn Account &#x2192;</a></div>';document.body.appendChild(o);document.body.style.overflow='hidden';});return;}
+
+  // ── WATERMARK ──────────────────────────────────────────────────
+  const n = _n;
+  const c = _c;
   const wmTekst = n ? (n.toUpperCase() + (c ? ' · ' + c : '')) : '';
 
   if(n){

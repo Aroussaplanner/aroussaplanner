@@ -93,7 +93,7 @@ exports.handler = async (event) => {
       naam: codeData.naam,
       product: codeData.product,
       code: normalizedCode,
-      exp: Date.now() + 24 * 60 * 60 * 1000,
+      exp: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days
     };
     const downloadToken = Buffer.from(JSON.stringify(tokenPayload)).toString('base64');
     return {
@@ -144,7 +144,7 @@ exports.handler = async (event) => {
     naam: codeData.naam,
     product: codeData.product,
     code: normalizedCode,
-    exp: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
+    exp: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days
   };
   const downloadToken = Buffer.from(JSON.stringify(tokenPayload)).toString('base64');
 
