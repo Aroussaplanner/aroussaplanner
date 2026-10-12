@@ -162,6 +162,12 @@
             </div>
             <div class="wa-block__text" id="waTemplate"></div>
           </div>
+
+          <!-- EMAIL VERZENDEN -->
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(196,168,130,0.1);">
+            <button class="btn" id="emailBtn" onclick="sendAccessEmail()" style="background:rgba(106,159,181,0.15);color:var(--blue);border:1px solid rgba(106,159,181,0.3);">✉ Verstuur toegang per email</button>
+            <div id="emailStatus" style="display:none;margin-top:10px;font-size:12px;text-align:center;padding:10px 14px;border-radius:4px;"></div>
+          </div>
         </div>
       </div>
 
@@ -205,10 +211,11 @@
 
 <script>
 var ADMIN_SECRET_KEY = 'aroussa_admin_session';
-var currentCode  = '';
-var currentNaam  = '';
-var currentEmail = '';
-var recentLoaded = false;
+var currentCode    = '';
+var currentNaam    = '';
+var currentEmail   = '';
+var currentProduct = '';
+var recentLoaded   = false;
 
 // ── PRODUCT NAMEN MAP ─────────────────────────────────────────────────────
 var PRODUCT_NAMEN = {
@@ -315,9 +322,10 @@ async function generateCode() {
       return;
     }
 
-    currentCode  = data.code;
-    currentNaam  = data.naam;
-    currentEmail = data.email;
+    currentCode    = data.code;
+    currentNaam    = data.naam;
+    currentEmail   = data.email;
+    currentProduct = product;
 
     var productNaam = PRODUCT_NAMEN[product] || product;
     document.getElementById('codeDisplay').textContent = data.code;
@@ -329,6 +337,9 @@ async function generateCode() {
     document.getElementById('waTemplate').textContent = buildWAMessage(data.naam, data.code, data.email, product, productNaam);
     document.getElementById('copyCodeBtn').textContent = 'Kopieer code';
     document.getElementById('copyCodeBtn').classList.remove('copied');
+    document.getElementById('emailBtn').textContent = '✉ Verstuur toegang per email';
+    document.getElementById('emailBtn').disabled = false;
+    document.getElementById('emailStatus').style.display = 'none';
     document.getElementById('codeResult').classList.add('show');
 
     // Reset form
@@ -469,6 +480,67 @@ function copyWA() {
     el.textContent = '✓ Gekopieerd!';
     setTimeout(function() { el.textContent = orig; }, 2000);
   });
+}
+
+// ── EMAIL VERSTUREN ───────────────────────────────────────────────────────
+async function sendAccessEmail() {
+  var btn      = document.getElementById('emailBtn');
+  var statusEl = document.getElementById('emailStatus');
+
+  if (!currentCode || !currentEmail || !currentProduct) {
+    showEmailStatus('error', 'Genereer eerst een code.');
+    return;
+  }
+
+  btn.disabled    = true;
+  btn.textContent = 'Versturen…';
+  statusEl.style.display = 'none';
+
+  try {
+    var resp = await fetch('/.netlify/functions/send-access', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        adminSecret: window._adminPass,
+        email:   currentEmail,
+        naam:    currentNaam,
+        product: currentProduct,
+        code:    currentCode,
+      })
+    });
+    var data = await resp.json();
+
+    if (!resp.ok || !data.success) {
+      if (resp.status === 401) { logout(); return; }
+      showEmailStatus('error', data.error || 'Email kon niet worden verstuurd.');
+      btn.disabled    = false;
+      btn.textContent = '✉ Verstuur toegang per email';
+    } else {
+      showEmailStatus('ok', '✓ Email verstuurd naar ' + currentEmail);
+      btn.textContent = '✓ Verstuurd';
+      // Don't re-enable — prevent double sends
+    }
+
+  } catch(e) {
+    showEmailStatus('error', 'Verbindingsfout. Probeer opnieuw.');
+    btn.disabled    = false;
+    btn.textContent = '✉ Verstuur toegang per email';
+  }
+}
+
+function showEmailStatus(type, msg) {
+  var el = document.getElementById('emailStatus');
+  el.textContent = msg;
+  if (type === 'ok') {
+    el.style.color      = 'var(--green)';
+    el.style.background = 'rgba(76,175,110,0.08)';
+    el.style.border     = '1px solid rgba(76,175,110,0.2)';
+  } else {
+    el.style.color      = 'var(--red)';
+    el.style.background = 'rgba(196,98,91,0.08)';
+    el.style.border     = '1px solid rgba(196,98,91,0.15)';
+  }
+  el.style.display = 'block';
 }
 
 function showError(id, msg) {

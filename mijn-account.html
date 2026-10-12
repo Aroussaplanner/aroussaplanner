@@ -223,7 +223,7 @@
             <input class="code-input" type="text" id="codeInput" placeholder="ARO-XXXX-XXXX" maxlength="13" oninput="formatCode(this)" onkeydown="if(event.key==='Enter')validateCode()">
             <button class="btn-validate" id="validateBtn" onclick="validateCode()">Activeren</button>
           </div>
-          <p class="code-hint">De code staat in het WhatsApp-bericht van Aroussa.</p>
+          <p class="code-hint">De code staat in jouw email of WhatsApp-bericht van Aroussa.</p>
           <div class="error-msg" id="codeError"></div>
           <div style="margin-top:16px;text-align:center;">
             <a href="https://wa.me/31613115286" class="wa-link" style="font-size:11px;padding:8px 18px;" target="_blank">Nog geen code? WhatsApp sturen</a>
@@ -259,6 +259,17 @@
 </footer>
 
 <script>
+// ── URL CODE PARAM — lees code uit email-link en bewaar voor na login ────
+(function() {
+  try {
+    var urlCode = new URLSearchParams(window.location.search).get('code') || '';
+    if (urlCode) {
+      sessionStorage.setItem('aroussa_pending_code', urlCode.trim().toUpperCase());
+      history.replaceState(null, '', window.location.pathname);
+    }
+  } catch(e) {}
+})();
+
 // ── PRODUCT MAP ────────────────────────────────────────────────────────────
 var PRODUCTS = {
   'whatsapp-scripts':   { url:'/producten/aroussa-whatsapp-scripts-v2.html',   naam:'WhatsApp Scripts Bundel',          printable:true  },
@@ -357,8 +368,25 @@ function init(user) {
       });
     }
   } else {
-    goPanel('code');
-    updateDots(1);
+    // Check for code pre-filled from email link
+    var pendingCode = '';
+    try { pendingCode = sessionStorage.getItem('aroussa_pending_code') || ''; } catch(e) {}
+
+    if (pendingCode) {
+      try { sessionStorage.removeItem('aroussa_pending_code'); } catch(e) {}
+      goPanel('code');
+      updateDots(1);
+      // Pre-fill het code-veld en valideer automatisch
+      var codeInput = document.getElementById('codeInput');
+      if (codeInput) {
+        codeInput.value = pendingCode;
+        // Korte vertraging zodat de UI al zichtbaar is
+        setTimeout(validateCode, 300);
+      }
+    } else {
+      goPanel('code');
+      updateDots(1);
+    }
   }
 }
 
