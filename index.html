@@ -380,6 +380,19 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .modal-success__icon{display:none;}
 .modal-success__title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);margin-bottom:10px;}
 .modal-success__text{font-size:13px;color:var(--warm);line-height:1.7;}
+/* PRODUCT CHECKBOX LIST */
+.product-checkboxes{max-height:240px;overflow-y:auto;border:1px solid rgba(196,168,130,0.25);margin-bottom:10px;}
+.product-item{display:flex;align-items:center;padding:9px 12px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(196,168,130,0.1);user-select:none;gap:10px;}
+.product-item:last-child{border-bottom:none;}
+.product-item:hover{background:rgba(196,168,130,0.06);}
+.product-item.selected{background:rgba(196,168,130,0.13);}
+.product-item__check{width:15px;height:15px;border:1px solid rgba(196,168,130,0.5);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.15s;font-size:9px;color:transparent;}
+.product-item.selected .product-item__check{background:var(--gold);border-color:var(--gold);color:var(--dark);}
+.product-item__naam{flex:1;font-size:12px;color:var(--dark);line-height:1.3;}
+.product-item__prijs{font-size:12px;font-weight:600;color:var(--bronze);white-space:nowrap;}
+.order-total-row{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;background:rgba(196,168,130,0.09);border:1px solid rgba(196,168,130,0.2);margin-bottom:14px;}
+.modal-submit:disabled{opacity:0.38;cursor:not-allowed;}
+.modal-submit:disabled::after{display:none;}
 /* WHY BUY */
 .pdf-why{background:var(--dark);padding:10px 14px;margin:0 0 14px;border-left:3px solid var(--gold);}
 .pdf-why p{font-size:11.5px;line-height:1.6;color:rgba(247,242,234,0.85);font-style:italic;}
@@ -1316,9 +1329,62 @@ function toggleFaq(el){const item=el.parentElement;const isOpen=item.classList.c
 function selectPrice(el){document.querySelectorAll('.price-option').forEach(p=>p.classList.remove('active'));el.classList.add('active');}
 function toggleNav(){document.getElementById('mobileNav').classList.toggle('open');}
 function submitWaitlist(e){e.preventDefault();const f=e.target;const data=new FormData(f);fetch('/',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams(data).toString()}).catch(()=>{});document.getElementById('waitlistForm').style.display='none';document.getElementById('waitlistSuccess').style.display='block';}
-function openModal(product) {
-  document.getElementById('modalProductLabel').textContent = product;
-  document.getElementById('orderProductField').value = product;
+// ── MULTI-PRODUCT ORDER MODAL ──────────────────────────────────────
+var PRODUCTEN = [
+  { id: 'rode-vlaggen-gids',  naam: 'Rode Vlaggen Gids',            prijs: 25 },
+  { id: 'whatsapp-scripts',   naam: 'WhatsApp Scripts Bundel',       prijs: 22 },
+  { id: 'budget-calculator',  naam: 'Budget Calculator',             prijs: 39 },
+  { id: 'ziana-gids',         naam: 'De Ziana / Bridalstylist Gids', prijs: 39 },
+  { id: 'dagvan-draaiboek',   naam: 'Dag-Van Draaiboek',             prijs: 35 },
+  { id: 'contract-checklist', naam: 'Contract Checklist',            prijs: 22 },
+  { id: 'bruid-checklist',    naam: 'De Bruid Checklist',            prijs: 25 },
+  { id: 'bruiloft-tijdlijn',  naam: 'Bruiloft Tijdlijn',             prijs: 25 },
+  { id: 'fotoshoot-locaties', naam: 'Fotoshootlocaties NL/BE',       prijs: 35 },
+  { id: 'offertes-gids',      naam: 'Offerteprijzen Diensten NL/BE', prijs: 39 },
+];
+document.addEventListener('DOMContentLoaded', function() {
+  var container = document.getElementById('productCheckboxes');
+  if (!container) return;
+  PRODUCTEN.forEach(function(p) {
+    var div = document.createElement('div');
+    div.className = 'product-item';
+    div.id = 'pi-' + p.id;
+    div.setAttribute('onclick', 'toggleProduct(this)');
+    div.innerHTML = '<div class="product-item__check">&#10003;</div>' +
+      '<span class="product-item__naam">' + p.naam + '</span>' +
+      '<span class="product-item__prijs">&euro;' + p.prijs + '</span>';
+    container.appendChild(div);
+  });
+});
+function toggleProduct(el) { el.classList.toggle('selected'); calcTotal(); }
+function calcTotal() {
+  var total = 0, selected = [];
+  PRODUCTEN.forEach(function(p) {
+    var el = document.getElementById('pi-' + p.id);
+    if (el && el.classList.contains('selected')) {
+      total += p.prijs;
+      selected.push(p.naam + ' (€' + p.prijs + ')');
+    }
+  });
+  var amountEl = document.getElementById('totalAmount');
+  var boxEl    = document.getElementById('orderTotal');
+  var btnEl    = document.getElementById('orderSubmitBtn');
+  if (amountEl) amountEl.textContent = '€' + total;
+  if (boxEl)    boxEl.style.display  = total > 0 ? 'flex' : 'none';
+  if (btnEl)    btnEl.disabled       = total === 0;
+  return { total: total, selected: selected };
+}
+function openModal(productNaam) {
+  PRODUCTEN.forEach(function(p) {
+    var el = document.getElementById('pi-' + p.id);
+    if (el) el.classList.remove('selected');
+  });
+  var match = PRODUCTEN.find(function(p) { return p.naam === productNaam; });
+  if (match) {
+    var el = document.getElementById('pi-' + match.id);
+    if (el) el.classList.add('selected');
+  }
+  calcTotal();
   document.getElementById('pdfOrderForm').style.display = 'block';
   document.getElementById('orderSuccess').style.display = 'none';
   document.getElementById('pdfModal').style.display = 'flex';
@@ -1330,13 +1396,13 @@ function closeModal() {
 }
 function submitOrder(e) {
   e.preventDefault();
-  const form = e.target;
-  const data = new FormData(form);
-  fetch('/', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(data).toString()
-  }).catch(() => {});
+  var result = calcTotal();
+  if (!result.selected.length) return;
+  document.getElementById('bestellijstField').value = result.selected.join(', ');
+  document.getElementById('totaalField').value      = '€' + result.total;
+  var data = new FormData(e.target);
+  fetch('/', { method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString() }).catch(function(){});
   document.getElementById('pdfOrderForm').style.display = 'none';
   document.getElementById('orderSuccess').style.display = 'block';
 }
@@ -1354,21 +1420,26 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
 <div class="modal-overlay" id="pdfModal" style="display:none;" onclick="if(event.target===this)closeModal()">
   <div class="modal-box">
     <button class="modal-close" onclick="closeModal()">&#10005;</button>
-    <div class="modal-product" id="modalProductLabel">Product</div>
-    <h3 class="modal-title">Vul je gegevens in</h3>
-    <p class="modal-sub">Vul je gegevens in en je ontvangt snel een betaallink per e-mail.</p>
+    <h3 class="modal-title">Kies je producten</h3>
+    <p class="modal-sub">Vink aan wat je wilt bestellen — je kunt meerdere producten combineren.</p>
     <form id="pdfOrderForm" name="pdf-bestelling" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:block;" onsubmit="submitOrder(event)">
       <input type="hidden" name="form-name" value="pdf-bestelling">
       <input type="hidden" name="_to" value="aroussaplanner@gmail.com">
-      <input type="hidden" name="product" id="orderProductField">
+      <input type="hidden" name="bestellijst" id="bestellijstField">
+      <input type="hidden" name="totaal-bedrag" id="totaalField">
       <p style="display:none"><input name="bot-field"></p>
+      <div class="product-checkboxes" id="productCheckboxes"></div>
+      <div id="orderTotal" style="display:none;" class="order-total-row">
+        <span style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--warm);">Totaal</span>
+        <span id="totalAmount" style="font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--dark);font-weight:300;">&#8364;0</span>
+      </div>
       <div class="modal-form-grid">
         <input class="modal-input-half" type="text" name="voornaam" placeholder="Voornaam" required>
         <input class="modal-input-half" type="text" name="achternaam" placeholder="Achternaam" required>
       </div>
       <input class="modal-input" type="tel" name="telefoon" placeholder="Telefoonnummer" required>
       <input class="modal-input" type="email" name="email" placeholder="E-mailadres" required>
-      <button type="submit" class="modal-submit"><span>Ontvang betaallink &#8594;</span></button>
+      <button type="submit" id="orderSubmitBtn" class="modal-submit" disabled><span>Ontvang betaallink &#8594;</span></button>
     </form>
     <div id="orderSuccess" style="display:none;" class="modal-success">
       <div class="modal-success__icon">&#9670;</div>
