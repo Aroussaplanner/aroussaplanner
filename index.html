@@ -253,6 +253,16 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .footer-col ul li a:hover{color:var(--gold);}
 .footer-bottom{border-top:1px solid rgba(196,168,130,0.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
 .footer-bottom p{font-size:11px;letter-spacing:1px;color:var(--warm);text-transform:uppercase;}
+.app-banner{position:fixed;bottom:16px;left:16px;right:16px;max-width:480px;margin:0 auto;background:var(--darker);border:1px solid rgba(196,168,130,0.25);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;z-index:999;box-shadow:0 8px 32px rgba(0,0,0,0.35);transform:translateY(120px);opacity:0;transition:transform 0.45s ease,opacity 0.45s ease;pointer-events:none;}
+.app-banner.show{transform:translateY(0);opacity:1;pointer-events:auto;}
+.app-banner__icon{width:44px;height:44px;border-radius:10px;flex-shrink:0;object-fit:cover;}
+.app-banner__text{flex:1;min-width:0;}
+.app-banner__text strong{display:block;font-size:13px;font-weight:600;color:var(--ivory);letter-spacing:0.02em;}
+.app-banner__text span{display:block;font-size:11px;color:var(--warm);margin-top:2px;}
+.app-banner__btn{background:var(--gold);color:var(--darker);border:none;padding:9px 18px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;border-radius:4px;cursor:pointer;white-space:nowrap;flex-shrink:0;transition:background 0.2s;}
+.app-banner__btn:hover{background:#D4B892;}
+.app-banner__close{background:none;border:none;color:var(--warm);font-size:16px;cursor:pointer;padding:4px;flex-shrink:0;line-height:1;transition:color 0.2s;}
+.app-banner__close:hover{color:var(--ivory);}
 .sticky-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(26,18,16,0.97);border-top:1px solid rgba(196,168,130,0.2);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;z-index:998;transform:translateY(100%);transition:transform 0.4s ease;backdrop-filter:blur(12px);}
 .sticky-bar.visible{transform:translateY(0);}
 .sticky-bar__text{font-size:13px;color:var(--ivory);}
@@ -1265,6 +1275,17 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
   </div>
 </footer>
 
+<!-- APP INSTALL BANNER -->
+<div class="app-banner" id="appBanner" role="complementary" aria-label="App installeren">
+  <img src="/icon-192.png" alt="Aroussa" class="app-banner__icon">
+  <div class="app-banner__text">
+    <strong>Download de Aroussa App</strong>
+    <span>Altijd bij de hand — gratis op je telefoon</span>
+  </div>
+  <button class="app-banner__btn" id="appInstallBtn">Installeer</button>
+  <button class="app-banner__close" id="appBannerClose" aria-label="Sluiten">&#x2715;</button>
+</div>
+
 <div class="sticky-bar" id="stickyBar">
   <p class="sticky-bar__text"><strong>Complete Bundle alle 10 gidsen voor &#8364;264</strong> &#183; Direct download</p>
   <div class="sticky-bar__actions">
@@ -1363,6 +1384,65 @@ function submitClub(e){e.preventDefault();const f=e.target;const data=new FormDa
   }
 </script>
 <script>
+// PWA App Install Banner
+(function() {
+  var banner = document.getElementById('appBanner');
+  var installBtn = document.getElementById('appInstallBtn');
+  var closeBtn = document.getElementById('appBannerClose');
+  var deferredPrompt = null;
+  var shown = false;
+
+  // Niet tonen als al als app geopend
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) return;
+  // Niet tonen als al weggetipt
+  try { if (localStorage.getItem('appBannerDismissed')) return; } catch(e) {}
+
+  function showBanner() {
+    if (shown) return;
+    shown = true;
+    setTimeout(function() { banner.classList.add('show'); }, 1800);
+  }
+
+  // Android / Chrome: vang de install-prompt op
+  window.addEventListener('beforeinstallprompt', function(e) {
+    e.preventDefault();
+    deferredPrompt = e;
+    showBanner();
+    installBtn.addEventListener('click', function() {
+      deferredPrompt.prompt();
+      deferredPrompt.userChoice.then(function() {
+        deferredPrompt = null;
+        banner.classList.remove('show');
+        try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+      });
+    });
+  });
+
+  // iOS Safari: toon handmatige instructie
+  var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+  if (isIOS && isSafari) {
+    installBtn.textContent = 'Hoe?';
+    installBtn.addEventListener('click', function() {
+      alert('Tik op het deel-icoontje onderin Safari \n(het vierkantje met pijltje omhoog ↑)\nen kies "Zet op beginscherm".');
+      banner.classList.remove('show');
+      try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+    });
+    showBanner();
+  }
+
+  // Sluiten
+  closeBtn.addEventListener('click', function() {
+    banner.classList.remove('show');
+    try { localStorage.setItem('appBannerDismissed', '1'); } catch(e) {}
+  });
+
+  // Verberg na installatie
+  window.addEventListener('appinstalled', function() {
+    banner.classList.remove('show');
+  });
+})();
+
 // PWA Service Worker registratie
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
