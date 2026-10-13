@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7T0NDH2N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DL7T0NDH2N');</script>
+<title>Gratis Tools — Aroussa Planner</title>
+<meta name="description" content="8 gratis tools voor je Marokkaanse bruiloft. Checklists, budgetplanner, contracthulp en meer. Direct te openen, geen account nodig.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://aroussaplanner.com/producten/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Italiana&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ivory:#F7F2EA;
+  --beige:#EDE6D6;
+  --sand:#F2EDE0;
+  --gold:#C4A882;
+  --bronze:#8B7355;
+  --dark:#2D2520;
+  --darker:#1A1210;
+  --warm:#9B8E7E;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Montserrat',sans-serif;background:var(--ivory);color:var(--dark);-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--darker);border-bottom:1px solid rgba(196,168,130,.1);}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Italiana',serif;font-size:22px;color:var(--gold);letter-spacing:.5px;}
+.nav-logo small{display:block;font-family:'Montserrat',sans-serif;font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(247,242,234,.35);margin-top:-3px;}
+.nav-links{display:flex;gap:28px;align-items:center;}
+.nav-links a{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.55);transition:color .2s;}
+.nav-links a:hover,.nav-links a.active{color:var(--gold);}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.burger span{display:block;width:22px;height:1.5px;background:var(--ivory);}
+
+/* Mobile nav */
+.mobile-nav{display:none;position:fixed;inset:0;background:var(--darker);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-nav.open{display:flex;}
+.mobile-nav-close{position:absolute;top:20px;right:24px;background:none;border:none;font-size:22px;color:var(--ivory);cursor:pointer;opacity:.6;}
+.mobile-nav a{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:var(--ivory);letter-spacing:.5px;}
+.mobile-nav a:hover{color:var(--gold);}
+
+/* Layout */
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+/* Hero */
+.hero{background:var(--darker);padding:120px 24px 80px;text-align:center;}
+.tag{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
+.h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,64px);font-weight:400;color:var(--ivory);line-height:1.05;margin-bottom:20px;}
+.h1 em{font-style:italic;color:var(--gold);}
+.hero-sub{font-size:13px;color:rgba(247,242,234,.55);max-width:480px;margin:0 auto 40px;line-height:1.8;}
+.trust-row{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:40px;}
+.trust-item{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.35);}
+
+/* Tools section */
+.tools-section{padding:80px 0;}
+.section-head{text-align:center;margin-bottom:56px;}
+.h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,44px);font-weight:400;color:var(--dark);line-height:1.1;}
+.h2 em{font-style:italic;color:var(--bronze);}
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
+.tool-card{background:var(--beige);padding:36px 32px;display:flex;flex-direction:column;gap:16px;transition:background .2s;position:relative;overflow:hidden;}
+.tool-card:hover{background:var(--sand);}
+.tool-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:transparent;transition:background .2s;}
+.tool-card:hover::after{background:var(--gold);}
+.tool-card__num{font-family:'Cormorant Garamond',serif;font-size:11px;color:var(--gold);opacity:.5;letter-spacing:1px;}
+.tool-card__name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--dark);line-height:1.2;}
+.tool-card__desc{font-size:11px;line-height:1.8;color:var(--warm);flex:1;}
+.tool-card__footer{display:flex;align-items:center;justify-content:space-between;margin-top:8px;}
+.badge-free{font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#5a9a6e;background:rgba(90,154,110,.1);padding:4px 10px;}
+.tool-link{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--bronze);transition:color .2s;}
+.tool-card:hover .tool-link{color:var(--dark);}
+
+/* Upgrade strip */
+.upgrade-strip{background:var(--dark);padding:80px 0;}
+.upgrade-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:900px;margin:40px auto 0;}
+.up-card{background:rgba(247,242,234,.04);padding:40px 36px;border:1px solid rgba(196,168,130,.1);display:flex;flex-direction:column;gap:12px;}
+.up-card--gold{border-color:rgba(196,168,130,.3);background:rgba(196,168,130,.06);}
+.up-card__type{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--bronze);}
+.up-card__name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:var(--ivory);}
+.up-card__price{font-size:42px;font-weight:700;color:var(--gold);line-height:1;}
+.up-card__note{font-size:10px;color:rgba(247,242,234,.3);margin-bottom:8px;}
+.up-card__list{list-style:none;display:flex;flex-direction:column;gap:8px;flex:1;}
+.up-card__list li{font-size:11px;color:rgba(247,242,234,.65);display:flex;align-items:center;gap:9px;line-height:1.5;}
+.up-card__list li::before{content:'→';color:var(--gold);font-weight:700;}
+.btn{display:inline-block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;cursor:pointer;border:none;transition:all .3s;padding:16px 32px;text-align:center;}
+.btn-gold{background:var(--gold);color:var(--dark);}
+.btn-gold:hover{background:var(--bronze);color:var(--ivory);}
+.btn-outline-light{background:transparent;color:var(--ivory);border:1px solid rgba(247,242,234,.2);}
+.btn-outline-light:hover{background:rgba(247,242,234,.05);}
+
+/* Footer */
+.foot{background:var(--darker);padding:48px 24px 32px;border-top:1px solid rgba(196,168,130,.08);}
+.foot-row{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;}
+.foot-logo{font-family:'Italiana',serif;font-size:28px;color:var(--gold);}
+.foot-sub{font-size:10px;color:rgba(247,242,234,.35);margin-top:4px;}
+.foot-links{display:flex;flex-wrap:wrap;gap:20px;}
+.foot-links a{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.45);transition:color .2s;}
+.foot-links a:hover{color:var(--gold);}
+.foot-copy{max-width:1100px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(196,168,130,.06);text-align:center;font-size:9px;color:rgba(247,242,234,.2);}
+
+/* Mobile */
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  .tools-grid{grid-template-columns:1fr;}
+  .upgrade-grid{grid-template-columns:1fr;}
+  .trust-row{gap:20px;}
+  .foot-row{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- Mobile nav -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="toggleNav()">&#10005;</button>
+  <a href="/" onclick="toggleNav()">Home</a>
+  <a href="/wedding-desk.html" onclick="toggleNav()">Wedding Desk</a>
+  <a href="/match.html" onclick="toggleNav()">Aroussa Match</a>
+  <a href="/producten/" onclick="toggleNav()">Producten</a>
+  <a href="/prijzen.html" onclick="toggleNav()">Prijzen</a>
+  <a href="/mijn-account" onclick="toggleNav()" style="color:var(--gold);">Mijn account</a>
+</div>
+
+<!-- Nav -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Aroussa<small>Wedding Planner</small></a>
+    <div class="nav-links">
+      <a href="/wedding-desk.html">Wedding Desk</a>
+      <a href="/match.html">Aroussa Match</a>
+      <a href="/producten/" class="active">Producten</a>
+      <a href="/prijzen.html">Prijzen</a>
+      <a href="/mijn-account" style="color:var(--gold);">Mijn account</a>
+    </div>
+    <button class="burger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="wrap">
+    <span class="tag">8 tools · allemaal gratis</span>
+    <h1 class="h1">Jouw bruiloft begint<br><em>met de juiste tools.</em></h1>
+    <p class="hero-sub">Checklists, budgetplanner, contracthulp en meer — gratis te gebruiken. Geen account nodig, direct openen.</p>
+    <div class="trust-row">
+      <span class="trust-item">Gratis · geen registratie</span>
+      <span class="trust-item">Direct te openen</span>
+      <span class="trust-item">Speciaal voor NL & BE</span>
+    </div>
+  </div>
+</section>
+
+<!-- Tools -->
+<section class="tools-section">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="tag" style="color:var(--bronze);">Gratis collectie</p>
+      <h2 class="h2">Kies jouw tool<br><em>en begin vandaag.</em></h2>
+      <p style="font-size:12px;color:var(--warm);margin-top:12px;">Klik op een tool om hem direct te openen. Gratis, altijd.</p>
+    </div>
+    <div class="tools-grid">
+
+      <a href="/producten/aroussa-bruid-checklist-v2.html" class="tool-card">
+        <span class="tool-card__num">01</span>
+        <h3 class="tool-card__name">Bruid Checklist</h3>
+        <p class="tool-card__desc">Alles wat je moet doen van verloving tot huwelijksdag, stap voor stap uitgewerkt. Niets vergeten, niets over het hoofd gezien.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-bruiloft-tijdlijn.html" class="tool-card">
+        <span class="tool-card__num">02</span>
+        <h3 class="tool-card__name">Bruiloft Tijdlijn</h3>
+        <p class="tool-card__desc">Wat moet je wanneer regelen? Maandelijkse planning tot 18 maanden vooruit — zodat je altijd op schema blijft.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-budget-calculator-v3.html" class="tool-card">
+        <span class="tool-card__num">03</span>
+        <h3 class="tool-card__name">Budget Calculator</h3>
+        <p class="tool-card__desc">Realistische budgetplanner speciaal voor de Marokkaanse bruiloft. Weet precies waar je geld naartoe gaat.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-contract-checklist-v2.html" class="tool-card">
+        <span class="tool-card__num">04</span>
+        <h3 class="tool-card__name">Contract Checklist</h3>
+        <p class="tool-card__desc">Bescherm jezelf: wat moet er in elk leverancierscontract staan? Zodat je achteraf nooit verrast wordt.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-dagvan-draaiboek-v2.html" class="tool-card">
+        <span class="tool-card__num">05</span>
+        <h3 class="tool-card__name">Dag-van Draaiboek</h3>
+        <p class="tool-card__desc">Het minutieuze tijdschema voor de huwelijksdag zelf. Wie doet wat, wanneer — geen stress op de grote dag.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-rode-vlaggen-gids-v3.html" class="tool-card">
+        <span class="tool-card__num">06</span>
+        <h3 class="tool-card__name">Rode Vlaggen Gids</h3>
+        <p class="tool-card__desc">27 concrete rode vlaggen om slechte leveranciers op tijd te herkennen. Vermijd de valkuilen die andere bruiden duur staan.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-whatsapp-scripts-v2.html" class="tool-card">
+        <span class="tool-card__num">07</span>
+        <h3 class="tool-card__name">WhatsApp Scripts</h3>
+        <p class="tool-card__desc">Kant-en-klare berichten voor onderhandelen, bevestigen en opvolgen. Kopieer, plak, verstuur — klaar.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+      <a href="/producten/aroussa-ziana-bridalstylist-gids.html" class="tool-card">
+        <span class="tool-card__num">08</span>
+        <h3 class="tool-card__name">Ziana Stylist Gids</h3>
+        <p class="tool-card__desc">Alles over het kiezen van je Ziana: welke vragen je moet stellen, veelgemaakte fouten en tips om teleurstelling te voorkomen.</p>
+        <div class="tool-card__footer">
+          <span class="badge-free">Gratis</span>
+          <span class="tool-link">Openen →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- Upgrade strip -->
+<section class="upgrade-strip">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="tag">Meer wil je?</span>
+      <h2 class="h2" style="color:var(--ivory);">Zet een volgende stap<br><em style="color:var(--gold);">met Aroussa.</em></h2>
+    </div>
+    <div class="upgrade-grid">
+      <div class="up-card up-card--gold">
+        <span class="up-card__type">Wedding Desk · Premium</span>
+        <h3 class="up-card__name">Alles op één plek</h3>
+        <div class="up-card__price">€49</div>
+        <p class="up-card__note">Eenmalig · levenslang toegang</p>
+        <ul class="up-card__list">
+          <li>Persoonlijk planning dashboard</li>
+          <li>Leverancier organizer</li>
+          <li>Live budgettracker</li>
+          <li>Gastenlijst beheer</li>
+          <li>Prioriteit klantenservice</li>
+        </ul>
+        <a href="/wedding-desk.html" class="btn btn-gold" style="margin-top:24px;">Meer over Wedding Desk</a>
+      </div>
+      <div class="up-card">
+        <span class="up-card__type">Aroussa Match · Service</span>
+        <h3 class="up-card__name">Wij zoeken, jij kiest</h3>
+        <div class="up-card__price" style="font-size:32px;">Vanaf €99</div>
+        <p class="up-card__note">Eenmalig · per categorie aanvraag</p>
+        <ul class="up-card__list">
+          <li>1 categorie (bijv. Ziana): €99</li>
+          <li>2–4 categorieën: €197</li>
+          <li>5+ categorieën: €297</li>
+          <li>2–3 offertes van gescreende leveranciers</li>
+          <li>Persoonlijk advies bij keuze</li>
+        </ul>
+        <a href="/match.html" class="btn btn-outline-light" style="margin-top:24px;">Meer over Aroussa Match</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="foot-row">
+    <div>
+      <div class="foot-logo">Aroussa</div>
+      <p class="foot-sub">Wedding Planner · NL & BE</p>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/wedding-desk.html">Wedding Desk</a>
+      <a href="/match.html">Aroussa Match</a>
+      <a href="/producten/">Producten</a>
+      <a href="/prijzen.html">Prijzen</a>
+    </div>
+  </div>
+  <p class="foot-copy">© 2025 Aroussa Planner · Alle rechten voorbehouden</p>
+</footer>
+
+<script>
+function toggleNav(){
+  const nav = document.getElementById('mobileNav');
+  nav.classList.toggle('open');
+}
+</script>
+</body>
+</html>
