@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7T0NDH2N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DL7T0NDH2N');</script>
+<title>Starter Bundle — Aroussa Planner</title>
+<meta name="description" content="De 3 essentiële PDF gidsen voor een vliegende start. Normaal €69 — nu €59. Rode Vlaggen Gids, WhatsApp Scripts en Contract Checklist.">
+<link rel="canonical" href="https://aroussaplanner.com/shop/starter-bundle">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Italiana&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ivory:#F7F2EA;--beige:#EDE6D6;--sand:#F2EDE0;--gold:#C4A882;--bronze:#8B7355;--dark:#2D2520;--darker:#1A1210;--warm:#9B8E7E;--nav-h:72px;}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--ivory);color:var(--dark);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+
+.nav{position:fixed;top:0;left:0;right:0;z-index:999;height:var(--nav-h);display:flex;align-items:center;background:rgba(26,18,16,0.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(196,168,130,0.12);}
+.nav .inner{max-width:1100px;margin:0 auto;padding:0 24px;width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{font-family:'Italiana',serif;font-size:28px;color:var(--gold);letter-spacing:2px;}
+.nav-links{display:flex;gap:28px;}
+.nav-links a{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,0.65);transition:color .2s;}
+.nav-links a:hover{color:var(--gold);}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+.burger span{display:block;width:24px;height:1px;background:var(--ivory);}
+.mob{display:none;position:fixed;inset:0;background:var(--darker);z-index:998;padding:110px 28px 40px;flex-direction:column;gap:28px;}
+.mob.open{display:flex;}
+.mob a{font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(247,242,234,.65);padding-bottom:20px;border-bottom:1px solid rgba(196,168,130,.1);}
+
+.page{padding:calc(var(--nav-h) + 56px) 0 80px;}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+
+/* Left: product details */
+.bundle-tag{font-size:9px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:block;}
+.bundle-name{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,52px);font-weight:400;line-height:1.05;color:var(--dark);margin-bottom:8px;}
+.bundle-name em{font-style:italic;color:var(--bronze);}
+.bundle-desc{font-size:13px;line-height:1.8;color:var(--warm);margin-bottom:32px;max-width:480px;}
+
+.products-included{margin-bottom:36px;}
+.pi-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--dark);margin-bottom:16px;display:block;}
+.pi-item{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-bottom:1px solid rgba(45,37,32,.08);}
+.pi-item:first-child{border-top:1px solid rgba(45,37,32,.08);}
+.pi-num{width:28px;height:28px;background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.pi-body{flex:1;}
+.pi-name{font-size:13px;font-weight:600;color:var(--dark);margin-bottom:3px;}
+.pi-why{font-size:11px;line-height:1.6;color:var(--warm);}
+.pi-price{font-size:11px;font-weight:600;color:var(--bronze);flex-shrink:0;margin-top:2px;}
+
+.pricing-row{display:flex;align-items:baseline;gap:12px;margin-bottom:8px;}
+.was{font-size:15px;color:var(--warm);text-decoration:line-through;}
+.save-badge{background:var(--gold);color:var(--dark);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;}
+.price-big{font-family:'Cormorant Garamond',serif;font-size:64px;font-weight:400;line-height:1;color:var(--dark);}
+.price-big sup{font-size:24px;vertical-align:top;margin-top:10px;}
+.price-note{font-size:10px;color:var(--warm);margin-bottom:32px;letter-spacing:.5px;}
+
+/* Trust items */
+.trust-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:0;}
+.trust-item{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;gap:6px;}
+.trust-item::before{content:'✓';color:var(--gold);}
+
+/* Right: order form */
+.order-box{background:var(--dark);padding:40px 36px;position:sticky;top:calc(var(--nav-h) + 24px);}
+.order-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:6px;}
+.order-sub{font-size:11px;color:rgba(247,242,234,.45);margin-bottom:28px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.f-input{width:100%;padding:13px 16px;border:1px solid rgba(196,168,130,.2);background:rgba(196,168,130,.06);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
+.f-input::placeholder{color:rgba(247,242,234,.3);}
+.f-input:focus{border-color:rgba(196,168,130,.5);}
+.f-input.full{width:100%;margin-bottom:10px;display:block;}
+.btn-submit{width:100%;padding:18px;background:var(--gold);color:var(--dark);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;margin-top:10px;transition:background .3s;}
+.btn-submit:hover{background:var(--bronze);color:var(--ivory);}
+.form-note{font-size:10px;color:rgba(247,242,234,.3);margin-top:12px;line-height:1.6;text-align:center;}
+
+.success-box{display:none;text-align:center;padding:20px 0;}
+.success-icon{font-size:28px;color:var(--gold);margin-bottom:12px;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivory);margin-bottom:10px;}
+.success-text{font-size:12px;color:rgba(247,242,234,.55);line-height:1.7;}
+
+.order-price-row{background:rgba(196,168,130,.08);border:1px solid rgba(196,168,130,.15);padding:14px 16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
+.opr-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.5);}
+.opr-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);}
+
+/* Also-like section */
+.also-like{margin-top:80px;padding-top:64px;border-top:1px solid rgba(45,37,32,.1);}
+.also-label{font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;}
+.also-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,38px);font-weight:400;color:var(--dark);margin-bottom:32px;}
+.upgrade-card{background:var(--dark);padding:36px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+.uc-body h3{font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--ivory);font-weight:400;margin-bottom:6px;}
+.uc-body p{font-size:12px;color:rgba(247,242,234,.5);line-height:1.6;max-width:420px;}
+.uc-price{text-align:right;flex-shrink:0;}
+.uc-was{font-size:12px;color:rgba(247,242,234,.3);text-decoration:line-through;margin-bottom:4px;}
+.uc-amount{font-family:'Cormorant Garamond',serif;font-size:42px;color:var(--gold);line-height:1;}
+.uc-note{font-size:10px;color:rgba(247,242,234,.3);margin-top:4px;}
+.btn-upgrade{display:inline-block;margin-top:16px;padding:14px 28px;background:var(--gold);color:var(--dark);font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;transition:all .3s;text-decoration:none;}
+.btn-upgrade:hover{background:var(--bronze);color:var(--ivory);}
+
+.foot{background:var(--darker);padding:36px 24px;border-top:1px solid rgba(196,168,130,.08);margin-top:80px;}
+.foot-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+.foot-logo{font-family:'Italiana',serif;font-size:24px;color:var(--gold);}
+.foot-links{display:flex;gap:20px;flex-wrap:wrap;}
+.foot-links a{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.35);transition:color .2s;}
+.foot-links a:hover{color:var(--gold);}
+.foot-copy{font-size:10px;color:rgba(247,242,234,.2);margin-top:16px;text-align:center;}
+
+@media(max-width:768px){
+  .nav-links{display:none;}
+  .burger{display:flex;}
+  .split{grid-template-columns:1fr;}
+  .order-box{position:static;}
+  .form-row{grid-template-columns:1fr;}
+  .upgrade-card{flex-direction:column;}
+  .uc-price{text-align:left;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="inner">
+    <a href="/" class="nav-logo">Aroussa</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/wedding-desk.html">Wedding Desk</a>
+      <a href="/match.html">Aroussa Match</a>
+      <a href="/producten/">Producten</a>
+      <a href="/prijzen.html">Prijzen</a>
+    </div>
+    <button class="burger" onclick="document.getElementById('mob').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="mob" id="mob">
+  <a href="/" onclick="this.closest('.mob').classList.remove('open')">Home</a>
+  <a href="/wedding-desk.html" onclick="this.closest('.mob').classList.remove('open')">Wedding Desk</a>
+  <a href="/match.html" onclick="this.closest('.mob').classList.remove('open')">Aroussa Match</a>
+  <a href="/producten/" onclick="this.closest('.mob').classList.remove('open')">Producten</a>
+  <a href="/prijzen.html" onclick="this.closest('.mob').classList.remove('open')">Prijzen</a>
+</div>
+
+<main class="page">
+  <div class="wrap">
+    <div class="split">
+
+      <!-- LEFT: product details -->
+      <div>
+        <span class="bundle-tag">Starter Bundle · 3 producten</span>
+        <h1 class="bundle-name">De essentials voor<br>een <em>vliegende start</em></h1>
+        <p class="bundle-desc">Alles om beschermd en overzichtelijk te beginnen met plannen. Herken slechte leveranciers, communiceer professioneel en zorg dat elk contract klopt — al voor je ook maar één euro hebt uitgegeven.</p>
+
+        <div class="products-included">
+          <span class="pi-label">Inbegrepen in deze bundle</span>
+          <div class="pi-item">
+            <div class="pi-num">1</div>
+            <div class="pi-body">
+              <div class="pi-name">Rode Vlaggen Gids</div>
+              <div class="pi-why">27 concrete rode vlaggen om slechte leveranciers op tijd te herkennen. Voorkom oplichting, no-shows en verborgen kosten. Bescherm jezelf al vóór je eerste afspraak.</div>
+            </div>
+            <div class="pi-price">€25</div>
+          </div>
+          <div class="pi-item">
+            <div class="pi-num">2</div>
+            <div class="pi-body">
+              <div class="pi-name">WhatsApp Scripts Bundel</div>
+              <div class="pi-why">Kant-en-klare berichten voor onderhandelen, bevestigen, opvolgen en annuleren. Altijd de juiste toon. Nooit meer zoeken naar woorden op het verkeerde moment.</div>
+            </div>
+            <div class="pi-price">€22</div>
+          </div>
+          <div class="pi-item">
+            <div class="pi-num">3</div>
+            <div class="pi-body">
+              <div class="pi-name">Contract Checklist</div>
+              <div class="pi-why">Wat moet er in elk leverancierscontract staan? Bescherm jezelf: controleer elk contract in 5 minuten met deze checklist voordat je tekent.</div>
+            </div>
+            <div class="pi-price">€22</div>
+          </div>
+        </div>
+
+        <div class="pricing-row">
+          <span class="was">Normaal €69</span>
+          <span class="save-badge">Jij bespaart €10</span>
+        </div>
+        <div class="price-big"><sup>€</sup>59</div>
+        <p class="price-note">Eenmalig · Direct te downloaden na betaling</p>
+
+        <div class="trust-row">
+          <span class="trust-item">Betalen via Tikkie (iDEAL)</span>
+          <span class="trust-item">7 dagen retourrecht</span>
+          <span class="trust-item">Eenmalige aankoop</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: order form -->
+      <div class="order-box">
+        <h2 class="order-title">Bestel de Starter Bundle</h2>
+        <p class="order-sub">Vul je gegevens in. Je ontvangt een betaallink via Tikkie — na betaling sturen we je de gidsen per e-mail.</p>
+
+        <div class="order-price-row">
+          <span class="opr-label">Totaal te betalen</span>
+          <span class="opr-price">€59</span>
+        </div>
+
+        <form id="bundleForm" name="bundle-starter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitBundle(event)" style="display:block;">
+          <input type="hidden" name="form-name" value="bundle-starter">
+          <input type="hidden" name="_to" value="aroussaplanner@gmail.com">
+          <input type="hidden" name="bundle" value="Starter Bundle — €59 (Rode Vlaggen Gids + WhatsApp Scripts + Contract Checklist)">
+          <p style="display:none"><input name="bot-field"></p>
+          <div class="form-row">
+            <input class="f-input" type="text" name="voornaam" placeholder="Voornaam" required>
+            <input class="f-input" type="text" name="achternaam" placeholder="Achternaam" required>
+          </div>
+          <input class="f-input full" type="tel" name="telefoon" placeholder="Telefoonnummer" required>
+          <input class="f-input full" type="email" name="email" placeholder="E-mailadres" required>
+          <button type="submit" class="btn-submit">Ontvang betaallink →</button>
+          <p class="form-note">Je ontvangt een Tikkie per e-mail. Na betaling sturen we de 3 PDF's direct naar je inbox.</p>
+        </form>
+
+        <div class="success-box" id="successBox">
+          <div class="success-icon">◈</div>
+          <div class="success-title">Aanvraag ontvangen!</div>
+          <p class="success-text">Je ontvangt snel een betaallink via Tikkie per e-mail. Vragen? WhatsApp ons via <strong>+31 6 13 11 52 86</strong>.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Also like section -->
+    <div class="also-like">
+      <span class="also-label">Meer waarde voor minder</span>
+      <h2 class="also-title">Liever alle 10 producten?</h2>
+      <div class="upgrade-card">
+        <div class="uc-body">
+          <h3>Complete Bundle</h3>
+          <p>Alle 10 PDF gidsen in één aankoop. Van eerste oriëntatie tot de grote dag zelf. De Complete Bundle bevat alles wat je nodig hebt om je Marokkaanse bruiloft professioneel te plannen — voor minder dan de prijs van één sessie.</p>
+          <a href="/shop/complete-bundle" class="btn-upgrade">Bekijk Complete Bundle →</a>
+        </div>
+        <div class="uc-price">
+          <div class="uc-was">Normaal €306</div>
+          <div class="uc-amount">€264</div>
+          <div class="uc-note">Jij bespaart €42</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-inner">
+    <div>
+      <div class="foot-logo">Aroussa</div>
+    </div>
+    <div class="foot-links">
+      <a href="/">Home</a>
+      <a href="/producten/">Producten</a>
+      <a href="/prijzen.html">Prijzen</a>
+      <a href="/match.html">Match</a>
+      <a href="/wedding-desk.html">Wedding Desk</a>
+    </div>
+  </div>
+  <p class="foot-copy">© 2025 Aroussa Planner · Alle rechten voorbehouden</p>
+</footer>
+
+<script>
+function submitBundle(e) {
+  e.preventDefault();
+  var data = new FormData(e.target);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  }).catch(function(){});
+  document.getElementById('bundleForm').style.display = 'none';
+  document.getElementById('successBox').style.display = 'block';
+  if (window.gtag) {
+    gtag('event', 'bundle_aanvraag', {bundle: 'starter', waarde: 59});
+  }
+}
+</script>
+
+</body>
+</html>
