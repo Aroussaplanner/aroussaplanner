@@ -68,16 +68,15 @@ a{text-decoration:none;color:inherit;}
 .whatyouget{padding:80px 0;}
 .get-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;}
 .get-card{background:var(--sand);padding:36px 32px;}
-.get-card__icon{font-size:28px;margin-bottom:14px;}
 .get-card__title{font-size:14px;font-weight:600;color:var(--dark);margin-bottom:8px;}
 .get-card__desc{font-size:11px;line-height:1.8;color:var(--warm);}
 
 /* Categories */
 .cats-section{padding:80px 0;background:var(--sand);}
 .cats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;}
-.cat-tile{background:var(--beige);padding:24px 16px;text-align:center;}
-.cat-tile__icon{font-size:26px;margin-bottom:10px;}
-.cat-tile__name{font-size:11px;font-weight:600;color:var(--dark);}
+.cat-tile{background:var(--beige);padding:28px 16px 24px;text-align:center;border-top:2px solid transparent;transition:all .2s;}
+.cat-tile:hover{background:var(--sand);border-top-color:var(--gold);}
+.cat-tile__name{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:400;color:var(--dark);line-height:1.3;}
 
 /* Packages */
 .packages{padding:80px 0;}
@@ -130,7 +129,6 @@ a{text-decoration:none;color:inherit;}
 .form-footer{margin-top:24px;}
 .form-note{font-size:10px;color:var(--warm);margin-top:12px;line-height:1.6;}
 .success-card{display:none;text-align:center;padding:40px 20px;}
-.success-card__icon{font-size:48px;margin-bottom:16px;}
 .success-card__title{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--dark);margin-bottom:8px;}
 .success-card__text{font-size:12px;color:var(--warm);line-height:1.8;}
 
@@ -173,7 +171,6 @@ a{text-decoration:none;color:inherit;}
   .form-wrap{padding:32px 24px;}
   .foot-row{flex-direction:column;}
   .trust-row{gap:16px;}
-  .cats-check{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -576,7 +573,7 @@ function updatePkg() {
 
   let price, name;
   if (n === 1) { price = 99; name = 'Starter — 1 categorie'; }
-  else if (n <= 4) { price = 197; name = 'Compleet — 3 categorieën'; }
+  else if (n <= 4) { price = 197; name = 'Compleet — 2–4 categorieën'; }
   else { price = 297; name = 'Volledig — 5+ categorieën'; }
 
   disp.style.display = 'flex';
