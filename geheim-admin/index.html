@@ -216,7 +216,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 <!-- LOCK SCREEN -->
 <div id="lock-screen">
   <div class="lock-card">
-    <div class="lock-logo">🌸 Aroussa</div>
+    <div class="lock-logo">Aroussa</div>
     <div class="lock-subtitle">Beheerportaal — alleen voor de eigenaar</div>
     <input type="password" id="lock-password" placeholder="Wachtwoord" autofocus>
     <button class="btn-primary" id="lock-btn" onclick="doLogin()">Inloggen</button>
@@ -230,25 +230,25 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 
     <aside class="sidebar">
       <div class="sidebar-logo">
-        <div class="sidebar-logo-text">🌸 Aroussa</div>
+        <div class="sidebar-logo-text">Aroussa</div>
         <div class="sidebar-logo-sub">Beheerportaal</div>
       </div>
       <nav class="sidebar-nav">
         <button class="nav-item active" onclick="showSection('dashboard')" id="nav-dashboard">
-          <span class="nav-icon">📊</span> Dashboard
+          Dashboard
         </button>
         <button class="nav-item" onclick="showSection('klanten')" id="nav-klanten">
-          <span class="nav-icon">👥</span> Klanten
+          Klanten
         </button>
         <button class="nav-item" onclick="showSection('nieuwe-code')" id="nav-nieuwe-code">
-          <span class="nav-icon">✨</span> Nieuwe Code
+          Nieuwe Code
         </button>
         <button class="nav-item" onclick="showSection('activiteit')" id="nav-activiteit">
-          <span class="nav-icon">📋</span> Activiteit
+          Activiteit
         </button>
       </nav>
       <div class="sidebar-bottom">
-        <button class="btn-logout" onclick="doLogout()">↩ Uitloggen</button>
+        <button class="btn-logout" onclick="doLogout()">Uitloggen</button>
       </div>
     </aside>
 
@@ -297,8 +297,8 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
             <div class="card">
               <div class="card-header"><div class="card-title">Snelle Acties</div></div>
               <div class="quick-actions">
-                <button class="btn-gold" onclick="showSection('nieuwe-code')">✨ Nieuwe code aanmaken</button>
-                <button class="btn-secondary" onclick="showSection('klanten')">👥 Klanten beheren</button>
+                <button class="btn-gold" onclick="showSection('nieuwe-code')">Nieuwe code aanmaken</button>
+                <button class="btn-secondary" onclick="showSection('klanten')">Klanten beheren</button>
               </div>
             </div>
           </div>
@@ -310,8 +310,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
             <div class="card-header">
               <div class="card-title">Alle Klanten</div>
               <div class="search-wrap">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="klanten-search" placeholder="Zoek op naam of e-mail..." oninput="filterKlanten(this.value)">
+                <input type="text" id="klanten-search" placeholder="Zoek op naam of e-mail..." oninput="filterKlanten(this.value)" style="padding-left:14px">
               </div>
             </div>
             <div class="card-body" id="klanten-list">
@@ -349,26 +348,26 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
                   <option value="bruiloft-tijdlijn">Bruiloft Tijdlijn</option>
                   <option value="fotoshootlocaties">Fotoshootlocaties NL/BE</option>
                   <option value="offerteprijzen">Offerteprijzen Diensten NL/BE</option>
-                  <option value="complete-bundel">⭐ Complete Bundel (alle producten)</option>
+                  <option value="complete-bundel">Complete Bundel (alle producten)</option>
                 </select>
               </div>
             </div>
             <div class="form-actions">
-              <button class="btn-gold" id="btn-genereer" onclick="genereerCode()">✨ Genereer Code</button>
-              <button class="btn-secondary" id="btn-reset-form" onclick="resetForm()" style="display:none">↩ Opnieuw</button>
+              <button class="btn-gold" id="btn-genereer" onclick="genereerCode()">Genereer Code</button>
+              <button class="btn-secondary" id="btn-reset-form" onclick="resetForm()" style="display:none">Opnieuw</button>
             </div>
             <div class="code-result" id="code-result">
-              <div class="code-result-label">Toegangscode aangemaakt ✓</div>
+              <div class="code-result-label">Toegangscode aangemaakt</div>
               <div class="code-result-code" id="cr-code"></div>
               <div class="code-result-info" id="cr-info"></div>
               <div class="code-result-actions">
-                <button class="btn-send-email" id="btn-email" onclick="stuurEmail()">📧 Stuur e-mail naar klant</button>
-                <button class="btn-copy" onclick="copyCode()">📋 Kopieer code</button>
-                <button class="btn-copy" onclick="toggleWhatsApp()">💬 WhatsApp bericht</button>
+                <button class="btn-send-email" id="btn-email" onclick="stuurEmail()">Stuur e-mail naar klant</button>
+                <button class="btn-copy" onclick="copyCode()">Kopieer code</button>
+                <button class="btn-copy" onclick="toggleWhatsApp()">WhatsApp bericht</button>
               </div>
             </div>
             <div class="whatsapp-box" id="whatsapp-box">
-              <div class="whatsapp-label">💬 WhatsApp Template</div>
+              <div class="whatsapp-label">WhatsApp Template</div>
               <div class="whatsapp-text" id="whatsapp-text"></div>
               <br>
               <button class="btn-copy" style="background:#25D366;border-color:#25D366" onclick="copyWhatsApp()">Kopieer WhatsApp bericht</button>
@@ -381,7 +380,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
           <div class="card">
             <div class="card-header">
               <div class="card-title">Recente Activiteit</div>
-              <button class="btn-secondary" style="padding:7px 14px;font-size:12.5px" onclick="laadAllCodes()">↻ Vernieuwen</button>
+              <button class="btn-secondary" style="padding:7px 14px;font-size:12.5px" onclick="laadAllCodes()">Vernieuwen</button>
             </div>
             <div id="activiteit-content">
               <div class="loading"><div class="spinner"></div> Activiteit laden...</div>
@@ -398,7 +397,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 
 <div id="modal-overlay">
   <div class="modal">
-    <div class="modal-icon" id="modal-icon">⚠️</div>
+    <div class="modal-icon" id="modal-icon" style="display:none"></div>
     <div class="modal-title" id="modal-title"></div>
     <div class="modal-text" id="modal-text"></div>
     <div class="modal-actions">
@@ -533,7 +532,7 @@ function renderDashboard() {
       <td><strong>${esc(k.naam)}</strong></td>
       <td style="color:var(--text-2);font-size:12.5px">${esc(k.email)}</td>
       <td><span class="badge badge-count">${k.codes.length}</span></td>
-      <td>${actief > 0 ? '<span class="badge badge-active">✓ Actief</span>' : '<span class="badge badge-used">Gebruikt</span>'}</td>
+      <td>${actief > 0 ? '<span class="badge badge-active">Actief</span>' : '<span class="badge badge-used">Gebruikt</span>'}</td>
     </tr>`;
   });
   el.innerHTML = html + '</tbody></table>';
@@ -557,7 +556,7 @@ function renderKlanten(customers) {
         </div>
         <div class="customer-meta">
           <span class="badge badge-count">${k.codes.length} ${k.codes.length === 1 ? 'product' : 'producten'}</span>
-          ${actief > 0 ? '<span class="badge badge-active">✓ Actief</span>' : '<span class="badge badge-used">Alles gebruikt</span>'}
+          ${actief > 0 ? '<span class="badge badge-active">Actief</span>' : '<span class="badge badge-used">Alles gebruikt</span>'}
           <span class="chevron">▶</span>
         </div>
       </div>
@@ -576,7 +575,7 @@ function renderKlanten(customers) {
         </table>
         <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
           <button class="btn-revoke-all" onclick="revokeAllForCustomer('${esc(k.email)}', '${esc(k.naam)}')">
-            🗑 Klant er uit gooien (alles intrekken)
+            Klant er uit gooien (alles intrekken)
           </button>
           <button class="btn-secondary" style="padding:8px 16px;font-size:13px" onclick="prefillNieuweCode('${esc(k.naam)}', '${esc(k.email)}')">
             + Nieuw product toevoegen
@@ -606,14 +605,14 @@ function prefillNieuweCode(naam, email) {
 
 // ── REVOKE ─────────────────────────────────────────────────────────────────
 function revokeCode(code, naam) {
-  openModal('⚠️', 'Code intrekken',
+  openModal('', 'Code intrekken',
     `Wil je de toegangscode van <strong>${esc(naam)}</strong> intrekken?<br><br><code style="background:#f5f5f5;padding:4px 8px;border-radius:4px;font-size:13px">${esc(code)}</code><br><br>De klant kan daarna niet meer inloggen met deze code.`,
     async () => { await doRevoke(code); }
   );
 }
 
 function revokeAllForCustomer(email, naam) {
-  openModal('🗑', 'Klant volledig verwijderen',
+  openModal('', 'Klant volledig verwijderen',
     `Wil je <strong>alle</strong> toegangscodes van <strong>${esc(naam)}</strong> intrekken?<br><br>${esc(email)}<br><br>De klant verliest direct alle toegang.`,
     async () => { await doRevokeAll(email); }
   );
@@ -628,7 +627,7 @@ async function doRevoke(code) {
     });
     const data = await res.json();
     if (data.success) {
-      showToast('✓ Code ingetrokken', 'success');
+      showToast('Code ingetrokken', 'success');
       await laadAllCodes();
       renderKlanten(allCustomers);
     } else {
@@ -646,7 +645,7 @@ async function doRevokeAll(email) {
     });
     const data = await res.json();
     if (data.success) {
-      showToast('✓ Klant volledig verwijderd', 'success');
+      showToast('Klant volledig verwijderd', 'success');
       await laadAllCodes();
       renderKlanten(allCustomers);
     } else {
@@ -679,7 +678,7 @@ async function genereerCode() {
       showToast(data.error || 'Aanmaken mislukt', 'error');
     }
   } catch { showToast('Verbindingsfout', 'error'); }
-  btn.disabled = false; btn.textContent = '✨ Genereer Code';
+  btn.disabled = false; btn.textContent = 'Genereer Code';
 }
 
 function showCodeResult(data) {
@@ -690,7 +689,7 @@ function showCodeResult(data) {
   document.getElementById('code-result').classList.add('show');
   const voornaam = data.naam.split(' ')[0];
   document.getElementById('whatsapp-text').textContent =
-    `Hoi ${voornaam} 🌸\n\nJe bestelling is klaar! Hier is je persoonlijke toegangscode:\n\n*${data.code}*\n\nActiveer via: https://aroussaplanner.com/mijn-account?code=${encodeURIComponent(data.code)}\n\nOf ga naar aroussaplanner.com/mijn-account en vul de code handmatig in.\n\nVeel succes met je bruiloftsplanning! 💖`;
+    `Hoi ${voornaam},\n\nJe bestelling is klaar! Hier is je persoonlijke toegangscode:\n\n*${data.code}*\n\nActiveer via: https://aroussaplanner.com/mijn-account?code=${encodeURIComponent(data.code)}\n\nOf ga naar aroussaplanner.com/mijn-account en vul de code handmatig in.\n\nVeel succes met je bruiloftsplanning!`;
 }
 
 function resetCodeResult() {
@@ -709,7 +708,7 @@ function resetForm() {
 async function stuurEmail() {
   if (!currentCode) return;
   const btn = document.getElementById('btn-email');
-  btn.disabled = true; btn.textContent = '📧 Versturen...';
+  btn.disabled = true; btn.textContent = 'Versturen...';
   try {
     const res = await fetch(`${API_BASE}/send-access`, {
       method: 'POST',
@@ -718,16 +717,16 @@ async function stuurEmail() {
     });
     const data = await res.json();
     if (data.success) {
-      showToast('✓ E-mail verstuurd!', 'success');
-      btn.textContent = '✓ Verstuurd!';
+      showToast('E-mail verstuurd!', 'success');
+      btn.textContent = 'Verstuurd!';
       btn.style.background = 'var(--success)';
     } else {
       showToast(data.error || 'Versturen mislukt', 'error');
-      btn.disabled = false; btn.textContent = '📧 Stuur e-mail naar klant';
+      btn.disabled = false; btn.textContent = 'Stuur e-mail naar klant';
     }
   } catch {
     showToast('Verbindingsfout', 'error');
-    btn.disabled = false; btn.textContent = '📧 Stuur e-mail naar klant';
+    btn.disabled = false; btn.textContent = 'Stuur e-mail naar klant';
   }
 }
 
