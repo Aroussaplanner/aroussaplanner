@@ -1,0 +1,18 @@
+# Aroussa Wedding Planner — robots.txt
+
+User-agent: *
+Allow: /
+Allow: /aanmelden
+Allow: /mijn-account
+
+# Admin portaal — niet indexeren
+Disallow: /geheim-admin/
+
+# Beveiligde productbestanden — niet indexeren
+Disallow: /producten/
+Disallow: /kaart/
+
+# Netlify functies
+Disallow: /.netlify/
+
+Sitemap: https://aroussaplanner.com/sitemap.xml
