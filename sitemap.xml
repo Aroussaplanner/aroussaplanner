@@ -10,12 +10,68 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Privacy Kaart aanvragen -->
+  <!-- Producten / Gratis Tools -->
+  <url>
+    <loc>https://aroussaplanner.com/producten/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Prijzen -->
+  <url>
+    <loc>https://aroussaplanner.com/prijzen.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Wedding Desk -->
+  <url>
+    <loc>https://aroussaplanner.com/wedding-desk.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Aroussa Match -->
+  <url>
+    <loc>https://aroussaplanner.com/match.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Aanmelden / Privacy Kaart -->
   <url>
     <loc>https://aroussaplanner.com/aanmelden</loc>
     <lastmod>2026-10-13</lastmod>
     <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Tips & Gidsen hub -->
+  <url>
+    <loc>https://aroussaplanner.com/tips/</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Blog: Marokkaanse bruiloft budget 2026 -->
+  <url>
+    <loc>https://aroussaplanner.com/tips/marokkaanse-bruiloft-budget.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog: Ziana kiezen tips -->
+  <url>
+    <loc>https://aroussaplanner.com/tips/ziana-kiezen-tips.html</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Mijn Account / Inloggen -->
