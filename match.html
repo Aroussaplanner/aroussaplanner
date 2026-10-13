@@ -113,11 +113,16 @@ a{text-decoration:none;color:inherit;}
 .form-row input,.form-row select,.form-row textarea{width:100%;background:var(--sand);border:1px solid rgba(45,37,32,.15);padding:12px 16px;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--dark);outline:none;transition:border-color .2s;appearance:none;}
 .form-row input:focus,.form-row select:focus,.form-row textarea:focus{border-color:var(--gold);}
 .form-row textarea{min-height:90px;resize:vertical;}
-.cats-check{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
-.cat-check{display:flex;align-items:center;gap:10px;cursor:pointer;padding:10px 12px;border:1px solid rgba(45,37,32,.12);transition:all .2s;background:var(--sand);}
-.cat-check:hover{border-color:var(--gold);}
-.cat-check input[type=checkbox]{accent-color:var(--gold);width:14px;height:14px;cursor:pointer;}
-.cat-check span{font-size:11px;color:var(--dark);}
+.cats-check{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;}
+.cat-check{display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:9px 16px;border:1px solid rgba(45,37,32,.15);transition:all .2s;background:var(--sand);user-select:none;}
+.cat-check:hover{border-color:var(--gold);background:var(--beige);}
+.cat-check input[type=checkbox]{display:none;}
+.cat-check .cb-box{width:14px;height:14px;border:1px solid rgba(45,37,32,.25);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.cat-check input:checked ~ .cb-box{background:var(--gold);border-color:var(--gold);}
+.cat-check input:checked ~ .cb-box::after{content:'';display:block;width:4px;height:7px;border:1.5px solid var(--dark);border-top:0;border-left:0;transform:rotate(45deg) translateY(-1px);}
+.cat-check input:checked ~ span{color:var(--dark);font-weight:500;}
+.cat-check:has(input:checked){border-color:var(--gold);background:rgba(196,168,130,.08);}
+.cat-check span{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm);transition:color .2s;}
 .pkg-display{background:var(--beige);padding:16px 20px;margin-top:16px;display:flex;align-items:center;justify-content:space-between;border-left:3px solid var(--gold);}
 .pkg-display__label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--warm);}
 .pkg-display__price{font-size:22px;font-weight:700;color:var(--dark);}
@@ -434,16 +439,16 @@ a{text-decoration:none;color:inherit;}
             <div class="form-row full">
               <label>Welke categorieën heb je nodig? * <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--warm);">(kies 1 of meer)</span></label>
               <div class="cats-check" id="cats-check">
-                <label class="cat-check"><input type="checkbox" value="Ziana" onchange="updatePkg()"><span>Ziana</span></label>
-                <label class="cat-check"><input type="checkbox" value="Feestzaal" onchange="updatePkg()"><span>Feestzaal</span></label>
-                <label class="cat-check"><input type="checkbox" value="Catering" onchange="updatePkg()"><span>Catering</span></label>
-                <label class="cat-check"><input type="checkbox" value="Fotograaf" onchange="updatePkg()"><span>Fotograaf</span></label>
-                <label class="cat-check"><input type="checkbox" value="Videograaf" onchange="updatePkg()"><span>Videograaf</span></label>
-                <label class="cat-check"><input type="checkbox" value="Henna" onchange="updatePkg()"><span>Henna</span></label>
-                <label class="cat-check"><input type="checkbox" value="DJ" onchange="updatePkg()"><span>DJ</span></label>
-                <label class="cat-check"><input type="checkbox" value="Bloemen" onchange="updatePkg()"><span>Bloemen</span></label>
-                <label class="cat-check"><input type="checkbox" value="Transport" onchange="updatePkg()"><span>Transport</span></label>
-                <label class="cat-check"><input type="checkbox" value="MC" onchange="updatePkg()"><span>MC</span></label>
+                <label class="cat-check"><input type="checkbox" value="Ziana" onchange="updatePkg()"><span class="cb-box"></span><span>Ziana</span></label>
+                <label class="cat-check"><input type="checkbox" value="Feestzaal" onchange="updatePkg()"><span class="cb-box"></span><span>Feestzaal</span></label>
+                <label class="cat-check"><input type="checkbox" value="Catering" onchange="updatePkg()"><span class="cb-box"></span><span>Catering</span></label>
+                <label class="cat-check"><input type="checkbox" value="Fotograaf" onchange="updatePkg()"><span class="cb-box"></span><span>Fotograaf</span></label>
+                <label class="cat-check"><input type="checkbox" value="Videograaf" onchange="updatePkg()"><span class="cb-box"></span><span>Videograaf</span></label>
+                <label class="cat-check"><input type="checkbox" value="Henna" onchange="updatePkg()"><span class="cb-box"></span><span>Henna</span></label>
+                <label class="cat-check"><input type="checkbox" value="DJ" onchange="updatePkg()"><span class="cb-box"></span><span>DJ</span></label>
+                <label class="cat-check"><input type="checkbox" value="Bloemen" onchange="updatePkg()"><span class="cb-box"></span><span>Bloemen</span></label>
+                <label class="cat-check"><input type="checkbox" value="Transport" onchange="updatePkg()"><span class="cb-box"></span><span>Transport</span></label>
+                <label class="cat-check"><input type="checkbox" value="MC" onchange="updatePkg()"><span class="cb-box"></span><span>MC</span></label>
               </div>
               <div class="pkg-display" id="pkg-display" style="display:none;">
                 <div>
