@@ -102,7 +102,7 @@ body{background:#d0c8be;font-family:'Montserrat',sans-serif;font-weight:300;colo
 }
 </style>
 <script>
-(function(){var _K='ziana-gids';var _p=new URLSearchParams(window.location.search);var _t=_p.get('token')||sessionStorage.getItem('aroussa_tok_'+_K);var _ok=false;if(_t){try{var _d=JSON.parse(atob(_t));if(_d.exp>Date.now()&&(_d.product===_K||_d.product==='bundle'||_d.product==='complete-bundel')){_ok=true;window.__AN=(_d.naam||'').toUpperCase()||'AROUSSA KLANT';window.__AC=(_d.code||'').toUpperCase()||'ARO-0000';sessionStorage.setItem('aroussa_tok_'+_K,_t);}}catch(e){}}if(!_ok){sessionStorage.removeItem('aroussa_tok_'+_K);window.__AN='AROUSSA KLANT';window.__AC='ARO-0000';document.addEventListener('DOMContentLoaded',function(){var o=document.createElement('div');o.style.cssText='position:fixed;inset:0;background:#fff9f5;z-index:99999;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;';o.innerHTML='<div style="text-align:center;max-width:420px;padding:2rem"><div style="font-size:3rem;margin-bottom:1rem">&#x1F512;</div><h2 style="color:#7a3b1e;margin-bottom:.75rem">Geen toegang</h2><p style="color:#555;line-height:1.7;margin-bottom:1.5rem">Dit document is persoonlijk en beveiligd. Log in via Mijn Account om toegang te krijgen.</p><a href="/mijn-account" style="background:#7a3b1e;color:#fff;padding:.75rem 1.75rem;border-radius:6px;text-decoration:none;font-size:.95rem">Naar Mijn Account &#x2192;</a></div>';document.body.appendChild(o);document.body.style.overflow='hidden';});}})();
+(function(){var _K='ziana-gids';var _p=new URLSearchParams(window.location.search);var _t=_p.get('token')||sessionStorage.getItem('aroussa_tok_'+_K);var _ok=false;if(_t){try{var _d=JSON.parse(atob(_t));if(_d.exp>Date.now()&&(_d.product===_K||_d.product==='bundle'||_d.product==='complete-bundel')){_ok=true;window.__AN=(_d.naam||'').toUpperCase()||'AROUSSA KLANT';window.__AC=(_d.code||'').toUpperCase()||'ARO-0000';sessionStorage.setItem('aroussa_tok_'+_K,_t);}}catch(e){}}if(!_ok){sessionStorage.removeItem('aroussa_tok_'+_K);window.__AN='AROUSSA KLANT';window.__AC='ARO-0000';document.addEventListener('DOMContentLoaded',function(){document.getElementById('aroussa-gate').style.display='flex';document.body.style.overflow='hidden';});}})();
 const KN=window.__AN;
 const KC=window.__AC;
 const WT=KN+' \u00b7 '+KC;
@@ -117,6 +117,77 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 </head>
 <body>
+
+<!-- NETLIFY FORM DETECTIE (verborgen) -->
+<form name="tool-ziana-gids-lead" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email">
+  <input type="hidden" name="product" value="De Ziana / Bridalstylist Gids">
+  <input type="text" name="bot-field">
+</form>
+
+<!-- AROUSSA GATE — verborgen lock screen met email capture -->
+<div id="aroussa-gate" style="display:none;position:fixed;inset:0;background:#F7F2EA;z-index:99999;overflow-y:auto;font-family:'Montserrat',sans-serif;">
+  <div style="min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px 16px;">
+    <div style="max-width:480px;width:100%;text-align:center;">
+
+      <!-- Branding -->
+      <div style="font-family:'Italiana',serif;font-size:32px;color:#C4A882;letter-spacing:3px;margin-bottom:4px;">Aroussa</div>
+      <div style="font-size:8px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#9B8E7E;margin-bottom:28px;">De Online Wedding Planner van Nederland</div>
+
+      <!-- Product info -->
+      <div style="background:#2D2520;padding:24px 20px;margin-bottom:20px;">
+        <div style="font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C4A882;margin-bottom:10px;">BEVEILIGD DOCUMENT</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#F7F2EA;line-height:1.2;margin-bottom:10px;">De Ziana / Bridalstylist Gids</div>
+        <div style="font-size:11px;color:rgba(247,242,234,0.6);line-height:1.7;margin-bottom:16px;">Alles over de ziana keuze: pakketten vergelijken, rode vlaggen, onderhandelen over prijs en lebsa timeline</div>
+        <div style="border:0.5px solid rgba(196,168,130,0.4);display:inline-block;padding:5px 16px;font-size:11px;color:#C4A882;font-weight:600;letter-spacing:2px;">&euro;39</div>
+      </div>
+
+      <!-- Email capture -->
+      <div style="background:#EDE6D6;padding:20px 16px;margin-bottom:20px;">
+        <div style="font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#8B7355;margin-bottom:8px;">GRATIS BRUILOFT TIPS</div>
+        <p style="font-size:12px;color:#2D2520;line-height:1.6;margin-bottom:14px;">Ontvang wekelijks praktische tips &amp; krijg 10% korting op je eerste bestelling.</p>
+        <form id="gate-form-ziana-gids" name="tool-ziana-gids-lead" data-netlify="true" data-netlify-honeypot="bot-field" style="display:flex;gap:8px;max-width:380px;margin:0 auto;">
+          <input type="hidden" name="form-name" value="tool-ziana-gids-lead">
+          <input type="hidden" name="product" value="De Ziana / Bridalstylist Gids">
+          <input type="text" name="bot-field" style="display:none;">
+          <input type="email" name="email" required placeholder="jouw@email.nl" style="flex:1;min-width:0;padding:10px 12px;font-family:Montserrat,sans-serif;font-size:12px;border:1px solid #C4A882;background:#F7F2EA;color:#2D2520;outline:none;">
+          <button type="submit" style="padding:10px 16px;background:#C4A882;color:#2D2520;border:none;font-family:Montserrat,sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;">Stuur &rarr;</button>
+        </form>
+        <div id="gate-ok-ziana-gids" style="display:none;font-size:12px;color:#27AE60;font-weight:600;margin-top:10px;">&#10003; Aangemeld! Check je inbox.</div>
+      </div>
+
+      <!-- Koop CTA -->
+      <div style="margin-bottom:14px;">
+        <a href="/shop/complete-bundle.html" style="display:inline-block;background:#2D2520;color:#C4A882;padding:14px 32px;font-family:Montserrat,sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-decoration:none;">Bestel Nu &rarr; &euro;39</a>
+      </div>
+
+      <!-- Al klant link -->
+      <div style="font-size:11px;color:#9B8E7E;">
+        Al gekocht? <a href="/mijn-account" style="color:#8B7355;font-weight:600;text-decoration:none;">Log in via Mijn Account &rarr;</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var f=document.getElementById('gate-form-ziana-gids');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new URLSearchParams(new FormData(f));
+    fetch('/',{method:'POST',body:data})
+      .then(function(){
+        f.style.display='none';
+        document.getElementById('gate-ok-ziana-gids').style.display='block';
+        if(typeof gtag!=='undefined') gtag('event','tool_lead',{product:'ziana-gids'});
+      })
+      .catch(function(){ f.submit(); });
+  });
+})();
+</script>
+
 <button class="print-btn no-print" onclick="window.print()">Opslaan als PDF &rarr;</button>
 
 <!-- COVER -->
@@ -591,5 +662,63 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div style="font-size:7pt;color:rgba(155,142,126,0.5);">&copy; 2026 Aroussa &middot; Alle rechten voorbehouden &middot; Niet voor commerciële verspreiding</div>
   </div>
 </div>
+
+<!-- CROSS-SELL SECTIE — NIET PRINTEN -->
+<div class="no-print" style="background:#2D2520;padding:48px 24px;text-align:center;font-family:Montserrat,sans-serif;margin-top:0;">
+  <div style="max-width:540px;margin:0 auto;">
+    <div style="width:40px;height:1px;background:rgba(196,168,130,0.4);margin:0 auto 28px;"></div>
+    <div style="font-size:8px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C4A882;margin-bottom:12px;">MEER TOOLS NODIG?</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#F7F2EA;line-height:1.2;margin-bottom:10px;">Complete Pakket</div>
+    <p style="font-size:12px;color:rgba(247,242,234,0.6);line-height:1.7;margin-bottom:24px;">Alle 10 planning tools voor je volledige Marokkaanse bruiloft &mdash; normale waarde &euro;310</p>
+
+    <!-- Bundle items -->
+    <div style="background:rgba(196,168,130,0.06);padding:16px;margin-bottom:24px;text-align:left;">
+      <div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Budget Calculator &middot; &euro;34</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Bruid Checklist &middot; &euro;25</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Contract Checklist &middot; &euro;25</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Dag-van Draaiboek &middot; &euro;29</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Rode Vlaggen Gids &middot; &euro;25</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">WhatsApp Scripts &middot; &euro;29</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">Ziana Gids &middot; &euro;39</div><div style="font-size:11px;color:rgba(247,242,234,0.6);padding:5px 0;border-bottom:0.5px solid rgba(196,168,130,0.12);">+ 3 extra tools</div>
+    </div>
+
+    <!-- CTA knop -->
+    <a href="/shop/complete-bundle.html" onclick="if(typeof gtag!=='undefined') gtag('event','upsell_click',{from:'ziana-gids',to:'/shop/complete-bundle.html'});" style="display:inline-block;border:1px solid rgba(196,168,130,0.5);color:#C4A882;padding:14px 40px;font-family:Montserrat,sans-serif;font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-decoration:none;margin-bottom:20px;">Bekijk Complete Pakket &rarr; &euro;264</a>
+
+    <!-- Email signup -->
+    <div style="border-top:0.5px solid rgba(196,168,130,0.2);padding-top:20px;margin-top:4px;">
+      <div style="font-size:8px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(196,168,130,0.6);margin-bottom:10px;">BLIJF OP DE HOOGTE</div>
+      <form id="cs-form-ziana-gids" name="tool-ziana-gids-newsletter" data-netlify="true" data-netlify-honeypot="bot-field" style="display:flex;gap:8px;max-width:380px;margin:0 auto;">
+        <input type="hidden" name="form-name" value="tool-ziana-gids-newsletter">
+        <input type="hidden" name="product" value="De Ziana / Bridalstylist Gids">
+        <input type="text" name="bot-field" style="display:none;">
+        <input type="email" name="email" required placeholder="jouw@email.nl" style="flex:1;min-width:0;padding:9px 12px;font-family:Montserrat,sans-serif;font-size:12px;border:1px solid rgba(196,168,130,0.35);background:rgba(247,242,234,0.06);color:#F7F2EA;outline:none;">
+        <button type="submit" style="padding:9px 16px;background:transparent;color:#C4A882;border:1px solid rgba(196,168,130,0.4);font-family:Montserrat,sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;white-space:nowrap;">Aanmelden</button>
+      </form>
+      <div id="cs-ok-ziana-gids" style="display:none;font-size:11px;color:#27AE60;margin-top:8px;">&#10003; Aangemeld!</div>
+    </div>
+
+    <div style="width:40px;height:1px;background:rgba(196,168,130,0.2);margin:24px auto 0;"></div>
+  </div>
+</div>
+
+<form name="tool-ziana-gids-newsletter" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+  <input type="email" name="email">
+  <input type="hidden" name="product" value="De Ziana / Bridalstylist Gids">
+  <input type="text" name="bot-field">
+</form>
+
+<script>
+(function(){
+  var f=document.getElementById('cs-form-ziana-gids');
+  if(!f) return;
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var data=new URLSearchParams(new FormData(f));
+    fetch('/',{method:'POST',body:data})
+      .then(function(){
+        f.style.display='none';
+        document.getElementById('cs-ok-ziana-gids').style.display='block';
+        if(typeof gtag!=='undefined') gtag('event','newsletter_signup',{product:'ziana-gids'});
+      })
+      .catch(function(){ f.submit(); });
+  });
+})();
+</script>
+
 </body>
 </html>
