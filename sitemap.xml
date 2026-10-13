@@ -90,6 +90,14 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog: 12-maanden tijdlijn -->
+  <url>
+    <loc>https://aroussaplanner.com/tips/marokkaanse-bruiloft-12-maanden-tijdlijn.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Shop: Starter Bundle -->
   <url>
     <loc>https://aroussaplanner.com/shop/starter-bundle.html</loc>
