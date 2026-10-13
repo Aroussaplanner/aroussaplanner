@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7T0NDH2N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DL7T0NDH2N');</script>
+<title>Pagina niet gevonden — Aroussa</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --darker: #1A1210;
+  --dark: #2D2520;
+  --ivory: #F7F2EA;
+  --gold: #C4A882;
+  --warm: #9B8E7E;
+  --bronze: #8B7355;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--darker);
+  color: var(--ivory);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  overflow-x: hidden;
+}
+
+/* Subtle background ornament */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(196,168,130,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 80%, rgba(196,168,130,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  text-align: center;
+  max-width: 560px;
+  width: 100%;
+}
+
+/* Decorative line */
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+.ornament-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,168,130,0.4));
+}
+.ornament-line:last-child {
+  background: linear-gradient(90deg, rgba(196,168,130,0.4), transparent);
+}
+.ornament-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  opacity: 0.7;
+}
+
+/* 404 number */
+.num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(96px, 20vw, 160px);
+  font-weight: 300;
+  line-height: 0.9;
+  color: transparent;
+  background: linear-gradient(135deg, var(--gold) 0%, rgba(196,168,130,0.4) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(180deg, transparent, rgba(196,168,130,0.3), transparent);
+  margin: 0 auto 28px;
+}
+
+/* Copy */
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(196,168,130,0.25);
+  padding: 5px 14px;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 5vw, 36px);
+  font-weight: 400;
+  color: var(--ivory);
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+h1 em {
+  font-style: italic;
+  color: var(--gold);
+}
+.desc {
+  font-size: 14px;
+  color: var(--warm);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* Links */
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: all 0.22s;
+}
+.btn--gold {
+  background: var(--gold);
+  color: var(--darker);
+}
+.btn--gold:hover {
+  background: #D4B892;
+  transform: translateY(-1px);
+}
+.btn--outline {
+  background: transparent;
+  color: var(--warm);
+  border: 1px solid rgba(155,142,126,0.3);
+}
+.btn--outline:hover {
+  border-color: rgba(196,168,130,0.5);
+  color: var(--gold);
+}
+
+/* Secondary links */
+.sec-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-bottom: 48px;
+}
+.sec-links a {
+  font-size: 12px;
+  color: var(--warm);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+}
+.sec-links a:hover {
+  opacity: 1;
+  color: var(--gold);
+}
+
+/* Footer */
+.footer {
+  font-size: 11px;
+  color: rgba(155,142,126,0.5);
+  letter-spacing: 0.06em;
+}
+.footer a {
+  color: rgba(196,168,130,0.5);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 480px) {
+  .links { flex-direction: column; align-items: center; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="ornament">
+    <div class="ornament-line"></div>
+    <div class="ornament-diamond"></div>
+    <div class="ornament-line"></div>
+  </div>
+
+  <div class="num">404</div>
+  <div class="divider"></div>
+
+  <span class="tag">Pagina niet gevonden</span>
+
+  <h1>Deze pagina bestaat<br><em>niet (meer)</em></h1>
+  <p class="desc">
+    Het lijkt erop dat deze pagina verplaatst of verwijderd is.<br>
+    Geen zorgen — je vindt alles terug via de homepage.
+  </p>
+
+  <div class="links">
+    <a href="/" class="btn btn--gold">Terug naar de homepage →</a>
+    <a href="/aanmelden" class="btn btn--outline">Privacy Kaart aanvragen</a>
+  </div>
+
+  <div class="sec-links">
+    <a href="/mijn-account">Mijn account</a>
+    <a href="/#producten">Producten</a>
+    <a href="/#over">Over Aroussa</a>
+    <a href="/#contact">Contact</a>
+  </div>
+
+  <p class="footer">
+    &copy; 2026 <a href="/">Aroussa Wedding Planner</a>
+  </p>
+</div>
+
+</body>
+</html>

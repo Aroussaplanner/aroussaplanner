@@ -57,6 +57,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 .nav-item:hover { background: rgba(255,255,255,0.06); color: white; }
 .nav-item.active { background: rgba(200,150,106,0.15); color: var(--gold); }
 .nav-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+.nav-badge { display:inline-flex; align-items:center; justify-content:center; background:#E53E3E; color:#fff; font-size:10px; font-weight:700; min-width:18px; height:18px; border-radius:9px; padding:0 5px; margin-left:auto; line-height:1; }
 .sidebar-bottom { padding: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
 .btn-logout { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 12px; border-radius: 8px; background: none; border: none; color: rgba(255,255,255,0.4); font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
 .btn-logout:hover { color: white; background: rgba(255,255,255,0.06); }
@@ -281,6 +282,9 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
         <button class="nav-item" onclick="showSection('activiteit')" id="nav-activiteit">
           Activiteit
         </button>
+        <button class="nav-item" onclick="showSection('aanmeldingen')" id="nav-aanmeldingen" style="display:flex;align-items:center;">
+          Aanmeldingen <span class="nav-badge" id="aanmeldingen-badge" style="display:none">0</span>
+        </button>
       </nav>
       <div class="sidebar-bottom">
         <button class="btn-logout" onclick="doLogout()">Uitloggen</button>
@@ -320,6 +324,11 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
               <div class="stat-label">Totaal Codes</div>
               <div class="stat-value" id="stat-totaal">—</div>
               <div class="stat-sub">ooit aangemaakt</div>
+            </div>
+            <div class="stat-card" style="cursor:pointer" onclick="showSection('aanmeldingen')">
+              <div class="stat-label">Nieuwe Aanmeldingen</div>
+              <div class="stat-value" id="stat-aanmeldingen">—</div>
+              <div class="stat-sub">nog niet behandeld</div>
             </div>
           </div>
           <div class="dashboard-grid">
@@ -424,6 +433,19 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
           </div>
         </div>
 
+        <!-- AANMELDINGEN -->
+        <div class="section" id="section-aanmeldingen">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Aanmeldingen</div>
+              <button class="btn-secondary" style="padding:7px 14px;font-size:12.5px" onclick="laadAanmeldingen(true)">Vernieuwen</button>
+            </div>
+            <div id="aanmeldingen-content">
+              <div class="loading"><div class="spinner"></div> Aanmeldingen laden...</div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
@@ -520,7 +542,7 @@ function doLogout() {
 async function initApp() {
   document.getElementById('lock-screen').style.display = 'none';
   document.getElementById('admin-app').style.display = 'block';
-  await laadAllCodes();
+  await Promise.all([laadAllCodes(), laadAanmeldingen(false)]);
 }
 
 // ── DATA ──────────────────────────────────────────────────────────────────
@@ -811,10 +833,11 @@ function renderActiviteit() {
 
 // ── NAVIGATION ─────────────────────────────────────────────────────────────
 const TITLES = {
-  'dashboard':    ['Dashboard', 'Overzicht van je klanten en activiteit'],
-  'klanten':      ['Klantenbeheer', 'Beheer toegang per klant'],
-  'nieuwe-code':  ['Nieuwe Code', 'Genereer een toegangscode voor een klant'],
-  'activiteit':   ['Activiteit', 'Alle aangemaakt codes'],
+  'dashboard':     ['Dashboard', 'Overzicht van je klanten en activiteit'],
+  'klanten':       ['Klantenbeheer', 'Beheer toegang per klant'],
+  'nieuwe-code':   ['Nieuwe Code', 'Genereer een toegangscode voor een klant'],
+  'activiteit':    ['Activiteit', 'Alle aangemaakt codes'],
+  'aanmeldingen':  ['Aanmeldingen', 'Nieuwe aanvragen voor de Privacy Kaart'],
 };
 
 function showSection(id) {
@@ -829,6 +852,10 @@ function showSection(id) {
   if (id === 'klanten') renderKlanten(allCustomers);
   if (id === 'activiteit') renderActiviteit();
   if (id === 'dashboard') renderDashboard();
+  if (id === 'aanmeldingen') {
+    renderAanmeldingen();
+    markAanmeldingenGezien();
+  }
 }
 
 // ── MODAL ──────────────────────────────────────────────────────────────────
@@ -872,6 +899,92 @@ function esc(s) {
 function formatDate(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('nl-NL', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+// ── AANMELDINGEN ────────────────────────────────────────────────────────────
+let allAanmeldingen = [];
+
+async function laadAanmeldingen(forceRender = false) {
+  const SUPABASE_URL = 'https://rgordytqhaionboljwlz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnb3JkeXRxaGFpb25ib2xqd2x6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1MDAwODEsImV4cCI6MjEwMzA3NjA4MX0.-ZOieeVT97TpH26_Kmfnkthw2bE6b_6khri5zfi6N0Y';
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/aanmeldingen?order=created_at.desc`, {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+    });
+    if (!res.ok) throw new Error('Supabase error');
+    allAanmeldingen = await res.json();
+    const onzichtbaar = allAanmeldingen.filter(a => !a.gezien).length;
+    const badge = document.getElementById('aanmeldingen-badge');
+    if (badge) {
+      if (onzichtbaar > 0) {
+        badge.textContent = onzichtbaar;
+        badge.style.display = 'inline-flex';
+      } else {
+        badge.style.display = 'none';
+      }
+    }
+    const statEl = document.getElementById('stat-aanmeldingen');
+    if (statEl) statEl.textContent = onzichtbaar || '0';
+    if (forceRender) renderAanmeldingen();
+  } catch (e) {
+    if (forceRender) {
+      const el = document.getElementById('aanmeldingen-content');
+      if (el) el.innerHTML = '<p style="color:#E53E3E;padding:16px">Fout bij laden van aanmeldingen.</p>';
+    }
+  }
+}
+
+function renderAanmeldingen() {
+  const el = document.getElementById('aanmeldingen-content');
+  if (!el) return;
+  if (!allAanmeldingen.length) {
+    el.innerHTML = '<p style="padding:24px;color:var(--text-2);text-align:center">Nog geen aanmeldingen ontvangen.</p>';
+    return;
+  }
+  let html = `<table class="table"><thead><tr>
+    <th>Naam (bruid)</th><th>Bruidegom</th><th>Trouwdatum</th><th>WhatsApp</th><th>E-mail</th><th>Aangemeld op</th><th>Status</th>
+  </tr></thead><tbody>`;
+  for (const a of allAanmeldingen) {
+    const nieuw = !a.gezien
+      ? '<span style="display:inline-block;background:#E53E3E;color:#fff;font-size:9px;font-weight:700;letter-spacing:0.08em;padding:2px 7px;border-radius:3px;text-transform:uppercase;margin-left:6px">Nieuw</span>'
+      : '';
+    html += `<tr>
+      <td><strong>${esc(a.naam)}</strong>${nieuw}</td>
+      <td>${esc(a.bruidegom || '—')}</td>
+      <td>${formatDate(a.trouwdatum)}</td>
+      <td><a href="https://wa.me/${esc(a.whatsapp.replace(/\D/g,''))}" target="_blank" style="color:var(--gold);text-decoration:none">${esc(a.whatsapp)}</a></td>
+      <td><a href="mailto:${esc(a.email)}" style="color:var(--gold);text-decoration:none">${esc(a.email)}</a></td>
+      <td>${formatDate(a.created_at)}</td>
+      <td>${a.gezien ? '<span style="color:var(--text-2);font-size:12px">Gezien</span>' : '<span style="color:#38A169;font-weight:600;font-size:12px">Nieuw</span>'}</td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  el.innerHTML = html;
+}
+
+async function markAanmeldingenGezien() {
+  const ongezien = allAanmeldingen.filter(a => !a.gezien);
+  if (!ongezien.length) return;
+  const SUPABASE_URL = 'https://rgordytqhaionboljwlz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnb3JkeXRxaGFpb25ib2xqd2x6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1MDAwODEsImV4cCI6MjEwMzA3NjA4MX0.-ZOieeVT97TpH26_Kmfnkthw2bE6b_6khri5zfi6N0Y';
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/aanmeldingen?gezien=eq.false`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify({ gezien: true }),
+    });
+    allAanmeldingen = allAanmeldingen.map(a => ({ ...a, gezien: true }));
+    const badge = document.getElementById('aanmeldingen-badge');
+    if (badge) badge.style.display = 'none';
+  } catch (e) { /* stille fout */ }
 }
 </script>
 </body>

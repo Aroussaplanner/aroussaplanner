@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7T0NDH2N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DL7T0NDH2N');</script>
 <title>Aroussa | Online Wedding Planner voor de Marokkaanse Bruid in Nederland</title>
 <meta name="description" content="Aroussa is de online bridal coach en wedding planner voor de Marokkaanse bruid in Nederland en België. Transparante offerteprijzen, fotoshootlocaties, eerlijke gidsen en persoonlijke begeleiding. Vanaf €22.">
 <meta name="keywords" content="marokkaanse wedding planner nederland, marokkaanse bruiloft plannen, ziana nederland, bridalstylist rotterdam amsterdam, marokkaanse bruiloft kosten, bridal coach nederland, henna avond plannen, lilat lahna nederland, marokkaanse bruidsjurk, lebsa kopen nederland, fotoshootlocaties bruiloft nederland, offerteprijzen marokkaanse bruiloft, marokkaanse bruiloft checklist, nikah nederland, marokkaans feest plannen, catering marokkaanse bruiloft, bruiloft budget calculator, aroussa">
@@ -1568,6 +1571,37 @@ if ('serviceWorker' in navigator) {
         console.warn('SW registratie mislukt:', err);
       });
   });
+}
+</script>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-label="Cookiemelding" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(26,18,16,0.97);border-top:1px solid rgba(196,168,130,0.18);backdrop-filter:blur(12px);padding:16px 24px;display:none;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="font-family:'Montserrat',sans-serif;font-size:12px;font-weight:300;color:#9B8E7E;line-height:1.6;flex:1;min-width:240px;margin:0;">
+    Aroussa gebruikt functionele cookies en laadt lettertypen van Google Fonts.
+    Meer informatie: <a href="/#privacy" style="color:#C4A882;text-decoration:none;">privacybeleid</a>.
+  </p>
+  <div style="display:flex;gap:10px;flex-shrink:0;">
+    <button onclick="cookieAccept()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:10px 20px;background:#C4A882;color:#1A1210;border:none;border-radius:2px;cursor:pointer;">Accepteren</button>
+    <button onclick="cookieDismiss()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:10px 16px;background:transparent;color:#9B8E7E;border:1px solid rgba(155,142,126,0.3);border-radius:2px;cursor:pointer;">Sluiten</button>
+  </div>
+</div>
+<script>
+(function(){
+  try {
+    if (!localStorage.getItem('aroussa_cookie_consent')) {
+      var b = document.getElementById('cookie-banner');
+      if (b) b.style.display = 'flex';
+    }
+  } catch(e) {}
+})();
+function cookieAccept() {
+  try { localStorage.setItem('aroussa_cookie_consent', '1'); } catch(e) {}
+  var b = document.getElementById('cookie-banner');
+  if (b) { b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
+}
+function cookieDismiss() {
+  var b = document.getElementById('cookie-banner');
+  if (b) { b.style.opacity='0'; b.style.transition='opacity .3s'; setTimeout(function(){ b.style.display='none'; }, 300); }
 }
 </script>
 </body>
