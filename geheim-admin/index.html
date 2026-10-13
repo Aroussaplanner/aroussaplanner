@@ -209,6 +209,40 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
   .form-grid { grid-template-columns: 1fr; }
   .activity-table th:nth-child(3), .activity-table td:nth-child(3) { display: none; }
 }
+
+/* MOBILE — hamburger sidebar */
+.menu-toggle { display: none; }
+@media (max-width: 480px) {
+  .sidebar {
+    position: fixed; top: 0; left: 0; height: 100vh;
+    width: 240px; min-width: 240px;
+    transform: translateX(-100%);
+    transition: transform 0.28s ease;
+    z-index: 300;
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-backdrop {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.55); z-index: 299;
+  }
+  .sidebar-backdrop.open { display: block; }
+  .main { margin-left: 0; }
+  .topbar { padding: 14px 16px; gap: 12px; }
+  .menu-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; flex-shrink: 0;
+    background: none; border: 1.5px solid var(--border);
+    border-radius: 8px; cursor: pointer; font-size: 20px; color: var(--text);
+  }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .content { padding: 16px 14px; }
+  .customer-header { padding: 14px 16px; }
+  .card-header { flex-direction: column; align-items: flex-start; }
+  .search-wrap { max-width: 100%; width: 100%; }
+  .activity-table th:nth-child(3), .activity-table td:nth-child(3) { display: none; }
+  .activity-table th:nth-child(4), .activity-table td:nth-child(4) { display: none; }
+}
 </style>
 </head>
 <body>
@@ -228,7 +262,8 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 <div id="admin-app">
   <div class="layout">
 
-    <aside class="sidebar">
+    <div class="sidebar-backdrop" id="sidebar-backdrop" onclick="closeSidebar()"></div>
+    <aside class="sidebar" id="sidebar">
       <div class="sidebar-logo">
         <div class="sidebar-logo-text">Aroussa</div>
         <div class="sidebar-logo-sub">Beheerportaal</div>
@@ -254,6 +289,7 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 
     <main class="main">
       <div class="topbar">
+        <button class="menu-toggle" onclick="openSidebar()" aria-label="Menu">&#9776;</button>
         <div>
           <div class="topbar-title" id="topbar-title">Dashboard</div>
           <div class="topbar-subtitle" id="topbar-subtitle">Welkom terug</div>
@@ -438,6 +474,15 @@ window.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') doLogin();
   });
 });
+
+function openSidebar() {
+  document.getElementById('sidebar').classList.add('open');
+  document.getElementById('sidebar-backdrop').classList.add('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebar-backdrop').classList.remove('open');
+}
 
 async function doLogin() {
   const pw = document.getElementById('lock-password').value.trim();
@@ -780,6 +825,7 @@ function showSection(id) {
   const [t, s] = TITLES[id] || [id, ''];
   document.getElementById('topbar-title').textContent = t;
   document.getElementById('topbar-subtitle').textContent = s;
+  closeSidebar();
   if (id === 'klanten') renderKlanten(allCustomers);
   if (id === 'activiteit') renderActiviteit();
   if (id === 'dashboard') renderDashboard();
