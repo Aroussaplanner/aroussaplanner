@@ -8,8 +8,8 @@ Allow: /mijn-account
 # Admin portaal — niet indexeren
 Disallow: /geheim-admin/
 
-# Beveiligde productbestanden — niet indexeren
-Disallow: /producten/
+# Beveiligde productbestanden — individuele tools niet indexeren
+Disallow: /producten/aroussa-
 Disallow: /kaart/
 
 # Netlify functies

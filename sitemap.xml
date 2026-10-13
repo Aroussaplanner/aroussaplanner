@@ -74,6 +74,30 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Blog: Marokkaanse trouwlocaties gids -->
+  <url>
+    <loc>https://aroussaplanner.com/tips/marokkaanse-trouwlocaties-gids.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Shop: Starter Bundle -->
+  <url>
+    <loc>https://aroussaplanner.com/shop/starter-bundle.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Shop: Complete Pakket -->
+  <url>
+    <loc>https://aroussaplanner.com/shop/complete-bundle.html</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Mijn Account / Inloggen -->
   <url>
     <loc>https://aroussaplanner.com/mijn-account</loc>
