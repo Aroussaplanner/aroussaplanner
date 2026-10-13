@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DL7T0NDH2N"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DL7T0NDH2N');</script>
+<title>Aanmelding ontvangen — Aroussa</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://aroussaplanner.com/bedankt">
+<link rel="icon" type="image/png" sizes="512x512" href="/logo-512.png">
+<link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#2D2520">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --darker: #1A1210;
+  --dark:   #2D2520;
+  --ivory:  #F7F2EA;
+  --beige:  #EDE6D6;
+  --gold:   #C4A882;
+  --bronze: #8B7355;
+  --warm:   #9B8E7E;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: var(--darker);
+  color: var(--ivory);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 0;
+  background: rgba(26,18,16,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(196,168,130,0.12);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  max-width: 1180px; margin: 0 auto; padding: 0 24px;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px; font-weight: 400; letter-spacing: 0.08em;
+  color: var(--ivory); text-decoration: none;
+}
+.nav-logo small {
+  display: block; font-family: 'Montserrat', sans-serif;
+  font-size: 9px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--warm); margin-top: -2px;
+}
+.nav-back {
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--warm); text-decoration: none; transition: color .2s;
+}
+.nav-back:hover { color: var(--gold); }
+
+/* MAIN */
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 120px 24px 60px;
+}
+
+.wrap {
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Ornament */
+.ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-bottom: 36px;
+}
+.ornament-line {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(196,168,130,0.4));
+}
+.ornament-line:last-child {
+  background: linear-gradient(90deg, rgba(196,168,130,0.4), transparent);
+}
+.ornament-diamond {
+  width: 7px; height: 7px;
+  background: var(--gold); transform: rotate(45deg); opacity: 0.8;
+}
+
+/* Check animation */
+.check-wrap {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(196,168,130,0.3);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 32px;
+  animation: fadeIn 0.6s ease;
+}
+.check-inner {
+  font-size: 28px;
+  animation: popIn 0.5s 0.2s ease both;
+}
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+@keyframes popIn  { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: scale(1); } }
+
+/* Tag */
+.tag {
+  display: inline-block;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid rgba(196,168,130,0.25);
+  padding: 5px 14px; border-radius: 2px; margin-bottom: 20px;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(30px, 5vw, 48px); font-weight: 300;
+  line-height: 1.15; color: var(--ivory); margin-bottom: 16px;
+}
+h1 em { font-style: italic; color: var(--gold); }
+
+.subtitle {
+  font-size: 15px; color: var(--warm); line-height: 1.7;
+  max-width: 440px; margin: 0 auto 40px;
+}
+
+/* Stappen */
+.stappen {
+  background: rgba(196,168,130,0.05);
+  border: 1px solid rgba(196,168,130,0.15);
+  border-radius: 8px;
+  padding: 32px 28px;
+  text-align: left;
+  margin-bottom: 40px;
+}
+.stappen h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 400; color: var(--ivory);
+  margin-bottom: 20px; text-align: center;
+  letter-spacing: 0.04em;
+}
+.stap {
+  display: flex; gap: 16px; align-items: flex-start;
+  margin-bottom: 20px;
+}
+.stap:last-child { margin-bottom: 0; }
+.stap-nr {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1px solid rgba(196,168,130,0.35);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 600; color: var(--gold);
+  flex-shrink: 0; margin-top: 1px;
+}
+.stap-body {}
+.stap-title {
+  font-size: 13px; font-weight: 600; color: var(--ivory);
+  margin-bottom: 3px; letter-spacing: 0.03em;
+}
+.stap-text { font-size: 12px; color: var(--warm); line-height: 1.6; }
+
+/* Buttons */
+.btns {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  justify-content: center; margin-bottom: 40px;
+}
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; text-decoration: none;
+  border-radius: 2px; transition: all 0.22s;
+}
+.btn--gold { background: var(--gold); color: var(--darker); }
+.btn--gold:hover { background: #D4B892; transform: translateY(-1px); }
+.btn--outline {
+  background: transparent; color: var(--warm);
+  border: 1px solid rgba(155,142,126,0.3);
+}
+.btn--outline:hover { border-color: rgba(196,168,130,0.5); color: var(--gold); }
+.btn--wa {
+  background: #25D366; color: #fff;
+}
+.btn--wa:hover { background: #1ebe5e; transform: translateY(-1px); }
+
+/* Footer */
+footer {
+  text-align: center; padding: 28px 24px;
+  border-top: 1px solid rgba(196,168,130,0.08);
+}
+footer p {
+  font-size: 11px; color: rgba(155,142,126,0.5); letter-spacing: 0.06em;
+}
+footer a { color: rgba(196,168,130,0.5); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@media (max-width: 480px) {
+  .btns { flex-direction: column; align-items: stretch; }
+  .btn { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">Aroussa<small>Wedding Planner</small></a>
+    <a href="/" class="nav-back">← Terug naar de website</a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <div class="ornament">
+      <div class="ornament-line"></div>
+      <div class="ornament-diamond"></div>
+      <div class="ornament-line"></div>
+    </div>
+
+    <div class="check-wrap">
+      <div class="check-inner">✦</div>
+    </div>
+
+    <span class="tag">Aanmelding ontvangen</span>
+
+    <h1>Jij bent <em>binnen</em>,<br>lieve bruid!</h1>
+    <p class="subtitle">
+      Je aanmelding voor de Aroussa Privacy Kaart is goed ontvangen.
+      Hieronder zie je wat er nu gaat gebeuren.
+    </p>
+
+    <div class="stappen">
+      <h3>Wat gebeurt er nu?</h3>
+
+      <div class="stap">
+        <div class="stap-nr">1</div>
+        <div class="stap-body">
+          <div class="stap-title">Tikkie via WhatsApp — binnen 24 uur</div>
+          <div class="stap-text">Je ontvangt een Tikkie betaallink van <strong style="color:var(--gold)">€30</strong> via WhatsApp. Check ook je berichtenverzoeken.</div>
+        </div>
+      </div>
+
+      <div class="stap">
+        <div class="stap-nr">2</div>
+        <div class="stap-body">
+          <div class="stap-title">Betaling afronden</div>
+          <div class="stap-text">Betaal veilig via Tikkie. Direct na betaling ontvang je een bevestiging.</div>
+        </div>
+      </div>
+
+      <div class="stap">
+        <div class="stap-nr">3</div>
+        <div class="stap-body">
+          <div class="stap-title">Privacy Kaart per e-mail</div>
+          <div class="stap-text">Jouw persoonlijke, printklare Privacy Kaart wordt direct naar je e-mailadres gestuurd.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="btns">
+      <a href="/" class="btn btn--gold">Terug naar de homepage →</a>
+      <a href="https://wa.me/31613115286?text=Hoi%2C%20ik%20heb%20mij%20net%20aangemeld%20voor%20de%20Privacy%20Kaart!" class="btn btn--wa" target="_blank" rel="noopener">
+        📲 Stuur een WhatsApp
+      </a>
+    </div>
+
+    <p style="font-size:12px;color:rgba(155,142,126,0.55);line-height:1.7;">
+      Heb je een vraag of hoor je niets binnen 24 uur?<br>
+      Stuur gerust een WhatsApp naar <a href="https://wa.me/31613115286" style="color:var(--gold);">06 13 11 52 86</a>.
+    </p>
+
+  </div>
+</main>
+
+<footer>
+  <p>&copy; 2026 <a href="/">Aroussa Wedding Planner</a></p>
+</footer>
+
+<script>
+// GA4 conversie-event: aanmelding voltooid
+if (typeof gtag !== 'undefined') {
+  gtag('event', 'aanmelding_voltooid', {
+    event_category: 'conversie',
+    event_label: 'privacy_kaart'
+  });
+}
+</script>
+
+</body>
+</html>

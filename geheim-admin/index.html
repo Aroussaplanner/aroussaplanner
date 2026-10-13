@@ -435,6 +435,20 @@ body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); c
 
         <!-- AANMELDINGEN -->
         <div class="section" id="section-aanmeldingen">
+          <!-- Wachtlijst toggle kaart -->
+          <div class="card" style="margin-bottom:20px;">
+            <div class="card-header">
+              <div class="card-title">Aanmeldformulier</div>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:4px 0 8px;gap:16px;flex-wrap:wrap;">
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;" id="wl-status-label">Formulier status laden…</div>
+                <div style="font-size:12px;color:var(--text-2);">Zet het formulier op de aanmeldpagina aan of uit.</div>
+              </div>
+              <button id="wl-toggle-btn" onclick="toggleWachtlijst()" style="padding:9px 20px;border-radius:6px;font-size:13px;font-weight:600;font-family:inherit;border:none;cursor:pointer;transition:all .2s;min-width:120px;">Laden…</button>
+            </div>
+          </div>
+
           <div class="card">
             <div class="card-header">
               <div class="card-title">Aanmeldingen</div>
@@ -542,7 +556,7 @@ function doLogout() {
 async function initApp() {
   document.getElementById('lock-screen').style.display = 'none';
   document.getElementById('admin-app').style.display = 'block';
-  await Promise.all([laadAllCodes(), laadAanmeldingen(false)]);
+  await Promise.all([laadAllCodes(), laadAanmeldingen(false), laadWachtlijstStatus()]);
 }
 
 // ── DATA ──────────────────────────────────────────────────────────────────
@@ -899,6 +913,71 @@ function esc(s) {
 function formatDate(iso) {
   if (!iso) return '—';
   return new Date(iso).toLocaleDateString('nl-NL', { day: '2-digit', month: 'short', year: 'numeric' });
+}
+
+// ── WACHTLIJST ────────────────────────────────────────────────────────────────
+const SB_URL  = 'https://rgordytqhaionboljwlz.supabase.co';
+const SB_KEY  = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnb3JkeXRxaGFpb25ib2xqd2x6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODc1MDAwODEsImV4cCI6MjEwMzA3NjA4MX0.-ZOieeVT97TpH26_Kmfnkthw2bE6b_6khri5zfi6N0Y';
+let formulierGesloten = false;
+
+async function laadWachtlijstStatus() {
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/site_instellingen?sleutel=eq.formulier_gesloten&select=waarde`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    const data = await res.json();
+    formulierGesloten = data && data[0] && data[0].waarde === 'true';
+    updateWachtlijstUI();
+  } catch(e) { /* stil falen */ }
+}
+
+function updateWachtlijstUI() {
+  const btn   = document.getElementById('wl-toggle-btn');
+  const label = document.getElementById('wl-status-label');
+  if (!btn) return;
+  if (formulierGesloten) {
+    label.textContent = '🔴 Formulier is GESLOTEN (wachtlijst actief)';
+    label.style.color = '#C84040';
+    btn.textContent  = 'Formulier openen';
+    btn.style.background = '#2E7D32';
+    btn.style.color = '#fff';
+  } else {
+    label.textContent = '🟢 Formulier is OPEN (aanmeldingen actief)';
+    label.style.color = '#2E7D32';
+    btn.textContent  = 'Formulier sluiten';
+    btn.style.background = '#C84040';
+    btn.style.color = '#fff';
+  }
+}
+
+async function toggleWachtlijst() {
+  const nieuw = !formulierGesloten;
+  const btn = document.getElementById('wl-toggle-btn');
+  btn.disabled = true;
+  btn.textContent = 'Opslaan…';
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/site_instellingen?sleutel=eq.formulier_gesloten`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SB_KEY,
+        'Authorization': `Bearer ${SB_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ waarde: nieuw ? 'true' : 'false' })
+    });
+    if (res.ok) {
+      formulierGesloten = nieuw;
+      updateWachtlijstUI();
+      showToast(nieuw ? '🔴 Formulier gesloten — wachtlijst actief' : '🟢 Formulier weer open voor aanmeldingen', 'success');
+    } else {
+      showToast('Fout bij opslaan. Probeer opnieuw.', 'error');
+    }
+  } catch(e) {
+    showToast('Verbindingsfout.', 'error');
+  }
+  btn.disabled = false;
+  updateWachtlijstUI();
 }
 
 // ── AANMELDINGEN ────────────────────────────────────────────────────────────
