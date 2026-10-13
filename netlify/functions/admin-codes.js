@@ -1,6 +1,6 @@
 // netlify/functions/admin-codes.js
-// Admin-only endpoint: list and lookup download codes
-// action: 'list' → last 30 codes | 'lookup' → codes for a given email
+// Admin-only endpoint: list, lookup, revoke and manage download codes
+// Actions: 'list' | 'lookup' | 'all' | 'revoke'
 
 exports.handler = async (event) => {
   const headers = {
@@ -23,7 +23,7 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
-  const { adminSecret, action, email } = body;
+  const { adminSecret, action, email, code: codeToRevoke } = body;
 
   const ADMIN_SECRET = process.env.ADMIN_SECRET;
   if (!ADMIN_SECRET || adminSecret !== ADMIN_SECRET) {
@@ -40,9 +40,70 @@ exports.handler = async (event) => {
   };
 
   try {
+    // ── REVOKE: delete a single code ──────────────────────────────────────────
+    if (action === 'revoke') {
+      if (!codeToRevoke) {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'Code is verplicht' }) };
+      }
+
+      const deleteResp = await fetch(
+        `${SUPABASE_URL}/rest/v1/download_codes?code=eq.${encodeURIComponent(codeToRevoke)}`,
+        { method: 'DELETE', headers: sbHeaders }
+      );
+
+      if (!deleteResp.ok) {
+        const errText = await deleteResp.text();
+        console.error('Supabase delete error:', deleteResp.status, errText);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ error: 'Verwijderen mislukt. Probeer opnieuw.' }),
+        };
+      }
+
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true, message: 'Code ingetrokken.' }),
+      };
+    }
+
+    // ── REVOKE ALL: delete all codes for an email ─────────────────────────────
+    if (action === 'revoke-all') {
+      if (!email) {
+        return { statusCode: 400, headers, body: JSON.stringify({ error: 'Email is verplicht' }) };
+      }
+
+      const normalizedEmail = email.toLowerCase().trim();
+      const deleteResp = await fetch(
+        `${SUPABASE_URL}/rest/v1/download_codes?email=eq.${encodeURIComponent(normalizedEmail)}`,
+        { method: 'DELETE', headers: sbHeaders }
+      );
+
+      if (!deleteResp.ok) {
+        const errText = await deleteResp.text();
+        console.error('Supabase delete-all error:', deleteResp.status, errText);
+        return {
+          statusCode: 500,
+          headers,
+          body: JSON.stringify({ error: 'Verwijderen mislukt. Probeer opnieuw.' }),
+        };
+      }
+
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true, message: 'Alle codes voor klant ingetrokken.' }),
+      };
+    }
+
+    // ── FETCH queries ─────────────────────────────────────────────────────────
     let url;
 
-    if (action === 'lookup' && email) {
+    if (action === 'all') {
+      // All codes, no limit — for full customer management view
+      url = `${SUPABASE_URL}/rest/v1/download_codes?select=*&order=created_at.desc&limit=1000`;
+    } else if (action === 'lookup' && email) {
       const normalizedEmail = email.toLowerCase().trim();
       url = `${SUPABASE_URL}/rest/v1/download_codes?email=eq.${encodeURIComponent(normalizedEmail)}&select=*&order=created_at.desc`;
     } else {

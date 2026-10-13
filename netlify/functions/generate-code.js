@@ -39,7 +39,9 @@ exports.handler = async (event) => {
   const VALID_PRODUCTS = [
     'bruid-checklist', 'contract-checklist', 'rode-vlaggen-gids',
     'whatsapp-scripts', 'dagvan-draaiboek', 'ziana-gids',
-    'budget-calculator', 'bruiloft-tijdlijn', 'complete-bundel',
+    'budget-calculator', 'bruiloft-tijdlijn',
+    'fotoshootlocaties', 'offerteprijzen',
+    'complete-bundel',
   ];
   if (!product || !VALID_PRODUCTS.includes(product)) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Ongeldig of ontbrekend product.' }) };

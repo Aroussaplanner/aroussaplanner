@@ -3,222 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aroussa Admin — Codebeheer</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Aroussa Beheer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--darker:#1A1210;--gold:#C4A882;--warm:#9B8E7E;--ivory:#F5F0E8;--green:#4CAF6E;--red:#C4625B;--blue:#6A9FB5;}
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  body{background:var(--darker);color:var(--ivory);font-family:'Montserrat',sans-serif;font-weight:300;min-height:100vh;padding:40px 20px;}
-  .wrap{max-width:600px;margin:0 auto;}
-  h1{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--gold);margin-bottom:4px;}
-  .sub{font-size:11px;color:var(--warm);letter-spacing:0.1em;margin-bottom:40px;}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* LOCK */
-  #lock{text-align:center;padding:60px 0;}
-  #lock h2{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--ivory);margin-bottom:20px;}
+:root {
+  --gold: #C8966A;
+  --gold-dark: #A67A52;
+  --gold-light: #EDD9C3;
+  --bg: #F7F4F1;
+  --sidebar-bg: #1C1018;
+  --sidebar-text: #D4C4BC;
+  --card: #FFFFFF;
+  --text: #2C1810;
+  --text-2: #6B5545;
+  --border: #E8DDD5;
+  --danger: #C84040;
+  --danger-hover: #A83030;
+  --danger-light: #FFF0F0;
+  --success: #2E7D32;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.14);
+  --radius: 10px;
+  --radius-sm: 6px;
+}
 
-  /* TABS */
-  .tabs{display:flex;gap:2px;margin-bottom:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.12);border-radius:6px;padding:4px;}
-  .tab{flex:1;padding:10px;background:transparent;color:var(--warm);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border:none;border-radius:4px;cursor:pointer;transition:all .2s;}
-  .tab.active{background:rgba(196,168,130,0.15);color:var(--ivory);}
-  .tab:hover:not(.active){color:var(--gold);}
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
 
-  /* CARD */
-  .card{background:rgba(255,255,255,0.03);border:1px solid rgba(196,168,130,0.15);border-radius:8px;padding:32px;margin-bottom:24px;}
-  .card h2{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ivory);margin-bottom:20px;}
-  .card h2 small{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:500;color:var(--warm);letter-spacing:0.1em;text-transform:uppercase;margin-left:10px;}
+/* LOCK */
+#lock-screen { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #1C1018, #2D1A26); }
+.lock-card { background: white; border-radius: 16px; padding: 48px 40px; width: 100%; max-width: 380px; text-align: center; box-shadow: var(--shadow-lg); }
+.lock-logo { font-size: 28px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.lock-subtitle { color: var(--text-2); font-size: 13px; margin-bottom: 32px; }
+.lock-card input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: var(--radius-sm); font-size: 15px; outline: none; transition: border-color 0.2s; margin-bottom: 12px; font-family: inherit; }
+.lock-card input:focus { border-color: var(--gold); }
+.btn-primary { width: 100%; padding: 13px; background: var(--gold); color: white; border: none; border-radius: var(--radius-sm); font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+.btn-primary:hover { background: var(--gold-dark); }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.lock-error { color: var(--danger); font-size: 13px; margin-top: 10px; display: none; }
 
-  /* FORM */
-  .form-group{margin-bottom:16px;}
-  .form-group label{display:block;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
-  .form-group input,
-  .form-group select{width:100%;padding:12px 14px;background:rgba(196,168,130,0.06);border:1px solid rgba(196,168,130,0.2);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:14px;font-weight:300;border-radius:2px;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none;}
-  .form-group input:focus,
-  .form-group select:focus{border-color:rgba(196,168,130,0.5);}
-  .form-group input::placeholder{color:rgba(155,142,126,0.5);}
-  .select-wrap{position:relative;}
-  .select-wrap::after{content:'▾';position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--gold);pointer-events:none;font-size:12px;}
-  .form-group select option{background:#2a1f1c;color:var(--ivory);}
+/* APP */
+#admin-app { display: none; min-height: 100vh; }
+.layout { display: flex; min-height: 100vh; }
 
-  /* BUTTONS */
-  .btn{width:100%;padding:14px;background:var(--gold);color:var(--darker);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:none;border-radius:2px;cursor:pointer;transition:background .2s;margin-top:8px;}
-  .btn:hover{background:#D4B892;}
-  .btn:disabled{opacity:0.5;cursor:not-allowed;}
-  .btn--ghost{background:transparent;color:var(--warm);border:1px solid rgba(196,168,130,0.2);margin-top:12px;}
-  .btn--ghost:hover{color:var(--ivory);border-color:rgba(196,168,130,0.4);}
-  .btn--sm{width:auto;padding:10px 22px;font-size:10px;}
+/* SIDEBAR */
+.sidebar { width: 220px; min-width: 220px; background: var(--sidebar-bg); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; height: 100vh; z-index: 100; }
+.sidebar-logo { padding: 28px 20px 24px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-logo-text { font-size: 18px; font-weight: 700; color: var(--gold); }
+.sidebar-logo-sub { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 1.5px; margin-top: 2px; }
+.sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 8px; cursor: pointer; color: var(--sidebar-text); font-size: 13.5px; font-weight: 500; transition: all 0.15s; border: none; background: none; width: 100%; text-align: left; font-family: inherit; }
+.nav-item:hover { background: rgba(255,255,255,0.06); color: white; }
+.nav-item.active { background: rgba(200,150,106,0.15); color: var(--gold); }
+.nav-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+.sidebar-bottom { padding: 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+.btn-logout { display: flex; align-items: center; gap: 8px; width: 100%; padding: 9px 12px; border-radius: 8px; background: none; border: none; color: rgba(255,255,255,0.4); font-size: 13px; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.btn-logout:hover { color: white; background: rgba(255,255,255,0.06); }
 
-  /* RESULT */
-  .result{display:none;margin-top:20px;padding:24px;background:rgba(76,175,110,0.08);border:1px solid rgba(76,175,110,0.25);border-radius:6px;text-align:center;}
-  .result.show{display:block;}
-  .result-label{font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:12px;}
-  .result-code{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:400;color:var(--ivory);letter-spacing:0.08em;margin-bottom:12px;}
-  .result-info{font-size:12px;color:var(--warm);line-height:1.6;}
-  .copy-btn{display:inline-block;margin-top:14px;padding:8px 20px;background:rgba(196,168,130,0.12);border:1px solid rgba(196,168,130,0.25);color:var(--gold);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;border-radius:2px;cursor:pointer;font-family:'Montserrat',sans-serif;transition:background .2s;}
-  .copy-btn:hover{background:rgba(196,168,130,0.22);}
-  .copy-btn.copied{color:var(--green);border-color:rgba(76,175,110,0.4);}
+/* MAIN */
+.main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
+.topbar { background: white; border-bottom: 1px solid var(--border); padding: 18px 32px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 10; }
+.topbar-title { font-size: 20px; font-weight: 700; }
+.topbar-subtitle { font-size: 12px; color: var(--text-2); margin-top: 1px; }
+.content { padding: 28px 32px; flex: 1; }
 
-  /* WA TEMPLATE */
-  .wa-block{margin-top:16px;background:rgba(255,255,255,0.02);border:1px solid rgba(196,168,130,0.1);border-radius:4px;padding:14px 16px;text-align:left;}
-  .wa-block__label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--warm);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;}
-  .wa-block__text{font-size:13px;color:var(--ivory);line-height:1.65;white-space:pre-line;}
-  .wa-copy{font-size:10px;color:var(--gold);cursor:pointer;text-decoration:underline;flex-shrink:0;}
+/* SECTIONS */
+.section { display: none; }
+.section.active { display: block; }
 
-  /* ERROR */
-  .error-msg{margin-top:14px;font-size:12px;color:var(--red);display:none;padding:10px 14px;background:rgba(196,98,91,0.08);border:1px solid rgba(196,98,91,0.15);border-radius:4px;}
-  .error-msg.show{display:block;}
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: var(--radius); padding: 20px 24px; box-shadow: var(--shadow); }
+.stat-label { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-2); margin-bottom: 8px; }
+.stat-value { font-size: 32px; font-weight: 700; color: var(--text); line-height: 1; }
+.stat-sub { font-size: 12px; color: var(--text-2); margin-top: 4px; }
+.stat-card.gold .stat-value { color: var(--gold); }
 
-  /* CODES TABLE */
-  .codes-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:12px;}
-  .codes-table th{text-align:left;font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);padding:8px 10px;border-bottom:1px solid rgba(196,168,130,0.15);}
-  .codes-table td{padding:10px 10px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--ivory);vertical-align:middle;}
-  .codes-table tr:last-child td{border-bottom:none;}
-  .codes-table tr:hover td{background:rgba(255,255,255,0.02);}
-  .badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;}
-  .badge--used{background:rgba(76,175,110,0.12);color:var(--green);border:1px solid rgba(76,175,110,0.2);}
-  .badge--unused{background:rgba(196,168,130,0.1);color:var(--warm);border:1px solid rgba(196,168,130,0.15);}
-  .code-mono{font-family:'Courier New',monospace;font-size:11px;color:var(--gold);letter-spacing:0.06em;}
-  .empty-state{text-align:center;padding:32px;color:var(--warm);font-size:13px;}
-  .loading-dots{color:var(--warm);font-size:13px;text-align:center;padding:20px;}
+/* CARDS */
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.card-header { padding: 18px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.card-title { font-size: 15px; font-weight: 700; }
 
-  /* INFO CARD */
-  .info-card{background:rgba(196,168,130,0.04);border:1px solid rgba(196,168,130,0.1);border-radius:6px;padding:20px;margin-bottom:24px;}
-  .info-card h3{font-size:13px;color:var(--ivory);margin-bottom:12px;}
-  .info-card ol{font-size:12px;color:var(--warm);line-height:2;padding-left:18px;}
-  .info-card ol li strong{color:var(--gold);font-weight:600;}
+/* SEARCH */
+.search-wrap { position: relative; flex: 1; max-width: 360px; }
+.search-wrap input { width: 100%; padding: 9px 14px 9px 36px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13.5px; outline: none; transition: border-color 0.2s; font-family: inherit; background: var(--bg); }
+.search-wrap input:focus { border-color: var(--gold); background: white; }
+.search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--text-2); font-size: 14px; pointer-events: none; }
+
+/* CUSTOMER CARDS */
+.customer-list { display: flex; flex-direction: column; gap: 12px; }
+.customer-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; border: 1.5px solid transparent; transition: border-color 0.2s; }
+.customer-card:hover { border-color: var(--gold-light); }
+.customer-header { padding: 16px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; user-select: none; }
+.customer-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--gold), var(--gold-dark)); color: white; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+.customer-info { flex: 1; min-width: 0; }
+.customer-name { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.customer-email { font-size: 12.5px; color: var(--text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.customer-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 20px; font-size: 11.5px; font-weight: 600; }
+.badge-count { background: var(--gold-light); color: var(--gold-dark); }
+.badge-active { background: #E8F5E9; color: var(--success); }
+.badge-used { background: #F5F5F5; color: #888; }
+.chevron { color: var(--text-2); font-size: 12px; transition: transform 0.2s; }
+.customer-card.open .chevron { transform: rotate(90deg); }
+.customer-details { display: none; border-top: 1px solid var(--border); padding: 16px 20px; background: #FAFAFA; }
+.customer-card.open .customer-details { display: block; }
+
+/* CODES TABLE */
+.codes-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
+.codes-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-2); padding: 6px 10px; background: var(--border); }
+.codes-table th:first-child { border-radius: 4px 0 0 4px; }
+.codes-table th:last-child { border-radius: 0 4px 4px 0; }
+.codes-table td { padding: 10px; border-bottom: 1px solid var(--border); font-size: 13px; }
+.codes-table tr:last-child td { border-bottom: none; }
+.code-mono { font-family: 'Courier New', monospace; font-weight: 600; font-size: 12.5px; letter-spacing: 0.5px; }
+.product-badge { display: inline-block; padding: 3px 9px; border-radius: 4px; font-size: 11.5px; font-weight: 500; background: var(--gold-light); color: var(--gold-dark); }
+.btn-revoke { padding: 5px 12px; border-radius: var(--radius-sm); border: 1.5px solid var(--danger); background: white; color: var(--danger); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.btn-revoke:hover { background: var(--danger); color: white; }
+.btn-revoke-all { padding: 8px 16px; border-radius: var(--radius-sm); border: none; background: var(--danger-light); color: var(--danger); font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.btn-revoke-all:hover { background: var(--danger); color: white; }
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 24px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+.form-label { font-size: 12.5px; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: 0.6px; }
+.form-input { padding: 11px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; outline: none; transition: border-color 0.2s; font-family: inherit; color: var(--text); background: white; }
+.form-input:focus { border-color: var(--gold); }
+.form-actions { padding: 0 24px 24px; display: flex; gap: 10px; }
+.btn-gold { padding: 11px 22px; border-radius: var(--radius-sm); background: var(--gold); color: white; border: none; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+.btn-gold:hover { background: var(--gold-dark); }
+.btn-gold:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-secondary { padding: 11px 22px; border-radius: var(--radius-sm); background: white; color: var(--text); border: 1.5px solid var(--border); font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; font-family: inherit; }
+.btn-secondary:hover { border-color: var(--gold); color: var(--gold); }
+.btn-secondary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* CODE RESULT */
+.code-result { margin: 0 24px 24px; background: linear-gradient(135deg, #1C1018, #2D1A26); border-radius: var(--radius); padding: 24px; color: white; display: none; }
+.code-result.show { display: block; }
+.code-result-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold-light); margin-bottom: 10px; }
+.code-result-code { font-family: 'Courier New', monospace; font-size: 28px; font-weight: 700; color: var(--gold); letter-spacing: 3px; margin-bottom: 16px; }
+.code-result-info { font-size: 12.5px; color: rgba(255,255,255,0.55); margin-bottom: 16px; line-height: 1.7; }
+.code-result-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn-send-email { padding: 9px 18px; border-radius: 6px; background: var(--gold); color: white; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+.btn-send-email:hover { background: var(--gold-dark); }
+.btn-send-email:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-copy { padding: 9px 18px; border-radius: 6px; background: rgba(255,255,255,0.12); color: white; border: 1px solid rgba(255,255,255,0.2); font-size: 13px; font-weight: 600; cursor: pointer; transition: background 0.2s; font-family: inherit; }
+.btn-copy:hover { background: rgba(255,255,255,0.2); }
+
+/* WHATSAPP */
+.whatsapp-box { margin: 0 24px 24px; background: #F0FFF4; border: 1.5px solid #C8E6C9; border-radius: var(--radius); padding: 18px; display: none; }
+.whatsapp-box.show { display: block; }
+.whatsapp-label { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--success); margin-bottom: 10px; }
+.whatsapp-text { font-size: 13px; color: var(--text); line-height: 1.7; white-space: pre-wrap; font-family: inherit; }
+
+/* ACTIVITY TABLE */
+.activity-table { width: 100%; border-collapse: collapse; }
+.activity-table th { text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text-2); padding: 12px 20px; background: var(--bg); border-bottom: 1px solid var(--border); }
+.activity-table td { padding: 13px 20px; border-bottom: 1px solid var(--border); font-size: 13.5px; vertical-align: middle; }
+.activity-table tr:last-child td { border-bottom: none; }
+.activity-table tr:hover td { background: #FAFAFA; }
+
+/* DASHBOARD */
+.dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+.quick-actions { display: flex; gap: 12px; flex-wrap: wrap; padding: 20px 24px; }
+
+/* LOADING */
+.loading { display: flex; align-items: center; justify-content: center; padding: 60px; color: var(--text-2); gap: 10px; font-size: 14px; }
+.spinner { width: 20px; height: 20px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* TOAST */
+#toast { position: fixed; bottom: 24px; right: 24px; padding: 13px 20px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500; box-shadow: var(--shadow-lg); z-index: 9999; transform: translateY(80px); opacity: 0; transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); max-width: 360px; }
+#toast.show { transform: translateY(0); opacity: 1; }
+#toast.success { background: var(--success); color: white; }
+#toast.error { background: var(--danger); color: white; }
+#toast.info { background: var(--text); color: white; }
+
+/* MODAL */
+#modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: none; align-items: center; justify-content: center; padding: 20px; }
+#modal-overlay.show { display: flex; }
+.modal { background: white; border-radius: 14px; padding: 32px; max-width: 420px; width: 100%; box-shadow: var(--shadow-lg); text-align: center; }
+.modal-icon { font-size: 36px; margin-bottom: 14px; }
+.modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.modal-text { color: var(--text-2); font-size: 13.5px; margin-bottom: 24px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; justify-content: center; }
+.btn-modal-cancel { padding: 10px 24px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); background: white; color: var(--text); font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.btn-modal-cancel:hover { border-color: var(--gold); }
+.btn-modal-confirm { padding: 10px 24px; border: none; border-radius: var(--radius-sm); background: var(--danger); color: white; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background 0.15s; }
+.btn-modal-confirm:hover { background: var(--danger-hover); }
+
+.no-results { padding: 40px 24px; text-align: center; color: var(--text-2); font-size: 14px; }
+
+@media (max-width: 900px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .sidebar { width: 180px; min-width: 180px; }
+  .main { margin-left: 180px; }
+  .content { padding: 16px; }
+  .topbar { padding: 14px 16px; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .activity-table th:nth-child(3), .activity-table td:nth-child(3) { display: none; }
+}
 </style>
 </head>
 <body>
 
-<div class="wrap">
-  <h1>Aroussa Admin</h1>
-  <p class="sub">Codebeheer — alleen voor intern gebruik</p>
-
-  <!-- LOCK SCREEN -->
-  <div id="lock">
-    <h2>Geheime code invoeren</h2>
-    <div class="form-group" style="max-width:320px;margin:0 auto 16px;">
-      <input type="password" id="adminPass" placeholder="Admin wachtwoord" onkeydown="if(event.key==='Enter')unlock()">
-    </div>
-    <button class="btn" id="lockBtn" style="max-width:320px;margin:0 auto;" onclick="unlock()">Inloggen</button>
-    <div class="error-msg" id="lockError" style="max-width:320px;margin:12px auto 0;">Verkeerd wachtwoord — probeer opnieuw.</div>
+<!-- LOCK SCREEN -->
+<div id="lock-screen">
+  <div class="lock-card">
+    <div class="lock-logo">🌸 Aroussa</div>
+    <div class="lock-subtitle">Beheerportaal — alleen voor de eigenaar</div>
+    <input type="password" id="lock-password" placeholder="Wachtwoord" autofocus>
+    <button class="btn-primary" id="lock-btn" onclick="doLogin()">Inloggen</button>
+    <div class="lock-error" id="lock-error">Ongeldig wachtwoord. Probeer opnieuw.</div>
   </div>
+</div>
 
-  <!-- ADMIN PANEL -->
-  <div id="panel" style="display:none;">
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <div class="layout">
 
-    <div class="tabs">
-      <button class="tab active" id="tab-btn-gen"    onclick="switchTab('gen')">✦ Code Genereren</button>
-      <button class="tab"        id="tab-btn-lookup" onclick="switchTab('lookup')">Codes Opzoeken</button>
-      <button class="tab"        id="tab-btn-recent" onclick="switchTab('recent')">Recent</button>
-    </div>
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="sidebar-logo-text">🌸 Aroussa</div>
+        <div class="sidebar-logo-sub">Beheerportaal</div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" onclick="showSection('dashboard')" id="nav-dashboard">
+          <span class="nav-icon">📊</span> Dashboard
+        </button>
+        <button class="nav-item" onclick="showSection('klanten')" id="nav-klanten">
+          <span class="nav-icon">👥</span> Klanten
+        </button>
+        <button class="nav-item" onclick="showSection('nieuwe-code')" id="nav-nieuwe-code">
+          <span class="nav-icon">✨</span> Nieuwe Code
+        </button>
+        <button class="nav-item" onclick="showSection('activiteit')" id="nav-activiteit">
+          <span class="nav-icon">📋</span> Activiteit
+        </button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="btn-logout" onclick="doLogout()">↩ Uitloggen</button>
+      </div>
+    </aside>
 
-    <!-- ── TAB: CODE GENEREREN ───────────────────────────────────── -->
-    <div id="tab-gen">
-      <div class="card">
-        <h2>Genereer downloadcode</h2>
-
-        <div class="form-group">
-          <label>E-mailadres klant</label>
-          <input type="email" id="klantEmail" placeholder="klant@email.nl">
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <div class="topbar-title" id="topbar-title">Dashboard</div>
+          <div class="topbar-subtitle" id="topbar-subtitle">Welkom terug</div>
         </div>
-        <div class="form-group">
-          <label>Naam bruid</label>
-          <input type="text" id="klantNaam" placeholder="Bijv. Fatima">
-        </div>
-        <div class="form-group">
-          <label>Product</label>
-          <div class="select-wrap">
-            <select id="klantProduct">
-              <option value="">— Kies een product —</option>
-              <option value="bruid-checklist">Bruid Checklist</option>
-              <option value="contract-checklist">Contract Checklist</option>
-              <option value="rode-vlaggen-gids">Rode Vlaggen Gids</option>
-              <option value="whatsapp-scripts">WhatsApp Scripts Bundel</option>
-              <option value="dagvan-draaiboek">Dag-Van Draaiboek</option>
-              <option value="ziana-gids">De Ziana Gids</option>
-              <option value="budget-calculator">Budget Calculator</option>
-              <option value="bruiloft-tijdlijn">Bruiloft Tijdlijn (interactief)</option>
-              <option value="complete-bundel">✦ Complete Bundel — alle 8 gidsen</option>
-            </select>
-          </div>
-        </div>
+      </div>
 
-        <button class="btn" id="genBtn" onclick="generateCode()">Code genereren →</button>
-        <div class="error-msg" id="genError"></div>
+      <div class="content">
 
-        <!-- RESULT -->
-        <div class="result" id="codeResult">
-          <div class="result-label"><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);margin-right:6px;"></span>Code aangemaakt</div>
-          <div class="result-code" id="codeDisplay"></div>
-          <div class="result-info" id="codeInfo"></div>
-          <button class="copy-btn" id="copyCodeBtn" onclick="copyCode()">Kopieer code</button>
-
-          <div class="wa-block">
-            <div class="wa-block__label">
-              <span>WhatsApp bericht</span>
-              <span class="wa-copy" onclick="copyWA()">Kopieer bericht</span>
+        <!-- DASHBOARD -->
+        <div class="section active" id="section-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-label">Klanten</div>
+              <div class="stat-value" id="stat-klanten">—</div>
+              <div class="stat-sub">unieke e-mailadressen</div>
             </div>
-            <div class="wa-block__text" id="waTemplate"></div>
+            <div class="stat-card gold">
+              <div class="stat-label">Actieve Codes</div>
+              <div class="stat-value" id="stat-actief">—</div>
+              <div class="stat-sub">nog niet gebruikt</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Gebruikte Codes</div>
+              <div class="stat-value" id="stat-gebruikt">—</div>
+              <div class="stat-sub">ingelogd door klant</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-label">Totaal Codes</div>
+              <div class="stat-value" id="stat-totaal">—</div>
+              <div class="stat-sub">ooit aangemaakt</div>
+            </div>
           </div>
-
-          <!-- EMAIL VERZENDEN -->
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(196,168,130,0.1);">
-            <button class="btn" id="emailBtn" onclick="sendAccessEmail()" style="background:rgba(106,159,181,0.15);color:var(--blue);border:1px solid rgba(106,159,181,0.3);">✉ Verstuur toegang per email</button>
-            <div id="emailStatus" style="display:none;margin-top:10px;font-size:12px;text-align:center;padding:10px 14px;border-radius:4px;"></div>
+          <div class="dashboard-grid">
+            <div class="card">
+              <div class="card-header">
+                <div class="card-title">Recente Klanten</div>
+                <button class="btn-secondary" style="padding:7px 14px;font-size:12.5px" onclick="showSection('klanten')">Alle klanten →</button>
+              </div>
+              <div id="dashboard-recent"></div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">Snelle Acties</div></div>
+              <div class="quick-actions">
+                <button class="btn-gold" onclick="showSection('nieuwe-code')">✨ Nieuwe code aanmaken</button>
+                <button class="btn-secondary" onclick="showSection('klanten')">👥 Klanten beheren</button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="info-card">
-        <h3>Hoe werkt het?</h3>
-        <ol>
-          <li>Klant bestelt en betaalt via jouw gebruikelijke manier</li>
-          <li>Genereer hier een code voor het <strong>juiste product</strong> en haar e-mailadres</li>
-          <li>Kopieer het WhatsApp-bericht en stuur het naar de klant</li>
-          <li>Klant gaat naar <strong>aroussaplanner.com/mijn-account</strong></li>
-          <li>Ze voert de code in → haar document opent direct</li>
-        </ol>
-      </div>
-    </div>
-
-    <!-- ── TAB: OPZOEKEN ─────────────────────────────────────────── -->
-    <div id="tab-lookup" style="display:none;">
-      <div class="card">
-        <h2>Code opzoeken <small>per e-mailadres</small></h2>
-        <div class="form-group">
-          <label>E-mailadres</label>
-          <input type="email" id="lookupEmail" placeholder="klant@email.nl" onkeydown="if(event.key==='Enter')lookupCodes()">
+        <!-- KLANTEN -->
+        <div class="section" id="section-klanten">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Alle Klanten</div>
+              <div class="search-wrap">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="klanten-search" placeholder="Zoek op naam of e-mail..." oninput="filterKlanten(this.value)">
+              </div>
+            </div>
+            <div class="card-body" id="klanten-list">
+              <div class="loading"><div class="spinner"></div> Klanten laden...</div>
+            </div>
+          </div>
         </div>
-        <button class="btn btn--sm" onclick="lookupCodes()">Opzoeken →</button>
-        <div class="error-msg" id="lookupError"></div>
-        <div id="lookupResult" style="margin-top:16px;"></div>
-      </div>
-    </div>
 
-    <!-- ── TAB: RECENT ───────────────────────────────────────────── -->
-    <div id="tab-recent" style="display:none;">
-      <div class="card">
-        <h2>Recente codes <small>laatste 30</small></h2>
-        <div id="recentResult"><div class="loading-dots">Laden…</div></div>
-      </div>
-    </div>
+        <!-- NIEUWE CODE -->
+        <div class="section" id="section-nieuwe-code">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Nieuwe Toegangscode Aanmaken</div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Naam klant</label>
+                <input class="form-input" type="text" id="nc-naam" placeholder="Bijv. Fatima El Amrani" oninput="resetCodeResult()">
+              </div>
+              <div class="form-group">
+                <label class="form-label">E-mailadres</label>
+                <input class="form-input" type="email" id="nc-email" placeholder="klant@voorbeeld.nl" oninput="resetCodeResult()">
+              </div>
+              <div class="form-group full">
+                <label class="form-label">Product</label>
+                <select class="form-input" id="nc-product" onchange="resetCodeResult()">
+                  <option value="">— Selecteer een product —</option>
+                  <option value="bruid-checklist">Bruid Checklist</option>
+                  <option value="contract-checklist">Contract Checklist</option>
+                  <option value="rode-vlaggen-gids">Rode Vlaggen Gids</option>
+                  <option value="whatsapp-scripts">WhatsApp Scripts Bundel</option>
+                  <option value="dagvan-draaiboek">Dag-Van Draaiboek</option>
+                  <option value="ziana-gids">De Ziana Gids</option>
+                  <option value="budget-calculator">Budget Calculator</option>
+                  <option value="bruiloft-tijdlijn">Bruiloft Tijdlijn</option>
+                  <option value="fotoshootlocaties">Fotoshootlocaties NL/BE</option>
+                  <option value="offerteprijzen">Offerteprijzen Diensten NL/BE</option>
+                  <option value="complete-bundel">⭐ Complete Bundel (alle producten)</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button class="btn-gold" id="btn-genereer" onclick="genereerCode()">✨ Genereer Code</button>
+              <button class="btn-secondary" id="btn-reset-form" onclick="resetForm()" style="display:none">↩ Opnieuw</button>
+            </div>
+            <div class="code-result" id="code-result">
+              <div class="code-result-label">Toegangscode aangemaakt ✓</div>
+              <div class="code-result-code" id="cr-code"></div>
+              <div class="code-result-info" id="cr-info"></div>
+              <div class="code-result-actions">
+                <button class="btn-send-email" id="btn-email" onclick="stuurEmail()">📧 Stuur e-mail naar klant</button>
+                <button class="btn-copy" onclick="copyCode()">📋 Kopieer code</button>
+                <button class="btn-copy" onclick="toggleWhatsApp()">💬 WhatsApp bericht</button>
+              </div>
+            </div>
+            <div class="whatsapp-box" id="whatsapp-box">
+              <div class="whatsapp-label">💬 WhatsApp Template</div>
+              <div class="whatsapp-text" id="whatsapp-text"></div>
+              <br>
+              <button class="btn-copy" style="background:#25D366;border-color:#25D366" onclick="copyWhatsApp()">Kopieer WhatsApp bericht</button>
+            </div>
+          </div>
+        </div>
 
-    <button class="btn btn--ghost" onclick="logout()">Uitloggen</button>
+        <!-- ACTIVITEIT -->
+        <div class="section" id="section-activiteit">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">Recente Activiteit</div>
+              <button class="btn-secondary" style="padding:7px 14px;font-size:12.5px" onclick="laadAllCodes()">↻ Vernieuwen</button>
+            </div>
+            <div id="activiteit-content">
+              <div class="loading"><div class="spinner"></div> Activiteit laden...</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<div id="modal-overlay">
+  <div class="modal">
+    <div class="modal-icon" id="modal-icon">⚠️</div>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-text" id="modal-text"></div>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" onclick="closeModal()">Annuleren</button>
+      <button class="btn-modal-confirm" onclick="confirmModal()">Verwijderen</button>
+    </div>
   </div>
 </div>
 
 <script>
-var ADMIN_SECRET_KEY = 'aroussa_admin_session';
-var currentCode    = '';
-var currentNaam    = '';
-var currentEmail   = '';
-var currentProduct = '';
-var recentLoaded   = false;
+const API_BASE = '/.netlify/functions';
 
-// ── PRODUCT NAMEN MAP ─────────────────────────────────────────────────────
-var PRODUCT_NAMEN = {
+const PRODUCT_NAMEN = {
   'bruid-checklist':    'Bruid Checklist',
   'contract-checklist': 'Contract Checklist',
   'rode-vlaggen-gids':  'Rode Vlaggen Gids',
@@ -227,325 +420,413 @@ var PRODUCT_NAMEN = {
   'ziana-gids':         'De Ziana Gids',
   'budget-calculator':  'Budget Calculator',
   'bruiloft-tijdlijn':  'Bruiloft Tijdlijn',
-  'complete-bundel':    'Complete Bundel (alle 8 gidsen)',
+  'fotoshootlocaties':  'Fotoshootlocaties NL/BE',
+  'offerteprijzen':     'Offerteprijzen Diensten NL/BE',
+  'complete-bundel':    'Complete Bundel',
 };
 
-// ── LOCK / UNLOCK ─────────────────────────────────────────────────────────
-async function unlock() {
-  var pass = document.getElementById('adminPass').value.trim();
-  if (!pass) return;
-  var btn = document.getElementById('lockBtn');
-  var errEl = document.getElementById('lockError');
-  btn.disabled = true;
-  btn.textContent = 'Controleren…';
-  errEl.classList.remove('show');
+let adminSecret = null;
+let allCodes = [];
+let allCustomers = [];
+let currentCode = null;
+let pendingAction = null;
 
-  try {
-    var resp = await fetch('/.netlify/functions/check-admin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminSecret: pass })
-    });
-    if (resp.status === 401) { errEl.classList.add('show'); return; }
-    if (!resp.ok) { errEl.textContent = 'Verbindingsfout — probeer opnieuw.'; errEl.classList.add('show'); return; }
-    sessionStorage.setItem(ADMIN_SECRET_KEY, pass);
-    showPanel(pass);
-  } catch(e) {
-    errEl.textContent = 'Verbindingsfout — controleer je internet.';
-    errEl.classList.add('show');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Inloggen';
-  }
-}
-
-function showPanel(pass) {
-  document.getElementById('lock').style.display = 'none';
-  document.getElementById('panel').style.display = 'block';
-  window._adminPass = pass;
-}
-
-function logout() {
-  sessionStorage.removeItem(ADMIN_SECRET_KEY);
-  window._adminPass = '';
-  document.getElementById('lock').style.display = 'block';
-  document.getElementById('panel').style.display = 'none';
-  document.getElementById('adminPass').value = '';
-  document.getElementById('lockError').classList.remove('show');
-  document.getElementById('lockError').textContent = 'Verkeerd wachtwoord — probeer opnieuw.';
-  recentLoaded = false;
-}
-
-// Auto-restore session
-(function() {
-  var stored = sessionStorage.getItem(ADMIN_SECRET_KEY);
-  if (stored) showPanel(stored);
-})();
-
-// ── TABS ──────────────────────────────────────────────────────────────────
-function switchTab(name) {
-  ['gen','lookup','recent'].forEach(function(n) {
-    document.getElementById('tab-' + n).style.display = (n === name) ? 'block' : 'none';
-    document.getElementById('tab-btn-' + n).classList.toggle('active', n === name);
+// ── AUTH ──────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = sessionStorage.getItem('aroussa_admin_session');
+  if (saved) { adminSecret = saved; initApp(); }
+  document.getElementById('lock-password').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doLogin();
   });
-  if (name === 'recent' && !recentLoaded) { loadRecent(); }
-}
+});
 
-// ── CODE GENEREREN ────────────────────────────────────────────────────────
-async function generateCode() {
-  var email   = document.getElementById('klantEmail').value.trim();
-  var naam    = document.getElementById('klantNaam').value.trim();
-  var product = document.getElementById('klantProduct').value;
-  var errEl   = document.getElementById('genError');
-  var btn     = document.getElementById('genBtn');
-
-  errEl.classList.remove('show');
-  document.getElementById('codeResult').classList.remove('show');
-
-  if (!email || !naam) { showError('genError', 'Vul e-mail en naam in.'); return; }
-  if (!product)        { showError('genError', 'Kies een product.'); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Aanmaken…';
-
+async function doLogin() {
+  const pw = document.getElementById('lock-password').value.trim();
+  if (!pw) return;
+  const btn = document.getElementById('lock-btn');
+  btn.disabled = true; btn.textContent = 'Bezig...';
   try {
-    var resp = await fetch('/.netlify/functions/generate-code', {
+    const res = await fetch(`${API_BASE}/check-admin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminSecret: window._adminPass, email, naam, product })
+      body: JSON.stringify({ adminSecret: pw }),
     });
-    var data = await resp.json();
-
-    if (!resp.ok || !data.success) {
-      if (resp.status === 401) { logout(); return; }
-      showError('genError', data.error || 'Er is iets misgegaan.');
-      return;
+    const data = await res.json();
+    if (data.success) {
+      adminSecret = pw;
+      sessionStorage.setItem('aroussa_admin_session', pw);
+      document.getElementById('lock-screen').style.display = 'none';
+      initApp();
+    } else {
+      document.getElementById('lock-error').style.display = 'block';
     }
+  } catch {
+    const err = document.getElementById('lock-error');
+    err.style.display = 'block';
+    err.textContent = 'Verbindingsfout. Probeer opnieuw.';
+  }
+  btn.disabled = false; btn.textContent = 'Inloggen';
+}
 
-    currentCode    = data.code;
-    currentNaam    = data.naam;
-    currentEmail   = data.email;
-    currentProduct = product;
+function doLogout() {
+  sessionStorage.removeItem('aroussa_admin_session');
+  location.reload();
+}
 
-    var productNaam = PRODUCT_NAMEN[product] || product;
-    document.getElementById('codeDisplay').textContent = data.code;
-    document.getElementById('codeInfo').innerHTML =
-      'Voor: <strong style="color:var(--ivory);">' + data.naam + '</strong><br>' +
-      'E-mail: ' + data.email + '<br>' +
-      'Product: <strong style="color:var(--gold);">' + productNaam + '</strong>';
+async function initApp() {
+  document.getElementById('lock-screen').style.display = 'none';
+  document.getElementById('admin-app').style.display = 'block';
+  await laadAllCodes();
+}
 
-    document.getElementById('waTemplate').textContent = buildWAMessage(data.naam, data.code, data.email, product, productNaam);
-    document.getElementById('copyCodeBtn').textContent = 'Kopieer code';
-    document.getElementById('copyCodeBtn').classList.remove('copied');
-    document.getElementById('emailBtn').textContent = '✉ Verstuur toegang per email';
-    document.getElementById('emailBtn').disabled = false;
-    document.getElementById('emailStatus').style.display = 'none';
-    document.getElementById('codeResult').classList.add('show');
-
-    // Reset form
-    document.getElementById('klantEmail').value = '';
-    document.getElementById('klantNaam').value  = '';
-    document.getElementById('klantProduct').value = '';
-
-    // Invalidate recent cache
-    recentLoaded = false;
-
-  } catch(err) {
-    showError('genError', 'Verbindingsfout. Controleer je internet en probeer opnieuw.');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Code genereren →';
+// ── DATA ──────────────────────────────────────────────────────────────────
+async function laadAllCodes() {
+  try {
+    const res = await fetch(`${API_BASE}/admin-codes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret, action: 'all' }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      allCodes = data.codes || [];
+      allCustomers = groupByCustomer(allCodes);
+      updateStats();
+      renderDashboard();
+      renderActiviteit();
+      if (document.getElementById('section-klanten').classList.contains('active')) {
+        renderKlanten(allCustomers);
+      }
+    }
+  } catch {
+    showToast('Fout bij laden. Probeer opnieuw.', 'error');
   }
 }
 
-function buildWAMessage(naam, code, email, product, productNaam) {
-  var voornaam = naam.split(' ')[0];
-  if (product === 'complete-bundel') {
-    return (
-      'Hoi ' + voornaam + '! 🌹\n\n' +
-      'Jouw Complete Bundel staat klaar — alle 8 Aroussa gidsen zijn voor jou!\n\n' +
-      'Hier is jouw persoonlijke toegangscode:\n\n' +
-      '📌 ' + code + '\n\n' +
-      'Zo open je jouw bundel:\n' +
-      '1. Ga naar aroussaplanner.com/mijn-account\n' +
-      '2. Maak een gratis account aan met dit e-mailadres:\n   ' + email + '\n' +
-      '3. Voer de code in\n' +
-      '4. Alle 8 gidsen staan direct voor je klaar ✨\n\n' +
-      'De code is persoonlijk en gekoppeld aan jouw e-mailadres.\n\n' +
-      'Veel liefde,\nAroussa 💛'
-    );
-  }
-  return (
-    'Hoi ' + voornaam + '! 🌹\n\n' +
-    'Jouw ' + productNaam + ' staat klaar!\n\n' +
-    'Hier is jouw persoonlijke toegangscode:\n\n' +
-    '📌 ' + code + '\n\n' +
-    'Zo open je jouw document:\n' +
-    '1. Ga naar aroussaplanner.com/mijn-account\n' +
-    '2. Maak een gratis account aan met dit e-mailadres:\n   ' + email + '\n' +
-    '3. Voer de code in\n' +
-    '4. Jouw ' + productNaam + ' opent direct ✨\n\n' +
-    'De code is persoonlijk en gekoppeld aan jouw e-mailadres.\n\n' +
-    'Veel liefde,\nAroussa 💛'
+function groupByCustomer(codes) {
+  const map = {};
+  codes.forEach(c => {
+    if (!map[c.email]) map[c.email] = { email: c.email, naam: c.naam, codes: [], _latest: 0 };
+    const t = new Date(c.created_at).getTime();
+    if (t > map[c.email]._latest) { map[c.email].naam = c.naam; map[c.email]._latest = t; }
+    map[c.email].codes.push(c);
+  });
+  return Object.values(map).sort((a, b) => b._latest - a._latest);
+}
+
+function updateStats() {
+  document.getElementById('stat-klanten').textContent = allCustomers.length;
+  document.getElementById('stat-actief').textContent = allCodes.filter(c => !c.used).length;
+  document.getElementById('stat-gebruikt').textContent = allCodes.filter(c => c.used).length;
+  document.getElementById('stat-totaal').textContent = allCodes.length;
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────────────────────
+function renderDashboard() {
+  const el = document.getElementById('dashboard-recent');
+  const recent = allCustomers.slice(0, 6);
+  if (!recent.length) { el.innerHTML = '<div class="no-results">Nog geen klanten</div>'; return; }
+  let html = '<table class="activity-table"><thead><tr><th>Klant</th><th>E-mail</th><th>Producten</th><th>Status</th></tr></thead><tbody>';
+  recent.forEach(k => {
+    const actief = k.codes.filter(c => !c.used).length;
+    html += `<tr>
+      <td><strong>${esc(k.naam)}</strong></td>
+      <td style="color:var(--text-2);font-size:12.5px">${esc(k.email)}</td>
+      <td><span class="badge badge-count">${k.codes.length}</span></td>
+      <td>${actief > 0 ? '<span class="badge badge-active">✓ Actief</span>' : '<span class="badge badge-used">Gebruikt</span>'}</td>
+    </tr>`;
+  });
+  el.innerHTML = html + '</tbody></table>';
+}
+
+// ── KLANTEN ───────────────────────────────────────────────────────────────
+function renderKlanten(customers) {
+  const el = document.getElementById('klanten-list');
+  if (!customers.length) { el.innerHTML = '<div class="no-results">Geen klanten gevonden</div>'; return; }
+  let html = '<div class="customer-list" style="padding:16px">';
+  customers.forEach((k, idx) => {
+    const initials = (k.naam || k.email)[0].toUpperCase();
+    const actief = k.codes.filter(c => !c.used).length;
+    html += `
+    <div class="customer-card" id="kc-${idx}">
+      <div class="customer-header" onclick="toggleCustomer(${idx})">
+        <div class="customer-avatar">${esc(initials)}</div>
+        <div class="customer-info">
+          <div class="customer-name">${esc(k.naam)}</div>
+          <div class="customer-email">${esc(k.email)}</div>
+        </div>
+        <div class="customer-meta">
+          <span class="badge badge-count">${k.codes.length} ${k.codes.length === 1 ? 'product' : 'producten'}</span>
+          ${actief > 0 ? '<span class="badge badge-active">✓ Actief</span>' : '<span class="badge badge-used">Alles gebruikt</span>'}
+          <span class="chevron">▶</span>
+        </div>
+      </div>
+      <div class="customer-details">
+        <table class="codes-table">
+          <thead><tr><th>Code</th><th>Product</th><th>Status</th><th>Aangemaakt</th><th></th></tr></thead>
+          <tbody>
+            ${k.codes.map(c => `<tr>
+              <td><span class="code-mono">${esc(c.code)}</span></td>
+              <td><span class="product-badge">${esc(PRODUCT_NAMEN[c.product] || c.product)}</span></td>
+              <td>${c.used ? '<span class="badge badge-used">Gebruikt</span>' : '<span class="badge badge-active">Actief</span>'}</td>
+              <td style="color:var(--text-2);font-size:12px">${formatDate(c.created_at)}</td>
+              <td><button class="btn-revoke" onclick="revokeCode('${esc(c.code)}', '${esc(k.naam)}')">Intrekken</button></td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+          <button class="btn-revoke-all" onclick="revokeAllForCustomer('${esc(k.email)}', '${esc(k.naam)}')">
+            🗑 Klant er uit gooien (alles intrekken)
+          </button>
+          <button class="btn-secondary" style="padding:8px 16px;font-size:13px" onclick="prefillNieuweCode('${esc(k.naam)}', '${esc(k.email)}')">
+            + Nieuw product toevoegen
+          </button>
+        </div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html + '</div>';
+}
+
+function toggleCustomer(idx) {
+  document.getElementById(`kc-${idx}`).classList.toggle('open');
+}
+
+function filterKlanten(q) {
+  const term = q.toLowerCase().trim();
+  renderKlanten(term ? allCustomers.filter(k => k.naam.toLowerCase().includes(term) || k.email.toLowerCase().includes(term)) : allCustomers);
+}
+
+function prefillNieuweCode(naam, email) {
+  showSection('nieuwe-code');
+  document.getElementById('nc-naam').value = naam;
+  document.getElementById('nc-email').value = email;
+  document.getElementById('nc-product').focus();
+}
+
+// ── REVOKE ─────────────────────────────────────────────────────────────────
+function revokeCode(code, naam) {
+  openModal('⚠️', 'Code intrekken',
+    `Wil je de toegangscode van <strong>${esc(naam)}</strong> intrekken?<br><br><code style="background:#f5f5f5;padding:4px 8px;border-radius:4px;font-size:13px">${esc(code)}</code><br><br>De klant kan daarna niet meer inloggen met deze code.`,
+    async () => { await doRevoke(code); }
   );
 }
 
-// ── CODE OPZOEKEN ─────────────────────────────────────────────────────────
-async function lookupCodes() {
-  var email = document.getElementById('lookupEmail').value.trim();
-  var errEl = document.getElementById('lookupError');
-  var resultEl = document.getElementById('lookupResult');
+function revokeAllForCustomer(email, naam) {
+  openModal('🗑', 'Klant volledig verwijderen',
+    `Wil je <strong>alle</strong> toegangscodes van <strong>${esc(naam)}</strong> intrekken?<br><br>${esc(email)}<br><br>De klant verliest direct alle toegang.`,
+    async () => { await doRevokeAll(email); }
+  );
+}
 
-  errEl.classList.remove('show');
-  if (!email) { showError('lookupError', 'Voer een e-mailadres in.'); return; }
-
-  resultEl.innerHTML = '<div class="loading-dots">Zoeken…</div>';
-
+async function doRevoke(code) {
   try {
-    var resp = await fetch('/.netlify/functions/admin-codes', {
+    const res = await fetch(`${API_BASE}/admin-codes`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminSecret: window._adminPass, action: 'lookup', email })
+      body: JSON.stringify({ adminSecret, action: 'revoke', code }),
     });
-    var data = await resp.json();
-    if (!resp.ok) { if (resp.status === 401) { logout(); return; } showError('lookupError', data.error || 'Fout.'); resultEl.innerHTML = ''; return; }
-    resultEl.innerHTML = renderCodesTable(data.codes, email);
-  } catch(e) {
-    showError('lookupError', 'Verbindingsfout.');
-    resultEl.innerHTML = '';
-  }
-}
-
-// ── RECENT LADEN ──────────────────────────────────────────────────────────
-async function loadRecent() {
-  var el = document.getElementById('recentResult');
-  el.innerHTML = '<div class="loading-dots">Laden…</div>';
-  try {
-    var resp = await fetch('/.netlify/functions/admin-codes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ adminSecret: window._adminPass, action: 'list' })
-    });
-    var data = await resp.json();
-    if (!resp.ok) { if (resp.status === 401) { logout(); return; } el.innerHTML = '<p class="empty-state">Kon codes niet laden.</p>'; return; }
-    el.innerHTML = renderCodesTable(data.codes);
-    recentLoaded = true;
-  } catch(e) {
-    el.innerHTML = '<p class="empty-state">Verbindingsfout.</p>';
-  }
-}
-
-function renderCodesTable(codes, highlightEmail) {
-  if (!codes || codes.length === 0) {
-    return '<p class="empty-state">Geen codes gevonden.</p>';
-  }
-  var html = '<table class="codes-table"><thead><tr>';
-  html += '<th>Code</th><th>Naam</th><th>E-mail</th><th>Product</th><th>Status</th><th>Datum</th>';
-  html += '</tr></thead><tbody>';
-  codes.forEach(function(row) {
-    var date = row.created_at ? new Date(row.created_at).toLocaleDateString('nl-NL', {day:'2-digit',month:'2-digit',year:'2-digit'}) : '—';
-    var productNaam = PRODUCT_NAMEN[row.product] || row.product || '—';
-    var badge = row.used
-      ? '<span class="badge badge--used">✓ Gebruikt</span>'
-      : '<span class="badge badge--unused">Beschikbaar</span>';
-    var emailStyle = (highlightEmail && row.email === highlightEmail.toLowerCase().trim()) ? 'color:var(--ivory);font-weight:500;' : '';
-    html += '<tr>';
-    html += '<td><span class="code-mono">' + (row.code || '—') + '</span></td>';
-    html += '<td>' + (row.naam || '—') + '</td>';
-    html += '<td style="' + emailStyle + '">' + (row.email || '—') + '</td>';
-    html += '<td style="font-size:11px;color:var(--warm);">' + productNaam + '</td>';
-    html += '<td>' + badge + '</td>';
-    html += '<td style="font-size:11px;color:var(--warm);">' + date + '</td>';
-    html += '</tr>';
-  });
-  html += '</tbody></table>';
-  return html;
-}
-
-// ── COPY ──────────────────────────────────────────────────────────────────
-function copyCode() {
-  navigator.clipboard.writeText(currentCode).then(function() {
-    var btn = document.getElementById('copyCodeBtn');
-    btn.textContent = '✓ Gekopieerd!';
-    btn.classList.add('copied');
-    setTimeout(function() { btn.textContent = 'Kopieer code'; btn.classList.remove('copied'); }, 2000);
-  });
-}
-
-function copyWA() {
-  var text = document.getElementById('waTemplate').textContent;
-  navigator.clipboard.writeText(text).then(function(e) {
-    var el = event.target;
-    var orig = el.textContent;
-    el.textContent = '✓ Gekopieerd!';
-    setTimeout(function() { el.textContent = orig; }, 2000);
-  });
-}
-
-// ── EMAIL VERSTUREN ───────────────────────────────────────────────────────
-async function sendAccessEmail() {
-  var btn      = document.getElementById('emailBtn');
-  var statusEl = document.getElementById('emailStatus');
-
-  if (!currentCode || !currentEmail || !currentProduct) {
-    showEmailStatus('error', 'Genereer eerst een code.');
-    return;
-  }
-
-  btn.disabled    = true;
-  btn.textContent = 'Versturen…';
-  statusEl.style.display = 'none';
-
-  try {
-    var resp = await fetch('/.netlify/functions/send-access', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        adminSecret: window._adminPass,
-        email:   currentEmail,
-        naam:    currentNaam,
-        product: currentProduct,
-        code:    currentCode,
-      })
-    });
-    var data = await resp.json();
-
-    if (!resp.ok || !data.success) {
-      if (resp.status === 401) { logout(); return; }
-      showEmailStatus('error', data.error || 'Email kon niet worden verstuurd.');
-      btn.disabled    = false;
-      btn.textContent = '✉ Verstuur toegang per email';
+    const data = await res.json();
+    if (data.success) {
+      showToast('✓ Code ingetrokken', 'success');
+      await laadAllCodes();
+      renderKlanten(allCustomers);
     } else {
-      showEmailStatus('ok', '✓ Email verstuurd naar ' + currentEmail);
-      btn.textContent = '✓ Verstuurd';
-      // Don't re-enable — prevent double sends
+      showToast(data.error || 'Fout bij intrekken', 'error');
     }
+  } catch { showToast('Verbindingsfout', 'error'); }
+}
 
-  } catch(e) {
-    showEmailStatus('error', 'Verbindingsfout. Probeer opnieuw.');
-    btn.disabled    = false;
-    btn.textContent = '✉ Verstuur toegang per email';
+async function doRevokeAll(email) {
+  try {
+    const res = await fetch(`${API_BASE}/admin-codes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret, action: 'revoke-all', email }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✓ Klant volledig verwijderd', 'success');
+      await laadAllCodes();
+      renderKlanten(allCustomers);
+    } else {
+      showToast(data.error || 'Fout bij verwijderen', 'error');
+    }
+  } catch { showToast('Verbindingsfout', 'error'); }
+}
+
+// ── CODE GENERATION ────────────────────────────────────────────────────────
+async function genereerCode() {
+  const naam = document.getElementById('nc-naam').value.trim();
+  const email = document.getElementById('nc-email').value.trim();
+  const product = document.getElementById('nc-product').value;
+  if (!naam || !email || !product) { showToast('Vul alle velden in', 'error'); return; }
+  const btn = document.getElementById('btn-genereer');
+  btn.disabled = true; btn.textContent = 'Bezig...';
+  try {
+    const res = await fetch(`${API_BASE}/generate-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret, email, naam, product }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      currentCode = data;
+      showCodeResult(data);
+      document.getElementById('btn-reset-form').style.display = 'inline-block';
+      laadAllCodes();
+    } else {
+      showToast(data.error || 'Aanmaken mislukt', 'error');
+    }
+  } catch { showToast('Verbindingsfout', 'error'); }
+  btn.disabled = false; btn.textContent = '✨ Genereer Code';
+}
+
+function showCodeResult(data) {
+  const pnaam = PRODUCT_NAMEN[data.product] || data.product;
+  document.getElementById('cr-code').textContent = data.code;
+  document.getElementById('cr-info').textContent =
+    `Klant: ${data.naam}  •  ${data.email}\nProduct: ${pnaam}\nLink: https://aroussaplanner.com/mijn-account?code=${encodeURIComponent(data.code)}`;
+  document.getElementById('code-result').classList.add('show');
+  const voornaam = data.naam.split(' ')[0];
+  document.getElementById('whatsapp-text').textContent =
+    `Hoi ${voornaam} 🌸\n\nJe bestelling is klaar! Hier is je persoonlijke toegangscode:\n\n*${data.code}*\n\nActiveer via: https://aroussaplanner.com/mijn-account?code=${encodeURIComponent(data.code)}\n\nOf ga naar aroussaplanner.com/mijn-account en vul de code handmatig in.\n\nVeel succes met je bruiloftsplanning! 💖`;
+}
+
+function resetCodeResult() {
+  document.getElementById('code-result').classList.remove('show');
+  document.getElementById('whatsapp-box').classList.remove('show');
+}
+
+function resetForm() {
+  ['nc-naam', 'nc-email'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('nc-product').value = '';
+  document.getElementById('btn-reset-form').style.display = 'none';
+  resetCodeResult();
+  currentCode = null;
+}
+
+async function stuurEmail() {
+  if (!currentCode) return;
+  const btn = document.getElementById('btn-email');
+  btn.disabled = true; btn.textContent = '📧 Versturen...';
+  try {
+    const res = await fetch(`${API_BASE}/send-access`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ adminSecret, email: currentCode.email, naam: currentCode.naam, code: currentCode.code, product: currentCode.product }),
+    });
+    const data = await res.json();
+    if (data.success) {
+      showToast('✓ E-mail verstuurd!', 'success');
+      btn.textContent = '✓ Verstuurd!';
+      btn.style.background = 'var(--success)';
+    } else {
+      showToast(data.error || 'Versturen mislukt', 'error');
+      btn.disabled = false; btn.textContent = '📧 Stuur e-mail naar klant';
+    }
+  } catch {
+    showToast('Verbindingsfout', 'error');
+    btn.disabled = false; btn.textContent = '📧 Stuur e-mail naar klant';
   }
 }
 
-function showEmailStatus(type, msg) {
-  var el = document.getElementById('emailStatus');
+function copyCode() {
+  if (!currentCode) return;
+  navigator.clipboard.writeText(currentCode.code).then(() => showToast('Code gekopieerd!', 'info'));
+}
+
+function toggleWhatsApp() {
+  document.getElementById('whatsapp-box').classList.toggle('show');
+}
+
+function copyWhatsApp() {
+  const text = document.getElementById('whatsapp-text').textContent;
+  navigator.clipboard.writeText(text).then(() => showToast('WhatsApp bericht gekopieerd!', 'info'));
+}
+
+// ── ACTIVITEIT ─────────────────────────────────────────────────────────────
+function renderActiviteit() {
+  const el = document.getElementById('activiteit-content');
+  if (!allCodes.length) { el.innerHTML = '<div class="no-results">Nog geen activiteit</div>'; return; }
+  let html = `<table class="activity-table">
+    <thead><tr><th>Code</th><th>Klant</th><th>E-mail</th><th>Product</th><th>Status</th><th>Datum</th><th></th></tr></thead><tbody>`;
+  allCodes.slice(0, 100).forEach(c => {
+    html += `<tr>
+      <td><span class="code-mono">${esc(c.code)}</span></td>
+      <td>${esc(c.naam)}</td>
+      <td style="color:var(--text-2);font-size:12px">${esc(c.email)}</td>
+      <td><span class="product-badge" style="font-size:11px">${esc(PRODUCT_NAMEN[c.product] || c.product)}</span></td>
+      <td>${c.used ? '<span class="badge badge-used">Gebruikt</span>' : '<span class="badge badge-active">Actief</span>'}</td>
+      <td style="color:var(--text-2);font-size:12px">${formatDate(c.created_at)}</td>
+      <td><button class="btn-revoke" onclick="revokeCode('${esc(c.code)}', '${esc(c.naam)}')">Intrek</button></td>
+    </tr>`;
+  });
+  el.innerHTML = html + '</tbody></table>';
+}
+
+// ── NAVIGATION ─────────────────────────────────────────────────────────────
+const TITLES = {
+  'dashboard':    ['Dashboard', 'Overzicht van je klanten en activiteit'],
+  'klanten':      ['Klantenbeheer', 'Beheer toegang per klant'],
+  'nieuwe-code':  ['Nieuwe Code', 'Genereer een toegangscode voor een klant'],
+  'activiteit':   ['Activiteit', 'Alle aangemaakt codes'],
+};
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`section-${id}`).classList.add('active');
+  document.getElementById(`nav-${id}`).classList.add('active');
+  const [t, s] = TITLES[id] || [id, ''];
+  document.getElementById('topbar-title').textContent = t;
+  document.getElementById('topbar-subtitle').textContent = s;
+  if (id === 'klanten') renderKlanten(allCustomers);
+  if (id === 'activiteit') renderActiviteit();
+  if (id === 'dashboard') renderDashboard();
+}
+
+// ── MODAL ──────────────────────────────────────────────────────────────────
+function openModal(icon, title, html, onConfirm) {
+  document.getElementById('modal-icon').textContent = icon;
+  document.getElementById('modal-title').textContent = title;
+  document.getElementById('modal-text').innerHTML = html;
+  pendingAction = onConfirm;
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+  pendingAction = null;
+}
+
+async function confirmModal() {
+  const a = pendingAction; closeModal();
+  if (a) await a();
+}
+
+document.getElementById('modal-overlay').addEventListener('click', e => {
+  if (e.target.id === 'modal-overlay') closeModal();
+});
+
+// ── TOAST ──────────────────────────────────────────────────────────────────
+let _tt;
+function showToast(msg, type = 'info') {
+  const el = document.getElementById('toast');
   el.textContent = msg;
-  if (type === 'ok') {
-    el.style.color      = 'var(--green)';
-    el.style.background = 'rgba(76,175,110,0.08)';
-    el.style.border     = '1px solid rgba(76,175,110,0.2)';
-  } else {
-    el.style.color      = 'var(--red)';
-    el.style.background = 'rgba(196,98,91,0.08)';
-    el.style.border     = '1px solid rgba(196,98,91,0.15)';
-  }
-  el.style.display = 'block';
+  el.className = `show ${type}`;
+  clearTimeout(_tt);
+  _tt = setTimeout(() => el.classList.remove('show'), 3500);
 }
 
-function showError(id, msg) {
-  var el = document.getElementById(id);
-  if (el) { el.textContent = msg; el.classList.add('show'); }
+// ── UTILS ──────────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+function formatDate(iso) {
+  if (!iso) return '—';
+  return new Date(iso).toLocaleDateString('nl-NL', { day: '2-digit', month: 'short', year: 'numeric' });
 }
 </script>
 </body>
