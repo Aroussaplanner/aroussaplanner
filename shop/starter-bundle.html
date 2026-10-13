@@ -61,21 +61,27 @@ a{text-decoration:none;color:inherit;}
 .trust-item{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm);display:flex;align-items:center;gap:6px;}
 .trust-item::before{content:'✓';color:var(--gold);}
 
-/* Right: checkout box */
+/* Right: order form */
 .order-box{background:var(--dark);padding:40px 36px;position:sticky;top:calc(var(--nav-h) + 24px);}
 .order-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:var(--ivory);margin-bottom:6px;}
 .order-sub{font-size:11px;color:rgba(247,242,234,.45);margin-bottom:28px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.f-input{width:100%;padding:13px 16px;border:1px solid rgba(196,168,130,.2);background:rgba(196,168,130,.06);color:var(--ivory);font-family:'Montserrat',sans-serif;font-size:12px;outline:none;transition:border-color .2s;}
+.f-input::placeholder{color:rgba(247,242,234,.3);}
+.f-input:focus{border-color:rgba(196,168,130,.5);}
+.f-input.full{width:100%;margin-bottom:10px;display:block;}
+.btn-submit{width:100%;padding:18px;background:var(--gold);color:var(--dark);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;border:none;cursor:pointer;margin-top:10px;transition:background .3s;}
+.btn-submit:hover{background:var(--bronze);color:var(--ivory);}
+.form-note{font-size:10px;color:rgba(247,242,234,.3);margin-top:12px;line-height:1.6;text-align:center;}
 
-.order-price-row{background:rgba(196,168,130,.08);border:1px solid rgba(196,168,130,.15);padding:14px 16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;}
+.success-box{display:none;text-align:center;padding:20px 0;}
+.success-icon{font-size:28px;color:var(--gold);margin-bottom:12px;}
+.success-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--ivory);margin-bottom:10px;}
+.success-text{font-size:12px;color:rgba(247,242,234,.55);line-height:1.7;}
+
+.order-price-row{background:rgba(196,168,130,.08);border:1px solid rgba(196,168,130,.15);padding:14px 16px;margin-bottom:20px;display:flex;justify-content:space-between;align-items:center;}
 .opr-label{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(247,242,234,.5);}
 .opr-price{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);}
-
-.btn-checkout{display:block;width:100%;padding:18px 24px;background:var(--gold);color:var(--dark);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;text-align:center;text-decoration:none;cursor:pointer;transition:background .3s;border:none;}
-.btn-checkout:hover{background:#d4bc96;color:var(--dark);}
-
-.delivery-perks{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
-.dp-item{font-size:11px;color:rgba(247,242,234,.55);display:flex;align-items:center;gap:8px;}
-.dp-item::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
 
 /* Also-like section */
 .also-like{margin-top:80px;padding-top:64px;border-top:1px solid rgba(45,37,32,.1);}
@@ -175,42 +181,47 @@ a{text-decoration:none;color:inherit;}
 
         <div class="pricing-row">
           <span class="was">Normaal €69</span>
-          <span class="save-badge">Jij bespaart €20</span>
+          <span class="save-badge">Jij bespaart €10</span>
         </div>
-        <div class="price-big"><sup>€</sup>49</div>
+        <div class="price-big"><sup>€</sup>59</div>
         <p class="price-note">Eenmalig · Direct te downloaden na betaling</p>
 
         <div class="trust-row">
-          <span class="trust-item">iDEAL, creditcard & meer</span>
-          <span class="trust-item">Directe download</span>
+          <span class="trust-item">Betalen via Tikkie (iDEAL)</span>
+          <span class="trust-item">7 dagen retourrecht</span>
           <span class="trust-item">Eenmalige aankoop</span>
         </div>
       </div>
 
       <!-- RIGHT: order form -->
       <div class="order-box">
-        <h2 class="order-title">Starter Bundle</h2>
-        <p class="order-sub">Betaal direct — je download staat klaar zodra de betaling is verwerkt. Automatische factuur per e-mail.</p>
+        <h2 class="order-title">Bestel de Starter Bundle</h2>
+        <p class="order-sub">Vul je gegevens in. Je ontvangt een betaallink via Tikkie — na betaling sturen we je de gidsen per e-mail.</p>
 
         <div class="order-price-row">
           <span class="opr-label">Totaal te betalen</span>
-          <span class="opr-price">€49</span>
+          <span class="opr-price">€59</span>
         </div>
 
-        <!-- SETUP: vervang de href hieronder door je Lemon Squeezy checkout URL -->
-        <!-- Hoe: lemon squeezy.com → maak product "Starter Bundle €49" → kopieer checkout link -->
-        <a href="https://aroussa.lemonsqueezy.com/checkout/buy/STARTER-BUNDLE-ID"
-           class="btn-checkout lemonsqueezy-button"
-           onclick="gtag('event','bundle_aanvraag',{bundle:'starter',waarde:49})">
-          Direct kopen — €49 →
-        </a>
+        <form id="bundleForm" name="bundle-starter" method="POST" data-netlify="true" netlify-honeypot="bot-field" onsubmit="submitBundle(event)" style="display:block;">
+          <input type="hidden" name="form-name" value="bundle-starter">
+          <input type="hidden" name="_to" value="aroussaplanner@gmail.com">
+          <input type="hidden" name="bundle" value="Starter Bundle — €59 (Rode Vlaggen Gids + WhatsApp Scripts + Contract Checklist)">
+          <p style="display:none"><input name="bot-field"></p>
+          <div class="form-row">
+            <input class="f-input" type="text" name="voornaam" placeholder="Voornaam" required>
+            <input class="f-input" type="text" name="achternaam" placeholder="Achternaam" required>
+          </div>
+          <input class="f-input full" type="tel" name="telefoon" placeholder="Telefoonnummer" required>
+          <input class="f-input full" type="email" name="email" placeholder="E-mailadres" required>
+          <button type="submit" class="btn-submit">Ontvang betaallink →</button>
+          <p class="form-note">Je ontvangt een Tikkie per e-mail. Na betaling sturen we de 3 PDF's direct naar je inbox.</p>
+        </form>
 
-        <div class="delivery-perks">
-          <div class="dp-item">iDEAL, creditcard, Bancontact & meer</div>
-          <div class="dp-item">Directe download na betaling</div>
-          <div class="dp-item">Automatische factuur per e-mail</div>
-          <div class="dp-item">7 dagen retourrecht</div>
-          <div class="dp-item">Eenmalige aankoop — geen abonnement</div>
+        <div class="success-box" id="successBox">
+          <div class="success-icon">◈</div>
+          <div class="success-title">Aanvraag ontvangen!</div>
+          <p class="success-text">Je ontvangt snel een betaallink via Tikkie per e-mail. Vragen? WhatsApp ons via <strong>+31 6 13 11 52 86</strong>.</p>
         </div>
       </div>
 
@@ -228,8 +239,8 @@ a{text-decoration:none;color:inherit;}
         </div>
         <div class="uc-price">
           <div class="uc-was">Normaal €306</div>
-          <div class="uc-amount">€199</div>
-          <div class="uc-note">Jij bespaart €107</div>
+          <div class="uc-amount">€264</div>
+          <div class="uc-note">Jij bespaart €42</div>
         </div>
       </div>
     </div>
@@ -253,7 +264,22 @@ a{text-decoration:none;color:inherit;}
   <p class="foot-copy">© 2025 Aroussa Planner · Alle rechten voorbehouden</p>
 </footer>
 
-<script src="https://app.lemonsqueezy.com/js/lemon.js" defer></script>
+<script>
+function submitBundle(e) {
+  e.preventDefault();
+  var data = new FormData(e.target);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  }).catch(function(){});
+  document.getElementById('bundleForm').style.display = 'none';
+  document.getElementById('successBox').style.display = 'block';
+  if (window.gtag) {
+    gtag('event', 'bundle_aanvraag', {bundle: 'starter', waarde: 59});
+  }
+}
+</script>
 
 </body>
 </html>
