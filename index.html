@@ -507,6 +507,15 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
 .nl-input{padding:13px 16px;border:1px solid rgba(196,168,130,0.35);background:transparent;font-family:'Montserrat',sans-serif;font-size:12px;color:var(--dark);outline:none;transition:border-color 0.2s;width:100%;}
 .nl-input:focus{border-color:var(--gold);}
 @media(max-width:640px){.nl-form{grid-template-columns:1fr;}.review-form-card{padding:24px 18px;}.star-label{min-width:140px;font-size:11px;}}
+/* TIPS GRID HOMEPAGE */
+.tips-hp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px;}
+.tips-hp-card{background:var(--ivory);padding:32px 28px;display:block;border-top:2px solid transparent;transition:all .25s;min-height:180px;}
+.tips-hp-card:hover{border-top-color:var(--gold);background:var(--white);}
+.tips-hp-cat{display:block;font-size:9px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.tips-hp-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:var(--dark);line-height:1.3;margin-bottom:16px;}
+.tips-hp-meta{font-size:10px;font-weight:600;letter-spacing:1px;color:var(--warm);}
+@media(max-width:900px){.tips-hp-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:540px){.tips-hp-grid{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -1074,6 +1083,52 @@ footer{background:var(--darker);padding:60px 0 32px;border-top:1px solid rgba(19
     <div class="reveal" style="margin-top:40px;text-align:center;">
       <p style="font-size:13px;color:var(--warm);margin-bottom:16px;">Ben jij een professionele leverancier in de Marokkaanse feestbranche?</p>
       <a href="mailto:aroussaplanner@gmail.com?subject=Verified Partner aanmelding" class="btn btn--dark btn--sm"><span>Meld je aan als Verified Partner</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS & GIDSEN -->
+<section style="padding:96px 0;background:var(--sand);" id="tips">
+  <div class="container">
+    <div class="reveal" style="text-align:center;">
+      <span class="label">Tips &amp; Gidsen</span>
+      <h2 class="title">Alles wat je wil weten over jouw <em>Marokkaanse bruiloft</em></h2>
+      <p class="subtitle">Eerlijke gidsen op basis van marktprijzen, eigen onderzoek en gesprekken met honderden bruiden.</p>
+    </div>
+    <div class="tips-hp-grid reveal">
+      <a href="/tips/marokkaanse-bruiloft-budget.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Budget &amp; Kosten</span>
+        <h3 class="tips-hp-title">Marokkaanse bruiloft budget 2026: wat kost een feest echt?</h3>
+        <span class="tips-hp-meta">10 min lezen &rarr;</span>
+      </a>
+      <a href="/tips/ziana-kiezen-tips.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Ziana &amp; Bridal</span>
+        <h3 class="tips-hp-title">Hoe kies je de juiste Ziana of Bridalstylist?</h3>
+        <span class="tips-hp-meta">8 min lezen &rarr;</span>
+      </a>
+      <a href="/tips/marokkaanse-trouwlocaties-gids.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Locaties</span>
+        <h3 class="tips-hp-title">De beste Marokkaanse trouwlocaties in Nederland</h3>
+        <span class="tips-hp-meta">9 min lezen &rarr;</span>
+      </a>
+      <a href="/tips/marokkaanse-bruiloft-fotograaf-vragen.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Fotografie</span>
+        <h3 class="tips-hp-title">5 vragen die elke bruid aan haar fotograaf moet stellen</h3>
+        <span class="tips-hp-meta">6 min lezen &rarr;</span>
+      </a>
+      <a href="/tips/marokkaanse-bruiloft-12-maanden-tijdlijn.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Planning</span>
+        <h3 class="tips-hp-title">12-maanden tijdlijn: alles wat je moet regelen voor je Marokkaanse bruiloft</h3>
+        <span class="tips-hp-meta">11 min lezen &rarr;</span>
+      </a>
+      <a href="/tips/marokkaanse-bruiloft-belgie-vs-nederland.html" class="tips-hp-card">
+        <span class="tips-hp-cat">Belgi&euml;</span>
+        <h3 class="tips-hp-title">Marokkaanse bruiloft in Belgi&euml;: wat is er anders dan in Nederland?</h3>
+        <span class="tips-hp-meta">6 min lezen &rarr;</span>
+      </a>
+    </div>
+    <div class="reveal" style="text-align:center;margin-top:48px;">
+      <a href="/tips/" class="btn btn--dark"><span>Alle gidsen bekijken &rarr;</span></a>
     </div>
   </div>
 </section>
