@@ -1,13 +1,3 @@
+# Aroussa Planner — static HTML site, no build required
 [build]
-  base = "apps/vendor-dashboard"
-  command = "npm ci && npm run build"
-  publish = "dist"
-
-[build.environment]
-  VITE_SUPABASE_URL = "https://kbwgqdihmqfalcrfhffq.supabase.co"
-  VITE_SUPABASE_ANON_KEY = "sb_publishable_cLsATbyH2vE3un73RuDYUw_h0dF5jB6"
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  publish = "."
