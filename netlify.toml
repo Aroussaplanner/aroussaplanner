@@ -1,38 +1,13 @@
 [build]
-  publish = "."
+  base = "apps/vendor-dashboard"
+  command = "npm ci && npm run build"
+  publish = "dist"
 
-[functions]
-  directory = "netlify/functions"
-  node_bundler = "esbuild"
-  # Supabase env vars: SUPABASE_URL + SUPABASE_ANON_KEY (beide ingesteld in Netlify)
+[build.environment]
+  VITE_SUPABASE_URL = "https://kbwgqdihmqfalcrfhffq.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "sb_publishable_cLsATbyH2vE3un73RuDYUw_h0dF5jB6"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Cache-Control = "public, max-age=3600"
-
-[[headers]]
-  for = "*.html"
-  [headers.values]
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/manifest.json"
-  [headers.values]
-    Content-Type = "application/manifest+json"
-    Cache-Control = "public, max-age=0, must-revalidate"
-
-[[headers]]
-  for = "/sw.js"
-  [headers.values]
-    Cache-Control = "no-cache, no-store, must-revalidate"
-    Service-Worker-Allowed = "/"
