@@ -1,3 +1,30 @@
 # Aroussa Planner — static HTML site, no build required
 [build]
   publish = "."
+
+# ── Beveiligingsheaders ────────────────────────────────────────────────────────
+# Beschermt tegen clickjacking, content-diefstal, XSS en HTTPS-downgrade
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Voorkomt dat de website in een iframe wordt geladen (anti-clickjacking)
+    X-Frame-Options = "DENY"
+
+    # Voorkomt MIME-type sniffing
+    X-Content-Type-Options = "nosniff"
+
+    # XSS-bescherming voor oudere browsers
+    X-XSS-Protection = "1; mode=block"
+
+    # Dwingt HTTPS voor 1 jaar (HSTS) — browser weigert HTTP voortaan
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # Referrer-informatie beperken
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # Schakel camera, microfoon, locatie en betalings-API uit
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+    # Content Security Policy — alleen vertrouwde bronnen mogen laden
+    # Toegestaan: eigen site, Google Analytics, Google Fonts, Supabase
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://kbwgqdihmqfalcrfhffq.supabase.co; frame-src https://calendly.com; object-src 'none'; base-uri 'self'; form-action 'self' https://kbwgqdihmqfalcrfhffq.supabase.co;"

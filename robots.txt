@@ -1,18 +1,55 @@
 # Aroussa Wedding Planner — robots.txt
 
+# ── Normale zoekmachines welkom ──────────────────────────────────────────────
+User-agent: Googlebot
+Allow: /
+Disallow: /.netlify/
+Disallow: /geheim-admin/
+
+User-agent: Bingbot
+Allow: /
+Disallow: /.netlify/
+Disallow: /geheim-admin/
+
+# ── AI-trainers en content scrapers blokkeren ────────────────────────────────
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: ia_archiver
+Disallow: /
+
+# ── Algemene regels ───────────────────────────────────────────────────────────
 User-agent: *
 Allow: /
 Allow: /aanmelden
 Allow: /mijn-account
-
-# Admin portaal — niet indexeren
+Disallow: /.netlify/
 Disallow: /geheim-admin/
-
-# Beveiligde productbestanden — individuele tools niet indexeren
 Disallow: /producten/aroussa-
 Disallow: /kaart/
-
-# Netlify functies
-Disallow: /.netlify/
 
 Sitemap: https://aroussaplanner.com/sitemap.xml
